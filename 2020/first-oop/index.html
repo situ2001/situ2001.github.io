@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="此文记录了咱对Java OOP的初步理解 由于是初学，文章也是初写，难免有错误，有的话，请指出（好像没有评论系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对Java OOP的肤浅见解之类与对象">
+<meta property="og:url" content="http://yoursite.com/2020/first-oop/index.html">
+<meta property="og:site_name" content="Situ Note">
+<meta property="og:description" content="此文记录了咱对Java OOP的初步理解 由于是初学，文章也是初写，难免有错误，有的话，请指出（好像没有评论系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-09-22T08:44:53.000Z">
+<meta property="article:modified_time" content="2020-09-22T09:24:45.873Z">
+<meta property="article:author" content="situ2001">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yoursite.com/2020/first-oop/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>对Java OOP的肤浅见解之类与对象 | Situ Note</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Situ Note</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">物无完物 人无完人</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">4</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">面向对象编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.1.</span> <span class="nav-text">什么是对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB"><span class="nav-number">4.</span> <span class="nav-text">类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB"><span class="nav-number">4.1.</span> <span class="nav-text">什么是类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E9%87%8C%E6%9C%89%E4%BB%80%E4%B9%88"><span class="nav-number">4.2.</span> <span class="nav-text">类里有什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.3.</span> <span class="nav-text">新建对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%95%E8%AE%B2constructor"><span class="nav-number">4.4.</span> <span class="nav-text">试讲constructor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UML-class-diagram"><span class="nav-number">5.</span> <span class="nav-text">UML class diagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-variable"><span class="nav-number">6.</span> <span class="nav-text">reference variable</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B1%E6%95%B0%E7%BB%84%E8%AF%B4%E8%B5%B7"><span class="nav-number">6.1.</span> <span class="nav-text">由数组说起</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9D%9F"><span class="nav-number">6.2.</span> <span class="nav-text">以对象结束</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E6%88%91%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">自我总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%96%87%E4%B8%AD%E5%87%BA%E7%8E%B0%E8%8B%B1%E8%AF%AD%E7%9A%84%E8%BF%99%E4%BB%B6%E4%BA%8B"><span class="nav-number">8.</span> <span class="nav-text">关于文中出现英语的这件事</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">situ2001</p>
+  <div class="site-description" itemprop="description">做好当下 永远不亏</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/first-oop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="situ2001">
+      <meta itemprop="description" content="做好当下 永远不亏">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Situ Note">
+    </span>
+
+    
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          对Java OOP的肤浅见解之类与对象
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-09-22 16:44:53 / 修改时间：17:24:45" itemprop="dateCreated datePublished" datetime="2020-09-22T16:44:53+08:00">2020-09-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>此文记录了咱对Java OOP的初步理解</p>
+<p>由于是初学，文章也是初写，难免有错误，有的话，请指出（<del>好像没有评论系统</del></p>
+<a id="more"></a>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>利用选择、循环、数组等这部分的内容，我们已经可以解决相当一部分的问题了。而当我们想构建一个包含着文本输入框、按钮等控件的GUI应用时，利用前面所学的知识，似乎需要耗费相当大的功夫。</p>
+<h2 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h2><p>所以，为了提高软件的灵活性，开发性与可维护性，于是<strong>面向对象编程</strong> (Object-Orient Programming) 便出现了</p>
+<p>面向对象编程，顾名思义就是使用Object(对象) 来进行程序设计</p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="什么是对象"><a href="#什么是对象" class="headerlink" title="什么是对象"></a>什么是对象</h3><p>那什么东西是Object呢？</p>
+<p>听到对象这个词语的时候，<del>我下意识看了下自己，咱可没有对象啊</del></p>
+<p>老师告诉过我们，遇到不懂的词语，就要学会查字典。Object在字典中的释义是</p>
+<p><code>THING: a solid thing that you can hold, touch, or see but that is not alive</code></p>
+<p>懂了(<del>其实没懂</del>)，对象，放在生活上，不就是个具体的物体吗？</p>
+<p>那么按理来讲，猫猫狗狗勺子苹果桌子学生，甚至是一个抽象的圆都可以是对象啊</p>
+<p>放回计算机语言上，(<del>复制粘贴的</del>)一个可以被明确标识的实体，就是对象，并且每一个对象都偶有自己独特的标识、状态和行为</p>
+<p>上面的文字真的好绕啊，理解对象是什么，我觉得最好还是要举栗子</p>
+<p>比如，我们现在啥都没有，但是，<strong>来 左边 跟我一起画个龙 在你右边 画一道彩虹</strong></p>
+<p><del>于是乎便有了一条龙和一道彩虹</del></p>
+<p>这条龙和这道彩虹，便是对象，龙有着独特位置(左)和长度这些特点，而彩虹也有着独特位置(右)和颜色等这些特点，这些都是用来描述他们的属性的</p>
+<p>一个对象具有其独特的 <strong>attribute</strong> 和 <strong>behavior</strong> (属性与行为)。</p>
+<p>如这条彩虹有着一定的大小与颜色深浅性质，这些都是通过它的 data field 才表示的；而如它的消失便是一个行为，一个对象的行为是通过 method 来定义的</p>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><h3 id="什么是类"><a href="#什么是类" class="headerlink" title="什么是类"></a>什么是类</h3><p>前面提及了对象，在这个地方说 class 便会自然而然了</p>
+<p>来点正经的，让我们忘掉刚刚那条龙和那一道彩虹（</p>
+<p>我们拿正方形和电视机来说事</p>
+<p>四条边相等并且互相垂直的四边形，便是正方形，这是每一个正方形基本性质，而对于每一台电视机，都有音量、频道和开关这些属性。</p>
+<p>上述这些这些对于每一个正方形或者每一台电视机来说，是共有的。</p>
+<p>或是说，每个正方形是同一类东西，每台电视也是如此</p>
+<p>所以我们可以通过 class 来生成每一个 object (instance is equivalent to object)</p>
+<p>比如我们可以通过Square类来创建三个边长不同的正方形，它们都有着正方形的性质，只是边长不同罢了。这个过程叫做instantnation(实例化)</p>
+<p>类在instantnation的过程中起到了一个相当于“模板”的作用，电视机对象也是如此。</p>
+<p>设想: 我是一个电视装配厂的工人，我可以跟着生产指南(class)进行电视机的基本装配,便可以不断装配出数不胜数的电视机。</p>
+<p>所以，可把类理解为产出同类对象的基本模板</p>
+<h3 id="类里有什么"><a href="#类里有什么" class="headerlink" title="类里有什么"></a>类里有什么</h3><p>类包含有什么，能吃吗？类如何定义的，我可以吗？直接看下码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Square</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** data field */</span></span><br><span class="line">    <span class="keyword">double</span> length;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** constructors */</span></span><br><span class="line">    Square() &#123;</span><br><span class="line">        length = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Square(<span class="keyword">double</span> inLength) &#123;</span><br><span class="line">        length = inLength;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** methods */</span></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getArea</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> length * length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getLength</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(length);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setLength</span><span class="params">(<span class="keyword">double</span> newLength)</span> </span>&#123;</span><br><span class="line">        length = newLength;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以注意到一个class里面，包含有<strong>data field, constructor, method</strong> (好像分别是数据域 构造方法 方法 <del>还是英语顺眼</del>)</p>
+<p>在本例中，data field里面的length变量是每一个对象都有且是特有的(称之为 <strong>instant variable</strong> 实例变量，当然这不包括static variable)，在每一个对象中单独存在且不会相互影响，method则包含了这个对象特有的方法(当然这也不包括static method)</p>
+<p>然后就是<strong>constructor</strong>了。我们注意到constructor与construct有关，那很好理解了(<del>中文好像是构造器吧</del>中文叫构造方法)。constructor便是新建对象时候所使用的方法。</p>
+<h3 id="新建对象"><a href="#新建对象" class="headerlink" title="新建对象"></a>新建对象</h3><p>可以如下新建一个square对象</p>
+<p><code>Square square1 = new Square();</code></p>
+<p>括号里面可以含<strong>actual parameter</strong>也可以不含，不含的我们称之为 <strong>no-arg constructor</strong> .</p>
+<p>这上面的语句用到了 <strong>new</strong> operator, 是不是似曾相识呢?</p>
+<p>没错啦，仔细回忆一下array和命令行输入的内容？</p>
+<p>输出的我们需要新建Scanner类下的对象</p>
+<p><code>Scanner input = new Scanner(System.in);</code></p>
+<p>新建数组我们需要的是新建一个array对象 (Java将array视为对象看待)</p>
+<p><code>int[] array = new int[10]; //create an array that contains 10 elements</code></p>
+<p>所以，结合之前的一些基础内容，也可以让我们理解创建对象的语句。</p>
+<h3 id="试讲constructor"><a href="#试讲constructor" class="headerlink" title="试讲constructor"></a>试讲constructor</h3><p>constructor嘛，就是用来construct对象的，并且constructor在syntax方面与method header极其相像</p>
+<p>因为只是极其相像，所以也有几点不像的（？</p>
+<ul>
+<li><p>与method header相比，没有return type</p>
+</li>
+<li><p>名字必须与类名 完 全 一 致</p>
+</li>
+<li><p>只在新建对象的时候会用到</p>
+</li>
+</ul>
+<p>如上面的Square class中的片段</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** constructors */</span></span><br><span class="line">Square() &#123;</span><br><span class="line">    length = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Square(<span class="keyword">double</span> inLength) &#123;</span><br><span class="line">    length = inLength;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果不带参地创建新对象，就会对该对象的length变量(instant variable)赋值1，而如果带实参的话，该对象便会以含形参的Square(double inLength)的constructor进行construct，此时变量length便会以inLength赋值</p>
+<p><strong>那我忘记了创建constructor怎么办？</strong><br>如果你啥constructor也没加的话，恭喜你(?)，因为Java会implicitly帮你加上一个的：<code>ClassName() &#123;&#125;</code></p>
+<p>如果只加了带argument的话，no-arg constructor是不会再帮你加上的了</p>
+<h2 id="UML-class-diagram"><a href="#UML-class-diagram" class="headerlink" title="UML class diagram"></a>UML class diagram</h2><p>我们能以 <strong>UML</strong>(Unified Modeling Language) <strong>class diagram</strong>方式表示类与对象</p>
+<p>把Square类做成图表的话，便会是如下所示</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">____</span><span class="strong">____</span><span class="strong">____</span><span class="strong">____</span><span class="strong">____</span><span class="strong">____</span><span class="strong">____</span></span><br><span class="line">|         Square           |</span><br><span class="line">| ------------------------ |</span><br><span class="line">|       length: int        |</span><br><span class="line">|                          |</span><br><span class="line">|         Square()         |</span><br><span class="line">| Square(inLength: double) |</span><br><span class="line">|      getArea(): void     |</span><br><span class="line">|    getLength(): void     |</span><br><span class="line">| ------------------------ |</span><br></pre></td></tr></table></figure>
+
+<p>也就是说用UML class diagram进行图示的话，遵从下列规则</p>
+<table>
+<thead>
+<tr>
+<th>Class name</th>
+<th>Denoted as</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Data Fields</td>
+<td>dataFieldName: dataFieldType</td>
+</tr>
+<tr>
+<td>Constructors</td>
+<td>ClassName(parameterName: parameterType)</td>
+</tr>
+<tr>
+<td>Methods</td>
+<td>methodName(paramterName: parameterType): returnType</td>
+</tr>
+</tbody></table>
+<h2 id="reference-variable"><a href="#reference-variable" class="headerlink" title="reference variable"></a>reference variable</h2><p>那么在面向对象编程中，object variable 和 primitive-type variable有什么区别呢</p>
+<p>请与之前学到的<strong>数组</strong>建立起<strong>联系</strong>(数组在Java中被当成对象并且我们已经熟知了Java数组)</p>
+<p>正如我们所知道的，基本数据类型是被存放于stack里的，而object是被存放在heap里面的</p>
+<p>面向对象的数据类型不包含value，而是作为一个reference指向目的的对象</p>
+<h3 id="由数组说起"><a href="#由数组说起" class="headerlink" title="由数组说起"></a>由数组说起</h3><p>试回忆前面array内容，array variable 是作为一个 reference variable，被引用到heap里相对应的数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] array = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>]; <span class="comment">// create a new array</span></span><br><span class="line"><span class="comment">/** and array is a reference variable that reference to the array at the heap */</span></span><br><span class="line"></span><br><span class="line">array[<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">// assign 1 to element 0 at array</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span>[] array1; <span class="comment">// create a new array variable called array1</span></span><br><span class="line">array1 = array; <span class="comment">// now array1 has the same reference as array</span></span><br><span class="line"></span><br><span class="line">System.out.println(array[<span class="number">0</span>]); <span class="comment">// output: 1</span></span><br><span class="line">System.out.println(array1[<span class="number">0</span>]); <span class="comment">// output is the same: 1</span></span><br></pre></td></tr></table></figure>
+
+<p>如下图</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">|   stack      |          |             heap        |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|--------------|reference |                         |</span><br><span class="line">| main()       |   to     |   An array that         |</span><br><span class="line">|        array | ---------|--&gt;contains 10 elements  |</span><br><span class="line">|--------------|          |                         |</span><br></pre></td></tr></table></figure>
+
+<h3 id="以对象结束"><a href="#以对象结束" class="headerlink" title="以对象结束"></a>以对象结束</h3><p>那么对于对象来讲，其实跟数组几乎一致（<del>数组也是对象啊喂</del></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Square square1 = <span class="keyword">new</span> Square(<span class="number">4</span>); <span class="comment">// create a square object which has length of 4</span></span><br><span class="line">Square square2; <span class="comment">// create a new reference variable of class Square</span></span><br><span class="line"></span><br><span class="line">square1.getLength(); <span class="comment">// output: 4</span></span><br><span class="line">square2 = square1;</span><br><span class="line">square2.setLength(<span class="number">5</span>); <span class="comment">// now make object square&#x27;s length to 5</span></span><br><span class="line"></span><br><span class="line">square2.getLength(); <span class="comment">// output: 5</span></span><br><span class="line">square1.getLength(); <span class="comment">// output: 5</span></span><br></pre></td></tr></table></figure>
+
+<p>语句 <code>square2 = square1;</code> 把square2的引用也指向了square对象，正因如此，invoke的method和修改的data field都是属于同一个object的</p>
+<p>可以表示如下</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Before square2 = square1</span><br><span class="line"></span><br><span class="line">|   stack      |          |             heap        |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">| main()       |reference |                         |</span><br><span class="line">| square2      |   to     |                         |</span><br><span class="line">|      square1 | ---------|--&gt; a square Object      |</span><br><span class="line">|--------------|          |                         |</span><br><span class="line"></span><br><span class="line">After</span><br><span class="line"></span><br><span class="line">|   stack      |          |             heap        |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|           ---|----------|-----------------------  |</span><br><span class="line">| main()    |  |reference |                      |  |</span><br><span class="line">| square2 ---  |   to     |                      |  |</span><br><span class="line">|      square1 | ---------|--&gt; a square Object <span class="xml"><span class="tag">&lt;<span class="name">--</span>  |</span></span></span><br><span class="line"><span class="xml">|--------------|          |                         |</span></span><br></pre></td></tr></table></figure>
+
+<p>总之，可以粗略地理解为在OOP中的变量其实就像一个书签，没有具体的值，指向着目标对象。</p>
+<h2 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h2><p>其实呢，在学习编程时候，可以进行联系与联想的，这些操作可以使得你有一个具体的认知，并且让前后知识结合得更加紧密，形成一个比较稳健的知识体系</p>
+<h2 id="关于文中出现英语的这件事"><a href="#关于文中出现英语的这件事" class="headerlink" title="关于文中出现英语的这件事"></a>关于文中出现英语的这件事</h2><p>emm还有有时候会忍不住用一下英语，是因为嘛，计算机几乎所有内容都是西方世界的，直接使用英语不好过加一步转化成为中文？</p>
+<p>比如下面这个例子</p>
+<p>这是对总线的解释</p>
+<p><code>总线 是指计算机组件间规范化的交换数据的方式，即以一种通用的方式为各组件提供数据传送和控制逻辑</code></p>
+<p>略有不解？</p>
+<p>那好，总线的英语是<strong>Bus</strong></p>
+<p>既然是Bus，那他就是计算机部件之间交换数据的方式啊。这不是简单粗暴吗？</p>
+<p>所以学习计算机与编程之类的，最好还是要把英语功底加深一下</p>
+<p>而如何加深呢？是不是天天百词斩启动，生词背上几十个？（</p>
+<p>其实不然，英语是我们生活中的应用工具，编程也如此，不使用它们，它们便会从你的记忆中褪去</p>
+<p>附上瞎编的一句话吧</p>
+<p><strong>工具 不能纯粹学习 更要学以致用</strong></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/hello-world/" rel="prev" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+  
+  
+  
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">situ2001</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
