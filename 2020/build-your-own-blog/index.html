@@ -363,6 +363,7 @@ $ npm install</code></pre><p>也就是说，在目标文件夹下依次输入上
 <p>若已经部署到github上了，直接在浏览器输入 <code>username.github.io</code> 就行</p>
 <p>如果没有问题，你的博客页面将会被加载</p>
 <p><strong>注</strong>: 绝大部分地区可能无法打开<code>*.github.io</code>，建议修改DNS为 <code>223.5.5.5</code>，能解决大部分问题，如果有cf的推荐CNAME解析再套上CDN</p>
+<p>update: CNAME文件会在deploy之后被覆盖，翻了一下，发现hexo deploy用的是 <code>git push --force</code> ，因此远程仓库的内容会被现有的本地仓库覆盖掉，解决方法是在source目录下直接新建一个CNAME文件，这样在生成的时候就会出现在public目录里</p>
 <p>如下图所示</p>
 <p><img src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003174322.png" alt=""></p>
 <h2 id="图床配置-Optional"><a href="#图床配置-Optional" class="headerlink" title="图床配置 (Optional)"></a>图床配置 (Optional)</h2><p>Git 这种东西，不是拿来给我们存放二进制文件（如图片）的</p>
