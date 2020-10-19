@@ -176,7 +176,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">2.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#super%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">3.</span> <span class="nav-text">super关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E9%93%BE"><span class="nav-number">4.</span> <span class="nav-text">继承链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamic-binding"><span class="nav-number">5.</span> <span class="nav-text">Dynamic binding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%80%81%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">6.</span> <span class="nav-text">多态和对象类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E4%B8%80%E5%88%BB"><span class="nav-number">7.</span> <span class="nav-text">总结一刻</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E8%AE%B0%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">版本记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">2.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">3.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#super%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">4.</span> <span class="nav-text">super关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E9%93%BE"><span class="nav-number">5.</span> <span class="nav-text">继承链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E4%B8%A4%E4%B8%AA%E7%B1%BB%E5%9E%8B"><span class="nav-number">6.</span> <span class="nav-text">变量的两个类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dynamic-binding"><span class="nav-number">7.</span> <span class="nav-text">Dynamic binding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E6%80%81%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">8.</span> <span class="nav-text">多态和对象类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93%E4%B8%80%E5%88%BB"><span class="nav-number">9.</span> <span class="nav-text">总结一刻</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -271,9 +271,10 @@
         <p>这篇文章主要写了咱对继承与多态的一点基本看法</p>
 <a id="more"></a>
 
-<p>虽然不知道发生了什么，但是我先把提纲摆在这里</p>
-<p>Outline:</p>
-<p><del>虽然不知道发生了什么，但是提纲已经被我删了</del></p>
+<h2 id="版本记录"><a href="#版本记录" class="headerlink" title="版本记录"></a>版本记录</h2><ol>
+<li>2020-10-14 初学初写</li>
+<li>2020-10-19 回头发现些小问题，做几处修改</li>
+</ol>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>咱最近在学习新知识–继承和多态的时候，反复看了一下书，然后手敲来验证</p>
 <p>最后吸收了知识并得到了结论</p>
 <p>知识输入住得稳还是要靠输出用得好</p>
@@ -308,7 +309,8 @@
 <p>也有<strong>天 马 行 空</strong></p>
 <p>不要为了复用方法和数据域而进行胡乱继承</p>
 <p>如<strong>Person</strong>和<strong>Tree</strong>有着些许相同的特性，但是 <code>Tree is not a person</code> 不遵循 <strong>is-A relationship</strong>，于是不能把Tree继承Person</p>
-<h2 id="super关键字"><a href="#super关键字" class="headerlink" title="super关键字"></a>super关键字</h2><p>我们以上面举的例子来说，也就是下面这个</p>
+<h2 id="super关键字"><a href="#super关键字" class="headerlink" title="super关键字"></a>super关键字</h2><p><code>super()</code> 关键字是用来调用父类的constructor或者method的</p>
+<p>我们以上面举的例子来说，也就是下面这个</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Circle</span> <span class="keyword">extends</span> <span class="title">GeometricObject</span></span></span><br></pre></td></tr></table></figure>
 
 <p>在创建Circle类对象的时候会同时调用Superclass的constructor以继承其方法和数据域</p>
@@ -317,33 +319,41 @@
 <p>所以下面两种都是等价的</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ClassName</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//is equivalent to</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ClassName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">super</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>一般来说，super()被显式调用的时候，往往是为了调用父类特定的constructor</p>
+<p>一般来说，super()被显式调用的时候，往往是为了调用父类特定的constructor或者与子类<strong>重名</strong>的方法，因为不重名的方法可以直接method()调用</p>
 <h2 id="继承链"><a href="#继承链" class="headerlink" title="继承链"></a>继承链</h2><p>当有类似下面的类时候，一条继承链就被创建了</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Circle</span> <span class="keyword">extends</span> <span class="title">GeometricObject</span></span></span><br></pre></td></tr></table></figure>
 
 <p>其中Circle是子类，GeometricObject是父类，也有GeometricObject是子类，Object是父类</p>
-<p>如下所示</p>
+<p>如下所示 这就是一继承链</p>
 <p><code>Object &lt;- GeometricObject &lt;- Circle</code></p>
 <p>让我们创建一个对象</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Circle circle = <span class="keyword">new</span> Circle();</span><br></pre></td></tr></table></figure>
 
-<p>也就是说，由于superclass的相互调用，此时circle同时拥有了Circle类GeometricObject类和Object类的方法和数据域</p>
-<p>因为子类extends父类，所以每个子类的实例都是父类的实例</p>
+<p>也就是说，由于类的constructor之间的相互调用，此时circle同时拥有了Circle类GeometricObject类和Object类的方法和数据域</p>
+<p>因为子类extends父类，所以子类的实例都可以是父类的实例</p>
 <p>听起来蛮拗口的对吧，我们可以用水果解释一下</p>
 <p>比如水果有苹果和橙子，苹果又分为红苹果和青苹果</p>
 <p>如果上述的都是类，那么它们其中一个继承关系应该如下</p>
 <p><code>Fruit &lt;- Apple &lt;- GreenApple</code></p>
-<p>所以<del>根据生活经验</del>可以看出GreenApple是Apple，Apple是Fruit，所以实例化为GreenApple类的实例呢，同时可以看作是Apple类的实例，也还可以看作是Fruit类对象的实例(就是可以被当做父类看，不过这个GreenApple还是这个GreenApple对象，并没有应该是多个类的实例而出现额外的新实例)</p>
-<h2 id="Dynamic-binding"><a href="#Dynamic-binding" class="headerlink" title="Dynamic binding"></a>Dynamic binding</h2><p>新建对象时的语句可以总结如下</p>
+<p>所以<del>根据生活经验</del>可以看出GreenApple是Apple，Apple是Fruit，所以实例化为GreenApple类的实例呢，同时可以看作是Apple类的实例，也还可以看作是Fruit类对象的实例(就是说子类实例可以<strong>被当做</strong>是父类的实例看，不过这个GreenApple本质上也只是GreenApple，并没有应该是多个类的实例而出现额外的新实例)</p>
+<h2 id="变量的两个类型"><a href="#变量的两个类型" class="headerlink" title="变量的两个类型"></a>变量的两个类型</h2><p>新建对象时的语句可以总结如下</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delaredType name = <span class="keyword">new</span> actualType(parameters);</span><br></pre></td></tr></table></figure>
 
-<p>其中declared type是用来声明变量类型的，而actual type是用来指示实际的类</p>
-<p>比如说</p>
+<p>上面的变量name，有了两个东东，一个是Declared Type，还有一个是Actual Type</p>
+<p>举栗子</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GeometricObject circle = <span class="keyword">new</span> Circle();</span><br></pre></td></tr></table></figure>
 
-<p>circle的声明类型是Object类型而实际类型是Circle类型，circle只是一个变量，本来它指向用new Circle()新建的对象，只不过现在它指向的是GeometricObject类型。</p>
-<p>通俗一点就是这本来是个圆实例，只不过声明类型是GeometricObject，Circle类对象可以被声明类型为GeometricObject类的对象所持有，也即是被特定父类类型的引用变量(reference variable)所引用，此时它就被当做是父类的实例看待了，我们便把它看成了一个几何实例。但是，这个<code>new Circle()</code>，表明了这个对象实际是由Circle类来实例化的</p>
-<p>并且，Declared Type决定了哪一个方法会在编译时被采用，而在运行的时候JVM会动态绑定method，这个所绑定的method，取决于Actual Type</p>
+<p>其继承关系</p>
+<p><code>Object &lt;- GeometricObject &lt;- Circle</code></p>
+<p>这个引用变量circle呢，有两个类型：<strong>Declared Type</strong>和<strong>Actual Type</strong>，中文应该是声明类型和实际类型吧</p>
+<p>这个例子中变量circle的声明类型是<strong>GeometricObject</strong>类型，实际类型是<strong>Circle</strong>类型</p>
+<p>circle只是一个引用着一个对象的引用变量，被这个变量所引用 的对象 最先实例化的类 就是这个变量的<strong>Actual Type</strong>，而所声明这个变量所选的类型，就是<strong>Declared Type</strong></p>
+<p>通俗一点就是这本来是个圆实例，只不过引用它的变量的声明类型是<strong>GeometricObject</strong>，并且这个圆实例不仅可以被声明类型为<strong>GeometricObject</strong>类的变量所引用，还可以被声明类型为某一父类类型的变量所引用，此时它就被当做是父类的实例看待了，我们便把它看成了一个几何实例（这 就 是 多 态）。但是，这个<code>new Circle()</code>（Circle即是这个变量的<strong>Actual Type</strong>）表明了这个对象<strong>根本上</strong>是由Circle类来实例化的</p>
+<p>其实这里我脑内理解还行，只不过表达输出来变得有点诡怪，希望大佬们能提点建议？</p>
+<p>？<strong>我认为</strong>，一个继承了父类的子类对象在被new出来的对象，必然包含了父类的方法和数据域，所以引用这个对象的变量可以自然而然的进行声明类型的的切换，从而可以把这个子类对象看作为其他父类的对象？</p>
+<h2 id="Dynamic-binding"><a href="#Dynamic-binding" class="headerlink" title="Dynamic binding"></a>Dynamic binding</h2><p>另一方面来讲</p>
+<p>Declared Type是给编译器看的决定了哪一个方法会在编译时被match，比如上述变量circle的actual type虽然是Circle，但Declared type是GeometricObject类型，所以在编译的时候自然match不到比Declared type更子的类型的方法，比如Circle里面的getDiameter()方法，便因此而无法被调用</p>
+<p>而在运行的时候JVM会动态绑定method，这个所绑定的method，取决于Actual Type，若对象circle里面有个Override的<code>toString()</code>方法，那么即使该对象被引用的变量的Declared Type是GeometricObject（甚至是Object的话），就算match到了声明类型的类里有这个method，由于<strong>Dynamic binding</strong>的缘故，它实际invoke的是最后一个子类所重写的<code>toString()</code>方法</p>
 <h2 id="多态和对象类型转换"><a href="#多态和对象类型转换" class="headerlink" title="多态和对象类型转换"></a>多态和对象类型转换</h2><p>多态意味着在父类对象的地盘，都可以使用子类对象</p>
 <p>我们可以把一个子类对象的类型cast到父类的类型，<del>通俗一点就是把儿子当爸爸用</del> 以便方便传参和通用化该对象</p>
 <p>看一下下面的一个传参的例子</p>
@@ -356,13 +366,13 @@
 <p>上面这两句话可以用生活例子来解释：就好比学科（父类）有语文和数学（子类），语文或数学类的实例一定可以是学科类的实例，而学科类的实例又不一定是语文类的实例，这个实例有可能是数学类的实例，也或许没有子类的实例存在呢？</p>
 <p>我们如果只new了实际类型是学科类的实例，那转换到语文或数学实例，便会产生<code>ClassCastExcpetion</code>错误</p>
 <p>所以需要我们人为添加<code>(Type)</code>来cast</p>
-<p>前面提到过了，由于继承，一个子类实例可以是一或多个父类的实例，但一个父类实例却不一定是某一子类的实例，所以为了避免产生downcast的错误，我们可以用关键字<code>instanceof</code>来判断一个引用变量所指的对象是不是目标类的一个实例</p>
+<p>前面提到过了，由于继承，一个子类实例可以是一或多个父类的实例，但一个父类实例却不一定是某一子类的实例，所以为了避免产生downcast的错误，我们可以用关键字<code>instanceof</code>来判断一个引用变量所引用的对象是不是目标类的一个实例</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CastingDemo</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Object object1 = <span class="keyword">new</span> Circle(<span class="number">1</span>);</span><br><span class="line">    Object object2 = <span class="keyword">new</span> Rectangle(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    displayObject(object1);</span><br><span class="line">    displayObject(object2);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">displayObject</span><span class="params">(Object object)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (object <span class="keyword">instanceof</span> Circle) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;The circle area is &quot;</span> + ((GeometricObject)object).getColor());</span><br><span class="line">      System.out.println(<span class="string">&quot;The circle diameter is &quot;</span> + ((Circle)object).getDiameter());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>  (object <span class="keyword">instanceof</span> Rectangle) &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;The rectangle area is &quot;</span> + ((Rectangle)object).getArea());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>上面这个例子就是利用了<code>instanceof</code>来对应地转换对象的类型</p>
+<p>上面这个例子就是利用了<code>instanceof</code>来对应地转换对象的类型，从而避免了错误的产生</p>
 <h2 id="总结一刻"><a href="#总结一刻" class="headerlink" title="总结一刻"></a>总结一刻</h2><p>在Java中，由多态概念的引出可以看出它与继承是有相当多的联系的，只因有了继承的关系，才会出现后面的多态，两者缺一不可</p>
 <p>而最后，多态中，出现的“子类的实例都可以是父类的实例”这句话，其实要理清楚，结合前面的知识，我们知道一个对象只能被实例化一次，多态中，这个创建了的对象只不过是随着指向着它的引用变量的类型变化而相对地变化成特定类的实例罢了</p>
-<p>所以，理清概念很重要</p>
+<p>所以，掳清概念很重要</p>
 
     </div>
 
