@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://img-situ.oss-cn-shenzhen.aliyuncs.com/apple-touch-icon-bike.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://img-situ.oss-cn-shenzhen.aliyuncs.com/favicon-32x32-next-bike.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://img-situ.oss-cn-shenzhen.aliyuncs.com/favicon-16x16-next-bike.png">
+  <link rel="mask-icon" href="https://img-situ.oss-cn-shenzhen.aliyuncs.com/logo-bike.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="这篇记录了咱对Java面向对象编程中抽象与接口的初步理解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java学习笔记之抽象与接口">
+<meta property="og:url" content="http://yoursite.com/bb31e33f1e48/index.html">
+<meta property="og:site_name" content="Situ Note">
+<meta property="og:description" content="这篇记录了咱对Java面向对象编程中抽象与接口的初步理解">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-24T02:24:00.000Z">
+<meta property="article:modified_time" content="2020-10-24T02:24:00.000Z">
+<meta property="article:author" content="situ2001">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yoursite.com/bb31e33f1e48/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java学习笔记之抽象与接口 | Situ Note</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Situ Note</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">要啥自行车</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-计划">
+
+    <a href="/plans/" rel="section"><i class="fa fa-flag fa-fw"></i>计划</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E8%AE%A2%E8%AE%B0%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">修订记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%8A%BD%E8%B1%A1%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.</span> <span class="nav-text">接口与抽象的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="nav-number">5.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">situ2001</p>
+  <div class="site-description" itemprop="description">做好当下 永远不亏</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/bb31e33f1e48/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="situ2001">
+      <meta itemprop="description" content="做好当下 永远不亏">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Situ Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java学习笔记之抽象与接口
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-24 10:24:00" itemprop="dateCreated datePublished" datetime="2020-10-24T10:24:00+08:00">2020-10-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>这篇记录了咱对Java面向对象编程中抽象与接口的初步理解</p>
+<a id="more"></a>
+
+<p>在了解了OOP中的封装、继承与多态之后，我继续前行到抽象与接口的学习</p>
+<p>因为是初次接触一下这个内容就开始输出文章了，估计问题不少，希望大神能指正</p>
+<h2 id="修订记录"><a href="#修订记录" class="headerlink" title="修订记录"></a>修订记录</h2><ol>
+<li>2020-10-24 初版</li>
+</ol>
+<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p>抽象是什么？什么是抽象？在了解OOP的抽象之前，我读过这么一段话</p>
+<p><code>The term abstraction, as we are using it here, refers to the distinction between the external properties of an entity and the details of the entity&#39;s internal composition. It is abstraction that allows us to ignore the internal details of a complex device and use it as a single, comprehensible unit.</code></p>
+<p>这段话大概是说了抽象存在的作用，它使得我们的社会分工更加妥当，在许多地方，你只需要做好你自己的本能，而不必刻意去理解你所作所为的背后的原理</p>
+<p>就好像计算机一样，当你作为用户，你不用去了解程序的运行过程和CPU的原理，这些东西并不会影响你的日常使用，你作为用户只需要好好去使用计算机就行了，此时这些原理就像黑盒子一样，被封装被抽象起来了</p>
+<p>那么OOP语言中的抽象也是这个道理吗？</p>
+<p>这里还是拿上一篇文章所用的类GeometricObject和Circle来举例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** UML diagram */</span></span><br><span class="line">               GeometricObject</span><br><span class="line">-------------------------------------------------</span><br><span class="line">-color: String</span><br><span class="line">-filled: <span class="keyword">boolean</span></span><br><span class="line">-dateCreated: java.util.Date</span><br><span class="line">-------------------------------------------------</span><br><span class="line">+GeometricObject()</span><br><span class="line">+GeometricObject(color: String, filled: <span class="keyword">boolean</span>)</span><br><span class="line">+getColor(): String</span><br><span class="line">+isFilled(): <span class="keyword">boolean</span></span><br><span class="line">+setFilled(filled: <span class="keyword">boolean</span>): <span class="keyword">void</span></span><br><span class="line">+getDataCreated(): java.util.Date</span><br><span class="line">+toString(): String</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                      Circle</span><br><span class="line">-------------------------------------------------------</span><br><span class="line">-radius: <span class="keyword">double</span></span><br><span class="line">-------------------------------------------------------</span><br><span class="line">+Circle()</span><br><span class="line">+Circle(radius: <span class="keyword">double</span>)</span><br><span class="line">+Circle(radius: <span class="keyword">double</span>, color: String, filled: <span class="keyword">boolean</span>)</span><br><span class="line">+getRadius(): <span class="keyword">double</span></span><br><span class="line">+setRadius(radius: <span class="keyword">double</span>): <span class="keyword">void</span></span><br><span class="line">+getArea(): <span class="keyword">double</span></span><br><span class="line">+getPerimeter(): <span class="keyword">double</span></span><br><span class="line">+getDiameter(): <span class="keyword">double</span></span><br><span class="line">+printCircle(): <span class="keyword">void</span></span><br></pre></td></tr></table></figure>
+
+<p>还是这熟悉的两个类</p>
+<p>只不过仔细观察，你会发现，计算周长和面积的方法<code>getPerimeter()</code>和<code>getArea()</code>都位于Circle类，但是每一个GeometricObject理论上都要计算面积和周长啊，然而由于每种几何图形的面积周长的计算方法都不一样，因此这两个方法都是依赖于特定图形的类如Circle的</p>
+<p>那我们应该怎么样让GeometricObject的实例使用<code>getPerimeter()</code>和<code>getArea()</code>方法呢？</p>
+<p>我们可以把类改成抽象类，然后在这个类里面添加抽象方法<code>getPerimeter()</code>和<code>getArea()</code></p>
+<p>将其class header</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GeometricObject</span></span></span><br></pre></td></tr></table></figure>
+
+<p>加个modifier abstract变为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">GeometricObject</span></span></span><br></pre></td></tr></table></figure>
+
+<p>并在GeometricObject类里，加入抽象方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**abstract classes */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">double</span> <span class="title">getArea</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">double</span> <span class="title">getPerimeter</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>抽象方法body都是空的，虽然这个抽象方法存在于GeometricObject类里面，但是并不由这个类实现，这个方法的实现交给了继承它的子类来实现</p>
+<p>我们在原Circle类里面重写这个方法（已经重写了，如下）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">double</span> radius;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">getArea</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> radius * radius * Math.PI;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时我们可以进行如下操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        GeometricObject circle = <span class="keyword">new</span> Circle(<span class="number">2</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Area is &quot;</span> + circle.getArea());</span><br><span class="line">        <span class="comment">//output: Area is 12.566370614359172</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>GeometricObject类型的对象也能调用getArea()方法了，这个方法实际是在Circle类里面实现的（这个实现方法的类的调用是由JVM动态决定的，取决于actual type），这跟我之前看到的关于抽象的描述岂不是有神似之处，虽然这方法实际上是在子类的那一层实现的，但是父类只管知道有这个方法并且自己可以用它就行</p>
+<p>就这个例子来说，在GeometricObject类中加这俩抽象方法有什么好处呢？</p>
+<p>我认为相比于哲学的抽象定义，更实际的用途就是在<strong>更加通用化的父类中使用子类中比较特殊化的方法</strong>吧</p>
+<p>这样定义了抽象类与方法，我们就可以直接比较两个不同子类对象的面积和周长了（而不用进行typecast）</p>
+<p><strong>并且</strong>由于抽象类中的抽象方法必须要有继承这个类的子类进行重写实现，因此抽象类的constructor不能直接被调用，从而无法直接创建一个actual type为抽象类的对象，其constructor在子类对象被创建的时候通过继承链进行调用</p>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>接口是什么呢？接口是一个与类非常相似的结构，它可以指定通用行为给相关或不相关的类，你可以指定这个类是不是如 可以比较(Comparable) 可以克隆(Cloneable)等</p>
+<p>接口继承的方式与类继承的方式也是差不多，只不过Java不允许一个子类继承多个子类，但是允许实现多个interface</p>
+<p>要实现一个接口，只需要在类上加上 <code>implements interface1, interface2, ... interfacen</code> 即可，此时这个类实现了这多个接口，并且同时也是这些个接口的对象</p>
+<p>有什么例子吗？</p>
+<p>我们用了非常多的一个<code>String</code>类，拥有一个方法<code>compareTo(String s)</code>，当我们想要表示两个字符串的时候，便可以调用这个方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">&quot;ABC&quot;</span>;</span><br><span class="line">String s2 = <span class="string">&quot;ABCD&quot;</span>;</span><br><span class="line">System.out.println(s1.compareTo(s2)); <span class="comment">//output: -1</span></span><br></pre></td></tr></table></figure>
+
+<p>经过API文档的查阅，我们可以得出这么点东西</p>
+<p>在String页面下有如下的class header</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">String</span> <span class="keyword">extends</span> <span class="title">Object</span> <span class="keyword">implements</span> <span class="title">Serializable</span>, <span class="title">Comparable</span>&lt;<span class="title">String</span>&gt;, <span class="title">CharSequence</span></span></span><br></pre></td></tr></table></figure>
+
+<p>对于<code>interface Comparable&lt;String&gt;</code> 我们也能在API Doc下面找到如下的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Interface Comparable&lt;T&gt; &#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(T o)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中的T其实就是type parameter, T 代表着任意一个 type</p>
+<p>也就是说，这个方法在接口中定义，在实现它的类中进行接口方法的实现，这点与抽象类非常相似</p>
+<h2 id="接口与抽象的区别"><a href="#接口与抽象的区别" class="headerlink" title="接口与抽象的区别"></a>接口与抽象的区别</h2><p>既然抽象类与接口如此相似，那差别是什么呢？</p>
+<p>一个类包含了data field, constructor和method, 而接口与类也差不多，只是没了constructor，并且在另外两个上也有那么一丢丢差别</p>
+<p>以<strong>Java8+</strong>来讲，主要有下面这些区别吧</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>data field</th>
+<th>constructor</th>
+<th>method</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>抽象类</td>
+<td>跟个正常类一样</td>
+<td>有 但是只能由子类调用</td>
+<td>跟个正常类一样 只是多了抽象方法</td>
+</tr>
+<tr>
+<td>接口</td>
+<td>必须都是final</td>
+<td>无</td>
+<td>只能是抽象方法 <strong>default</strong>方法 <strong>static</strong>方法</td>
+</tr>
+</tbody></table>
+<p>并且，一个子类可以实现多个接口，而一个子类只能继承一个父类</p>
+<p>也许你会问：好像除了一类实现多个接口的特性，接口好像一无是处诶？</p>
+<p>其实我认为存在即合理吧，从某种情况来讲，接口比抽象类更加<strong>普适通用</strong></p>
+<p>写这篇文章的时候，咱还没有什么实际项目经验，是个云玩家，举个小实例吧</p>
+<p>比如我们定义那么一个接口 <code>Edible</code>, 含有一个 <code>howToEat()</code> 抽象方法</p>
+<p>那么，任意能吃的实体类都能实现它</p>
+<p>而我们把 <code>howToEat()</code> 方法定义在一个抽象类<code>Animal</code>中，那么只有继承它的子类才能实现这个方法，那一些蔬菜也能吃啊，把一种植物强行继承在动物类中，这有点不合继承的一些规则（不遵守is-a关系，乱来）</p>
+<p>而接口并没有这个情况出现，他很通用，只要能实现，都能在类中用 <code>implements</code> 来继承它</p>
+<p>这里应该可以用 <strong>is-a</strong> 和 <strong>is-kind-of</strong> 关系来描述接口与子类，抽象父类与子类的关系</p>
+<p>我们在继承的时候知道了is-a关系，可以 <code>Circle is a GeometricObject</code> 这样表示一个继承关系，这个父类子类关系比较明显</p>
+<p>而接口的继承关系可以这样表达 <code>String is kind of Comparable</code> 或 <code>String is a Comparable Object</code>，而这接口和类的关系就没那么关系明显了，是比较弱的一个关系</p>
+<p>那么就可以一句话解释上面的错误了 你想想 <code>Cabbage is an Animal</code> 这河里吗？</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>所以，接口和接口相似但又有区别，因此设计程序的时候，最好根据实际需求进行选择</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/49e5f4612660/" rel="prev" title="Java学习笔记之初学继承与多态">
+                  <i class="fa fa-chevron-left"></i> Java学习笔记之初学继承与多态
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">situ2001</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -134,7 +134,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">7</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">8</span></a>
 
   </li>
         <li class="menu-item menu-item-计划">
@@ -190,7 +190,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -286,7 +286,7 @@
 <p>依旧是拿几何图形来举例</p>
 <p>比如说三角形和圆形都是几何图形，它们有着如<strong>颜色 创建日期 是否被填色</strong>等特性，有着共同的变量和对应的getter和setter，对于这些图形的实例，我们也都可以调用<strong>方法</strong>来获取它们的<strong>填充状态 颜色 创建日期</strong>等</p>
 <p>这时我们可以创建一个类<strong>GeometricObject</strong>拥有着对应的data field和method</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//此处放UML图</span></span><br><span class="line">GeometricObject</span><br><span class="line">----</span><br><span class="line">-color: String</span><br><span class="line">-filled: <span class="keyword">boolean</span></span><br><span class="line">-dateCreated: java.util.Date</span><br><span class="line">----</span><br><span class="line">+GeometricObject()</span><br><span class="line">+GeometricObject(color: String, filled: <span class="keyword">boolean</span>)</span><br><span class="line">+getColor(): String</span><br><span class="line">+isFilled(): <span class="keyword">boolean</span></span><br><span class="line">+setFilled(filled: <span class="keyword">boolean</span>): <span class="keyword">void</span></span><br><span class="line">+getDataCreated(): java.util.Date</span><br><span class="line">+toString(): String</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">GeometricObject</span><br><span class="line">----</span><br><span class="line">-color: String</span><br><span class="line">-filled: <span class="keyword">boolean</span></span><br><span class="line">-dateCreated: java.util.Date</span><br><span class="line">----</span><br><span class="line">+GeometricObject()</span><br><span class="line">+GeometricObject(color: String, filled: <span class="keyword">boolean</span>)</span><br><span class="line">+getColor(): String</span><br><span class="line">+isFilled(): <span class="keyword">boolean</span></span><br><span class="line">+setFilled(filled: <span class="keyword">boolean</span>): <span class="keyword">void</span></span><br><span class="line">+getDataCreated(): java.util.Date</span><br><span class="line">+toString(): String</span><br></pre></td></tr></table></figure>
 
 <p>而圆和三角形对象都有自己那特别的特性，比如圆拥有<strong>半径</strong>和变量的setter和getter，并且有自己特有的用于<strong>计算周长 计算面积</strong>方法</p>
 <p>此时，类<strong>Circle</strong>便如下图所示</p>
@@ -371,7 +371,7 @@
 
 <p>上面这个例子就是利用了<code>instanceof</code>来对应地转换对象的类型，从而避免了错误的产生</p>
 <h2 id="这要单独给个标题"><a href="#这要单独给个标题" class="headerlink" title="这要单独给个标题"></a>这要单独给个标题</h2><p>结合前后内容突然醒悟 <del>小声BB 我悟错了吗</del></p>
-<p>其实到最后，对于多态和上下转型的实现，我发现应该是这样的吧，不管是声明类型的怎么变化，还是typecast的那各种上上下下的操作，<strong>实际上操作的是引用变量，而不是已经被实例化的对象本身</strong> </p>
+<p>其实到最后，对于多态和上下转型的实现，我发现应该是这样的吧，不管是声明类型的怎么变化，还是typecast的那各种上上下下的操作，<strong>实际上操作的是引用变量，而不是已经被实例化的对象本身</strong></p>
 <p>结合上面那奇奇怪怪的大段文字和下面这句话理解</p>
 <p>一个继承了父类的子类对象在被new出来，必然包含了父类的方法和数据域</p>
 <p><del>所以，只不过是因为引用变量的变化，才导致引用变量所指向的对象出现不那么一样的样子而已（此表达有点奇怪</del></p>
@@ -396,6 +396,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/bb31e33f1e48/" rel="next" title="Java学习笔记之抽象与接口">
+                  Java学习笔记之抽象与接口 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
