@@ -19,13 +19,13 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
   <meta name="description" content="这篇记录了咱对Java面向对象编程中抽象与接口的初步理解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习笔记之抽象与接口">
-<meta property="og:url" content="http://yoursite.com/bb31e33f1e48/index.html">
+<meta property="og:title" content="初识抽象与接口">
+<meta property="og:url" content="https://blog.situ2001.com/bb31e33f1e48/index.html">
 <meta property="og:site_name" content="Situ Note">
 <meta property="og:description" content="这篇记录了咱对Java面向对象编程中抽象与接口的初步理解">
 <meta property="og:locale" content="zh_CN">
@@ -35,7 +35,7 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://yoursite.com/bb31e33f1e48/">
+<link rel="canonical" href="https://blog.situ2001.com/bb31e33f1e48/">
 
 
 <script class="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>Java学习笔记之抽象与接口 | Situ Note</title>
+  <title>初识抽象与接口 | Situ Note</title>
   
 
 
@@ -114,7 +114,7 @@
       <h1 class="site-title">Situ Note</h1>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">要啥自行车</p>
+      <p class="site-subtitle" itemprop="description">光阴的月台</p>
   </div>
 
   <div class="site-nav-right">
@@ -130,6 +130,11 @@
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -183,7 +188,7 @@
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
   <p class="site-author-name" itemprop="name">situ2001</p>
-  <div class="site-description" itemprop="description">做好当下 永远不亏</div>
+  <div class="site-description" itemprop="description">回首过去 做好当下 展望未来</div>
 </div>
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
@@ -193,6 +198,12 @@
           <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
 </div>
@@ -231,12 +242,12 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/bb31e33f1e48/">
+    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/bb31e33f1e48/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="situ2001">
-      <meta itemprop="description" content="做好当下 永远不亏">
+      <meta itemprop="description" content="回首过去 做好当下 展望未来">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -244,7 +255,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Java学习笔记之抽象与接口
+          初识抽象与接口
         </h1>
 
         <div class="post-meta-container">
@@ -256,6 +267,15 @@
       <span class="post-meta-item-text">发表于</span>
 
       <time title="创建时间：2020-10-24 10:24:00" itemprop="dateCreated datePublished" datetime="2020-10-24T10:24:00+08:00">2020-10-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">Java学习</span></a>
+        </span>
     </span>
 
   
@@ -276,24 +296,23 @@
 <h2 id="修订记录"><a href="#修订记录" class="headerlink" title="修订记录"></a>修订记录</h2><ol>
 <li>2020-10-24 初版</li>
 </ol>
-<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p>抽象是什么？什么是抽象？在了解OOP的抽象之前，我读过这么一段话</p>
+<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p>抽象是什么？什么是抽象？在了解OOP的抽象之前，我在一本计算机导论书里面读过这段话</p>
 <blockquote>
-<p>The term abstraction, as we are using it here, refers to the distinction between the external properties of an entity and the details of the entity’s internal composition. It is abstraction that allows us to ignore the internal details of a complex device and use it as a single, comprehensible unit.</p>
+<p>The term <strong>abstraction</strong>, as we are using it here, refers to the distinction between the external properties of an entity and the details of the entity’s internal composition. It is abstraction that allows us to ignore the internal details of a complex device and use it as a single, comprehensible unit.</p>
 </blockquote>
 <p>这段话大概是说了抽象存在的作用，它使得我们的社会分工更加妥当，在许多地方，你只需要做好你自己的本能，而不必刻意去理解你所作所为的背后的原理</p>
-<p>就好像计算机一样，当你作为用户，你不用去了解程序的运行过程和CPU的原理，这些东西并不会影响你的日常使用，你作为用户只需要好好去使用计算机就行了，此时这些原理就像黑盒子一样，被封装被抽象起来了</p>
+<p>这就像计算机与用户之间的关系一样，当你作为用户，你不用去了解程序的运行过程和CPU的原理，这些东西并不会影响你的日常使用，你作为用户只需要好好去使用计算机就行了，此时这些原理就像黑盒子一样，被封装被抽象起来了</p>
 <p>那么OOP语言中的抽象也是这个道理吗？</p>
-<p>这里还是拿上一篇文章所用的类GeometricObject和Circle来举例</p>
+<p>那我这里还是拿上一篇文章所用的类GeometricObject和Circle来举例</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** UML diagram */</span></span><br><span class="line">               GeometricObject</span><br><span class="line">-------------------------------------------------</span><br><span class="line">-color: String</span><br><span class="line">-filled: <span class="keyword">boolean</span></span><br><span class="line">-dateCreated: java.util.Date</span><br><span class="line">-------------------------------------------------</span><br><span class="line">+GeometricObject()</span><br><span class="line">+GeometricObject(color: String, filled: <span class="keyword">boolean</span>)</span><br><span class="line">+getColor(): String</span><br><span class="line">+isFilled(): <span class="keyword">boolean</span></span><br><span class="line">+setFilled(filled: <span class="keyword">boolean</span>): <span class="keyword">void</span></span><br><span class="line">+getDataCreated(): java.util.Date</span><br><span class="line">+toString(): String</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                      Circle</span><br><span class="line">-------------------------------------------------------</span><br><span class="line">-radius: <span class="keyword">double</span></span><br><span class="line">-------------------------------------------------------</span><br><span class="line">+Circle()</span><br><span class="line">+Circle(radius: <span class="keyword">double</span>)</span><br><span class="line">+Circle(radius: <span class="keyword">double</span>, color: String, filled: <span class="keyword">boolean</span>)</span><br><span class="line">+getRadius(): <span class="keyword">double</span></span><br><span class="line">+setRadius(radius: <span class="keyword">double</span>): <span class="keyword">void</span></span><br><span class="line">+getArea(): <span class="keyword">double</span></span><br><span class="line">+getPerimeter(): <span class="keyword">double</span></span><br><span class="line">+getDiameter(): <span class="keyword">double</span></span><br><span class="line">+printCircle(): <span class="keyword">void</span></span><br></pre></td></tr></table></figure>
 
-<p>还是这熟悉的两个类</p>
-<p>只不过仔细观察，你会发现，计算周长和面积的方法<code>getPerimeter()</code>和<code>getArea()</code>都位于Circle类，但是每一个GeometricObject理论上都要计算面积和周长啊，然而由于每种几何图形的面积周长的计算方法都不一样，因此这两个方法都是依赖于特定图形的类如Circle的</p>
+<p>还是这熟悉的两个类，只不过仔细观察，你会发现，计算周长和面积的方法<code>getPerimeter()</code>和<code>getArea()</code>都位于Circle类，但是每一个GeometricObject理论上都要计算面积和周长啊，然而由于每种几何图形的面积周长的计算方法都不一样，因此这两个方法都是依赖于特定图形的类如Circle的</p>
 <p>那我们应该怎么样让GeometricObject的实例使用<code>getPerimeter()</code>和<code>getArea()</code>方法呢？</p>
 <p>我们可以把类改成抽象类，然后在这个类里面添加抽象方法<code>getPerimeter()</code>和<code>getArea()</code></p>
-<p>将其class header</p>
+<p>于是将其class header</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GeometricObject</span></span></span><br></pre></td></tr></table></figure>
 
-<p>加个modifier abstract变为</p>
+<p>加个 modifier <strong>abstract</strong> 改变为如下</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">GeometricObject</span></span></span><br></pre></td></tr></table></figure>
 
 <p>并在GeometricObject类里，加入抽象方法</p>
@@ -329,7 +348,7 @@
 <p>也就是说，这个方法在接口中定义，在实现它的类中进行接口方法的实现，这点与抽象类非常相似</p>
 <h2 id="接口与抽象的区别"><a href="#接口与抽象的区别" class="headerlink" title="接口与抽象的区别"></a>接口与抽象的区别</h2><p>既然抽象类与接口如此相似，那差别是什么呢？</p>
 <p>一个类包含了data field, constructor和method, 而接口与类也差不多，只是没了constructor，并且在另外两个上也有那么一丢丢差别</p>
-<p>以<strong>Java8+</strong>来讲，主要有下面这些区别吧</p>
+<p>拿<strong>Java 8 or above</strong>来讲，主要有下面这些区别吧</p>
 <table>
 <thead>
 <tr>
@@ -378,11 +397,14 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/49e5f4612660/" rel="prev" title="Java学习笔记之初学继承与多态">
-                  <i class="fa fa-chevron-left"></i> Java学习笔记之初学继承与多态
+                <a href="/49e5f4612660/" rel="prev" title="初识继承与多态">
+                  <i class="fa fa-chevron-left"></i> 初识继承与多态
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/e5ecfc9a7a7d/" rel="next" title="#1 大一本科生 何去又何从">
+                  #1 大一本科生 何去又何从 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
