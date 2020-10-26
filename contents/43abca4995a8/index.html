@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://img-situ.oss-cn-shenzhen.aliyuncs.com/apple-touch-icon-bike.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://img-situ.oss-cn-shenzhen.aliyuncs.com/favicon-32x32-next-bike.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="https://img-situ.oss-cn-shenzhen.aliyuncs.com/favicon-16x16-next-bike.png">
-  <link rel="mask-icon" href="https://img-situ.oss-cn-shenzhen.aliyuncs.com/logo-bike.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-bike.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-bike.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-bike.png">
+  <link rel="mask-icon" href="/images/logo-bike.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -16,16 +16,17 @@
 
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
   <meta name="description" content="国庆回家了，先随便水一篇文章 才放4天假差评 那么，如何搭建一个属于自己的静态博客？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搭建个人博客">
-<meta property="og:url" content="https://blog.situ2001.com/43abca4995a8/index.html">
+<meta property="og:url" content="https://blog.situ2001.com/contents/43abca4995a8/index.html">
 <meta property="og:site_name" content="Situ Note">
 <meta property="og:description" content="国庆回家了，先随便水一篇文章 才放4天假差评 那么，如何搭建一个属于自己的静态博客？">
 <meta property="og:locale" content="zh_CN">
@@ -40,10 +41,10 @@
 <meta name="twitter:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003114117.png">
 
 
-<link rel="canonical" href="https://blog.situ2001.com/43abca4995a8/">
+<link rel="canonical" href="https://blog.situ2001.com/contents/43abca4995a8/">
 
 
-<script class="page-configurations">
+<script data-pjax class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
@@ -139,12 +140,12 @@
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">8</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
         <li class="menu-item menu-item-计划">
@@ -200,7 +201,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -247,7 +248,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/43abca4995a8/">
+    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/contents/43abca4995a8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -374,12 +375,12 @@ $ npm install</code></pre><p>也就是说，在目标文件夹下依次输入上
 <p>此时，到github的connection已经没有问题</p>
 <h2 id="关于部署"><a href="#关于部署" class="headerlink" title="关于部署"></a>关于部署</h2><p>本地写好了，当然是要部署，而部署之前，得要有地方给你放。</p>
 <p>首先先在github上建立一个这样的仓库</p>
-<p><img src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003114117.png" alt=""></p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003114117.png" alt=""></p>
 <p>repo的name是 yourusername.github.io ，并且这个repo要是Public的，填完之后点击 Create Repository 按钮就行了</p>
 <p>至于为什么要这样做，细看官方讲解: <a target="_blank" rel="noopener" href="https://pages.github.com/">Github Pages</a></p>
 <p>新建出来的repo，github pages默认是启用着的（<del>也关不了</del></p>
 <p>再调一下 repo 里面的 setting ，进入 setting 之后一直往下跑就看到了</p>
-<p><img src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003151605.png" alt=""></p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003151605.png" alt=""></p>
 <p>主要是设置一下 source folder 和 branch 之类的，可以直接加一个HTTPS，也支持自定义域名</p>
 <p>至于hexo这边如何配置呢</p>
 <p>先执行如下命令，为什么，因为文档有的说啊：<a target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages#One-command-deployment">Github Pages | Hexo</a></p>
@@ -395,7 +396,7 @@ $ npm install</code></pre><p>也就是说，在目标文件夹下依次输入上
 <p><strong>注</strong>: 绝大部分地区可能无法打开<code>*.github.io</code>，建议修改DNS为 <code>223.5.5.5</code>，能解决大部分问题，如果有cf的推荐CNAME解析再套上CDN</p>
 <p>update: CNAME文件会在deploy之后被覆盖，翻了一下，发现<code>hexo deploy</code>用的是 <code>git push --force</code> ，因此远程仓库的内容会被现有的本地仓库覆盖掉，解决方法是在source目录下直接新建一个CNAME文件，这样在生成的时候就会出现在public目录里</p>
 <p>如下图所示</p>
-<p><img src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003174322.png" alt=""></p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003174322.png" alt=""></p>
 <h2 id="图床配置-Optional"><a href="#图床配置-Optional" class="headerlink" title="图床配置 (Optional)"></a>图床配置 (Optional)</h2><p>Git 这种东西，不是拿来给我们存放二进制文件（如图片）的</p>
 <p>俗话说得好， <del>Git存换删图一时爽，.git folder火葬场</del></p>
 <p>而图片在Markdown中，可以以URL形式附上，所以只要有链接，就能出图了</p>
@@ -433,7 +434,7 @@ $ npm install</code></pre><p>也就是说，在目标文件夹下依次输入上
 <p>一定要<strong>有.gitignore文件</strong></p>
 <p><strong>一定要有.gitignore文件</strong></p>
 <p>如果你想git clone下来一堆或者push一堆node_moudle，请忽略此步</p>
-<p><img src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003182803.png" alt=""></p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003182803.png" alt=""></p>
 <p>该文件的作用如文件名本身，可以忽略上传的文件/文件夹</p>
 <p>对于hexo源文件，我一般选择忽略如下，剩下的便是文章和config文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.log</span><br><span class="line">node_modules&#x2F;</span><br><span class="line">public&#x2F;</span><br><span class="line">.deploy*&#x2F;</span><br></pre></td></tr></table></figure>
@@ -451,17 +452,34 @@ $ npm install</code></pre><p>也就是说，在目标文件夹下依次输入上
     
 
     <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>situ2001
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.situ2001.com/contents/43abca4995a8/" title="搭建个人博客">https://blog.situ2001.com/contents/43abca4995a8/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/f88ff2f50f29/" rel="prev" title="初识类与对象">
+                <a href="/contents/f88ff2f50f29/" rel="prev" title="初识类与对象">
                   <i class="fa fa-chevron-left"></i> 初识类与对象
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/5a4f09596a4e/" rel="next" title="反思之概念理解不可粗糙">
+                <a href="/contents/5a4f09596a4e/" rel="next" title="反思之概念理解不可粗糙">
                   反思之概念理解不可粗糙 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -476,6 +494,7 @@ $ npm install</code></pre><p>也就是说，在目标文件夹下依次输入上
 
 
       
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -525,7 +544,46 @@ $ npm install</code></pre><p>也就是说，在目标文件夹下依次输入上
 
   
   <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
 
   
 
@@ -555,9 +613,31 @@ $ npm install</code></pre><p>也就是说，在目标文件夹下依次输入上
 
 
 
+    <div class="pjax">
   
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '25660877348ea415abbd',
+      clientSecret: 'a57f3ffb40fa5965d5211cbb8c3ddeb956a2d259',
+      repo        : 'comments',
+      owner       : 'situ2001',
+      admin       : ['situ2001'],
+      id          : '3db6dcab3d5ff6f450b1c6cec40356e2',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
 </body>
 </html>
