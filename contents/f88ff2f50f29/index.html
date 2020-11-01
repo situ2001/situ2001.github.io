@@ -23,12 +23,12 @@
     var CONFIG = {"hostname":"blog.situ2001.com","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="此文记录了咱对Java OOP的初步理解 由于是初学，文章也是初写，难免有错误，有的话，请指出（好像没有评论系统">
+  <meta name="description" content="此文记录了咱对Java OOP的初步理解 由于是初学，文章也是初写，难免有错误，有的话，请指出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初识类与对象">
 <meta property="og:url" content="https://blog.situ2001.com/contents/f88ff2f50f29/index.html">
 <meta property="og:site_name" content="Situ Note">
-<meta property="og:description" content="此文记录了咱对Java OOP的初步理解 由于是初学，文章也是初写，难免有错误，有的话，请指出（好像没有评论系统">
+<meta property="og:description" content="此文记录了咱对Java OOP的初步理解 由于是初学，文章也是初写，难免有错误，有的话，请指出">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-09-22T08:44:53.000Z">
 <meta property="article:modified_time" content="2020-09-22T08:44:53.000Z">
@@ -182,7 +182,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">面向对象编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.1.</span> <span class="nav-text">什么是对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB"><span class="nav-number">4.</span> <span class="nav-text">类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB"><span class="nav-number">4.1.</span> <span class="nav-text">什么是类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E9%87%8C%E6%9C%89%E4%BB%80%E4%B9%88"><span class="nav-number">4.2.</span> <span class="nav-text">类里有什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.3.</span> <span class="nav-text">新建对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%95%E8%AE%B2constructor"><span class="nav-number">4.4.</span> <span class="nav-text">试讲constructor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UML-class-diagram"><span class="nav-number">5.</span> <span class="nav-text">UML class diagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-variable"><span class="nav-number">6.</span> <span class="nav-text">reference variable</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B1%E6%95%B0%E7%BB%84%E8%AF%B4%E8%B5%B7"><span class="nav-number">6.1.</span> <span class="nav-text">由数组说起</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9D%9F"><span class="nav-number">6.2.</span> <span class="nav-text">以对象结束</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E6%88%91%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">自我总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%96%87%E4%B8%AD%E5%87%BA%E7%8E%B0%E8%8B%B1%E8%AF%AD%E7%9A%84%E8%BF%99%E4%BB%B6%E4%BA%8B"><span class="nav-number">8.</span> <span class="nav-text">关于文中出现英语的这件事</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E8%AE%B0%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">修改记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">面向对象编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.</span> <span class="nav-text">对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.1.</span> <span class="nav-text">什么是对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB"><span class="nav-number">5.</span> <span class="nav-text">类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB"><span class="nav-number">5.1.</span> <span class="nav-text">什么是类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%90%8E%E8%BF%BD%E5%8A%A0%E9%83%A8%E5%88%86"><span class="nav-number">5.2.</span> <span class="nav-text">日后追加部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E9%87%8C%E6%9C%89%E4%BB%80%E4%B9%88"><span class="nav-number">5.3.</span> <span class="nav-text">类里有什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E5%AF%B9%E8%B1%A1"><span class="nav-number">5.4.</span> <span class="nav-text">新建对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%95%E8%AE%B2constructor"><span class="nav-number">5.5.</span> <span class="nav-text">试讲constructor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UML-class-diagram"><span class="nav-number">6.</span> <span class="nav-text">UML class diagram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference-variable"><span class="nav-number">7.</span> <span class="nav-text">reference variable</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B1%E6%95%B0%E7%BB%84%E8%AF%B4%E8%B5%B7"><span class="nav-number">7.1.</span> <span class="nav-text">由数组说起</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5%E5%AF%B9%E8%B1%A1%E7%BB%93%E6%9D%9F"><span class="nav-number">7.2.</span> <span class="nav-text">以对象结束</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E6%88%91%E6%80%BB%E7%BB%93"><span class="nav-number">8.</span> <span class="nav-text">自我总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%96%87%E4%B8%AD%E5%87%BA%E7%8E%B0%E8%8B%B1%E8%AF%AD%E7%9A%84%E8%BF%99%E4%BB%B6%E4%BA%8B"><span class="nav-number">9.</span> <span class="nav-text">关于文中出现英语的这件事</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -196,7 +196,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -287,14 +287,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.5k</span>
+      <span>3.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -306,9 +306,13 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>此文记录了咱对Java OOP的初步理解</p>
-<p>由于是初学，文章也是初写，难免有错误，有的话，请指出（<del>好像没有评论系统</del></p>
+<p>由于是初学，文章也是初写，难免有错误，有的话，请指出</p>
 <a id="more"></a>
 
+<h2 id="修改记录"><a href="#修改记录" class="headerlink" title="修改记录"></a>修改记录</h2><ol>
+<li>2020-09-22 原始文章</li>
+<li>2020-11-01 coding有了点积累，回来追加一部分内容</li>
+</ol>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>利用选择、循环、数组等这部分的内容，我们已经可以解决相当一部分的问题了。而当我们想构建一个包含着文本输入框、按钮等控件的GUI应用时，利用前面所学的知识，似乎需要耗费相当大的功夫。</p>
 <h2 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h2><p>所以，为了提高软件的灵活性，开发性与可维护性，于是<strong>面向对象编程</strong> (Object-Orient Programming) 便出现了，面向对象编程，顾名思义就是使用Object(对象) 来进行程序设计</p>
 <h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="什么是对象"><a href="#什么是对象" class="headerlink" title="什么是对象"></a>什么是对象</h3><p>那什么东西是Object呢？</p>
@@ -320,23 +324,37 @@
 <p>懂了(<del>其实没懂</del>)，对象，放在生活上，不就是个具体的物体吗？</p>
 <p>那么按理来讲，猫猫狗狗勺子苹果桌子学生，甚至是一个抽象的圆都可以是对象啊<br>放到计算机语言上，(<del>复制粘贴的</del>)一个可以被明确标识的实体，就是对象，并且每一个对象都偶有自己独特的标识、状态和行为</p>
 <p>上面的文字真的好绕啊，理解对象是什么，我觉得最好还是要举栗子</p>
-<p>比如，我们现在啥都没有，但是，<strong>来 左边 跟我一起画个龙 在你右边 画一道彩虹</strong></p>
-<p><del>于是乎便有了一条龙和一道彩虹</del></p>
-<p>这条龙和这道彩虹，便是对象，龙有着独特位置(左)和长度这些特点，而彩虹也有着独特位置(右)和颜色等这些特点，这些都是用来描述他们的属性的</p>
-<p>一个对象具有其独特的 <strong>attribute</strong> 和 <strong>behavior</strong> (属性与行为)。</p>
-<p>如这条彩虹有着一定的大小与颜色深浅性质，这些都是通过它的 data field 才表示的；而如它的消失便是一个行为，一个对象的行为是通过 method 来定义的</p>
+<p>比如，我们现在啥都没有，但是，<strong>来 左边 跟我一起画个龙 在你右边 画一道彩虹</strong><br><del>于是乎便有了一条龙和一道彩虹</del></p>
+<p>这条龙和这道彩虹，便是对象，龙有着独特位置(左)和长度这些特点，而彩虹也有着独特位置(右)和颜色等这些特点，这些都是用来描述他们的属性的<br>一个对象具有其独特的 <strong>attribute</strong> 和 <strong>behavior</strong> (属性与行为)。<br>如这条彩虹有着一定的大小与颜色深浅性质，这些都是通过它的 data field 才表示的；而如它的消失便是一个行为，一个对象的行为是通过 method 来定义的</p>
 <h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><h3 id="什么是类"><a href="#什么是类" class="headerlink" title="什么是类"></a>什么是类</h3><p>前面提及了对象，在这个地方说 class 便会自然而然了</p>
 <p>来点正经的，先让我们忘掉刚刚那条龙和那一道彩虹（</p>
 <p>我们拿正方形和电视机来说事</p>
-<p>四条边相等并且互相垂直的四边形，便是正方形，这是每一个正方形基本性质，而对于每一台电视机，都有音量、频道和开关这些属性。</p>
-<p>上述这些这些对于每一个正方形或者每一台电视机来说，是共有的。</p>
-<p>或是说，每个正方形是同一类东西，每台电视也是如此</p>
-<p>所以我们可以通过 class 来生成每一个 object</p>
+<p>四条边相等并且互相垂直的四边形，便是正方形，这是每一个正方形基本性质，而对于每一台电视机，都有音量、频道和开关这些属性。<br>上述这些这些对于每一个正方形或者每一台电视机来说，是共有的。<br>或是说，每个正方形是同一类东西，每台电视也是如此<br>所以我们可以通过 class 来生成每一个 object</p>
 <p>比如我们可以通过Square类来创建三个边长不同的正方形，它们都有着正方形的性质，只是边长不同罢了。这个过程叫做instantnation(实例化)</p>
-<p>Note: instance is equivalent to object</p>
-<p>类在instantnation的过程中起到了一个相当于“模板”的作用，电视机对象也是如此。</p>
-<p>设想: 我是一个电视装配厂的工人，我可以跟着生产指南(class)进行电视机的基本装配,便可以不断装配出数不胜数的电视机。</p>
-<p>所以，可把类理解为产出同类对象的基本模板</p>
+<blockquote>
+<p>Note: instance is equivalent to object<br>类在instantnation的过程中起到了一个相当于“模板”的作用，电视机对象也是如此。</p>
+</blockquote>
+<p>设想: 我是一个电视装配厂的工人，我可以跟着生产指南(class)进行电视机的基本装配,便可以不断装配出数不胜数的电视机。<br>所以，可把类理解为产出同类对象的基本模板或者蓝图</p>
+<h3 id="日后追加部分"><a href="#日后追加部分" class="headerlink" title="日后追加部分"></a>日后追加部分</h3><blockquote>
+<p>2020-11-01追加部分 可能会对文章逻辑造成影响 推荐跳过这部分的阅读</p>
+</blockquote>
+<p>对上面那句话怎么了解呢，又模板又蓝图的？</p>
+<p>经过多一点的实操之后，发现优点不是仅仅万物皆对象，而是让某段代码拥有更好的更强的可复用性，就拿一个实际的音乐播放器类进行举例吧。</p>
+<p>如果有两台音乐播放器，我们按照之前的面向过程写法，就是分别声明变量来对应每一播放器的属性，如播放器的开关这个属性，就要声明下面这两个变量<br><code>isOn1: boolean  isOn2: boolean</code><br>并给它们上一个开机关机方法<br><code>toggle（isOn: boolean): void</code></p>
+<p>开关机就要这样做</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">toggle(isOn1);</span><br><span class="line">toogle (isOn2);</span><br></pre></td></tr></table></figure>
+
+<p>那么如果我们要管理n台音乐播放器，那么就要手动声明如下变量 <code>isOn1 isOn2 ... isOnn</code><br>对他们进行开关机操作就要这样做</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">toggle (isOn1);</span><br><span class="line">toggle (isOn2);</span><br><span class="line">...</span><br><span class="line">toggle (isOnn);</span><br></pre></td></tr></table></figure>
+
+<p>这臃肿与coding效率啊，请自己细品。</p>
+<p>所以我们可以对播放器，创建一个Player类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Player</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isOn;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">toggle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        isOn = !isOn;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样一来每一台播放器都有着相同的作用域和方法，开关只需要操作指定的播放器对象即可，如<code>player1.toggle()</code></p>
+<blockquote>
+<p>追加结束</p>
+</blockquote>
 <h3 id="类里有什么"><a href="#类里有什么" class="headerlink" title="类里有什么"></a>类里有什么</h3><p>类包含有什么，能吃吗？类如何定义的，我可以吗？直接看下码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Square</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** data field */</span></span><br><span class="line">    <span class="keyword">double</span> length;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** constructors */</span></span><br><span class="line">    Square() &#123;</span><br><span class="line">        length = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Square(<span class="keyword">double</span> inLength) &#123;</span><br><span class="line">        length = inLength;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** methods */</span></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getArea</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> length * length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getLength</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(length);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setLength</span><span class="params">(<span class="keyword">double</span> newLength)</span> </span>&#123;</span><br><span class="line">        length = newLength;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -522,13 +540,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">18k</span>
+    <span title="站点总字数">21k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17 分钟</span>
+    <span title="站点阅读时长">19 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

@@ -201,7 +201,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -403,13 +403,16 @@ $ npm install</code></pre><p>也就是说，在目标文件夹下依次输入上
 <p><code>$ npm install hexo-deployer-git --save</code></p>
 <p>再去到hexo文件夹下，找到 <code>_config.yml</code> 文件</p>
 <p>添加如下几行</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">&#x27;git&#x27;</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/yourusername/yourusername.github.io</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">&#x27;git&#x27;</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/yourusername/yourusername.github.io</span></span><br><span class="line">  <span class="comment">#branch: master</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
 
+<blockquote>
+<p>2020-11-01更新: GitHub repo的default branch的名字变成main而不是master了, 因此上方做了一些修改</p>
+</blockquote>
 <p>输入 command <code>hexo deploy</code> 等待一段时间之后，若无错误提示，便是部署成功</p>
 <h2 id="访问博客"><a href="#访问博客" class="headerlink" title="访问博客"></a>访问博客</h2><p>在部署之前可以输入command <code>hexo server</code> 进行本地访问</p>
 <p>若已经部署到github上了，直接在浏览器输入 <code>username.github.io</code> 就行</p>
 <p>如果没有问题，你的博客页面将会被加载</p>
-<p><strong>注</strong>: 绝大部分地区可能无法打开<code>*.github.io</code>，建议修改DNS为 <code>223.5.5.5</code>，能解决大部分问题，如果有cf的推荐CNAME解析再套上CDN</p>
+<p><strong>注</strong>: 绝大部分地区可能无法打开<code>*.github.io</code>，建议修改DNS为 <code>223.5.5.5</code>，能解决大部分问题，如果有域名和CDN的，推荐CNAME解析再套上CDN</p>
 <p>update: CNAME文件会在deploy之后被覆盖，翻了一下，发现<code>hexo deploy</code>用的是 <code>git push --force</code> ，因此远程仓库的内容会被现有的本地仓库覆盖掉，解决方法是在source目录下直接新建一个CNAME文件，这样在生成的时候就会出现在public目录里</p>
 <p>如下图所示</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003174322.png" alt=""></p>
@@ -557,13 +560,13 @@ $ npm install</code></pre><p>也就是说，在目标文件夹下依次输入上
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">18k</span>
+    <span title="站点总字数">21k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17 分钟</span>
+    <span title="站点阅读时长">19 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
