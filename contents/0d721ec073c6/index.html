@@ -341,7 +341,7 @@
 <p>下意识想到是不是有可能是302跳转，如果是这样的话，直接F12看看跳转部分有啥就行<br>果不其然，在header的部分找到了flag</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145848.png" alt="世界上最好的语言(?)"></p>
 <h3 id="二次元-二刺猿"><a href="#二次元-二刺猿" class="headerlink" title="二次元? 二刺猿"></a>二次元? 二刺猿</h3><p>题目如图所示</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145907.png" alt=""></p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145907.png"></p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145856.png" alt="不 愧 是 你"></p>
 <p>hint如下，我表示这是GHS的行为 <del>赤裸裸的扒裤子</del></p>
 <blockquote>
@@ -350,10 +350,10 @@
 <p>那综合现有条件进行分析，应该是通过某种手段将下半部分隐藏起来了，而下半部分的实际信息还是存在的</p>
 <p>之前参加过一个学院的讲座，好像是介绍啥方班的，里面的大佬也一展身手，我印象中好像有个十六进制编辑器是常用到的，便匆忙下载了UltraEdit，然后把图扔进去打开，出现一坨码</p>
 <p>先冷静一下，进行第一次尝试，会不会是这se图的高度被改掉了？查看一下分辨率，其高度是1754，十六进制转换过去就是06DA，于是把06DA扔入搜索框内进行搜索，果不其然在开头部分找到了</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145926.png" alt=""></p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145926.png"></p>
 <p>那么图片高度属性应该就可以通过修改这个hex值进行更改了</p>
 <p>过于疲惫，做人要暴力一点，直接把06更成0F再保存（</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145935.png" alt=""></p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145935.png"></p>
 <p>一瞬爆出flag</p>
 <h3 id="g2uc-android1"><a href="#g2uc-android1" class="headerlink" title="g2uc_android1"></a>g2uc_android1</h3><p>这个题差点把我整吐了，前期没有hint也不能安装，打开jadx也就是一个创建mainactivity的方法，并没有什么特殊之处，死磕了好久，太菜了<br>不过最后admin加了hint。。。</p>
 <p>题目没啥的，就提供了一个apk，两个hint如下</p>
@@ -362,9 +362,9 @@
 </blockquote>
 <p>思考了一下，难不成这个apk打开其实有张图片被盖住了？那既然是图片，直接把apk解开不就行了吗。</p>
 <p>解开之后，根据高中用app inventor(?)写apk现在用AS的我的一点经验，<del>直接搜索筛选较大文件啊这apk这么小</del></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145950.png" alt=""></p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145950.png"></p>
 <p>最后找出了flag所在图，图片名为f，<del>我表示我的此刻的心情也是F</del></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145959.png" alt=""></p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145959.png"></p>
 <h3 id="g2uc-android2"><a href="#g2uc-android2" class="headerlink" title="g2uc_android2"></a>g2uc_android2</h3><p>这个还行，直接jadx打开就看到获取flag的方法了，应用如果能安装运行的话，那应该是一个输入框+按钮进行flag输入与比对</p>
 <p>有用的部分在下面，很直接写在MainActivity里了</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">click</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">    Intrinsics.checkParameterIsNotNull(view, <span class="string">&quot;view&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (view.getId() == R.id.button) &#123;</span><br><span class="line">        <span class="keyword">boolean</span> correct = <span class="keyword">true</span>;</span><br><span class="line">        View findViewById = findViewById(R.id.editTextTextPersonName);</span><br><span class="line">        Intrinsics.checkExpressionValueIsNotNull(findViewById, <span class="string">&quot;findViewById&lt;EditText&gt;(R…d.editTextTextPersonName)&quot;</span>);</span><br><span class="line">        Editable Flag = ((EditText) findViewById).getText();</span><br><span class="line">        <span class="keyword">int</span>[] arr = &#123;<span class="number">153</span>, <span class="number">147</span>, <span class="number">158</span>, <span class="number">152</span>, <span class="number">132</span>, <span class="number">167</span>, <span class="number">144</span>, <span class="number">141</span>, <span class="number">160</span>, <span class="number">206</span>, <span class="number">140</span>, <span class="number">160</span>, <span class="number">154</span>, <span class="number">158</span>, <span class="number">140</span>, <span class="number">134</span>, <span class="number">134</span>, <span class="number">134</span>, <span class="number">130</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i2 = <span class="number">0</span>; i2 &lt; Flag.length(); i2++) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((Flag.charAt(i2) ^ <span class="number">255</span>) != arr[i]) &#123;</span><br><span class="line">                correct = <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        TextView text = (TextView) findViewById(R.id.textView2);</span><br><span class="line">        <span class="keyword">if</span> (correct) &#123;</span><br><span class="line">            Intrinsics.checkExpressionValueIsNotNull(text, <span class="string">&quot;text&quot;</span>);</span><br><span class="line">            text.setText(<span class="string">&quot;Correct&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        Intrinsics.checkExpressionValueIsNotNull(text, <span class="string">&quot;text&quot;</span>);</span><br><span class="line">        text.setText(<span class="string">&quot;False&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
