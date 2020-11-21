@@ -301,7 +301,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.9k</span>
+      <span>4.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -389,10 +389,8 @@ $ npm install</code></pre>
 <p>官方文档如下</p>
 <p><a target="_blank" rel="noopener" href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh">connecting to github with ssh Github Docs</a></p>
 <p>经阅读上方的文档可以得知</p>
-<p>先生成SSH key，下列command生成了公/私对</p>
-<p><code>$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code></p>
-<p>再将其public key复制进剪贴板</p>
-<p><code>$ clip &lt; ~/.ssh/id_rsa.pub</code></p>
+<p>先生成SSH key，下列command生成了公/私对<br><code>$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code></p>
+<p>再将其public key复制进剪贴板<br><code>$ clip &lt; ~/.ssh/id_rsa.pub</code></p>
 <p>之后到<a target="_blank" rel="noopener" href="https://github.com/settings/keys">https://github.com/settings/keys</a>里，点击New SSH key，然后把它粘贴到文本框里</p>
 <p>接下来就是测试连接</p>
 <p>在命令行下输入 <code>ssh -T git@github.com</code> 以测试SSH是否配置好</p>
@@ -410,8 +408,7 @@ $ npm install</code></pre>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003151605.png"></p>
 <p>主要是设置一下 source folder 和 branch 之类的，可以直接加一个HTTPS，也支持自定义域名</p>
 <p>至于hexo这边如何配置呢</p>
-<p>先执行如下命令，为什么，因为文档有的说啊：<a target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages#One-command-deployment">Github Pages | Hexo</a></p>
-<p><code>$ npm install hexo-deployer-git --save</code></p>
+<p>先执行如下命令，为什么，因为文档有的说啊：<a target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages#One-command-deployment">Github Pages | Hexo</a><br><code>$ npm install hexo-deployer-git --save</code></p>
 <p>再去到hexo文件夹下，找到 <code>_config.yml</code> 文件</p>
 <p>添加如下几行</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">&#x27;git&#x27;</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/yourusername/yourusername.github.io</span></span><br><span class="line">  <span class="comment">#branch: master</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
@@ -437,37 +434,35 @@ $ npm install</code></pre>
 <li><a target="_blank" rel="noopener" href="https://imgur.com/">imgur</a> (国外知名图床，国内访问不友好)</li>
 <li><a target="_blank" rel="noopener" href="https://imgchr.com/">imgchr</a> (<del>跟1域名高度重合，一看就知道解决了什么问题</del>)</li>
 </ol>
-<h3 id="私人图床"><a href="#私人图床" class="headerlink" title="私人图床"></a>私人图床</h3><p>私人图床可以考虑使用对象存储，如七牛、腾讯、阿里的对象存储</p>
-<p>对于一般的个人博客，用对象存储，金钱开支一般都会很小（存储便宜，流量价格适中但是几乎不怎么跑流量）</p>
-<h3 id="图片管理神器-PicGo"><a href="#图片管理神器-PicGo" class="headerlink" title="图片管理神器 PicGo"></a>图片管理神器 PicGo</h3><p>地址：<a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo">PicGo</a></p>
-<p>这是github上的大佬开发的一个用于管理自己存放于图床的图片的工具</p>
+<h3 id="私人图床"><a href="#私人图床" class="headerlink" title="私人图床"></a>私人图床</h3><p>私人图床可以考虑使用对象存储，如七牛、腾讯、阿里的对象存储<br>对于一般的个人博客，用对象存储，金钱开支一般都会很小（存储便宜，流量价格适中但是几乎不怎么跑流量）</p>
+<h3 id="图片管理神器-PicGo"><a href="#图片管理神器-PicGo" class="headerlink" title="图片管理神器 PicGo"></a>图片管理神器 PicGo</h3><p>地址：<a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo">PicGo</a><br>这是github上的大佬开发的一个用于管理自己存放于图床的图片的工具</p>
 <p>下载下来并根据里面的Wiki一步一步来就行了</p>
-<p>上传图片之后，按照md的syntax <code>[text](URL)</code> 插入到文章即可</p>
+<p>上传图片之后，按照md的syntax <code>![text](URL)</code> 插入到文章即可</p>
 <p>不详细说怎么操作了，毕竟人家已经有文档了，我在这里说，无非就是照搬文档，甚至还可能加上自己的主观认知，从而导致方法步骤等被个人地二次加工。</p>
-<p>所以</p>
-<p><strong>不会读文档的人可不是一个新时代青年哦</strong></p>
+<p>所以<br><strong>不会读文档的人可不是一个新时代青年哦</strong></p>
 <p><del>为了叫你们去读文档而不花费大量篇幅写作，我可真是好人呢</del></p>
-<h2 id="安装主题-Optional"><a href="#安装主题-Optional" class="headerlink" title="安装主题 (Optional)"></a>安装主题 (Optional)</h2><p>可以安装其他主题以美化自己的博客</p>
-<p>我用的是Next主题：<a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-theme-next">https://github.com/next-theme/hexo-theme-next</a></p>
-<p>安装很简单，直接在hexo目录下输入下面command即可</p>
-<p><code>$ npm install hexo-theme-next</code></p>
-<p>之后再在 <code>_config.yml</code> 下将theme改成</p>
-<p><code>theme: next</code></p>
+<h2 id="安装主题-Optional"><a href="#安装主题-Optional" class="headerlink" title="安装主题 (Optional)"></a>安装主题 (Optional)</h2><p>可以安装其他主题以美化自己的博客<br>我用的是Next主题：<a target="_blank" rel="noopener" href="https://github.com/next-theme/hexo-theme-next">https://github.com/next-theme/hexo-theme-next</a></p>
+<p>安装很简单，直接在hexo目录下输入下面command即可<br><code>$ npm install hexo-theme-next</code></p>
+<p>之后再在 <code>_config.yml</code> 下将theme改成<br><code>theme: next</code></p>
 <p>剩下的设置都在官方文档了，自己去看吧: <a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/">https://theme-next.js.org/docs/</a></p>
 <p><del>我还在用着默认设置</del></p>
-<h2 id="备份博客-Optional"><a href="#备份博客-Optional" class="headerlink" title="备份博客 (Optional)"></a>备份博客 (Optional)</h2><p>虽然博客的源文件是在本地的，但是在本地也有风险啊，（猜测）并且有时候为了去其他电脑码文，你用了U盘拷过去，一次两次还好，多次之后你将会分不清那边是latest的源文件了</p>
+<h2 id="备份博客-Optional"><a href="#备份博客-Optional" class="headerlink" title="备份博客 (Optional)"></a>备份博客 (Optional)</h2><p>虽然博客的源文件是在本地的，但是在本地也有风险啊，（猜测）并且有时候为了去其他电脑码文，你用了U盘拷过去，一次两次还好，多次之后你将会分不清那边是最新的源文件了<del>（论版本控制的重要性）</del></p>
 <h3 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h3><p>所以我们可以在github新开一个private repo(没想到已经放开使用了)</p>
-<p><strong>首次</strong>先<code>git clone</code>下来，把源文件扔进去，一波 <code>git add .</code> 一波 <code>git commit</code> 最后 <code>git push</code> 送他上路（</p>
-<p><strong>以后</strong>再其他设备上，只需要 <code>git clone</code> <code>git add</code> <code>git commit</code> 和 <code>git push / git pull</code> 就行了（常用的几个）</p>
-<p>Alternative: 也可以在github pages的repo下，把deployment的branch设置为master之外的（如gh-pages），然后直接push到master分支即可</p>
-<h3 id="把-gitignore文件设置好"><a href="#把-gitignore文件设置好" class="headerlink" title="把.gitignore文件设置好"></a>把.gitignore文件设置好</h3><p><strong>一定要有</strong>.gitignore**文件</p>
-<p>一定要<strong>有.gitignore文件</strong></p>
-<p><strong>一定要有.gitignore文件</strong></p>
+<p><strong>首次</strong>先<code>git clone</code>下来，把源文件扔进去，一波 <code>git add .</code> 一波 <code>git commit</code> 最后 <code>git push</code> 送他上路<br><strong>以后</strong>再其他设备上，只需要 <code>git clone</code> <code>git add</code> <code>git commit</code> 和 <code>git push / git pull</code> 就行了（常用的几个）</p>
+<p>Alternative: 也可以在github pages的repo下，把deployment的branch设置为master之外的（如gh-pages），然后直接push到master分支即可，不过.deploy_git文件夹没拉下来的话，可能会出事，下面有提到。</p>
+<h3 id="把-gitignore文件设置好"><a href="#把-gitignore文件设置好" class="headerlink" title="把.gitignore文件设置好"></a>把.gitignore文件设置好</h3><p><strong>一定要有</strong>.gitignore<strong>文件<br>一定要</strong>有.gitignore文件**<br><strong>一定要有.gitignore文件</strong></p>
 <p>如果你想git clone下来一堆或者push一堆node_moudle，请忽略此步</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003182803.png"></p>
 <p>该文件的作用如文件名本身，可以忽略上传的文件/文件夹</p>
 <p>对于hexo源文件，我一般选择忽略如下，剩下的便是文章和config文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.log</span><br><span class="line">node_modules&#x2F;</span><br><span class="line">public&#x2F;</span><br><span class="line">.deploy*&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>2020-11-21更新：<strong>不过</strong>在更换本地环境之后，.deploy*/是保存有静态页面仓库的.git文件夹的，并且hexo-deployer-git的<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-deployer-git#how-it-works">README</a>如是说</p>
+<blockquote>
+<p>hexo-deployer-git works by generating the site in .deploy_git and force pushing to the repo(es) in config. If .deploy_git does not exist, a repo will initialized (git init). Otherwise the curent repo (with its commit history) will be used.</p>
+</blockquote>
+<p>由于是force push，也就是说没有这个文件夹时候，重新生成的新的，会把你原有的仓库直接覆盖掉（也就是说commit啥的全没了）<br>所以在换环境的时候，记得clone一下，即是把你的username.github.io这个repo clone下来并重命名为.deploy_git，如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone &lt;gh-pages repo&gt; .deploy_git</span><br></pre></td></tr></table></figure>
 
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>到这里，现在你<del>应该</del>有一个属于自己的个人博客了</p>
 <p>听说在线聊天，异性”哦”你的时候，回个”嗯”是一个很好的选择（跑</p>
