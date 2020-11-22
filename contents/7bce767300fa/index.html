@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-bike.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-bike.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-bike.png">
+  <link rel="mask-icon" href="/images/logo-bike.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","scheme":"Gemini","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+
+  <meta name="description" content="由于最近的某些需求，先把前端三件套象征性地过一下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="笔记-入门三件套">
+<meta property="og:url" content="https://blog.situ2001.com/contents/7bce767300fa/index.html">
+<meta property="og:site_name" content="Situ Note">
+<meta property="og:description" content="由于最近的某些需求，先把前端三件套象征性地过一下">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-11-22T02:51:43.000Z">
+<meta property="article:modified_time" content="2020-11-22T02:51:43.000Z">
+<meta property="article:author" content="situ2001">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.situ2001.com/contents/7bce767300fa/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>笔记-入门三件套 | Situ Note</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Situ Note</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">光阴的月台</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-周记">
+
+    <a href="/journals/" rel="section"><i class="fa fa-book fa-fw"></i>周记</a>
+
+  </li>
+        <li class="menu-item menu-item-计划">
+
+    <a href="/plans/" rel="section"><i class="fa fa-flag fa-fw"></i>计划</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript%E9%83%A8%E5%88%86"><span class="nav-number">2.</span> <span class="nav-text">JavaScript部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.1.</span> <span class="nav-text">基本数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">2.2.</span> <span class="nav-text">运算符与操作符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS%E9%83%A8%E5%88%86"><span class="nav-number">3.</span> <span class="nav-text">CSS部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML%E9%83%A8%E5%88%86"><span class="nav-number">4.</span> <span class="nav-text">HTML部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E6%88%90"><span class="nav-number">4.1.</span> <span class="nav-text">组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%B4%A0%E4%B8%8E%E5%B1%9E%E6%80%A7"><span class="nav-number">4.2.</span> <span class="nav-text">元素与属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E7%94%A8-lt-gt"><span class="nav-number">4.3.</span> <span class="nav-text">什么时候用&lt;&#x2F;&gt;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%AF%AD%E4%B9%89"><span class="nav-number">4.4.</span> <span class="nav-text">使用语义</span></a></li></ol></li></ol></div>
+        </section>
+        <!--/noindex-->
+
+        <section class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">situ2001</p>
+  <div class="site-description" itemprop="description">回首过去 做好当下 展望未来</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </section>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/contents/7bce767300fa/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="situ2001">
+      <meta itemprop="description" content="回首过去 做好当下 展望未来">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Situ Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          笔记-入门三件套
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-22 10:51:43" itemprop="dateCreated datePublished" datetime="2020-11-22T10:51:43+08:00">2020-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>由于最近的某些需求，先把前端三件套象征性地过一下</p>
+<a id="more"></a>
+
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>由于最近想探一下CTF的web方向，并且这些知识就算放在以后也挺有用，于是便开始了HTML/CSS和JavaScript的基础性学习。</p>
+<p>我学习的资源来自github，是巨硬的一个repo：<a href="">https://github.com/microsoft/Web-Dev-For-Beginners</a>，里面先是给我灌输了一些必备的知识储备，然后开始实例驱动手把手教，我觉得这挺不错的，做着做着就学到了东西。</p>
+<p>再来一个万能的文档镇楼：<a href="">https://developer.mozilla.org/en-US/docs/Web</a></p>
+<p>这文章呢，就先把三件套的一些知识做成笔记记下来了，DOM和event-driven这些呢，以后再写（咕咕咕</p>
+<h2 id="JavaScript部分"><a href="#JavaScript部分" class="headerlink" title="JavaScript部分"></a>JavaScript部分</h2><p>先有几个chapter介绍了JS Basics，分别讲了一下JS的数据类型(?)，函数和方法，选择与循环，数组。</p>
+<p>由于我有一定的Jvav基础，所以我就挑一些有差异的、特别的地方记录一下吧。</p>
+<h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><ul>
+<li>初始化一个变量</li>
+</ul>
+<p>可以用<code>let</code>或<code>var</code>来初始化，但是<code>let</code>在ES6开始，代表的变量或者常量是有scope的，所以教程推荐我们使用<code>let</code>而不建议使用<code>var</code>，如下所示</p>
+<blockquote>
+<p>Note, They keyword <code>let</code> was introduced in ES6 and gives your variable a so called <em>block scope</em>. It’s recommended that you use <code>let</code> over <code>var</code>. We will cover block scopes more in depth in future parts.</p>
+</blockquote>
+<p>变量<code>let myVar = 123;</code>，长这个样子就行了。</p>
+<ul>
+<li>关于常量的初始化和可改变性</li>
+</ul>
+<p><strong>初始化</strong>：常量用<code>const</code>来初始化，如<code>const MY_VARIABLE = 123</code></p>
+<p><strong>可改变性</strong>：应该是跟Java差不多的，基本数值类型的变量不能被改变，OOP里面的引用变量不能改变其引用的对象，但是可以改变对象里面的value</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> PI = <span class="number">3</span>;</span><br><span class="line">PI = <span class="number">4</span>; <span class="comment">// not allowed</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">a</span>: <span class="number">3</span> &#125;;</span><br><span class="line">obj = &#123; <span class="attr">b</span>: <span class="number">5</span> &#125; <span class="comment">// not allowed</span></span><br><span class="line">obj.a = <span class="number">5</span>;  <span class="comment">// allowed</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>6种基本数据类型</li>
+</ul>
+<blockquote>
+<p>There are 6 primitive data types: string, number, bigint, boolean, undefined, and symbol. </p>
+</blockquote>
+<p><del>（这怕不是要它自己来进行推测判断</del></p>
+<ul>
+<li>String 字符串</li>
+</ul>
+<ol>
+<li>在JS里面，字符串可以用单引号或者双引号，都用的场景就是如<code>&#39;Are you &quot;OK&quot;&#39;</code>之类的</li>
+<li>连接字符串可以像Java一样使用 <strong>+</strong> 号，还可以使用一种叫做<code>Template literals</code>的操作，如下</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myString1 = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line"><span class="keyword">let</span> myString2 = <span class="string">&quot;World&quot;</span>;</span><br><span class="line"></span><br><span class="line">myString1 + <span class="string">&quot; &quot;</span> + myString2 + <span class="string">&quot;!&quot;</span>; <span class="comment">//Hello World!</span></span><br><span class="line">myString1 + <span class="string">&quot;, &quot;</span> + myString2 + <span class="string">&quot;!&quot;</span>; <span class="comment">//Hello, World!</span></span><br><span class="line"></span><br><span class="line"><span class="string">`<span class="subst">$&#123;myString1&#125;</span> <span class="subst">$&#123;myString2&#125;</span>!`</span> <span class="comment">//Hello World!</span></span><br><span class="line"><span class="string">`<span class="subst">$&#123;myString1&#125;</span>, <span class="subst">$&#123;myString2&#125;</span>!`</span> <span class="comment">//Hello, World!</span></span><br></pre></td></tr></table></figure>
+
+<p>不过要注意，这不是单引号<code>&#39;&#39;</code>，而是反引号`` `</p>
+<ul>
+<li>Boolean类型</li>
+</ul>
+<p>在JS里面，布尔类型<strong>默认</strong>是true，除非它被定义为false</p>
+<h3 id="运算符与操作符"><a href="#运算符与操作符" class="headerlink" title="运算符与操作符"></a>运算符与操作符</h3><p>与Java差不多，唯一不同的话就是，比较操作符有<code>==</code>和<code>===</code>，不同之处就是前者比较的是值的相同，而后面的既比较值是否相同还比较数据类型是否相同。同理，也就会有<code>!=</code>和<code>!==</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">Symbol</th>
+<th align="left">Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>===</code></td>
+<td align="left"><strong>Strict equality</strong>: Compares two values and returns the <code>true</code> Boolean data type if values on the right and left are equal AND are the same data type.</td>
+<td><code>5 === 6 // false</code></td>
+</tr>
+<tr>
+<td align="center"><code>!==</code></td>
+<td align="left"><strong>Inequality</strong>: Compares two values and returns the opposite Boolean value of what a strict equality operator would return</td>
+<td><code>5 !== 6 // true</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li>函数与方法</li>
+</ul>
+<p>不过这两者可以互换地讲，严格说的话，方法是限定在对象范围内的吧。也只是把差异记下来而已。</p>
+<ol>
+<li><p>初始化一个function: <code>function nameOfFunction() &#123;&#125;</code></p>
+</li>
+<li><p>参数与传递：<code>function name(param, param1, param2) &#123;&#125;</code></p>
+</li>
+<li><p>默认值：<code>function name(name, salutation=&#39;Hello&#39;)</code></p>
+</li>
+<li><p>然后函数里面可以套函数。函数参数里面也可以套函数（这叫做匿名函数）（？为了解决scope问题）<del>套娃警告</del></p>
+</li>
+<li><p> <del>肥箭头</del>Fat Arrow函数：<del>这像极了Lambda表达式不是吗</del>在匿名函数，可以直接用 <code>() =&gt; &#123;&#125;</code></p>
+</li>
+</ol>
+<h2 id="CSS部分"><a href="#CSS部分" class="headerlink" title="CSS部分"></a>CSS部分</h2><p>这部分我没啥可说的了，感觉下来就是CSS牵一发而动全身……感觉不能用编程语言的思维来理解它<del>，我目前的做法也就是不会的查文档，然后F12在Element选项卡里面，边调数字边预览</del></p>
+<p><del>先把文档放这里：<a href="">https://developer.mozilla.org/en-US/docs/Web/CSS</a></del></p>
+<p>当然还是有点基础的基础要知道的。</p>
+<ul>
+<li>CSS优先级</li>
+</ul>
+<p>CSS是啥呢？英文全称是<strong>Cascade Style Sheets</strong>，Cascade有级联、串联的意思，对于priority优先级的话，也是这个样子，优先级就是</p>
+<p><code>inline style &gt;  style tag &gt; external css file</code></p>
+<ul>
+<li>CSS继承</li>
+</ul>
+<p>这个要想象一下HTML文件里面的不同tag、class和id之间的结构关系了，比如有如下</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">	<span class="attribute">font-family</span>: helvetica, arial, sans-serif;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所有的文字都会变为这种字体，因为所有文字都是body的下级啊。</p>
+<ul>
+<li>CSS选择器</li>
+</ul>
+<p>可以根据tag、class或id来进行styling，如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* by tag */</span></span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* by class */</span></span><br><span class="line"><span class="selector-class">.left-container</span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* by id */</span></span><br><span class="line"><span class="selector-id">#left-container</span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>CSS的layout</li>
+</ul>
+<p>这部分我无能为力了，我目前也就只会拿实例进行比对，再开始写新的css</p>
+<h2 id="HTML部分"><a href="#HTML部分" class="headerlink" title="HTML部分"></a>HTML部分</h2><p>我认为使用HTML的话，有两个核心要素</p>
+<ol>
+<li><strong>Semantic</strong>即语义</li>
+<li>理解结构与合理使用tag和class和id</li>
+<li><del>不会就去看文档<a href="">https://developer.mozilla.org/en-US/docs/Web/HTML/Element</a></del></li>
+</ol>
+<h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><p>一个HTML Doc的话，由下面的一些部分来组成</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 存放页面的关键信息 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 放的是显示区域能看到的东西 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="元素与属性"><a href="#元素与属性" class="headerlink" title="元素与属性"></a>元素与属性</h3><p>HTML有两个重要的东西：元素（Element）与属性（Attribution），哪些是元素，哪里又是属性呢？直接来一个包含src属性和class属性的img元素</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;picture&quot;</span> <span class="attr">src</span>=<span class="string">&quot;1.png&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="什么时候用-lt-gt"><a href="#什么时候用-lt-gt" class="headerlink" title="什么时候用&lt;/&gt;"></a>什么时候用&lt;/&gt;</h3><p>这个问题曾经有过，不过大多数情况下，这个tag中间不引文字的话就不用了，比如</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a<span class="tag">&lt;<span class="name">br</span>&gt;</span>linebreak.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用语义"><a href="#使用语义" class="headerlink" title="使用语义"></a>使用语义</h3><p>在读HTML或者写HTML的时候最好用语义即Semantic，为什么呢？我认为HTML好多tag都是某个英语单词的缩写，比如<code>&lt;br&gt;</code>是<strong>break</strong><code>&lt;i&gt;</code>是<strong>Italic</strong><code>&lt;a&gt;</code>是<strong>Anchor</strong><code>&lt;li&gt;</code>是<strong>list</strong></p>
+<p>又比如<code>&lt;span&gt;</code>表示一块inline的，而<code>&lt;div&gt;</code>表示一块一块的，你可以去查下这些东西的英文全称。</p>
+<p>所以，表示按钮的时候是<code>&lt;button&gt;</code>而表示列表时候使用<code>&lt;list&gt;</code></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>situ2001
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.situ2001.com/contents/7bce767300fa/" title="笔记-入门三件套">https://blog.situ2001.com/contents/7bce767300fa/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/contents/bd5b790794cf/" rel="prev" title="git快速上手">
+                  <i class="fa fa-chevron-left"></i> git快速上手
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">situ2001</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">24k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">22 分钟</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+    <div class="pjax">
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '25660877348ea415abbd',
+      clientSecret: 'a57f3ffb40fa5965d5211cbb8c3ddeb956a2d259',
+      repo        : 'comments',
+      owner       : 'situ2001',
+      admin       : ['situ2001'],
+      id          : 'a27095b9fdc769cb7606dc043e9e0dd0',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>
