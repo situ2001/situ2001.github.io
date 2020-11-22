@@ -341,7 +341,6 @@
 
 
       
-    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -479,25 +478,6 @@ document.addEventListener('pjax:success', () => {
 
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
-
-<script>
-NexT.utils.loadComments('#gitalk-container', () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '25660877348ea415abbd',
-      clientSecret: 'a57f3ffb40fa5965d5211cbb8c3ddeb956a2d259',
-      repo        : 'comments',
-      owner       : 'situ2001',
-      admin       : ['situ2001'],
-      id          : '8e8ada923d1353f92378a4bf89e0753e',
-        language: '',
-      distractionFreeMode: false
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
 
     </div>
 </body>
