@@ -193,7 +193,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%95%A5%E6%98%AFjson"><span class="nav-number">2.</span> <span class="nav-text">啥是json</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E5%A4%A7%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">两大结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%BD%A2%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">一些形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object"><span class="nav-number">4.1.</span> <span class="nav-text">Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Array"><span class="nav-number">4.2.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Value"><span class="nav-number">4.3.</span> <span class="nav-text">Value</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E5%AE%9E%E4%BE%8B"><span class="nav-number">5.</span> <span class="nav-text">阅读实例</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%99%E6%98%AF%E5%95%A5%E5%95%8A"><span class="nav-number">2.</span> <span class="nav-text">这是啥啊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E5%A4%A7%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">两大结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%BD%A2%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">一些形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object"><span class="nav-number">4.1.</span> <span class="nav-text">Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Array"><span class="nav-number">4.2.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Value"><span class="nav-number">4.3.</span> <span class="nav-text">Value</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E5%AE%9E%E4%BE%8B"><span class="nav-number">5.</span> <span class="nav-text">阅读实例</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -336,7 +336,7 @@
 <a id="more"></a>
 
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>其实JSON这个东西我也不是第一次听到了，只不过之前看json文件看得云里雾里，但因为不是要自己上手使用<del>（之前的想法是读json只需知道它大概说了啥就行）</del>所以一直没去了解，一直拖延到现在，才打算学习一下json。</p>
-<h2 id="啥是json"><a href="#啥是json" class="headerlink" title="啥是json"></a>啥是json</h2><p>俗话说：“知己知彼，百战百胜。”所以我特地去找了找其介绍</p>
+<h2 id="这是啥啊"><a href="#这是啥啊" class="headerlink" title="这是啥啊"></a>这是啥啊</h2><p>俗话说：“知己知彼，百战百胜。”所以我特地去找了找其介绍</p>
 <blockquote>
 <p><strong>JSON</strong>(JavaScript Object Notation) 是一种轻量级的数据交换格式。 易于人阅读和编写。同时也易于机器解析和生成。 它基于<a target="_blank" rel="noopener" href="http://www.crockford.com/javascript">JavaScript Programming Language</a>, <a target="_blank" rel="noopener" href="http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf">Standard ECMA-262 3rd Edition - December 1999</a>的一个子集。 JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C, C++, C#, Java, JavaScript, Perl, Python等）。 这些特性使JSON成为理想的数据交换语言。</p>
 </blockquote>
@@ -364,7 +364,7 @@
 <h2 id="一些形式"><a href="#一些形式" class="headerlink" title="一些形式"></a>一些形式</h2><h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>对象呢，就是一堆无序的名称/值的集合，以<code>&#123;</code>开始并以<code>&#125;</code>结束，里面的每个pair都是以<code>name: value</code>这样的格式表示的，然后每个pair<strong>之间</strong>都要用逗号<code>,</code>来<strong>分隔开</strong><del>（之前一直以为是每次换行都要加个逗号</del></p>
 <p>我觉得官网上面的这个图画的挺厉害的，就收下来了</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193252.png" alt="Object 选自json官网"></p>
-<h3 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h3><p>数组嘛，见得太多了，就不多说了，跟<code>[ele1, ele2 ... elen]</code>这东西长得是差不多的，只不过其中的元素就是名次/值pair</p>
+<h3 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h3><p>数组嘛，见得太多了，就不多说了，跟<code>[ele1, ele2 ... eleN]</code>这东西长得是差不多的，只不过其中的元素就是名次/值pair</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193253.png" alt="Array 选自json官网"></p>
 <h3 id="Value"><a href="#Value" class="headerlink" title="Value"></a>Value</h3><p>为什么我要把见得太多了的value给记录下呢？因为之前我是不知道json的值可以是object或者array的，所以也要用小本本记下来。</p>
 <blockquote>
