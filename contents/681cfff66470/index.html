@@ -25,20 +25,23 @@
     var CONFIG = {"hostname":"blog.situ2001.com","root":"/","scheme":"Gemini","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":260},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
-  <meta name="description" content="文章们终于能有一个家了">
+  <meta name="description" content="咋感觉最近学的小东西越来越多了…">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://blog.situ2001.com/contents/3861b188dd27/index.html">
+<meta property="og:title" content="记一次JSON入门">
+<meta property="og:url" content="https://blog.situ2001.com/contents/681cfff66470/index.html">
 <meta property="og:site_name" content="Situ Note">
-<meta property="og:description" content="文章们终于能有一个家了">
+<meta property="og:description" content="咋感觉最近学的小东西越来越多了…">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-09-12T08:45:32.000Z">
-<meta property="article:modified_time" content="2020-09-12T08:45:32.000Z">
+<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193252.png">
+<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193253.png">
+<meta property="article:published_time" content="2020-11-27T10:39:51.000Z">
+<meta property="article:modified_time" content="2020-11-27T10:39:51.000Z">
 <meta property="article:author" content="situ2001">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193252.png">
 
 
-<link rel="canonical" href="https://blog.situ2001.com/contents/3861b188dd27/">
+<link rel="canonical" href="https://blog.situ2001.com/contents/681cfff66470/">
 
 
 <script data-pjax class="page-configurations">
@@ -51,7 +54,7 @@
   };
 </script>
 
-  <title>Hello World | Situ Note</title>
+  <title>记一次JSON入门 | Situ Note</title>
   
 
 
@@ -177,7 +180,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -190,6 +193,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <section class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%95%A5%E6%98%AFjson"><span class="nav-number">2.</span> <span class="nav-text">啥是json</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E5%A4%A7%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">两大结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%BD%A2%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">一些形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Object"><span class="nav-number">4.1.</span> <span class="nav-text">Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Array"><span class="nav-number">4.2.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Value"><span class="nav-number">4.3.</span> <span class="nav-text">Value</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E5%AE%9E%E4%BE%8B"><span class="nav-number">5.</span> <span class="nav-text">阅读实例</span></a></li></ol></div>
         </section>
         <!--/noindex-->
 
@@ -266,7 +270,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/contents/3861b188dd27/">
+    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/contents/681cfff66470/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -279,7 +283,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          记一次JSON入门
         </h1>
 
         <div class="post-meta-container">
@@ -290,7 +294,16 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2020-09-12 16:45:32" itemprop="dateCreated datePublished" datetime="2020-09-12T16:45:32+08:00">2020-09-12</time>
+      <time title="创建时间：2020-11-27 18:39:51" itemprop="dateCreated datePublished" datetime="2020-11-27T18:39:51+08:00">2020-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
     </span>
 
   
@@ -301,7 +314,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>163</span>
+      <span>1.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -319,12 +332,48 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>文章们终于能有一个家了</p>
+        <p>咋感觉最近学的小东西越来越多了…</p>
 <a id="more"></a>
 
-<p>快开学了，而我也有了一个比较正式的博客了<br>（之前是高中弄得用的WordPress，太臃肿了<del>并且里面大多是一些没有什么技术或生活营养的输出</del>）<br>前博客的备份被我备份放在了备份盘的备份文件夹里作为备份躺着吃灰 <del>套娃警告</del></p>
-<p>本博客用的hexo + github pages，图床用的阿里OSS</p>
-<p>希望这个博客能伴我很长很长的一段时间</p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>其实JSON这个东西我也不是第一次听到了，只不过之前看json文件看得云里雾里，但因为不是要自己上手使用<del>（之前的想法是读json只需知道它大概说了啥就行）</del>所以一直没去了解，一直拖延到现在，才打算学习一下json。</p>
+<h2 id="啥是json"><a href="#啥是json" class="headerlink" title="啥是json"></a>啥是json</h2><p>俗话说：“知己知彼，百战百胜。”所以我特地去找了找其介绍</p>
+<blockquote>
+<p><strong>JSON</strong>(JavaScript Object Notation) 是一种轻量级的数据交换格式。 易于人阅读和编写。同时也易于机器解析和生成。 它基于<a target="_blank" rel="noopener" href="http://www.crockford.com/javascript">JavaScript Programming Language</a>, <a target="_blank" rel="noopener" href="http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf">Standard ECMA-262 3rd Edition - December 1999</a>的一个子集。 JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C, C++, C#, Java, JavaScript, Perl, Python等）。 这些特性使JSON成为理想的数据交换语言。</p>
+</blockquote>
+<p>现在我对json的认识是：</p>
+<ol>
+<li>是一种用于数据交换的文本格式</li>
+<li>使用了C-liked的风格</li>
+</ol>
+<p>那么相对于之前一股脑乱读json，停下脚步，静下心来思考，也许json并不是很难呢？</p>
+<p>事实证明，思维的懒惰才是最为可怕的，花了一小段时间来阅读了一下<a target="_blank" rel="noopener" href="https://www.json.org/json-en.html">JSON官网</a>的介绍，发现json这东西，真的不是很难</p>
+<p><strong>由于目前咱有一点程序语言的知识储备</strong>，所以这里只记录一些我自己需要记录的东西。</p>
+<h2 id="两大结构"><a href="#两大结构" class="headerlink" title="两大结构"></a>两大结构</h2><p>如同HTML有属性和元素，JSON也有两大结构</p>
+<blockquote>
+<p>JSON is built on two structures:</p>
+<ul>
+<li>A collection of name/value pairs. In various languages, this is realized as an <em>object</em>, record, struct, dictionary, hash table, keyed list, or associative array.</li>
+<li>An ordered list of values. In most languages, this is realized as an <em>array</em>, vector, list, or sequence.</li>
+</ul>
+</blockquote>
+<p>它们分别是</p>
+<ol>
+<li>名称/值 pair 的集合</li>
+<li>值的有序列表（这个跟数组array很像的）</li>
+</ol>
+<h2 id="一些形式"><a href="#一些形式" class="headerlink" title="一些形式"></a>一些形式</h2><h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>对象呢，就是一堆无序的名称/值的集合，以<code>&#123;</code>开始并以<code>&#125;</code>结束，里面的每个pair都是以<code>name: value</code>这样的格式表示的，然后每个pair<strong>之间</strong>都要用逗号<code>,</code>来<strong>分隔开</strong><del>（之前一直以为是每次换行都要加个逗号</del></p>
+<p>我觉得官网上面的这个图画的挺厉害的，就收下来了</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193252.png" alt="Object 选自json官网"></p>
+<h3 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h3><p>数组嘛，见得太多了，就不多说了，跟<code>[ele1, ele2 ... elen]</code>这东西长得是差不多的，只不过其中的元素就是名次/值pair</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193253.png" alt="Array 选自json官网"></p>
+<h3 id="Value"><a href="#Value" class="headerlink" title="Value"></a>Value</h3><p>为什么我要把见得太多了的value给记录下呢？因为之前我是不知道json的值可以是object或者array的，所以也要用小本本记下来。</p>
+<blockquote>
+<p>A <em>value</em> can be a <em>string</em> in double quotes, or a <em>number</em>, or <code>true</code> or <code>false</code> or <code>null</code>, or an <strong>object</strong>  or an <strong>array</strong>. These structures can be nested.</p>
+</blockquote>
+<h2 id="阅读实例"><a href="#阅读实例" class="headerlink" title="阅读实例"></a>阅读实例</h2><p>json就顺手在刚刚查询的空教室记录里面抽取了一段，如下</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;currentPage&quot;</span>:<span class="number">1</span>,</span><br><span class="line">  <span class="attr">&quot;currentResult&quot;</span>:<span class="number">0</span>,</span><br><span class="line">  <span class="attr">&quot;entityOrField&quot;</span>:<span class="literal">false</span>,</span><br><span class="line">  <span class="attr">&quot;items&quot;</span>:[</span><br><span class="line">     &#123;</span><br><span class="line">        <span class="attr">&quot;cd_id&quot;</span>:<span class="string">&quot;1011230&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;cdbh&quot;</span>:<span class="string">&quot;1011230&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;cdjylx&quot;</span>:<span class="string">&quot;教学类,活动类&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;cdmc&quot;</span>:<span class="string">&quot;文新123#&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;dateDigit&quot;</span>:<span class="string">&quot;2020年11月27日&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;dateDigitSeparator&quot;</span>:<span class="string">&quot;2020-11-27&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;month&quot;</span>:<span class="string">&quot;11&quot;</span>,</span><br><span class="line">        <span class="attr">&quot;queryModel&quot;</span>:&#123;</span><br><span class="line">           <span class="attr">&quot;currentPage&quot;</span>:<span class="number">1</span>,</span><br><span class="line">           <span class="attr">&quot;currentResult&quot;</span>:<span class="number">0</span>,</span><br><span class="line">           <span class="attr">&quot;entityOrField&quot;</span>:<span class="literal">false</span>,</span><br><span class="line">           <span class="attr">&quot;limit&quot;</span>:<span class="number">15</span>,</span><br><span class="line">           <span class="attr">&quot;offset&quot;</span>:<span class="number">0</span>,</span><br><span class="line">           <span class="attr">&quot;pageNo&quot;</span>:<span class="number">0</span>,</span><br><span class="line">           <span class="attr">&quot;pageSize&quot;</span>:<span class="number">15</span>,</span><br><span class="line">           <span class="attr">&quot;showCount&quot;</span>:<span class="number">10</span>,</span><br><span class="line">           <span class="attr">&quot;sorts&quot;</span>:[</span><br><span class="line">              </span><br><span class="line">           ],</span><br><span class="line">           <span class="attr">&quot;totalCount&quot;</span>:<span class="number">0</span>,</span><br><span class="line">           <span class="attr">&quot;totalPage&quot;</span>:<span class="number">0</span>,</span><br><span class="line">           <span class="attr">&quot;totalResult&quot;</span>:<span class="number">0</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">&quot;rangeable&quot;</span>:<span class="literal">true</span></span><br><span class="line">     &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结合上面的知识储备，就能看懂这段json想表示啥了<del>，但为什么部分混入了拼音首字母缩写啊我擦</del></p>
 
     </div>
 
@@ -342,7 +391,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://blog.situ2001.com/contents/3861b188dd27/" title="Hello World">https://blog.situ2001.com/contents/3861b188dd27/</a>
+      <a href="https://blog.situ2001.com/contents/681cfff66470/" title="记一次JSON入门">https://blog.situ2001.com/contents/681cfff66470/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
@@ -355,11 +404,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/contents/7bce767300fa/" rel="prev" title="笔记-入门三件套">
+                  <i class="fa fa-chevron-left"></i> 笔记-入门三件套
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/contents/f88ff2f50f29/" rel="next" title="初识类与对象">
-                  初识类与对象 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -521,7 +570,7 @@ NexT.utils.loadComments('#gitalk-container', () => {
       repo        : 'comments',
       owner       : 'situ2001',
       admin       : ['situ2001'],
-      id          : '416968c25b8be1d979b22547a912e3a5',
+      id          : '7b3a07606ac7fcbc7f721a2d8b869048',
         language: '',
       distractionFreeMode: false
     });

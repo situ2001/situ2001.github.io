@@ -204,7 +204,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -452,14 +452,14 @@
 <h3 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h3><p>一个HTML Doc的话，由下面的一些部分来组成</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 存放页面的关键信息 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 放的是显示区域能看到的东西 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="元素与属性"><a href="#元素与属性" class="headerlink" title="元素与属性"></a>元素与属性</h3><p>HTML有两个重要的东西：元素（Element）与属性（Attribution），哪些是元素，哪里又是属性呢？直接来一个包含src属性和class属性的img元素</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;picture&quot;</span> <span class="attr">src</span>=<span class="string">&quot;1.png&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="元素与属性"><a href="#元素与属性" class="headerlink" title="元素与属性"></a>元素与属性</h3><p>HTML有两个重要的东西：元素（Element）与属性（Attribution），哪些是元素，哪些又是属性呢？不如，直接上一个包含src属性和class属性还有一个和style属性和id属性的img元素，一目了然</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;picture&quot;</span> <span class="attr">id</span>=<span class="string">&quot;pic&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width: 114px; height: 514px&quot;</span> <span class="attr">src</span>=<span class="string">&quot;sample.png&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="什么时候用-lt-gt"><a href="#什么时候用-lt-gt" class="headerlink" title="什么时候用&lt;/&gt;"></a>什么时候用&lt;/&gt;</h3><p>这个问题曾经有过，不过大多数情况下，这个tag中间不引文字的话就不用了，比如</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a<span class="tag">&lt;<span class="name">br</span>&gt;</span>linebreak.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="什么时候用-lt-gt"><a href="#什么时候用-lt-gt" class="headerlink" title="什么时候用&lt;/&gt;"></a>什么时候用&lt;/&gt;</h3><p>这个问题曾经有过，不过我认为大多数情况下，这个tag中间不引文字的话就不用了，比如</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a<span class="tag">&lt;<span class="name">br</span>&gt;</span>line break.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="使用语义"><a href="#使用语义" class="headerlink" title="使用语义"></a>使用语义</h3><p>在读HTML或者写HTML的时候最好用语义即Semantic，为什么呢？我认为HTML好多tag都是某个英语单词的缩写，比如<code>&lt;br&gt;</code>是<strong>break</strong><code>&lt;i&gt;</code>是<strong>Italic</strong><code>&lt;a&gt;</code>是<strong>Anchor</strong><code>&lt;li&gt;</code>是<strong>list</strong></p>
-<p>又比如<code>&lt;span&gt;</code>表示一块inline的，而<code>&lt;div&gt;</code>表示一块一块的，你可以去查下这些东西的英文全称。</p>
+<p>又比如<code>&lt;span&gt;</code>就是<strong>span</strong>中文意思是<strong>跨度、范围</strong>，就是一块inline的东西，而<code>&lt;div&gt;</code>表示<strong>division</strong>，就是一块一块的，你可以去查下这些东西的英文全称。</p>
 <p>所以，表示按钮的时候是<code>&lt;button&gt;</code>而表示列表时候使用<code>&lt;list&gt;</code></p>
 
     </div>
@@ -496,6 +496,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/contents/681cfff66470/" rel="next" title="记一次JSON入门">
+                  记一次JSON入门 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -555,13 +558,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">24k</span>
+    <span title="站点总字数">25k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">22 分钟</span>
+    <span title="站点阅读时长">23 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
