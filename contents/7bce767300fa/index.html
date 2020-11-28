@@ -318,7 +318,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.2k</span>
+      <span>4.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -479,13 +479,19 @@
 <h3 id="布局与定位"><a href="#布局与定位" class="headerlink" title="布局与定位"></a>布局与定位</h3><ul>
 <li>CSS的layout</li>
 </ul>
-<p><del>这部分我无能为力了，我目前也就只会拿实例进行比对，再开始写新的css</del>啊</p>
+<p><del>这部分我无能为力了，我目前也就只会拿实例进行比对，再开始写新的css</del>啊，原因是巨硬提到了</p>
+<blockquote>
+<p>Mixing position properties (there are static, relative, fixed, absolute, and sticky positions) can be a little <strong>tricky</strong>, but when done properly it gives you good control over the elements on your pages.</p>
+</blockquote>
 <p>喂，别这么怂啊，还没开始你就退下了？</p>
 <p>首先布局和定位这些我一般在某些居中的元素里头见到，怎么说呢，HTML的document像河道，里面的元素都是像水一样，顺着河流流下来的，所以一般的HTML里面的内容，都是靠左显示，并且一个接一个地往下列。</p>
-<p>要想改变它们的布局，就要使用CSS了，先来看下<code>position: relative</code>和<code>position: absolute</code>的区别</p>
+<p>要想改变它们的布局，就要使用CSS的<code>position</code>了，先来看下<code>position: relative</code>和<code>position: absolute</code>的区别</p>
 <p>首先<code>position</code>有许多value，包括<code>static fixed relative absolute</code>等，其中<code>static</code>和<code>fixed</code>分别是无定位（默认）和固定（字面义）</p>
 <p>然后把注意力放在<code>absolute</code>和<code>relative</code>上，这两个东西都可以用<code>left</code>,<code>right</code>,<code>top</code>和<code>bottom</code>来进行<strong>相对定位</strong>，但是又有那么一点小差别，具体可以用个小例子来解释。</p>
-<p>既然是<strong>相对</strong>定位，大家也都学过初中物理，运动是<strong>相对</strong>的，那么这里肯定也会出现参照物的说法！</p>
+<p>既然是<strong>相对</strong>定位，大家也都学过初中物理，知道这么一个道理</p>
+<blockquote class="blockquote-center">运动是<b>相对</b>的</blockquote>
+
+<p>那么这里肯定也会出现参照物的说法！</p>
 <p>因为要实际操作体验，所以我自己造了一个很简单的小demo</p>
 <p>HTML部分</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Test<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;style.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;grandpa&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>grandpa<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;father&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>father<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;div1&quot;</span>&gt;</span>son 1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;div2&quot;</span>&gt;</span>son 2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;div3&quot;</span>&gt;</span>son 3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -625,7 +631,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">24 分钟</span>
+    <span title="站点阅读时长">25 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
