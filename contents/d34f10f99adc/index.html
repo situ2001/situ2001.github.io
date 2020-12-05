@@ -318,7 +318,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.2k</span>
+      <span>2.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -340,6 +340,8 @@
 <a id="more"></a>
 
 <p>课间写的，有点匆忙，估计有不少错误，如有，请指出，谢谢。</p>
+<p>上面不懂的可能需要下面内容的补足（写作水平太菜了）</p>
+<p><del>禁止茴香豆</del></p>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>为什么我突然写这篇文章呢？原来是我在<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/c/memory/malloc">cppreference上面看malloc()</a>，了解一下简单的内存分配的时候，试了一下附带的example</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;   </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt; </span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *p1 = <span class="built_in">malloc</span>(<span class="number">4</span>*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));  <span class="comment">// allocates enough for an array of 4 int</span></span><br><span class="line">    <span class="keyword">int</span> *p2 = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>[<span class="number">4</span>])); <span class="comment">// same, naming the type directly</span></span><br><span class="line">    <span class="keyword">int</span> *p3 = <span class="built_in">malloc</span>(<span class="number">4</span>*<span class="keyword">sizeof</span> *p3);   <span class="comment">// same, without repeating the type name</span></span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span>(p1) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> n=<span class="number">0</span>; n&lt;<span class="number">4</span>; ++n) <span class="comment">// populate the array</span></span><br><span class="line">            p1[n] = n*n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> n=<span class="number">0</span>; n&lt;<span class="number">4</span>; ++n) <span class="comment">// print it back out</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;p1[%d] == %d\n&quot;</span>, n, p1[n]);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">free</span>(p1);</span><br><span class="line">    <span class="built_in">free</span>(p2);</span><br><span class="line">    <span class="built_in">free</span>(p3);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -356,12 +358,12 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = arr;</span><br><span class="line"></span><br><span class="line">arr[<span class="number">4</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="comment">//or</span></span><br><span class="line">p += <span class="number">4</span>;</span><br><span class="line">*p = <span class="number">1</span>;</span><br><span class="line"><span class="comment">//or</span></span><br><span class="line">*(arr + <span class="number">4</span>) = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, arr[<span class="number">4</span>]);</span><br></pre></td></tr></table></figure>
 
 <p>上面三个操作都是一样的，输出结果都是<code>1</code></p>
-<p>那么我把数组arr当成一个常量指针，既然arr可以拥有一个属于他自己的下标，那么一般的指针，是否也能拥有一个下标呢？</p>
+<p>既然上面有<code>int *p = arr;</code>那么我把数组arr当成一个常量指针，既然arr可以拥有一个属于他自己的下标，那么一般的指针，是否也能拥有一个下标呢？</p>
 <p>不多猜测，先试一下看看是不是这样</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p[<span class="number">4</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, arr[<span class="number">4</span>]);</span><br></pre></td></tr></table></figure>
 
 <p>也是一个样，那么，<strong>指针变量拥有下标</strong>。</p>
-<p>并且在一段查询过后，发现数组名其实是存有首地址的<strong>常量指针</strong>（就是不能改变指针的内容）</p>
+<p>并且在一段查询过后，发现数组名其实是存有该数组首地址的<strong>常量指针</strong>（就是不能改变指针的内容）</p>
 <h2 id="与内存的关系"><a href="#与内存的关系" class="headerlink" title="与内存的关系"></a>与内存的关系</h2><p>前面只是基于代码和结果来猜测和讨论的，那实际上它们都干了些啥，我们可以结合关于内存的一点知识来讨论。</p>
 <p>首先，先给自己的脑子灌输一点知识：如果没有了解过内存的话，我们可以大概的形成一下印象。（大佬请跳过）</p>
 <p>内存呢，我喜欢把它形象化成一张密密麻麻的表格，它很长很长，但是宽度只有8个格子（1字节 = 8位），并且每一行都有一个专门的标号，就是内存的地址啦（字节编址）</p>
@@ -371,7 +373,7 @@
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143537.png"></p>
 <p>数组是在内存上连续分布一块的数据结构，如果有一个<code>int arr[3] = &#123;7, 4, 5&#125;</code>，那么它就会在内存里占用连续的，三个int类型长度的地址，还有一个数组名的变量，相当于一个常量指针（不可更改地址）</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143733.png"></p>
-<p>我们可以使用<code>arr[0] arr[1] arr[2]</code>来进行对应元素的访问，同时使用一个指针<code>int *p = arr</code>。</p>
+<p>我们可以使用<code>arr[0] arr[1] arr[2]</code>来进行对应元素的访问。与此同时，使用一个指针<code>int *p = arr</code>来实现上述的访问</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">3</span>] = &#123;<span class="number">7</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> *p = arr; <span class="comment">// *p = 7</span></span><br><span class="line">p++; <span class="comment">// *p = 4</span></span><br><span class="line">p++; <span class="comment">// *p = 5</span></span><br></pre></td></tr></table></figure>
 
 <p>由上可见，指针p进行了两次自增，每一次自增，都会对p存放的地址+4，去到下一个元素的起始地址。因此，对p解引用就会出现不同的结果，分别对应<code>arr[0] arr[1] arr[2]</code></p>
@@ -382,7 +384,7 @@
 <p><code>arr[2]</code>同理，结果是<code>5</code></p>
 <h2 id="使用指针操作数组"><a href="#使用指针操作数组" class="headerlink" title="使用指针操作数组"></a>使用指针操作数组</h2><p>一维数组的指针就是像上面那样子，那如果我们对<strong>二维、三维数组</strong>用指针进行数组操作呢？</p>
 <p>其实呢，二维数组就是一个<strong>连续的</strong>，<strong>包含多个一维数组</strong>的数组</p>
-<p>又因为，数组名就是个指针，所以，二维数组的变量名就是个指针，指向着多个一维数组名（pointer to pointer）</p>
+<p>又因为，数组名就是个指针，所以，二维数组的数组名就是个指针，指向着多个一维数组名（pointer to pointer）</p>
 <p>再根据上面所提到的一句话：</p>
 <blockquote>
 <p>指针变量自增1，即是对其原来的地址加上一个对应类型的长度</p>
@@ -425,10 +427,11 @@
 <p>再者就是优先级的问题了。比如上文这个</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//an int[4] type pointer</span></span><br><span class="line"><span class="keyword">int</span> (*p2)[<span class="number">4</span>] = <span class="built_in">array</span>;</span><br></pre></td></tr></table></figure>
 
-<p>由于<code>[]</code>的优先级比<code>*</code>的要高，所以用了括号来强行更改优先级，意思是p2先是一个指针，然后<code>int</code>与<code>[4]</code>表明p2是一个<code>int[4]</code>类型的指针。不加的话，意思是这样的</p>
+<p>由于<code>[]</code>的优先级比<code>*</code>的要高，所以用了括号来强行更改优先级，先解析<code>*</code>，它的意思是p2先是一个指针，然后解析<code>int</code>与<code>[4]</code>，表明p2是一个指向<code>int[4]</code>类型的指针。</p>
+<p>不加的话，意思是这样的</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p2[<span class="number">4</span>];</span><br><span class="line"><span class="comment">// p2 is an array of pointers</span></span><br></pre></td></tr></table></figure>
 
-<p>这里情况是，p2先与<code>[]</code>进行结合，表明p2会是一个int型数组，然后<code>p2[4]</code>再与<code>*</code>结合，表明了p2是一个<code>int</code>类型的指针数组。</p>
+<p>（感觉解释有点奇怪）这里情况是，根据优先级，先解析<code>[4]</code>，表明p2会是一个长度为4的数组，然后再解析<code>*</code>，表明了p2是存储指针用的数组，指针指向<code>int</code>类型</p>
 <p>举个简单的，<code>int **p = array;</code>这个呢？</p>
 <p>就是等效于<code>int *(*p)</code>这个，<code>*</code>是右结合的，所以中间的<code>*</code>先与p结合，再与左边的<code>*</code>进行结合</p>
 <p>再者就是指针加减实际的多少，在这里，我姑且把对指针的加减当做是对指针变量里头存放的地址的前移和后移吧，这东西在前面的部分，已经讲了个大概了。</p>
