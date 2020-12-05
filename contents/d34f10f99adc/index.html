@@ -369,9 +369,9 @@
 <p>内存呢，我喜欢把它形象化成一张密密麻麻的表格，它很长很长，但是宽度只有8个格子（1字节 = 8位），并且每一行都有一个专门的标号，就是内存的地址啦（字节编址）</p>
 <p>如图所示</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143617.png"></p>
-<p>数据进入内存的话，就会占据内存的一部分，比如我们熟知32位下，<code>int</code>型占用4个字节，<code>double</code>型占用8个字节，比如我们有一个值为1的int变量，他会在内存中占据着4个字节</p>
+<p>数据进入内存的话，就会占据内存的一部分，比如我们熟知，在32位下，<code>int</code>型占用4个字节，<code>double</code>型占用8个字节，比如我们有一个值为1的int变量，它会在内存中占据着4个字节</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143537.png"></p>
-<p>数组是在内存上连续分布一块的数据结构，如果有一个<code>int arr[3] = &#123;7, 4, 5&#125;</code>，那么它就会在内存里占用连续的，三个int类型长度的地址，还有一个数组名的变量，相当于一个常量指针（不可更改地址）</p>
+<p>数组是在内存上连续分布一块的数据结构。如果有一个长度为3的int数组<code>arr[3] = &#123;7, 4, 5&#125;</code>，那么它在内存里的占用是连续的，三个int类型长度的地址，还有一个数组名的变量，相当于一个常量指针（不可更改地址）</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143733.png"></p>
 <p>我们可以使用<code>arr[0] arr[1] arr[2]</code>来进行对应元素的访问。与此同时，使用一个指针<code>int *p = arr</code>来实现上述的访问</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">3</span>] = &#123;<span class="number">7</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> *p = arr; <span class="comment">// *p = 7</span></span><br><span class="line">p++; <span class="comment">// *p = 4</span></span><br><span class="line">p++; <span class="comment">// *p = 5</span></span><br></pre></td></tr></table></figure>
@@ -471,8 +471,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/contents/7bce767300fa/" rel="prev" title="笔记-入门前端三件套">
-                  <i class="fa fa-chevron-left"></i> 笔记-入门前端三件套
+                <a href="/contents/681cfff66470/" rel="prev" title="记一次JSON入门">
+                  <i class="fa fa-chevron-left"></i> 记一次JSON入门
                 </a>
             </div>
             <div class="post-nav-item">
