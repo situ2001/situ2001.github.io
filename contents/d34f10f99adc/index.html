@@ -432,7 +432,7 @@
 <p>举个简单的，<code>int **p = array;</code>这个呢？</p>
 <p>就是等效于<code>int *(*p)</code>这个，<code>*</code>是右结合的，所以中间的<code>*</code>先与p结合，再与左边的<code>*</code>进行结合</p>
 <p>再者就是指针加减实际的多少，在这里，我姑且把对指针的加减当做是对指针变量里头存放的地址的前移和后移吧，这东西在前面的部分，已经讲了个大概了。</p>
-<p>对于上文那个<code>array[3][4]</code>数组，语句<code>(*(p2+1)+1)</code>做了些啥呢？p2是<code>int[4]</code>的，对<code>(p2+1)</code>就是p2右移动1个<code>int[4]</code>长度，就是<code>array[1][0]</code>的起始地址，对该地址解引用后就获得了<code>array[1][0]</code>，他是一个<code>int</code>指针，之后加1就是右移动1个int长度了，因此解引用后就是9</p>
+<p>对于上文那个<code>array[3][4]</code>数组，语句<code>(*(p2+1)+1)</code>做了些啥呢？p2是<code>int[4]</code>类型的指针，对<code>(p2+1)</code>就是p2右移动1个<code>int[4]</code>的长度，就是<code>array[1][0]</code>的起始地址，对该地址解引用后，即是获得了这个二维数组中的第二个<code>int[4]</code>类型的一维数组，即<code>array[2]</code>是一个<code>int</code>指针，之后加1就是右移动1个<code>int</code>长度了，因此最后解引用后就是9</p>
 <p>并且写到这里我发现，<code>array[1][1] </code>，因为<code>[]</code>的结合性是左结合，即是<code>(array[1])[1]</code>，其实不就是相当于<code>*(*(p2+1)+1)</code>吗？？？(难道数组的下标相当于给指针进行解引用)</p>
 <p>大概是下图这样的</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205153231.png"></p>
