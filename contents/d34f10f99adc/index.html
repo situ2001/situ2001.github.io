@@ -22,7 +22,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","scheme":"Gemini","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":260},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","scheme":"Gemini","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":260},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
   <meta name="description" content="指针和数组，关系不浅啊">
@@ -318,14 +318,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.3k</span>
+      <span>3.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -343,24 +343,57 @@
 <p>上面不懂的可能需要下面内容的补足（写作水平太菜了）</p>
 <p><del>禁止茴香豆</del></p>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>为什么我突然写这篇文章呢？原来是我在<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/c/memory/malloc">cppreference上面看malloc()</a>，了解一下简单的内存分配的时候，试了一下附带的example</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;   </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt; </span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *p1 = <span class="built_in">malloc</span>(<span class="number">4</span>*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));  <span class="comment">// allocates enough for an array of 4 int</span></span><br><span class="line">    <span class="keyword">int</span> *p2 = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>[<span class="number">4</span>])); <span class="comment">// same, naming the type directly</span></span><br><span class="line">    <span class="keyword">int</span> *p3 = <span class="built_in">malloc</span>(<span class="number">4</span>*<span class="keyword">sizeof</span> *p3);   <span class="comment">// same, without repeating the type name</span></span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span>(p1) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> n=<span class="number">0</span>; n&lt;<span class="number">4</span>; ++n) <span class="comment">// populate the array</span></span><br><span class="line">            p1[n] = n*n;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> n=<span class="number">0</span>; n&lt;<span class="number">4</span>; ++n) <span class="comment">// print it back out</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;p1[%d] == %d\n&quot;</span>, n, p1[n]);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">free</span>(p1);</span><br><span class="line">    <span class="built_in">free</span>(p2);</span><br><span class="line">    <span class="built_in">free</span>(p3);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span>   </span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span> </span>
+ 
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> 
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token operator">*</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// allocates enough for an array of 4 int</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>p2 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// same, naming the type directly</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>p3 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token operator">*</span><span class="token keyword">sizeof</span> <span class="token operator">*</span>p3<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// same, without repeating the type name</span>
+ 
+    <span class="token keyword">if</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> n<span class="token operator">&lt;</span><span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>n<span class="token punctuation">)</span> <span class="token comment">// populate the array</span>
+            p1<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> n<span class="token operator">*</span>n<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> n<span class="token operator">&lt;</span><span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>n<span class="token punctuation">)</span> <span class="token comment">// print it back out</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"p1[%d] == %d\n"</span><span class="token punctuation">,</span> n<span class="token punctuation">,</span> p1<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+ 
+    <span class="token function">free</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>p3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>这段代码运行之后，输出的结果是</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p1[0] = 0</span><br><span class="line">p1[1] = 1</span><br><span class="line">p1[2] = 4</span><br><span class="line">p1[3] = 9</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">p1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+p1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
+p1<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">4</span>
+p1<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">9</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>诶诶诶，为什么指针也能拥有数组那样的下标呢？我的直觉告诉我：指针和数组，之间必定有不可描述的关系</p>
 <p>在开始之前，感谢一下tindy2013能抽空给我微微解释了一下<del>，缩短了我自主探索的时间</del></p>
 <h2 id="数组的下标"><a href="#数组的下标" class="headerlink" title="数组的下标"></a>数组的下标</h2><p>如同多数地方所说的，数组就是一种数据结构。是一坨<strong>连续</strong>的元素，接连着一起躺在了内存中的某一块区域。并且数组拥有operator<code>[]</code>，即是数组的下标。</p>
 <p>之前我发现数组还可以这样子</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">5</span>];</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%p&quot;</span>, arr);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%p"</span><span class="token punctuation">,</span> arr<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>最后的输出了一个内存地址，并且我们还可以新建一个指针并把数组变量赋值给它，并能通过指针给arr中的其中一个元素赋值</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p = arr;</span><br><span class="line"></span><br><span class="line">arr[<span class="number">4</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="comment">//or</span></span><br><span class="line">p += <span class="number">4</span>;</span><br><span class="line">*p = <span class="number">1</span>;</span><br><span class="line"><span class="comment">//or</span></span><br><span class="line">*(arr + <span class="number">4</span>) = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, arr[<span class="number">4</span>]);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span>
+
+arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token comment">//or</span>
+p <span class="token operator">+=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token operator">*</span>p <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token comment">//or</span>
+<span class="token operator">*</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>上面三个操作都是一样的，输出结果都是<code>1</code></p>
 <p>既然上面有<code>int *p = arr;</code>那么我把数组arr当成一个常量指针，既然arr可以拥有一个属于他自己的下标，那么一般的指针，是否也能拥有一个下标呢？</p>
 <p>不多猜测，先试一下看看是不是这样</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p[<span class="number">4</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, arr[<span class="number">4</span>]);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">p<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>也是一个样，那么，<strong>指针变量拥有下标</strong>。</p>
 <p>并且在一段查询过后，发现数组名其实是存有该数组首地址的<strong>常量指针</strong>（就是不能改变指针的内容）</p>
@@ -374,7 +407,10 @@
 <p>数组是在内存上连续分布一块的数据结构。如果有一个长度为3的int数组<code>arr[3] = &#123;7, 4, 5&#125;</code>，那么它在内存里的占用是连续的，三个int类型长度的地址，还有一个数组名的变量，相当于一个常量指针（不可更改地址）</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143733.png"></p>
 <p>我们可以使用<code>arr[0] arr[1] arr[2]</code>来进行对应元素的访问。与此同时，使用一个指针<code>int *p = arr</code>来实现上述的访问</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">3</span>] = &#123;<span class="number">7</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> *p = arr; <span class="comment">// *p = 7</span></span><br><span class="line">p++; <span class="comment">// *p = 4</span></span><br><span class="line">p++; <span class="comment">// *p = 5</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span> <span class="token comment">// *p = 7</span>
+p<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// *p = 4</span>
+p<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// *p = 5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>由上可见，指针p进行了两次自增，每一次自增，都会对p存放的地址+4，去到下一个元素的起始地址。因此，对p解引用就会出现不同的结果，分别对应<code>arr[0] arr[1] arr[2]</code></p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205144359.png"></p>
@@ -390,10 +426,19 @@
 <p>指针变量自增1，即是对其原来的地址加上一个对应类型的长度</p>
 </blockquote>
 <p>假设这里有一个二维数组<code>int array[3][4]</code>呢？我们用指针进行操作的时候，可以初始化这两种指针：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="built_in">array</span>[<span class="number">3</span>][<span class="number">4</span>] = &#123;&#123;<span class="number">4</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">4</span>&#125;, &#123;<span class="number">1</span>, <span class="number">9</span>, <span class="number">1</span>, <span class="number">9</span>&#125;, &#123;<span class="number">8</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;&#125;;</span><br><span class="line"><span class="comment">//an int type pointer</span></span><br><span class="line"><span class="keyword">int</span> *p1 = *<span class="built_in">array</span>;</span><br><span class="line"><span class="comment">//an int[4] type pointer</span></span><br><span class="line"><span class="keyword">int</span> (*p2)[<span class="number">4</span>] = <span class="built_in">array</span>;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> array<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token comment">//an int type pointer</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token operator">*</span>array<span class="token punctuation">;</span>
+<span class="token comment">//an int[4] type pointer</span>
+<span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>我们对p1和p2加一，并对其解引用</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">p1++;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, *p1);	<span class="comment">//output: 5</span></span><br><span class="line">print(<span class="string">&quot;%d\n&quot;</span>, <span class="built_in">array</span>[<span class="number">0</span>][<span class="number">1</span>]);</span><br><span class="line">p2++;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, *p2);	<span class="comment">//output: 9</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, <span class="built_in">array</span>[<span class="number">1</span>][<span class="number">1</span>]);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">p1<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment">//output: 5</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> array<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+p2<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment">//output: 9</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> array<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>可以看出，两者输出结果不一样，其中p1读出来的是<code>a[0][1]  = 5</code>，而p2读出来的是<code>a[1][1] = 9</code></p>
 <p>为什么呢？仔细思考一下的话，其实也不难理解</p>
@@ -425,11 +470,13 @@
 </tbody></table>
 <p>英语表示不就直白很多了吗…</p>
 <p>再者就是优先级的问题了。比如上文这个</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//an int[4] type pointer</span></span><br><span class="line"><span class="keyword">int</span> (*p2)[<span class="number">4</span>] = <span class="built_in">array</span>;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//an int[4] type pointer</span>
+<span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>由于<code>[]</code>的优先级比<code>*</code>的要高，所以用了括号来强行更改优先级，先解析<code>*</code>，它的意思是p2先是一个指针，然后解析<code>int</code>与<code>[4]</code>，表明p2是一个指向<code>int[4]</code>类型的指针。</p>
 <p>不加的话，意思是这样的</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *p2[<span class="number">4</span>];</span><br><span class="line"><span class="comment">// p2 is an array of pointers</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span>p2<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">// p2 is an array of pointers</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>（感觉解释有点奇怪）这里情况是，根据优先级，先解析<code>[4]</code>，表明p2会是一个长度为4的数组，然后再解析<code>*</code>，表明了p2是存储指针用的数组，指针指向<code>int</code>类型</p>
 <p>举个简单的，<code>int **p = array;</code>这个呢？</p>
@@ -535,13 +582,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">29k</span>
+    <span title="站点总字数">42k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">27 分钟</span>
+    <span title="站点阅读时长">38 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

@@ -22,7 +22,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","scheme":"Gemini","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":260},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","scheme":"Gemini","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":260},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
   <meta name="description" content="国庆回家了，先随便水一篇文章 才放4天假差评 那么，如何搭建一个属于自己的静态博客？">
@@ -316,7 +316,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.4k</span>
+      <span>4.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -378,7 +378,7 @@ Once all the requirements are installed, you can install Hexo with npm:
 
 $ npm install -g hexo-cli</code></pre>
 <p>读出来，就是在命令行输入</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>便能安装hexo</p>
 <p>hexo-cli安装了，所以该如何setup呢？</p>
@@ -393,7 +393,12 @@ $ npm install</code></pre>
 <p>初始化之后的目录结构，一些对于config文件的说明，文档里已经讲得清清楚楚了，跟着它一起配置即可</p>
 <p>关于命令行操作，<a target="_blank" rel="noopener" href="https://hexo.io/docs/commands">文档</a>里面也写的很清楚了</p>
 <p>我一般也就新建新文章，本地测试，上传到github，所以大部分时候会用到如下几个</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hexo new [layout] &lt;title&gt;</span><br><span class="line">hexo generate</span><br><span class="line">hexo publish</span><br><span class="line">hexo clean</span><br><span class="line">hexo server</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">hexo new <span class="token punctuation">[</span>layout<span class="token punctuation">]</span> <span class="token operator">&lt;</span>title<span class="token operator">></span>
+hexo generate
+hexo publish
+hexo clean
+hexo server
+hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="撰写你的第一篇文章"><a href="#撰写你的第一篇文章" class="headerlink" title="撰写你的第一篇文章"></a>撰写你的第一篇文章</h2><p>在hexo目录下输入 <code>hexo new my-first-content</code></p>
 <p>接着，该文章的文件就会生成于子目录 <code>source/_post</code> 下</p>
@@ -410,7 +415,8 @@ $ npm install</code></pre>
 <p>接下来就是测试连接</p>
 <p>在命令行下输入 <code>ssh -T git@github.com</code> 以测试SSH是否配置好</p>
 <p>预期结果应如下</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\Users\situ&gt; ssh <span class="literal">-T</span> git@github.com</span><br><span class="line">Hi situ2001! You<span class="string">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> C:\Users\situ> ssh <span class="token operator">-</span>T git@github<span class="token punctuation">.</span>com
+Hi situ2001<span class="token operator">!</span> You've successfully authenticated<span class="token punctuation">,</span> but GitHub does not provide shell access<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>此时，到github的connection已经没有问题</p>
 <h2 id="关于部署"><a href="#关于部署" class="headerlink" title="关于部署"></a>关于部署</h2><p>本地写好了，当然是要部署，而部署之前，得要有地方给你放。</p>
@@ -426,7 +432,11 @@ $ npm install</code></pre>
 <p>先执行如下命令，为什么，因为文档有的说啊：<a target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages#One-command-deployment">Github Pages | Hexo</a><br><code>$ npm install hexo-deployer-git --save</code></p>
 <p>再去到hexo文件夹下，找到 <code>_config.yml</code> 文件</p>
 <p>添加如下几行</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">&#x27;git&#x27;</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/yourusername/yourusername.github.io</span></span><br><span class="line">  <span class="comment">#branch: master</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">deploy:
+  type: &#39;git&#39;
+  repo: https:&#x2F;&#x2F;github.com&#x2F;yourusername&#x2F;yourusername.github.io
+  #branch: master
+  branch: main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <blockquote>
 <p>2020-11-01更新: GitHub repo的default branch的名字变成main而不是master了, 因此上方做了一些修改</p>
@@ -470,14 +480,20 @@ $ npm install</code></pre>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003182803.png"></p>
 <p>该文件的作用如文件名本身，可以忽略上传的文件/文件夹</p>
 <p>对于hexo源文件，我一般选择忽略如下，剩下的便是文章和config文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">Thumbs.db</span><br><span class="line">db.json</span><br><span class="line">*.log</span><br><span class="line">node_modules&#x2F;</span><br><span class="line">public&#x2F;</span><br><span class="line">.deploy*&#x2F;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-none"><code class="language-none">.DS_Store
+Thumbs.db
+db.json
+*.log
+node_modules&#x2F;
+public&#x2F;
+.deploy*&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>2020-11-21更新：<strong>不过</strong>在更换本地环境之后，.deploy*/是保存有静态页面仓库的.git文件夹的，并且hexo-deployer-git的<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-deployer-git#how-it-works">README</a>如是说</p>
 <blockquote>
 <p>hexo-deployer-git works by generating the site in .deploy_git and force pushing to the repo(es) in config. If .deploy_git does not exist, a repo will initialized (git init). Otherwise the curent repo (with its commit history) will be used.</p>
 </blockquote>
 <p>由于是force push，也就是说没有这个文件夹时候，重新生成的新的，会把你原有的仓库直接覆盖掉（也就是说commit啥的全没了）<br>所以在换环境的时候，记得clone一下，即是把你的username.github.io这个repo clone下来并重命名为.deploy_git，如下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone &lt;gh-pages repo&gt; .deploy_git</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone <span class="token operator">&lt;</span>gh-pages repo<span class="token operator">></span> .deploy_git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>到这里，现在你<del>应该</del>有一个属于自己的个人博客了</p>
 <p>听说在线聊天，异性”哦”你的时候，回个”嗯”是一个很好的选择（跑</p>
@@ -581,13 +597,13 @@ $ npm install</code></pre>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">29k</span>
+    <span title="站点总字数">42k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">27 分钟</span>
+    <span title="站点阅读时长">38 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

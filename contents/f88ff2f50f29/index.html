@@ -22,7 +22,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","scheme":"Gemini","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":260},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","scheme":"Gemini","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":260},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
   <meta name="description" content="此文记录了咱对Java OOP的初步理解 由于是初学，文章也是初写，难免有错误，有的话，请指出">
@@ -311,14 +311,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.9k</span>
+      <span>5.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -366,21 +366,56 @@
 <p>经过多一点的实操之后，发现优点不是仅仅万物皆对象，而是让某段代码拥有更好的更强的可复用性，就拿一个实际的音乐播放器类进行举例吧。</p>
 <p>如果有两台音乐播放器，我们按照之前的面向过程写法，就是分别声明变量来对应每一播放器的属性，如播放器的开关这个属性，就要声明下面这两个变量<br><code>isOn1: boolean  isOn2: boolean</code><br>并给它们上一个开机关机方法<br><code>toggle（isOn: boolean): void</code></p>
 <p>开关机就要这样做</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">toggle(isOn1);</span><br><span class="line">toogle (isOn2);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token function">toggle</span><span class="token punctuation">(</span>isOn1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+toogle <span class="token punctuation">(</span>isOn2<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>那么如果我们要管理n台音乐播放器，那么就要手动声明如下变量 <code>isOn1 isOn2 ... isOnn</code><br>对他们进行开关机操作就要这样做</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">toggle (isOn1);</span><br><span class="line">toggle (isOn2);</span><br><span class="line">...</span><br><span class="line">toggle (isOnn);</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">toggle <span class="token punctuation">(</span>isOn1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+toggle <span class="token punctuation">(</span>isOn2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+toggle <span class="token punctuation">(</span>isOnn<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>这臃肿与coding效率啊，请自己细品。</p>
 <p>所以我们可以对播放器，创建一个Player类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Player</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isOn;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">toggle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        isOn = !isOn;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Player</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">boolean</span> isOn<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">toggle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        isOn <span class="token operator">=</span> <span class="token operator">!</span>isOn<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>这样一来每一台播放器都有着相同的作用域和方法，开关只需要操作指定的播放器对象即可，如<code>player1.toggle()</code></p>
 <blockquote>
 <p>追加结束</p>
 </blockquote>
 <h3 id="类里有什么"><a href="#类里有什么" class="headerlink" title="类里有什么"></a>类里有什么</h3><p>类包含有什么，能吃吗？类如何定义的，我可以吗？直接看下码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Square</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** data field */</span></span><br><span class="line">    <span class="keyword">double</span> length;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** constructors */</span></span><br><span class="line">    Square() &#123;</span><br><span class="line">        length = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Square(<span class="keyword">double</span> inLength) &#123;</span><br><span class="line">        length = inLength;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** methods */</span></span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">getArea</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> length * length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">getLength</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(length);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setLength</span><span class="params">(<span class="keyword">double</span> newLength)</span> </span>&#123;</span><br><span class="line">        length = newLength;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Square</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">/** data field */</span>
+    <span class="token keyword">double</span> length<span class="token punctuation">;</span>
+
+    <span class="token comment">/** constructors */</span>
+    <span class="token class-name">Square</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        length <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token class-name">Square</span><span class="token punctuation">(</span><span class="token keyword">double</span> inLength<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        length <span class="token operator">=</span> inLength<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">/** methods */</span>
+    <span class="token keyword">double</span> <span class="token function">getArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> length <span class="token operator">*</span> length<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">void</span> <span class="token function">getLength</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">void</span> <span class="token function">setLength</span><span class="token punctuation">(</span><span class="token keyword">double</span> newLength<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        length <span class="token operator">=</span> newLength<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>我们可以注意到一个class里面，包含有<strong>data field, constructor, method</strong> (好像分别是数据域 构造方法 方法 <del>还是英语顺眼</del>)</p>
 <p>在本例中，data field里面的length变量是每一个对象都有且是特有的(称之为 <strong>instant variable</strong> 实例变量，当然这不包括static variable)，在每一个对象中单独存在且不会相互影响，method则包含了这个对象特有的方法(当然这也不包括static method)</p>
@@ -406,14 +441,30 @@
 </li>
 </ul>
 <p>如上面的Square class中的片段</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** constructors */</span></span><br><span class="line">Square() &#123;</span><br><span class="line">    length = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Square(<span class="keyword">double</span> inLength) &#123;</span><br><span class="line">    length = inLength;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/** constructors */</span>
+<span class="token class-name">Square</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    length <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token class-name">Square</span><span class="token punctuation">(</span><span class="token keyword">double</span> inLength<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    length <span class="token operator">=</span> inLength<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>如果不带参地创建新对象，就会对该对象的length变量(instant variable)赋值1，而如果带实参的话，该对象便会以含形参的Square(double inLength)的constructor进行construct，此时变量length便会以inLength赋值</p>
 <p><strong>那我忘记了创建constructor怎么办？</strong><br>如果你啥constructor也没加的话，恭喜你(?)，因为Java会implicitly帮你加上一个的：<code>ClassName() &#123;&#125;</code></p>
 <p>如果只加了带argument的话，no-arg constructor是不会再帮你加上的了</p>
 <h2 id="UML-class-diagram"><a href="#UML-class-diagram" class="headerlink" title="UML class diagram"></a>UML class diagram</h2><p>我们能以 <strong>UML</strong>(Unified Modeling Language) <strong>class diagram</strong>方式表示类与对象</p>
 <p>把Square类做成图表的话，便会是如下所示</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">____</span><span class="strong">____</span><span class="strong">____</span><span class="strong">____</span><span class="strong">____</span><span class="strong">____</span><span class="strong">____</span></span><br><span class="line">|         Square           |</span><br><span class="line">| ------------------------ |</span><br><span class="line">|       length: int        |</span><br><span class="line">|                          |</span><br><span class="line">|         Square()         |</span><br><span class="line">| Square(inLength: double) |</span><br><span class="line">|      getArea(): void     |</span><br><span class="line">|    getLength(): void     |</span><br><span class="line">| ------------------------ |</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">____________________________
+|         Square           |
+| ------------------------ |
+|       length: int        |
+|                          |
+|         Square()         |
+| Square(inLength: double) |
+|      getArea(): void     |
+|    getLength(): void     |
+| ------------------------ |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>也就是说用UML class diagram进行图示的话，遵从下列规则</p>
 <table>
@@ -441,17 +492,64 @@
 <p>正如我们所知道的，基本数据类型是被存放于stack里的，而object是被存放在heap里面的</p>
 <p>面向对象的数据类型不包含value，而是作为一个reference指向目的的对象</p>
 <h3 id="由数组说起"><a href="#由数组说起" class="headerlink" title="由数组说起"></a>由数组说起</h3><p>试回忆前面array内容，array variable 是作为一个 reference variable，被引用到heap里相对应的数组</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] array = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>]; <span class="comment">// create a new array</span></span><br><span class="line"><span class="comment">/** and array is a reference variable that reference to the array at the heap */</span></span><br><span class="line"></span><br><span class="line">array[<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">// assign 1 to element 0 at array</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span>[] array1; <span class="comment">// create a new array variable called array1</span></span><br><span class="line">array1 = array; <span class="comment">// now array1 has the same reference as array</span></span><br><span class="line"></span><br><span class="line">System.out.println(array[<span class="number">0</span>]); <span class="comment">// output: 1</span></span><br><span class="line">System.out.println(array1[<span class="number">0</span>]); <span class="comment">// output is the same: 1</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// create a new array</span>
+<span class="token comment">/** and array is a reference variable that reference to the array at the heap */</span>
+
+array<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// assign 1 to element 0 at array</span>
+
+<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> array1<span class="token punctuation">;</span> <span class="token comment">// create a new array variable called array1</span>
+array1 <span class="token operator">=</span> array<span class="token punctuation">;</span> <span class="token comment">// now array1 has the same reference as array</span>
+
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>array<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// output: 1</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>array1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// output is the same: 1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>如下图</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">|   stack      |          |             heap        |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|--------------|reference |                         |</span><br><span class="line">| main()       |   to     |   An array that         |</span><br><span class="line">|        array | ---------|--&gt;contains 10 elements  |</span><br><span class="line">|--------------|          |                         |</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">|   stack      |          |             heap        |
+|              |          |                         |
+|              |          |                         |
+|              |          |                         |
+|              |          |                         |
+|--------------|reference |                         |
+| main()       |   to     |   An array that         |
+|        array | ---------|-->contains 10 elements  |
+|--------------|          |                         |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="以对象结束"><a href="#以对象结束" class="headerlink" title="以对象结束"></a>以对象结束</h3><p>那么对于对象来讲，其实跟数组几乎一致（<del>数组也是对象啊喂</del></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Square square1 = <span class="keyword">new</span> Square(<span class="number">4</span>); <span class="comment">// create a square object which has length of 4</span></span><br><span class="line">Square square2; <span class="comment">// create a new reference variable of class Square</span></span><br><span class="line"></span><br><span class="line">square1.getLength(); <span class="comment">// output: 4</span></span><br><span class="line">square2 = square1;</span><br><span class="line">square2.setLength(<span class="number">5</span>); <span class="comment">// now make object square&#x27;s length to 5</span></span><br><span class="line"></span><br><span class="line">square2.getLength(); <span class="comment">// output: 5</span></span><br><span class="line">square1.getLength(); <span class="comment">// output: 5</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Square</span> square1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Square</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// create a square object which has length of 4</span>
+<span class="token class-name">Square</span> square2<span class="token punctuation">;</span> <span class="token comment">// create a new reference variable of class Square</span>
+
+square1<span class="token punctuation">.</span><span class="token function">getLength</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// output: 4</span>
+square2 <span class="token operator">=</span> square1<span class="token punctuation">;</span>
+square2<span class="token punctuation">.</span><span class="token function">setLength</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// now make object square's length to 5</span>
+
+square2<span class="token punctuation">.</span><span class="token function">getLength</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// output: 5</span>
+square1<span class="token punctuation">.</span><span class="token function">getLength</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// output: 5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>语句 <code>square2 = square1;</code> 把square2的引用也指向了square对象，正因如此，invoke的method和修改的data field都是属于同一个object的</p>
 <p>可以表示如下</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Before square2 = square1</span><br><span class="line"></span><br><span class="line">|   stack      |          |             heap        |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">| main()       |reference |                         |</span><br><span class="line">| square2      |   to     |                         |</span><br><span class="line">|      square1 | ---------|--&gt; a square Object      |</span><br><span class="line">|--------------|          |                         |</span><br><span class="line"></span><br><span class="line">After</span><br><span class="line"></span><br><span class="line">|   stack      |          |             heap        |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|              |          |                         |</span><br><span class="line">|           ---|----------|-----------------------  |</span><br><span class="line">| main()    |  |reference |                      |  |</span><br><span class="line">| square2 ---  |   to     |                      |  |</span><br><span class="line">|      square1 | ---------|--&gt; a square Object &lt;--  |</span><br><span class="line">|--------------|          |                         |</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">Before square2 = square1
+
+|   stack      |          |             heap        |
+|              |          |                         |
+|              |          |                         |
+|              |          |                         |
+|              |          |                         |
+| main()       |reference |                         |
+| square2      |   to     |                         |
+|      square1 | ---------|--> a square Object      |
+|--------------|          |                         |
+
+After
+
+|   stack      |          |             heap        |
+|              |          |                         |
+|              |          |                         |
+<span class="token table"><span class="token table-header-row"><span class="token punctuation">|</span><span class="token table-header important">              </span><span class="token punctuation">|</span><span class="token table-header important">          </span><span class="token punctuation">|</span><span class="token table-header important">                         </span><span class="token punctuation">|</span>
+</span><span class="token table-line"><span class="token punctuation">|</span>           <span class="token punctuation">---</span><span class="token punctuation">|</span><span class="token punctuation">----------</span><span class="token punctuation">|</span><span class="token punctuation">-----------------------</span>  <span class="token punctuation">|</span>
+</span><span class="token table-data-rows"><span class="token punctuation">|</span><span class="token table-data"> main()    </span><span class="token punctuation">|</span><span class="token table-data">  </span><span class="token punctuation">|</span><span class="token table-data">reference </span><span class="token punctuation">|</span><span class="token table-data">                      </span><span class="token punctuation">|</span><span class="token table-data">  </span><span class="token punctuation">|</span>
+<span class="token punctuation">|</span><span class="token table-data"> square2 ---  </span><span class="token punctuation">|</span><span class="token table-data">   to     </span><span class="token punctuation">|</span><span class="token table-data">                      </span><span class="token punctuation">|</span><span class="token table-data">  </span><span class="token punctuation">|</span>
+<span class="token punctuation">|</span><span class="token table-data">      square1 </span><span class="token punctuation">|</span><span class="token table-data"> <span class="token hr punctuation">---------</span></span><span class="token punctuation">|</span><span class="token table-data">--> a square Object &lt;--  </span><span class="token punctuation">|</span>
+<span class="token punctuation">|</span><span class="token table-data"><span class="token hr punctuation">--------------</span></span><span class="token punctuation">|</span><span class="token table-data">          </span><span class="token punctuation">|</span><span class="token table-data">                         </span><span class="token punctuation">|</span></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>总之，可以粗略地理解为在OOP中的变量其实就像一个书签，没有具体的值，指向着目标对象。</p>
 <h2 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h2><p>其实呢，在学习编程时候，可以进行联系与联想的，这些操作可以使得你有一个具体的认知，并且让前后知识结合得更加紧密，形成一个比较稳健的知识体系</p>
@@ -564,13 +662,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">29k</span>
+    <span title="站点总字数">42k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">27 分钟</span>
+    <span title="站点阅读时长">38 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

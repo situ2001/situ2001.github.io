@@ -22,7 +22,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","scheme":"Gemini","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":260},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","scheme":"Gemini","version":"8.0.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":260},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
   <meta name="description" content="我想这篇文章应该可以让你快速上手git和github吧？">
@@ -311,14 +311,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.8k</span>
+      <span>4.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -349,7 +349,8 @@
 <p>接下来就是测试连接</p>
 <p>在命令行下输入 <code>ssh -T git@github.com</code> 以测试SSH是否配置好</p>
 <p>预期结果应如下</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">PS</span> C:\Users\situ&gt; ssh <span class="literal">-T</span> git@github.com</span><br><span class="line">Hi situ2001! You<span class="string">&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> C:\Users\situ> ssh <span class="token operator">-</span>T git@github<span class="token punctuation">.</span>com
+Hi situ2001<span class="token operator">!</span> You've successfully authenticated<span class="token punctuation">,</span> but GitHub does not provide shell access<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>此时，密钥配置完成。</p>
 <p>然后下面是操作的过程，虽然不知道发生了什么，但是先照着做就是了。</p>
@@ -361,45 +362,68 @@
 <h3 id="新建一个仓库"><a href="#新建一个仓库" class="headerlink" title="新建一个仓库"></a>新建一个仓库</h3><p>这个新建一次就行了。这个新建一次就行了。这个新建一次就行了。</p>
 <p>仓库分为本地的仓库（即本机）和远程仓库（在这里指github的仓库）</p>
 <p>建立本地仓库的话，就是在你代码的目录下，输入下面的命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>成功初始化后的输出可能如下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Initialized empty Git repository in C:/Users/situ/github/git_test/.git/</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">Initialized empty Git repository <span class="token keyword">in</span> C:/Users/situ/github/git_test/.git/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>接着去github新建对应的仓库，在github首页的右上角就能看到新建仓库的图标了，跟着指引一步一步做下去就行了</p>
 <p>至此，仓库的新建工作完成了</p>
 <h3 id="往仓库提交你的代码"><a href="#往仓库提交你的代码" class="headerlink" title="往仓库提交你的代码"></a>往仓库提交你的代码</h3><p>接着就是进行状态的检查，这个命令<strong>很有用</strong>，它可以告诉你现在仓库的状态是什么样子的</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>输出可能如下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\situ\github\git_test&gt;git status</span><br><span class="line">On branch master</span><br><span class="line"></span><br><span class="line">No commits yet</span><br><span class="line"></span><br><span class="line">Untracked files:</span><br><span class="line">  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</span><br><span class="line">        1.txt</span><br><span class="line">        Main.java</span><br><span class="line"></span><br><span class="line">nothing added to commit but untracked files present (use &quot;git add&quot; to track)</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>git_test<span class="token operator">></span>git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  <span class="token punctuation">(</span>use <span class="token string">"git add &lt;file>..."</span> to include <span class="token keyword">in</span> what will be committed<span class="token punctuation">)</span>
+        <span class="token number">1</span>.txt
+        Main.java
+
+nothing added to commit but untracked files present <span class="token punctuation">(</span>use <span class="token string">"git add"</span> to track<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>接着，把untracked的文件加入git中</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>这个命令表示把所有更改过的或者未追踪的文件加入跟踪</p>
 <p>接着就是记录自己此时仓库的情况，使用如下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;my first commit&quot;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> commit -m <span class="token string">"my first commit"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>输出结果如下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[master (root-commit) cc978b4] my first commit</span><br><span class="line"> 2 files changed, 15 insertions(+)</span><br><span class="line"> create mode 100644 1.txt</span><br><span class="line"> create mode 100644 Main.java</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token punctuation">[</span>master <span class="token punctuation">(</span>root-commit<span class="token punctuation">)</span> cc978b4<span class="token punctuation">]</span> my first commit
+ <span class="token number">2</span> files changed, <span class="token number">15</span> insertions<span class="token punctuation">(</span>+<span class="token punctuation">)</span>
+ create mode <span class="token number">100644</span> <span class="token number">1</span>.txt
+ create mode <span class="token number">100644</span> Main.java<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>再用<code>git status</code>看看</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">On branch master</span><br><span class="line">nothing to commit, working tree clean</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">On branch master
+nothing to commit, working tree clean<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>说明，此时仓库已经记录下你现在的工作了。</p>
 <p>接着我们使用命令<code>git remote</code>进行远端仓库的添加(如下仅为实例，具体情况具体分析)</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://github.com/situ2001/git_test.git</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> remote <span class="token function">add</span> origin https://github.com/situ2001/git_test.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>最后，我们使用<code>git push</code>命令，把此时本地的master分支推到远端仓库上的master分支</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>出现像下面这样的，是成功了</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\situ\github\git_test&gt;git push -u origin master</span><br><span class="line">Enumerating objects: 4, done.</span><br><span class="line">Counting objects: 100% (4/4), done.</span><br><span class="line">Delta compression using up to 16 threads</span><br><span class="line">Compressing objects: 100% (3/3), done.</span><br><span class="line">Writing objects: 100% (4/4), 406 bytes | 406.00 KiB/s, done.</span><br><span class="line">Total 4 (delta 0), reused 0 (delta 0), pack-reused 0</span><br><span class="line">To https://github.com/situ2001/git_test.git</span><br><span class="line"> * [new branch]      master -&gt; master</span><br><span class="line">Branch &#x27;master&#x27; set up to track remote branch &#x27;master&#x27; from &#x27;origin&#x27;.</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>git_test<span class="token operator">></span>git push -u origin master
+Enumerating objects: <span class="token number">4</span>, done.
+Counting objects: <span class="token number">100</span>% <span class="token punctuation">(</span><span class="token number">4</span>/4<span class="token punctuation">)</span>, done.
+Delta compression using up to <span class="token number">16</span> threads
+Compressing objects: <span class="token number">100</span>% <span class="token punctuation">(</span><span class="token number">3</span>/3<span class="token punctuation">)</span>, done.
+Writing objects: <span class="token number">100</span>% <span class="token punctuation">(</span><span class="token number">4</span>/4<span class="token punctuation">)</span>, <span class="token number">406</span> bytes <span class="token operator">|</span> <span class="token number">406.00</span> KiB/s, done.
+Total <span class="token number">4</span> <span class="token punctuation">(</span>delta <span class="token number">0</span><span class="token punctuation">)</span>, reused <span class="token number">0</span> <span class="token punctuation">(</span>delta <span class="token number">0</span><span class="token punctuation">)</span>, pack-reused <span class="token number">0</span>
+To https://github.com/situ2001/git_test.git
+ * <span class="token punctuation">[</span>new branch<span class="token punctuation">]</span>      master -<span class="token operator">></span> master
+Branch <span class="token string">'master'</span> <span class="token builtin class-name">set</span> up to track remote branch <span class="token string">'master'</span> from <span class="token string">'origin'</span><span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>接着，你在github的repo上面就能见到这次的commit了。</p>
 <p>那么<strong>在其他地方</strong>操作，怎么把仓库拉下来啊。很EZ，用<code>git clone</code>命令就行了，如下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone [repo-url]</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone <span class="token punctuation">[</span>repo-url<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>还有不要忘了在其他地方做了更改，回到自己的环境下，要进行一下<code>git pull</code>同步一下远端仓库的内容哦</p>
 <h2 id="与他人进行合作"><a href="#与他人进行合作" class="headerlink" title="与他人进行合作"></a>与他人进行合作</h2><p>有时候我们会与他人合作，共同contribute同一个repo，因此，一些git分支与合并的操作还是要懂得一点的</p>
@@ -411,7 +435,7 @@
 <h3 id="直接修改所有者的repo"><a href="#直接修改所有者的repo" class="headerlink" title="直接修改所有者的repo"></a>直接修改所有者的repo</h3><p>这两种原理是差不多的，我挑较为用过次数比2多的1来说吧(事实上这<strong>有点头铁</strong>，推荐用2)</p>
 <p>如果repo的所有者对你发出了collaborate的邀请，接受了，你对应用户的邮箱就能直接在这个repo下进行更改了</p>
 <p>此时先使用命令<code>git clone</code>把对应的仓库clone下来</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone [repo-url]</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone <span class="token punctuation">[</span>repo-url<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>由于是多人合作，就要避免一些更改的冲突，此处比较保险的方法是利用git的分支操作，大概操作如下：</p>
 <ol>
@@ -422,24 +446,29 @@
 </ol>
 <p><strong>开始操作</strong><del>（由于最近在肝某deadline，所以一些输出就不搞了，理论上这流程下来是没有问题的）</del></p>
 <p>首先，创建一个分支并切换到对应分支</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b [branch-name]</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout -b <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>下面这两行与上面的是等效的</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch [branch-name]</span><br><span class="line">git checkout [branch-name]</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> branch <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
+<span class="token function">git</span> checkout <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>接着，开始你的工作，进行相对应的更改并做好相对应的commit，还是像上面一样</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;some changes&quot;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit -m <span class="token string">"some changes"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>再接着，把做好的修改，确定无误后，使用<code>git merge</code>指令将该分支合并到主分支上……等等，此时我们冷静一下，我在进行多人合作诶，思考下：万一人家在我合并之前已经进行了一次合并或者是主分支出现了一些更新的commit呢？</p>
 <p>所以，我们在合并之前最好是使用<code>git pull</code>命令，同步一下最新的远端仓库，所以要执行的操作如下，先同步后合并</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git pull</span><br><span class="line">git merge [branch-name]</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout master
+<span class="token function">git</span> pull
+<span class="token function">git</span> merge <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>git会进行自动处理，除非是git无法处理的冲突才需要人为干涉（这里暂不多说）</p>
 <p>接下来就是，把当前本地的分支推到远端了，依旧是<code>git push</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>要是想要把新分支也同步上去，如下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout [branch-name]</span><br><span class="line">git push -u origin [branch-name]</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
+<span class="token function">git</span> push -u origin <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="使用Pull-Request"><a href="#使用Pull-Request" class="headerlink" title="使用Pull Request"></a>使用Pull Request</h3><p>如果是用PR的方法的话，应该会安全一点（云玩家又来了</p>
 <p>我认为先是fork一份到自己的号里，然后前面1 2步骤与上面一样，而3 4 5分别是</p>
@@ -449,15 +478,19 @@
 <li>在你的repo下根据提示进行PR</li>
 </ol>
 <p>自第三步有点差别，考虑到是合作，他人有可能进行了一定的修改，先<code>git pull</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git pull</span><br><span class="line">git checkout [branch-name]</span><br><span class="line">git merge master</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout master
+<span class="token function">git</span> pull
+<span class="token function">git</span> checkout <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
+<span class="token function">git</span> merge master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>再合并，不过此次是把master合并到你的分支里</p>
 <p>第四步就是将你的分支推到远端啦</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin [branch-name]</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> push -u origin <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>第五步就是打开你的github对应的repo，它会自动提示你进行PR操作的</p>
 <p>甚至还能做下事后清理工作，可以把本地和远程对应的分支所删除(当然远程分支也可以在github的对应的repo下进行删除分支的操作)</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -d [branch-name]</span><br><span class="line">git push -d origin [branch-name]</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> branch -d <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
+<span class="token function">git</span> push -d origin <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="还有更多"><a href="#还有更多" class="headerlink" title="还有更多"></a>还有更多</h2><p>我只是简单地写了两种常见的git使用场景的普遍情况，这俩操作可以应付得来大部分场景了</p>
 <p>不过就这么点，还远远不够，再安利些东西吧，git指令想了解原理和更多操作，可以参考下面这个，初学的时候受益甚多（不过内容还是比较多的，初次上手可以像我这篇文章一样直接开个仓库进行操作</p>
@@ -569,13 +602,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">29k</span>
+    <span title="站点总字数">42k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">27 分钟</span>
+    <span title="站点阅读时长">38 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
