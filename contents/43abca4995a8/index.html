@@ -432,7 +432,7 @@ Hi situ2001<span class="token operator">!</span> You've successfully authenticat
   branch: main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <blockquote>
-<p>2020-11-01更新: GitHub repo的default branch的名字变成main而不是master了, 因此上方做了一些修改</p>
+<p>2020-11-01更新: GitHub repo的default branch name变成main而不是master了, 因此上方做了一些修改</p>
 </blockquote>
 <p>输入 command <code>hexo deploy</code> 等待一段时间之后，若无错误提示，便是部署成功</p>
 <h2 id="访问博客"><a href="#访问博客" class="headerlink" title="访问博客"></a>访问博客</h2><p>在部署之前可以输入command <code>hexo server</code> 进行本地访问</p>
@@ -468,7 +468,7 @@ Hi situ2001<span class="token operator">!</span> You've successfully authenticat
 <h3 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h3><p>所以我们可以在github新开一个private repo(没想到已经放开使用了)</p>
 <p><strong>首次</strong>先<code>git clone</code>下来，把源文件扔进去，一波 <code>git add .</code> 一波 <code>git commit</code> 最后 <code>git push</code> 送他上路<br><strong>以后</strong>再其他设备上，只需要 <code>git clone</code> <code>git add</code> <code>git commit</code> 和 <code>git push / git pull</code> 就行了（常用的几个）</p>
 <p>Alternative: 也可以在github pages的repo下，把deployment的branch设置为master之外的（如gh-pages），然后直接push到master分支即可，不过.deploy_git文件夹没拉下来的话，可能会出事，下面有提到。</p>
-<h3 id="把-gitignore文件设置好"><a href="#把-gitignore文件设置好" class="headerlink" title="把.gitignore文件设置好"></a>把.gitignore文件设置好</h3><p><strong>一定要有</strong>.gitignore<strong>文件<br>一定要</strong>有.gitignore文件**<br><strong>一定要有.gitignore文件</strong></p>
+<h3 id="把-gitignore文件设置好"><a href="#把-gitignore文件设置好" class="headerlink" title="把.gitignore文件设置好"></a>把.gitignore文件设置好</h3><p><strong>一定要有</strong>.gitignore文件<br>一定要<strong>有.gitignore文件</strong><br><strong>一定要有.gitignore文件</strong></p>
 <p>如果你想git clone下来一堆或者push一堆node_moudle，请忽略此步</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003182803.png"></p>
 <p>该文件的作用如文件名本身，可以忽略上传的文件/文件夹</p>
