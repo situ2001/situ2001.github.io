@@ -332,9 +332,9 @@
         <p>指针和数组，关系不浅啊</p>
 <a id="more"></a>
 
+<p><del><strong>禁止茴香豆</strong></del></p>
 <p>课间写的，有点匆忙，估计有不少错误，如有，请指出，谢谢。</p>
 <p>上面不懂的可能需要下面内容的补足（写作水平太菜了）</p>
-<p><del>禁止茴香豆</del></p>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>为什么我突然写这篇文章呢？原来是我在<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/c/memory/malloc">cppreference上面看malloc()</a>，了解一下简单的内存分配的时候，试了一下附带的example</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span>   </span>
 <span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span> </span>
@@ -389,12 +389,9 @@ p <span class="token operator">+=</span> <span class="token number">4</span><spa
 <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>也是一个样，那么，<strong>指针变量拥有下标</strong>。</p>
-<p>但是经过一番的查询之后，发现数组和指针，这两者并不是<strong>绝对相同</strong>的。常见且有区别的，就是在使用运算符<code>sizeof</code>的时候，得到的就是数组类型<code>int[]</code>的长度了。只不过在大多数情况下，被当成是常量指针了。</p>
+<p>但是经过一番的查询之后，发现数组和指针，这两者并不是<strong>绝对相同</strong>的。常见且有区别的，就是在使用运算符<code>sizeof</code>的时候，得到的就是数组类型<code>int[]</code>的长度了。只不过在大多数情况下，被隐式转换成指针了。</p>
 <p>下面摘抄一点ISO C标准对数组的说明（不想看可以跳过）</p>
-<blockquote>
-<p>Constraints : 1 One of the expressions shall have type ‘pointer to object type’,  the other expression shall have integer type, and the result has type  ‘type’. </p>
-<p>Semantics : 2 A postfix expression followed by an expression in square brackets [] is a subscripted designation of an element of an array object. The definition of the subscript operator [] is that E1[E2] is identical to (*((E1)+(E2))). Because of the conversion rules that apply to the binary + operator, if E1 is an array object (<strong>equivalently,</strong> a pointer to the initial element of an array object) and E2 is an integer, E1[E2] designates the E2-th element of E1 (counting from zero).</p>
-</blockquote>
+<p><code>Constraints : 1 One of the expressions shall have type &#39;pointer to object type&#39;,  the other expression shall have integer type, and the result has type  &#39;type&#39;.</code><br><code>Semantics : 2 A postfix expression followed by an expression in square brackets [] is a subscripted designation of an element of an array object. The definition of the subscript operator [] is that E1[E2] is identical to (*((E1)+(E2))). Because of the conversion rules that apply to the binary + operator, if E1 is an array object (equivalently, a pointer to the initial element of an array object) and E2 is an integer, E1[E2] designates the E2-th element of E1 (counting from zero).</code></p>
 <h2 id="关于内存的一点知识来讨论。"><a href="#关于内存的一点知识来讨论。" class="headerlink" title="关于内存的一点知识来讨论。"></a>关于内存的一点知识来讨论。</h2><p>前面只是基于代码和结果来猜测和讨论的，那实际上它们都干了些啥，我们可以结合关于内存的一点知识来讨论。</p>
 <p>首先，先给自己的脑子灌输一点知识：如果没有了解过内存的话，我们可以大概的形成一下印象。（大佬请跳过）</p>
 <p>内存呢，我喜欢把它形象化成一张密密麻麻的表格，它很长很长，但是宽度只有8个格子（1字节 = 8位），并且每一行都有一个专门的标号，就是内存的地址啦（字节编址）</p>
