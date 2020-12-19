@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-bike.png">
@@ -367,22 +367,18 @@
 <span class="token operator">+</span><span class="token function">getPerimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">double</span>
 <span class="token operator">+</span><span class="token function">getDiameter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">double</span>
 <span class="token operator">+</span><span class="token function">printCircle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>还是这熟悉的两个类，只不过仔细观察，你会发现，计算周长和面积的方法<code>getPerimeter()</code>和<code>getArea()</code>都位于Circle类，但是每一个GeometricObject理论上都要计算面积和周长啊，然而由于每种几何图形的面积周长的计算方法都不一样，因此这两个方法都是依赖于特定图形的类如Circle的</p>
 <p>那我们应该怎么样让GeometricObject的实例使用<code>getPerimeter()</code>和<code>getArea()</code>方法呢？</p>
 <p>我们可以把类改成抽象类，然后在这个类里面添加抽象方法<code>getPerimeter()</code>和<code>getArea()</code></p>
 <p>于是将其class header</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GeometricObject</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>加个 modifier <strong>abstract</strong> 改变为如下</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">GeometricObject</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>并在GeometricObject类里，加入抽象方法</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**abstract classes */</span>
 <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">double</span> <span class="token function">getArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">double</span> <span class="token function">getPerimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>抽象方法body都是空的，虽然这个抽象方法存在于GeometricObject类里面，但是并不由这个类实现，这个方法的实现交给了继承它的子类来实现</p>
 <p>我们在原Circle类里面重写这个方法（已经重写了，如下）</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">double</span> radius<span class="token punctuation">;</span>
@@ -391,7 +387,6 @@
 <span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">return</span> radius <span class="token operator">*</span> radius <span class="token operator">*</span> <span class="token class-name">Math</span><span class="token punctuation">.</span>PI<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>此时我们可以进行如下操作</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -400,7 +395,6 @@
         <span class="token comment">//output: Area is 12.566370614359172</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>GeometricObject类型的对象也能调用getArea()方法了，这个方法实际是在Circle类里面实现的（这个实现方法的类的调用是由JVM动态决定的，取决于actual type），这跟我之前看到的关于抽象的描述岂不是有神似之处，虽然这方法实际上是在子类的那一层实现的，但是父类只管知道有这个方法并且自己可以用它就行</p>
 <p>就这个例子来说，在GeometricObject类中加这俩抽象方法有什么好处呢？</p>
 <p>我认为相比于哲学的抽象定义，更实际的用途就是在<strong>更加通用化的父类中使用子类中比较特殊化的方法</strong>吧</p>
@@ -414,16 +408,13 @@
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"ABC"</span><span class="token punctuation">;</span>
 <span class="token class-name">String</span> s2 <span class="token operator">=</span> <span class="token string">"ABCD"</span><span class="token punctuation">;</span>
 <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span><span class="token function">compareTo</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//output: -1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>经过API文档的查阅，我们可以得出这么点东西</p>
 <p>在String页面下有如下的class header</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">String</span> <span class="token keyword">extends</span> <span class="token class-name">Object</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span><span class="token punctuation">,</span> <span class="token class-name">Comparable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">,</span> <span class="token class-name">CharSequence</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>对于<code>interface Comparable&lt;String&gt;</code> 我们也能在API Doc下面找到如下的</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Interface</span> <span class="token class-name">Comparable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">int</span> <span class="token function">compareTo</span><span class="token punctuation">(</span><span class="token class-name">T</span> o<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>其中的T其实就是type parameter, T 代表着任意一个 type</p>
 <p>也就是说，这个方法在接口中定义，在实现它的类中进行接口方法的实现，这点与抽象类非常相似</p>
 <h2 id="接口与抽象的区别"><a href="#接口与抽象的区别" class="headerlink" title="接口与抽象的区别"></a>接口与抽象的区别</h2><p>既然抽象类与接口如此相似，那差别是什么呢？</p>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-bike.png">
@@ -344,7 +344,6 @@
 <p>预期结果应如下</p>
 <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> C:\Users\situ> ssh <span class="token operator">-</span>T git@github<span class="token punctuation">.</span>com
 Hi situ2001<span class="token operator">!</span> You've successfully authenticated<span class="token punctuation">,</span> but GitHub does not provide shell access<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>此时，密钥配置完成。</p>
 <p>然后下面是操作的过程，虽然不知道发生了什么，但是先照着做就是了。</p>
 <h2 id="跟踪自己的代码"><a href="#跟踪自己的代码" class="headerlink" title="跟踪自己的代码"></a>跟踪自己的代码</h2><p>这块内容大致分为两步</p>
@@ -356,15 +355,12 @@ Hi situ2001<span class="token operator">!</span> You've successfully authenticat
 <p>仓库分为本地的仓库（即本机）和远程仓库（在这里指github的仓库）</p>
 <p>建立本地仓库的话，就是在你代码的目录下，输入下面的命令</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>成功初始化后的输出可能如下</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">Initialized empty Git repository <span class="token keyword">in</span> C:/Users/situ/github/git_test/.git/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>接着去github新建对应的仓库，在github首页的右上角就能看到新建仓库的图标了，跟着指引一步一步做下去就行了</p>
 <p>至此，仓库的新建工作完成了</p>
 <h3 id="往仓库提交你的代码"><a href="#往仓库提交你的代码" class="headerlink" title="往仓库提交你的代码"></a>往仓库提交你的代码</h3><p>接着就是进行状态的检查，这个命令<strong>很有用</strong>，它可以告诉你现在仓库的状态是什么样子的</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>输出可能如下</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>git_test<span class="token operator">></span>git status
 On branch master
@@ -377,31 +373,24 @@ Untracked files:
         Main.java
 
 nothing added to commit but untracked files present <span class="token punctuation">(</span>use <span class="token string">"git add"</span> to track<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>接着，把untracked的文件加入git中</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>这个命令表示把所有更改过的或者未追踪的文件加入跟踪</p>
 <p>接着就是记录自己此时仓库的情况，使用如下命令</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> commit -m <span class="token string">"my first commit"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>输出结果如下</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token punctuation">[</span>master <span class="token punctuation">(</span>root-commit<span class="token punctuation">)</span> cc978b4<span class="token punctuation">]</span> my first commit
  <span class="token number">2</span> files changed, <span class="token number">15</span> insertions<span class="token punctuation">(</span>+<span class="token punctuation">)</span>
  create mode <span class="token number">100644</span> <span class="token number">1</span>.txt
  create mode <span class="token number">100644</span> Main.java<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>再用<code>git status</code>看看</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">On branch master
 nothing to commit, working tree clean<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>说明，此时仓库已经记录下你现在的工作了。</p>
 <p>接着我们使用命令<code>git remote</code>进行远端仓库的添加(如下仅为实例，具体情况具体分析)</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> remote <span class="token function">add</span> origin https://github.com/situ2001/git_test.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>最后，我们使用<code>git push</code>命令，把此时本地的master分支推到远端仓库上的master分支</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>出现像下面这样的，是成功了</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>git_test<span class="token operator">></span>git push -u origin master
 Enumerating objects: <span class="token number">4</span>, done.
@@ -413,11 +402,9 @@ Total <span class="token number">4</span> <span class="token punctuation">(</spa
 To https://github.com/situ2001/git_test.git
  * <span class="token punctuation">[</span>new branch<span class="token punctuation">]</span>      master -<span class="token operator">></span> master
 Branch <span class="token string">'master'</span> <span class="token builtin class-name">set</span> up to track remote branch <span class="token string">'master'</span> from <span class="token string">'origin'</span><span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>接着，你在github的repo上面就能见到这次的commit了。</p>
 <p>那么<strong>在其他地方</strong>操作，怎么把仓库拉下来啊。很EZ，用<code>git clone</code>命令就行了，如下</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone <span class="token punctuation">[</span>repo-url<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>还有不要忘了在其他地方做了更改，回到自己的环境下，要进行一下<code>git pull</code>同步一下远端仓库的内容哦</p>
 <h2 id="与他人进行合作"><a href="#与他人进行合作" class="headerlink" title="与他人进行合作"></a>与他人进行合作</h2><p>有时候我们会与他人合作，共同contribute同一个repo，因此，一些git分支与合并的操作还是要懂得一点的</p>
 <p>我目前了解到的合作还是<strong>比较肤浅</strong>，自己了解过的只有两种</p>
@@ -429,7 +416,6 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 <p>如果repo的所有者对你发出了collaborate的邀请，接受了，你对应用户的邮箱就能直接在这个repo下进行更改了</p>
 <p>此时先使用命令<code>git clone</code>把对应的仓库clone下来</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone <span class="token punctuation">[</span>repo-url<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>由于是多人合作，就要避免一些更改的冲突，此处比较保险的方法是利用git的分支操作，大概操作如下：</p>
 <ol>
 <li>创建分支并切换到对应的分支</li>
@@ -440,29 +426,23 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 <p><strong>开始操作</strong><del>（由于最近在肝某deadline，所以一些输出就不搞了，理论上这流程下来是没有问题的）</del></p>
 <p>首先，创建一个分支并切换到对应分支</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout -b <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>下面这两行与上面的是等效的</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> branch <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
 <span class="token function">git</span> checkout <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>接着，开始你的工作，进行相对应的更改并做好相对应的commit，还是像上面一样</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
 <span class="token function">git</span> commit -m <span class="token string">"some changes"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>再接着，把做好的修改，确定无误后，使用<code>git merge</code>指令将该分支合并到主分支上……等等，此时我们冷静一下，我在进行多人合作诶，思考下：万一人家在我合并之前已经进行了一次合并或者是主分支出现了一些更新的commit呢？</p>
 <p>所以，我们在合并之前最好是使用<code>git pull</code>命令，同步一下最新的远端仓库，所以要执行的操作如下，先同步后合并</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout master
 <span class="token function">git</span> pull
 <span class="token function">git</span> merge <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>git会进行自动处理，除非是git无法处理的冲突才需要人为干涉（这里暂不多说）</p>
 <p>接下来就是，把当前本地的分支推到远端了，依旧是<code>git push</code></p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>要是想要把新分支也同步上去，如下</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
 <span class="token function">git</span> push -u origin <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <h3 id="使用Pull-Request"><a href="#使用Pull-Request" class="headerlink" title="使用Pull Request"></a>使用Pull Request</h3><p>如果是用PR的方法的话，应该会安全一点（云玩家又来了</p>
 <p>我认为先是fork一份到自己的号里，然后前面1 2步骤与上面一样，而3 4 5分别是</p>
 <ol start="3">
@@ -475,16 +455,13 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 <span class="token function">git</span> pull
 <span class="token function">git</span> checkout <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
 <span class="token function">git</span> merge master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>再合并，不过此次是把master合并到你的分支里</p>
 <p>第四步就是将你的分支推到远端啦</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> push -u origin <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>第五步就是打开你的github对应的repo，它会自动提示你进行PR操作的</p>
 <p>甚至还能做下事后清理工作，可以把本地和远程对应的分支所删除(当然远程分支也可以在github的对应的repo下进行删除分支的操作)</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> branch -d <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
 <span class="token function">git</span> push -d origin <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <h2 id="还有更多"><a href="#还有更多" class="headerlink" title="还有更多"></a>还有更多</h2><p>我只是简单地写了两种常见的git使用场景的普遍情况，这俩操作可以应付得来大部分场景了</p>
 <p>不过就这么点，还远远不够，再安利些东西吧，git指令想了解原理和更多操作，可以参考下面这个，初学的时候受益甚多（不过内容还是比较多的，初次上手可以像我这篇文章一样直接开个仓库进行操作</p>
 <p><a target="_blank" rel="noopener" href="https://www.atlassian.com/git/tutorials">Git Tutorials and Training | Atlassian Git Tutorial</a></p>

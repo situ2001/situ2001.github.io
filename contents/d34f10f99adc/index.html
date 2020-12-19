@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-bike.png">
@@ -356,20 +356,17 @@
     <span class="token function">free</span><span class="token punctuation">(</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">free</span><span class="token punctuation">(</span>p3<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这段代码运行之后，输出的结果是</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">p1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
 p1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
 p1<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">4</span>
 p1<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">9</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>诶诶诶，为什么指针也能拥有数组那样的下标呢？我的直觉告诉我：指针和数组，之间必定有不可描述的关系</p>
 <p>在开始之前，感谢一下tindy2013能抽空给我微微解释了一下<del>，缩短了我自主探索的时间</del></p>
 <h2 id="数组的下标"><a href="#数组的下标" class="headerlink" title="数组的下标"></a>数组的下标</h2><p>如同多数地方所说的，数组就是一种数据结构。是一坨<strong>连续</strong>的元素，接连着一起躺在了内存中的某一块区域。并且数组拥有operator<code>[]</code>，即是数组的下标。</p>
 <p>之前我发现数组还可以这样子</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%p"</span><span class="token punctuation">,</span> arr<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>最后的输出了一个内存地址，并且我们还可以新建一个指针并把数组变量赋值给它，并能通过指针给arr中的其中一个元素赋值</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span>
 
@@ -381,13 +378,11 @@ p <span class="token operator">+=</span> <span class="token number">4</span><spa
 <span class="token operator">*</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 
 <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上面三个操作都是一样的，输出结果都是<code>1</code></p>
 <p>既然上面有<code>int *p = arr;</code>那么我把数组arr当成一个常量指针，既然arr可以拥有一个属于他自己的下标，那么一般的指针，是否也能拥有一个下标呢？</p>
 <p>不多猜测，先试一下看看是不是这样</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">p<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>也是一个样，那么，<strong>指针变量拥有下标</strong>。</p>
 <p>但是经过一番的查询之后，发现数组和指针，这两者并不是<strong>绝对相同</strong>的。常见且有区别的，就是在使用运算符<code>sizeof</code>的时候，得到的就是数组类型<code>int[]</code>的长度了。只不过在大多数情况下，被隐式转换成指针了。</p>
 <p>下面摘抄一点ISO C标准对数组的说明（不想看可以跳过）</p>
@@ -406,7 +401,6 @@ p <span class="token operator">+=</span> <span class="token number">4</span><spa
 <span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span> <span class="token comment">// *p = 7</span>
 p<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// *p = 4</span>
 p<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// *p = 5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>由上可见，指针p进行了两次自增，每一次自增，都会对p存放的地址+4，去到下一个元素的起始地址。因此，对p解引用就会出现不同的结果，分别对应<code>arr[0] arr[1] arr[2]</code></p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205144359.png"></p>
 <p>那么有，</p>
@@ -426,7 +420,6 @@ p<span class="token operator">++</span><span class="token punctuation">;</span> 
 <span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token operator">*</span>array<span class="token punctuation">;</span>
 <span class="token comment">//an int[4] type pointer</span>
 <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>我们对p1和p2加一，并对其解引用</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c">p1<span class="token operator">++</span><span class="token punctuation">;</span>
 <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment">//output: 5</span>
@@ -434,7 +427,6 @@ p<span class="token operator">++</span><span class="token punctuation">;</span> 
 p2<span class="token operator">++</span><span class="token punctuation">;</span>
 <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment">//output: 9</span>
 <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> array<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>可以看出，两者输出结果不一样，其中p1读出来的是<code>a[0][1]  = 5</code>，而p2读出来的是<code>a[1][1] = 9</code></p>
 <p>为什么呢？仔细思考一下的话，其实也不难理解</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205145556.png"></p>
@@ -467,12 +459,10 @@ p2<span class="token operator">++</span><span class="token punctuation">;</span>
 <p>再者就是优先级的问题了。比如上文这个</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//an int[4] type pointer</span>
 <span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>由于<code>[]</code>的优先级比<code>*</code>的要高，所以用了括号来强行更改优先级，先解析<code>*</code>，它的意思是p2先是一个指针，然后解析<code>int</code>与<code>[4]</code>，表明p2是一个指向<code>int[4]</code>类型的指针。</p>
 <p>不加的话，意思是这样的</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span>p2<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 <span class="token comment">// p2 is an array of pointers</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>（感觉解释有点奇怪）这里情况是，根据优先级，先解析<code>[4]</code>，表明p2会是一个长度为4的数组，然后再解析<code>*</code>，表明了p2是存储指针用的数组，指针指向<code>int</code>类型</p>
 <p>举个简单的，<code>int **p = array;</code>这个呢？</p>
 <p>就是等效于<code>int *(*p)</code>这个，<code>*</code>是右结合的，所以中间的<code>*</code>先与p结合，再与左边的<code>*</code>进行结合</p>

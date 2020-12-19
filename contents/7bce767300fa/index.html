@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-bike.png">
@@ -359,7 +359,6 @@ obj <span class="token operator">=</span> <span class="token punctuation">&#123;
 obj<span class="token punctuation">.</span>a <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>  <span class="token comment">// allowed</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-
 <ul>
 <li>6种基本数据类型</li>
 </ul>
@@ -382,7 +381,6 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
 
 <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>myString1<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string"> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>myString2<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">!</span><span class="token template-punctuation string">`</span></span> <span class="token comment">//Hello World!</span>
 <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>myString1<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">, </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>myString2<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">!</span><span class="token template-punctuation string">`</span></span> <span class="token comment">//Hello, World!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>不过要注意，这不是单引号<code>&#39;&#39;</code>，而是反引号`` `</p>
 <ul>
 <li>Boolean类型</li>
@@ -441,13 +439,10 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
         <span class="token comment">&lt;!-- 放的是显示区域能看到的东西 --></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <h3 id="元素与属性"><a href="#元素与属性" class="headerlink" title="元素与属性"></a>元素与属性</h3><p>HTML有两个重要的东西：元素（Element）与属性（Attribution），哪些是元素，哪些又是属性呢？不如，直接上一个包含src属性和class属性还有一个和style属性和id属性的img元素，一目了然</p>
 <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>picture<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pic<span class="token punctuation">"</span></span><span class="token style-attr language-css"><span class="token attr-name"> <span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token property">width</span><span class="token punctuation">:</span> 114px<span class="token punctuation">;</span> <span class="token property">height</span><span class="token punctuation">:</span> 514px</span><span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>sample.png<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <h3 id="什么时候用-lt-gt"><a href="#什么时候用-lt-gt" class="headerlink" title="什么时候用&lt;/&gt;"></a>什么时候用&lt;/&gt;</h3><p>这个问题曾经有过，不过我认为大多数情况下，这个tag中间不引文字的话就不用了，比如</p>
 <pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>This is a<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>line break.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <h3 id="使用语义"><a href="#使用语义" class="headerlink" title="使用语义"></a>使用语义</h3><p>在读HTML或者写HTML的时候最好用语义即Semantic，为什么呢？我认为HTML好多tag都是某个英语单词的缩写，比如<code>&lt;br&gt;</code>是<strong>break</strong><code>&lt;i&gt;</code>是<strong>Italic</strong><code>&lt;a&gt;</code>是<strong>Anchor</strong><code>&lt;li&gt;</code>是<strong>list</strong></p>
 <p>又比如<code>&lt;span&gt;</code>就是<strong>span</strong>中文意思是<strong>跨度、范围</strong>，就是一块inline的东西，而<code>&lt;div&gt;</code>表示<strong>division</strong>，就是一块一块的，你可以去查下这些东西的英文全称。</p>
 <p>所以，表示按钮的时候是<code>&lt;button&gt;</code>而表示列表时候使用<code>&lt;list&gt;</code></p>
@@ -472,7 +467,6 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>style.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-
 <ul>
 <li>CSS继承</li>
 </ul>
@@ -481,13 +475,11 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
     <span class="token property">font-family</span><span class="token punctuation">:</span> helvetica<span class="token punctuation">,</span> arial<span class="token punctuation">,</span> sans-serif<span class="token punctuation">;</span>
     <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>所有的文字都会变为这种字体，因为所有文字都是body的下级啊。</p>
 <p>然后有个子元素把<code>text-align</code>更改为了<code>left</code>，如下</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">input</span> <span class="token punctuation">&#123;</span>
     <span class="token property">text-align</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>那么input元素里面的文字对其形式，就会是左对齐，这点跟Java中的<strong>Method Override</strong>有点类似<del>（奇怪的联想增加了</del></p>
 <ul>
 <li>CSS选择器</li>
@@ -505,7 +497,6 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
 <span class="token selector">#left-container</span> <span class="token punctuation">&#123;</span>
     
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>当然了，也能一层一层地深入选择，如下</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token comment">/*class inside a tag */</span>
 <span class="token selector">input .test</span> <span class="token punctuation">&#123;</span>
@@ -515,12 +506,10 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
 <span class="token selector">div img</span> <span class="token punctuation">&#123;</span>
     
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>加逗号就是同时对多个进行应用</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.div1, .div2, .div3</span> <span class="token punctuation">&#123;</span>
     
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 
 
 <h3 id="布局与定位"><a href="#布局与定位" class="headerlink" title="布局与定位"></a>布局与定位</h3><ul>
@@ -557,7 +546,6 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>CSS部分</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">div</span> <span class="token punctuation">&#123;</span>
   <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
@@ -589,14 +577,12 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
   <span class="token property">background-color</span><span class="token punctuation">:</span> gainsboro<span class="token punctuation">;</span>
   <span class="token property">width</span><span class="token punctuation">:</span> 300px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>页面长这个样子，如图所示。</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195627.png" alt="原始页面"></p>
 <p>然后我们给son2加上这么一段css</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
 <span class="token property">left</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
 <span class="token property">top</span><span class="token punctuation">:</span> 120px<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195646.png" alt="此时的参照物为body"></p>
 <p>如图所示，son3直接顶上来了，son2仿佛就像是“跳”出了文档本身一样，并且以页面（此时没有其他的father设置了non-static的position）左上角，相对左边向右偏移了40px，相对上面向下偏移了120px</p>
 <p>如果我们把<code>position</code>改为<code>relative</code>，那么便会出现下图的情况</p>
@@ -615,7 +601,6 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
 <span class="token property">left</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
 <span class="token property">top</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
 <p>就会出现下图的这种情况</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195749.png" alt="此时的参照物为grandpa"></p>
 <p>此时百分比是<strong>占得father的宽度和高度</strong></p>

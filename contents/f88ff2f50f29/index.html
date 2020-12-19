@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-bike.png">
@@ -361,13 +361,11 @@
 <p>开关机就要这样做</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token function">toggle</span><span class="token punctuation">(</span>isOn1<span class="token punctuation">)</span><span class="token punctuation">;</span>
 toogle <span class="token punctuation">(</span>isOn2<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>那么如果我们要管理n台音乐播放器，那么就要手动声明如下变量 <code>isOn1 isOn2 ... isOnn</code><br>对他们进行开关机操作就要这样做</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">toggle <span class="token punctuation">(</span>isOn1<span class="token punctuation">)</span><span class="token punctuation">;</span>
 toggle <span class="token punctuation">(</span>isOn2<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 toggle <span class="token punctuation">(</span>isOnn<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这臃肿与coding效率啊，请自己细品。</p>
 <p>所以我们可以对播放器，创建一个Player类</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Player</span> <span class="token punctuation">&#123;</span>
@@ -377,7 +375,6 @@ toggle <span class="token punctuation">(</span>isOnn<span class="token punctuati
         isOn <span class="token operator">=</span> <span class="token operator">!</span>isOn<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>这样一来每一台播放器都有着相同的作用域和方法，开关只需要操作指定的播放器对象即可，如<code>player1.toggle()</code></p>
 <blockquote>
 <p>追加结束</p>
@@ -409,7 +406,6 @@ toggle <span class="token punctuation">(</span>isOnn<span class="token punctuati
         length <span class="token operator">=</span> newLength<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>我们可以注意到一个class里面，包含有<strong>data field, constructor, method</strong> (好像分别是数据域 构造方法 方法 <del>还是英语顺眼</del>)</p>
 <p>在本例中，data field里面的length变量是每一个对象都有且是特有的(称之为 <strong>instant variable</strong> 实例变量，当然这不包括static variable)，在每一个对象中单独存在且不会相互影响，method则包含了这个对象特有的方法(当然这也不包括static method)</p>
 <p>然后就是<strong>constructor</strong>了。我们注意到constructor与construct有关，那很好理解了(<del>中文好像是构造器吧</del>中文叫构造方法)。constructor便是新建对象时候所使用的方法。</p>
@@ -442,7 +438,6 @@ toggle <span class="token punctuation">(</span>isOnn<span class="token punctuati
 <span class="token class-name">Square</span><span class="token punctuation">(</span><span class="token keyword">double</span> inLength<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     length <span class="token operator">=</span> inLength<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>如果不带参地创建新对象，就会对该对象的length变量(instant variable)赋值1，而如果带实参的话，该对象便会以含形参的Square(double inLength)的constructor进行construct，此时变量length便会以inLength赋值</p>
 <p><strong>那我忘记了创建constructor怎么办？</strong><br>如果你啥constructor也没加的话，恭喜你(?)，因为Java会implicitly帮你加上一个的：<code>ClassName() &#123;&#125;</code></p>
 <p>如果只加了带argument的话，no-arg constructor是不会再帮你加上的了</p>
@@ -458,7 +453,6 @@ toggle <span class="token punctuation">(</span>isOnn<span class="token punctuati
 |      getArea(): void     |
 |    getLength(): void     |
 | ------------------------ |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>也就是说用UML class diagram进行图示的话，遵从下列规则</p>
 <table>
 <thead>
@@ -495,7 +489,6 @@ array1 <span class="token operator">=</span> array<span class="token punctuation
 
 <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>array<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// output: 1</span>
 <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>array1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// output is the same: 1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>如下图</p>
 <pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">|   stack      |          |             heap        |
 |              |          |                         |
@@ -506,7 +499,6 @@ array1 <span class="token operator">=</span> array<span class="token punctuation
 | main()       |   to     |   An array that         |
 |        array | ---------|-->contains 10 elements  |
 |--------------|          |                         |<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <h3 id="以对象结束"><a href="#以对象结束" class="headerlink" title="以对象结束"></a>以对象结束</h3><p>那么对于对象来讲，其实跟数组几乎一致（<del>数组也是对象啊喂</del></p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Square</span> square1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Square</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// create a square object which has length of 4</span>
 <span class="token class-name">Square</span> square2<span class="token punctuation">;</span> <span class="token comment">// create a new reference variable of class Square</span>
@@ -517,7 +509,6 @@ square2<span class="token punctuation">.</span><span class="token function">setL
 
 square2<span class="token punctuation">.</span><span class="token function">getLength</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// output: 5</span>
 square1<span class="token punctuation">.</span><span class="token function">getLength</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// output: 5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>语句 <code>square2 = square1;</code> 把square2的引用也指向了square对象，正因如此，invoke的method和修改的data field都是属于同一个object的</p>
 <p>可以表示如下</p>
 <pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">Before square2 = square1
@@ -543,7 +534,6 @@ After
 <span class="token punctuation">|</span><span class="token table-data"> square2 ---  </span><span class="token punctuation">|</span><span class="token table-data">   to     </span><span class="token punctuation">|</span><span class="token table-data">                      </span><span class="token punctuation">|</span><span class="token table-data">  </span><span class="token punctuation">|</span>
 <span class="token punctuation">|</span><span class="token table-data">      square1 </span><span class="token punctuation">|</span><span class="token table-data"> <span class="token hr punctuation">---------</span></span><span class="token punctuation">|</span><span class="token table-data">--> a square Object &lt;--  </span><span class="token punctuation">|</span>
 <span class="token punctuation">|</span><span class="token table-data"><span class="token hr punctuation">--------------</span></span><span class="token punctuation">|</span><span class="token table-data">          </span><span class="token punctuation">|</span><span class="token table-data">                         </span><span class="token punctuation">|</span></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>总之，可以粗略地理解为在OOP中的变量其实就像一个书签，没有具体的值，指向着目标对象。</p>
 <h2 id="自我总结"><a href="#自我总结" class="headerlink" title="自我总结"></a>自我总结</h2><p>其实呢，在学习编程时候，可以进行联系与联想的，这些操作可以使得你有一个具体的认知，并且让前后知识结合得更加紧密，形成一个比较稳健的知识体系</p>
 <h2 id="关于文中出现英语的这件事"><a href="#关于文中出现英语的这件事" class="headerlink" title="关于文中出现英语的这件事"></a>关于文中出现英语的这件事</h2><p>emm还有有时候会忍不住用一下英语，是因为嘛，计算机几乎所有内容都是西方世界的，直接使用英语不好过加一步转化成为中文？</p>

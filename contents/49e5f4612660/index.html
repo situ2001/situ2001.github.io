@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-bike.png">
@@ -355,7 +355,6 @@
 <span class="token operator">+</span><span class="token function">setFilled</span><span class="token punctuation">(</span>filled<span class="token operator">:</span> <span class="token keyword">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
 <span class="token operator">+</span><span class="token function">getDataCreated</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span><span class="token class-name">Date</span>
 <span class="token operator">+</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token class-name">String</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>而圆和三角形对象都有自己那特别的特性，比如圆拥有<strong>半径</strong>和变量的setter和getter，并且有自己特有的用于<strong>计算周长 计算面积</strong>方法</p>
 <p>此时，类<strong>Circle</strong>便如下图所示</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">                      <span class="token class-name">Circle</span>
@@ -371,10 +370,8 @@
 <span class="token operator">+</span><span class="token function">getPerimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">double</span>
 <span class="token operator">+</span><span class="token function">getDiameter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">double</span>
 <span class="token operator">+</span><span class="token function">printCircle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>而圆也有的那部分如<strong>颜色</strong>相关等的data field和method呢？不用虚，我们可以使用如下语句创建一个继承了GeometricObject的Circle类</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Circle</span> <span class="token keyword">extends</span> <span class="token class-name">GeometricObject</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>对于Circle也是如此</p>
 <p>注：在Java中，<strong>所有类都extend于Object类</strong></p>
 <p>然后下面是<strong>注意事项</strong></p>
@@ -386,7 +383,6 @@
 <span class="token keyword">public</span> <span class="token class-name">Circle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   filled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>不过在继承的使用之中也要避免一些滥用错误(真这样用也是很暴力了)</p>
 <p>有<strong>不当继承</strong></p>
 <p>比如继承中，很多东西都遵循<strong>is-A relationship</strong>，比如上述的Geometric和Circle可以说成 <code>A circle is geometric</code></p>
@@ -397,7 +393,6 @@
 <h2 id="super关键字"><a href="#super关键字" class="headerlink" title="super关键字"></a>super关键字</h2><p><code>super()</code> 关键字是用来调用父类的constructor或者method的</p>
 <p>我们以上面举的例子来说，也就是下面这个</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Circle</span> <span class="token keyword">extends</span> <span class="token class-name">GeometricObject</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>在创建Circle类对象的时候会同时调用Superclass的constructor以继承其方法和数据域</p>
 <p>他们只能被 <code>super();</code> 或者 <code>super(parameters);</code> 语句调用且该语句需要放在第一行</p>
 <p>没有被人为打上的时<code>super()</code>是被隐式(implicitly)调用的</p>
@@ -409,17 +404,14 @@
 <span class="token keyword">public</span> <span class="token class-name">ClassName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>一般来说，super()被显式调用的时候，往往是为了调用父类特定的constructor或者与子类<strong>重名</strong>的方法，因为不重名的方法可以直接method()调用</p>
 <h2 id="继承链"><a href="#继承链" class="headerlink" title="继承链"></a>继承链</h2><p>当有类似下面的类时候，一条继承链就被创建了</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Circle</span> <span class="token keyword">extends</span> <span class="token class-name">GeometricObject</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>其中Circle是子类，GeometricObject是父类，也有GeometricObject是子类，Object是父类</p>
 <p>如下所示 这就是一继承链</p>
 <p><code>Object &lt;- GeometricObject &lt;- Circle</code></p>
 <p>让我们创建一个对象</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Circle</span> circle <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Circle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>也就是说，由于类的constructor之间的相互调用，此时circle同时拥有了Circle类GeometricObject类和Object类的方法和数据域</p>
 <p>因为子类extends父类，所以子类的实例都可以是父类的实例</p>
 <p>听起来蛮拗口的对吧，我们可以用水果解释一下</p>
@@ -429,11 +421,9 @@
 <p>所以<del>根据生活经验</del>可以看出GreenApple是Apple，Apple是Fruit，所以实例化为GreenApple类的实例呢，同时可以看作是Apple类的实例，也还可以看作是Fruit类对象的实例(就是说子类实例可以<strong>被当做</strong>是父类的实例看，不过这个GreenApple本质上也只是GreenApple，并没有应该是多个类的实例而出现额外的新实例)</p>
 <h2 id="变量的两个类型"><a href="#变量的两个类型" class="headerlink" title="变量的两个类型"></a>变量的两个类型</h2><p>新建对象时的语句可以总结如下</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">delaredType name <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">actualType</span><span class="token punctuation">(</span>parameters<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>上面的变量name，有了两个东东，一个是Declared Type，还有一个是Actual Type</p>
 <p>举栗子</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">GeometricObject</span> circle <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Circle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>其继承关系</p>
 <p><code>Object &lt;- GeometricObject &lt;- Circle</code></p>
 <p>这个引用变量circle呢，有两个类型：<strong>Declared Type</strong>和<strong>Actual Type</strong>，中文应该是声明类型和实际类型吧</p>
@@ -462,7 +452,6 @@
       <span class="token string">". Color is "</span> <span class="token operator">+</span> object<span class="token punctuation">.</span><span class="token function">getColor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上面的代码中，通过cast为父类GeometricObject类型进行传参，方便了许多</p>
 <p>那我们upcast后怎么把他们downcast下来啊，很简单，想一下基本数据类型的casting，有显性转换也有隐形转换，同理，对象的类型转换也有隐有显，只不过面向对象的转换过程，并没有出现新的对象</p>
 <p>因为每一个子类的实例永远都是其父类的一个实例，所以upcast是隐性的</p>
@@ -490,7 +479,6 @@
     <span class="token punctuation">&#125;</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上面这个例子就是利用了<code>instanceof</code>来对应地转换对象的类型，从而避免了错误的产生</p>
 <h2 id="这要单独给个标题"><a href="#这要单独给个标题" class="headerlink" title="这要单独给个标题"></a>这要单独给个标题</h2><p>结合前后内容突然醒悟 <del>小声BB 我悟错了吗</del></p>
 <p>其实到最后，对于多态和上下转型的实现，我发现应该是这样的吧，不管是声明类型的怎么变化，还是typecast的那各种上上下下的操作，<strong>实际上操作的是引用变量，而不是已经被实例化的对象本身</strong></p>

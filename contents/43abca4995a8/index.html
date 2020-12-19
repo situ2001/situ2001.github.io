@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-bike.png">
@@ -373,7 +373,6 @@ Once all the requirements are installed, you can install Hexo with npm:
 $ npm install -g hexo-cli</code></pre>
 <p>读出来，就是在命令行输入</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <p>便能安装hexo</p>
 <p>hexo-cli安装了，所以该如何setup呢？</p>
 <p>无需多虑，开发者写了相应的文档<a target="_blank" rel="noopener" href="https://hexo.io/docs/setup">hexo setup</a></p>
@@ -393,7 +392,6 @@ hexo publish
 hexo clean
 hexo server
 hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <h2 id="撰写你的第一篇文章"><a href="#撰写你的第一篇文章" class="headerlink" title="撰写你的第一篇文章"></a>撰写你的第一篇文章</h2><p>在hexo目录下输入 <code>hexo new my-first-content</code></p>
 <p>接着，该文章的文件就会生成于子目录 <code>source/_post</code> 下</p>
 <p>该文件是 <strong>Markdown</strong> 格式，最好用支持md的editor打开（<del>vscode + markdownlint 天下第一</del></p>
@@ -411,7 +409,6 @@ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span><span
 <p>预期结果应如下</p>
 <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> C:\Users\situ> ssh <span class="token operator">-</span>T git@github<span class="token punctuation">.</span>com
 Hi situ2001<span class="token operator">!</span> You've successfully authenticated<span class="token punctuation">,</span> but GitHub does not provide shell access<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>此时，到github的connection已经没有问题</p>
 <h2 id="关于部署"><a href="#关于部署" class="headerlink" title="关于部署"></a>关于部署</h2><p>本地写好了，当然是要部署，而部署之前，得要有地方给你放。</p>
 <p>首先先在github上建立一个这样的仓库</p>
@@ -431,7 +428,6 @@ Hi situ2001<span class="token operator">!</span> You've successfully authenticat
   repo: https:&#x2F;&#x2F;github.com&#x2F;yourusername&#x2F;yourusername.github.io
   #branch: master
   branch: main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <blockquote>
 <p>2020-11-01更新: GitHub repo的default branch name变成main而不是master了, 因此上方做了一些修改</p>
 </blockquote>
@@ -481,14 +477,12 @@ db.json
 node_modules&#x2F;
 public&#x2F;
 .deploy*&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>2020-11-21更新：<strong>不过</strong>在更换本地环境之后，.deploy*/是保存有静态页面仓库的.git文件夹的，并且hexo-deployer-git的<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-deployer-git#how-it-works">README</a>如是说</p>
 <blockquote>
 <p>hexo-deployer-git works by generating the site in .deploy_git and force pushing to the repo(es) in config. If .deploy_git does not exist, a repo will initialized (git init). Otherwise the curent repo (with its commit history) will be used.</p>
 </blockquote>
 <p>由于是force push，也就是说没有这个文件夹时候，重新生成的新的，会把你原有的仓库直接覆盖掉（也就是说commit啥的全没了）<br>所以在换环境的时候，记得clone一下，即是把你的username.github.io这个repo clone下来并重命名为.deploy_git，如下</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone <span class="token operator">&lt;</span>gh-pages repo<span class="token operator">></span> .deploy_git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>到这里，现在你<del>应该</del>有一个属于自己的个人博客了</p>
 <p>听说在线聊天，异性”哦”你的时候，回个”嗯”是一个很好的选择（跑</p>
 <p>那么</p>

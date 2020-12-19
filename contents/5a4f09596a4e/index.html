@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.3.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-bike.png">
@@ -348,7 +348,6 @@
     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>上题来自Java教材 <strong>Introduction to Java Programming and Data Structures Comprehensive Version</strong> 的 Page.427 <strong>Check Point 11.8.4</strong></p>
 <h2 id="绞尽脑汁"><a href="#绞尽脑汁" class="headerlink" title="绞尽脑汁"></a>绞尽脑汁</h2><p>看到这道题的时候我只想到 pass 到 method printArray 的是对象的reference，而数组都是对象啊，这题目，哪里有错误啊</p>
 <p>“一定是粗心的坏习惯犯了！” 我想</p>
@@ -357,7 +356,6 @@
 <h2 id="一瞬报错"><a href="#一瞬报错" class="headerlink" title="一瞬报错"></a>一瞬报错</h2><p>而最后中午回到宿舍，马上把代码码了上去，发现报错如下</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Exception <span class="token keyword">in</span> thread <span class="token string">"main"</span> java.lang.Error: Unresolved compilation problem:
     The method printArray<span class="token punctuation">(</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">in</span> the <span class="token builtin class-name">type</span> Test is not applicable <span class="token keyword">for</span> the arguments <span class="token punctuation">(</span>int<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>阅读这报错内容，基本可以得知, int[] type 竟然不是对象类型???</p>
 <p>震惊，难道数组在Java中不是属于对象吗？</p>
 <p>挺秃然的.jpg</p>
@@ -365,7 +363,6 @@
 <p>我对比了一下这两行代码</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>不就一个用的 Integer[] type 而另一个用的 int type 吗？</p>
 <p>回想起之前看过的 <strong>A primitive type can be automatically converted to an object using a wrapper class, and vice versa.</strong></p>
 <p>也就是说，Java是允许基本数据类型和 <strong>Wrapper Class</strong> 类型相互转换的，这种转换叫做<strong>autoboxing</strong> 和 <strong>autounboxing</strong> （一般是在赋值的时候？）</p>
@@ -385,7 +382,6 @@
   <span class="token class-name">In</span> line <span class="token number">1</span><span class="token punctuation">,</span> the prmitive values <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span> and <span class="token number">3</span> are automatically boxed into objects <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> and <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
 
   <span class="token class-name">In</span> line <span class="token number">2</span><span class="token punctuation">,</span> the objects intArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> intArray<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> and intArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> are automatically unboxed into <span class="token keyword">int</span> values that are added together<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>好了，看完这段话我开始明白我的错误之处了 <del>这么长的一段话我当初怎么略读掉的</del></p>
 <p>噢原来 Integer[] type 是创建一个包含有多个Integer对象的数组啊</p>
 <p>比如，这里有一个<code>Student</code>类，我们可以用<code>Student[]</code>来声明包含多个Student对象的数组</p>
@@ -400,7 +396,6 @@
 <h2 id="总结错误"><a href="#总结错误" class="headerlink" title="总结错误"></a>总结错误</h2><p>回到下面的代码</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>通过前面重新回顾和学习的成果</p>
 <p><strong>我们可见</strong> list1数组它本身也是一个对象，并且是一个包含了好几个<strong>对象</strong>形如<code>new Integer(1)</code>的数组；而list3数组它本身也是一个对象，只不过里面包含的是好几个基本类型的数值而已</p>
 <h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>做事要一步一步慢慢来，这才是符合科学和实践规律的</p>
