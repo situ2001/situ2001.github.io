@@ -24,12 +24,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":260},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="竟敢作死读源码（未完）">
+<meta name="description" content="大一菜鸡，竟敢作死读源码（未完）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaFX binding与观察者模式">
+<meta property="og:title" content="JavaFX与观察者模式">
 <meta property="og:url" content="https://blog.situ2001.com/contents/cab8b78811bf/index.html">
 <meta property="og:site_name" content="Situ Note">
-<meta property="og:description" content="竟敢作死读源码（未完）">
+<meta property="og:description" content="大一菜鸡，竟敢作死读源码（未完）">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210113131956.png">
 <meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210113132012.png">
@@ -53,7 +53,7 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>JavaFX binding与观察者模式 | Situ Note</title>
+<title>JavaFX与观察者模式 | Situ Note</title>
   
 
 
@@ -166,7 +166,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E6%89%8B%E4%B9%8B%E5%89%8D"><span class="nav-number">2.</span> <span class="nav-text">上手之前</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E8%83%A1%E4%B9%B1%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">开始胡乱分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%B2%E6%89%8B%E5%B0%8F%E8%AF%95%E9%AA%8C"><span class="nav-number">4.</span> <span class="nav-text">亲手小试验</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E6%89%8B%E4%B9%8B%E5%89%8D"><span class="nav-number">2.</span> <span class="nav-text">上手之前</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B2%E7%9B%AE%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">盲目分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%B2%E6%89%8B%E8%AF%95%E9%94%99"><span class="nav-number">4.</span> <span class="nav-text">亲手试错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">最后总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -257,7 +257,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JavaFX binding与观察者模式
+          JavaFX与观察者模式
         </h1>
 
         <div class="post-meta-container">
@@ -288,14 +288,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>12k</span>
+      <span>14k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>11 分钟</span>
+      <span>13 分钟</span>
     </span>
 </div>
 
@@ -306,10 +306,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>竟敢作死读源码（未完）</p>
+        <p>大一菜鸡，竟敢作死读源码（未完）</p>
 <a id="more"></a>
 
-<p>本文基于JavaFX<code>11.0.9</code>所写</p>
+<p>本文中的JavaFX版本号为<code>11.0.9</code></p>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>最近的军训真的又干燥又冷，我感到十分不舒服。不过军训的中午，拥有长达两个钟的吃饭与休息时间。闲来无事，我就捡起了好两个星期没有接触的Java（这两个星期游戏+复习+发烧，时间都没耗光了）</p>
 <p>那么言归正传，之前我学了并会在一些简单的实际应用中使用Java的OOP，并了解到了一些设计模式。最近又想了解一下Observer Pattern（观察者模式），那么我能否通过阅读我所熟练使用的JavaFX源码来了解这个设计模式呢？</p>
 <h2 id="上手之前"><a href="#上手之前" class="headerlink" title="上手之前"></a>上手之前</h2><p>“知己知彼，百战百胜。”这句话还是一样重要，所以我先去找了下观察者模式的解释。</p>
@@ -317,7 +317,7 @@
 <p>定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。</p>
 </blockquote>
 <p>通俗地讲，就是对象在更新的时候，顺便通知其他对象，从而使得其他对象得到更新？</p>
-<p>我拿jfx来写了一段代码，运行后，窗口中的宽度与高度大小信息都会随着窗体的大小变化而更新。如下</p>
+<p>我写了一段使用JavaFX代码，运行后，窗口中的宽度与高度大小信息都会随着窗体的大小变化而更新。如下</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">javafx<span class="token punctuation">.</span>application<span class="token punctuation">.</span></span><span class="token class-name">Application</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token namespace">javafx<span class="token punctuation">.</span>beans<span class="token punctuation">.</span></span><span class="token class-name">InvalidationListener</span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token namespace">javafx<span class="token punctuation">.</span>beans<span class="token punctuation">.</span></span><span class="token class-name">Observable</span><span class="token punctuation">;</span>
@@ -360,7 +360,7 @@
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>并且有使用IDEA IDE</p>
-<h2 id="开始胡乱分析"><a href="#开始胡乱分析" class="headerlink" title="开始胡乱分析"></a>开始胡乱分析</h2><p>可以看出，窗口里头<code>Text</code>的字符串变换是通过这一段代码实现的。这里以Width（窗体宽度）来说。</p>
+<h2 id="盲目分析"><a href="#盲目分析" class="headerlink" title="盲目分析"></a>盲目分析</h2><p>可以看出，窗口里头<code>Text</code>的字符串变换是通过这一段代码实现的。这里以Width（窗体宽度）来说。</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java">primaryStage<span class="token punctuation">.</span><span class="token function">widthProperty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">addListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">InvalidationListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token annotation punctuation">@Override</span>
     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">invalidated</span><span class="token punctuation">(</span><span class="token class-name">Observable</span> observable<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -451,7 +451,7 @@ All Implemented Interfaces:
 NumberExpression, Observable, ReadOnlyProperty&lt;Number&gt;, ObservableDoubleValue, ObservableNumberValue, ObservableValue&lt;Number&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210113132012.png" alt="ReadOnlyPropertyImpl"></p>
 <p>啊，因为在Stage里头的width需要更改，所以要是个可读可写的property。但可以用一个内部私有类，把一个property肛成一个read-only property。并根据dynamic binding将<code>ObservableDoubleValue</code>和<code>ReadOnlyProperty</code>里头的方法给实现掉（原先是在类<code>DoublePropertyBase</code>和<code>SimpleDoubleProperty</code>里头实现的）。实在是妙！</p>
-<p>并且查阅文档可以发现内部私有类<code>ReadOnlyPropertyImpl</code>与property binding有关的方法，全部在<code>ReadOnlyDoublePropertyBase</code>类里头。</p>
+<p>并且查阅文档可以发现内部私有类<code>ReadOnlyPropertyImpl</code>与Listener有关的方法，全部在<code>ReadOnlyDoublePropertyBase</code>类里头。</p>
 <p>所以我们要看<code>addListener</code>的实现，就要去<code>DoublePropertyBase</code>这个类里头看了。如下所示</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">ExpressionHelper</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Number</span><span class="token punctuation">></span></span> helper<span class="token punctuation">;</span>
 <span class="token annotation punctuation">@Override</span>
@@ -640,8 +640,117 @@ NumberExpression, Observable, ReadOnlyProperty&lt;Number&gt;, ObservableDoubleVa
 <span class="token class-name">ExpressionHelper</span><span class="token punctuation">.</span><span class="token function">fireValueChangedEvent</span><span class="token punctuation">(</span>helper<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//breakpoint here</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>从Frame来看，我的思路被验证了，是正确的</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210113132029.jpg" alt="Debug"></p>
-<h2 id="亲手小试验"><a href="#亲手小试验" class="headerlink" title="亲手小试验"></a>亲手小试验</h2><p>竟然不明不白地就这样分析了一通InvalidationListener的实现，对Observer Pattern也有了更进一步的了解，那么准备做了小型的class，来辅助自己理解得更加深刻。</p>
-<p>此处未完，待更新。</p>
+<h2 id="亲手试错"><a href="#亲手试错" class="headerlink" title="亲手试错"></a>亲手试错</h2><p>竟然不明不白地就这样分析了一通InvalidationListener的实现，对Observer Pattern也有了更进一步的了解。于是垃圾地模拟了一下好像现实的场景：有一个商店里面有商品要抢购，而顾客们迫切地想知道商品的补货信息。但是，你是一个Customer，而不一定是一个Subscriber。</p>
+<p>思路就是，实现一个Subscription接口，然后由Customer实现，最后Store里头存储着subscribers，并会提醒subscriber们关于价格和库存的更新。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">test</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">ArrayList</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">List</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Observer</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Store</span> store <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Store</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Customer</span> customer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Customer</span><span class="token punctuation">(</span><span class="token string">"Situ"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Customer</span> customer1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Customer</span><span class="token punctuation">(</span><span class="token string">"Tony"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        customer<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>store<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        customer1<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>store<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        store<span class="token punctuation">.</span><span class="token function">updatePrice</span><span class="token punctuation">(</span><span class="token number">1919810</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        store<span class="token punctuation">.</span><span class="token function">updateStock</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        customer1<span class="token punctuation">.</span><span class="token function">unsubscribe</span><span class="token punctuation">(</span>store<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        store<span class="token punctuation">.</span><span class="token function">updateStock</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        customer<span class="token punctuation">.</span><span class="token function">unsubscribe</span><span class="token punctuation">(</span>store<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Store</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Subscription</span><span class="token punctuation">></span></span> subscribers <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">Product</span> product <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Product</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">void</span> <span class="token function">addSubscriber</span><span class="token punctuation">(</span><span class="token class-name">Subscription</span> subscriber<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"A subscriber subscribes the product!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        subscribers<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>subscriber<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">void</span> <span class="token function">removeSubscriber</span><span class="token punctuation">(</span><span class="token class-name">Subscription</span> subscriber<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"A subscriber unsubscribes the product!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        subscribers<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>subscriber<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">void</span> <span class="token function">updateStock</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> status<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        product<span class="token punctuation">.</span><span class="token function">setStock</span><span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        subscribers<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>subscription <span class="token operator">-></span> subscription<span class="token punctuation">.</span><span class="token function">notifyStock</span><span class="token punctuation">(</span>product<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">void</span> <span class="token function">updatePrice</span><span class="token punctuation">(</span><span class="token keyword">int</span> price<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        product<span class="token punctuation">.</span><span class="token function">setPrice</span><span class="token punctuation">(</span>price<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        subscribers<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span>subscription <span class="token operator">-></span> subscription<span class="token punctuation">.</span><span class="token function">notifyPriceChange</span><span class="token punctuation">(</span>product<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Product</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> price<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">boolean</span> stock<span class="token punctuation">;</span>
+
+    <span class="token class-name">Product</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        price <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
+        stock <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getPrice</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> price<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setPrice</span><span class="token punctuation">(</span><span class="token keyword">int</span> price<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>price <span class="token operator">=</span> price<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setStock</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> status<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        stock <span class="token operator">=</span> status<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">getStock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> stock<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">interface</span> <span class="token class-name">Subscription</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">void</span> <span class="token function">notifyStock</span><span class="token punctuation">(</span><span class="token class-name">Product</span> product<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">notifyPriceChange</span><span class="token punctuation">(</span><span class="token class-name">Product</span> product<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Customer</span> <span class="token keyword">implements</span> <span class="token class-name">Subscription</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+
+    <span class="token class-name">Customer</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">notifyStock</span><span class="token punctuation">(</span><span class="token class-name">Product</span> product<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Hi, "</span> <span class="token operator">+</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">". The product is "</span>
+                <span class="token operator">+</span> <span class="token punctuation">(</span>product<span class="token punctuation">.</span><span class="token function">getStock</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token string">"in stock"</span> <span class="token operator">:</span> <span class="token string">"out of stock"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">notifyPriceChange</span><span class="token punctuation">(</span><span class="token class-name">Product</span> product<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Hi, "</span> <span class="token operator">+</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token operator">+</span> <span class="token string">". The price of product is changed. New price is $"</span> <span class="token operator">+</span> product<span class="token punctuation">.</span><span class="token function">getPrice</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token class-name">Store</span> store<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        store<span class="token punctuation">.</span><span class="token function">addSubscriber</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">unsubscribe</span><span class="token punctuation">(</span><span class="token class-name">Store</span> store<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        store<span class="token punctuation">.</span><span class="token function">removeSubscriber</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="最后总结"><a href="#最后总结" class="headerlink" title="最后总结"></a>最后总结</h2><p>还没完，甚至准备咕咕咕。</p>
 
     </div>
 
@@ -659,7 +768,7 @@ NumberExpression, Observable, ReadOnlyProperty&lt;Number&gt;, ObservableDoubleVa
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://blog.situ2001.com/contents/cab8b78811bf/" title="JavaFX binding与观察者模式">https://blog.situ2001.com/contents/cab8b78811bf/</a>
+      <a href="https://blog.situ2001.com/contents/cab8b78811bf/" title="JavaFX与观察者模式">https://blog.situ2001.com/contents/cab8b78811bf/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
@@ -731,13 +840,13 @@ NumberExpression, Observable, ReadOnlyProperty&lt;Number&gt;, ObservableDoubleVa
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">54k</span>
+    <span title="站点总字数">56k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">49 分钟</span>
+    <span title="站点阅读时长">51 分钟</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
