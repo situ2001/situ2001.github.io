@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-bike.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-bike.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-bike.png">
+  <link rel="mask-icon" href="/images/logo-bike.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="基操，见得多了，只不过之前没往里头摸。行文诡异，可能错漏百出，也许为午后昏睡过久所致。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Java的装箱与拆箱">
+<meta property="og:url" content="https://blog.situ2001.com/contents/152c3b965d2f/index.html">
+<meta property="og:site_name" content="Situ Note">
+<meta property="og:description" content="基操，见得多了，只不过之前没往里头摸。行文诡异，可能错漏百出，也许为午后昏睡过久所致。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-22T08:48:49.000Z">
+<meta property="article:modified_time" content="2021-01-22T08:48:49.000Z">
+<meta property="article:author" content="situ2001">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.situ2001.com/contents/152c3b965d2f/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>浅谈Java的装箱与拆箱 | Situ Note</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Situ Note</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">光阴的月台</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-周记"><a href="/journals/" rel="section"><i class="fa fa-book fa-fw"></i>周记</a></li>
+        <li class="menu-item menu-item-计划"><a href="/plans/" rel="section"><i class="fa fa-flag fa-fw"></i>计划</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">situ2001</p>
+  <div class="site-description" itemprop="description">水到渠成 不须预虑</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/situ2001" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;situ2001" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://makri-hub.github.io/" title="https:&#x2F;&#x2F;makri-hub.github.io&#x2F;" rel="noopener" target="_blank">makri-hub</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://favorhau.github.io/" title="https:&#x2F;&#x2F;favorhau.github.io&#x2F;" rel="noopener" target="_blank">favorhau</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/contents/152c3b965d2f/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="situ2001">
+      <meta itemprop="description" content="水到渠成 不须预虑">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Situ Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          浅谈Java的装箱与拆箱
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-01-22 16:48:49" itemprop="dateCreated datePublished" datetime="2021-01-22T16:48:49+08:00">2021-01-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>基操，见得多了，只不过之前没往里头摸。<br>行文诡异，可能错漏百出，也许为午后昏睡过久所致。</p>
+<a id="more"></a>
+
+<p>众所周知，在Java中，有primitive type和wrapper class。它们之间可以相互转化。比如下面的代码是合法的。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span> integer <span class="token operator">=</span> <span class="token number">114</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> i <span class="token operator">=</span> integer<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>Java的官方也有如下的说明</p>
+<blockquote>
+<p>Autoboxing is the automatic conversion that the Java <strong>compiler</strong> makes between the primitive types and their corresponding object wrapper classes. For example, converting an int to an Integer, a double to a Double, and so on. If the conversion goes the other way, this is called unboxing.</p>
+</blockquote>
+<p>这里可以看到一个关键的部分<code>the Java compiler makes</code>，也就是说这个拆箱与装箱的过程，是编译器帮忙做的。</p>
+<p>回想一下之前学校教C++的时候讲到了引用，老师只把它比喻为“分身”，并叫我们记住。而这个似乎可以通过反汇编看出来，如下，编译器为MSVC。</p>
+<pre class="line-numbers language-assembly" data-language="assembly"><code class="language-assembly">    int i &#x3D; 114514;
+00D91842  mov         dword ptr [i],1BF52h  
+    int&amp; j &#x3D; i;
+00D91849  lea         eax,[i]  &#x2F;&#x2F;将i的地址放入寄存器eax中
+00D9184C  mov         dword ptr [j],eax   &#x2F;&#x2F;将此时寄存器eax的内容移到j的值中
+    j &#x3D; 1919;
+00D9184F  mov         eax,dword ptr [j]  &#x2F;&#x2F;将j的值送入eax中
+00D91852  mov         dword ptr [eax],77Fh  &#x2F;&#x2F;将1919移入i中
+    int *const pi &#x3D; &amp;i;
+00D91858  lea         eax,[i]  
+00D9185B  mov         dword ptr [pi],eax  
+    *pi &#x3D; 810;
+00D9185E  mov         eax,dword ptr [pi]  
+00D91861  mov         dword ptr [eax],32Ah <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看出引用其实相当于是语法糖，底层实现其实是一个指针常量？（C++没去学太多，有错请指出）</p>
+<p>那么Java的这个自动装拆箱机制，是否也可以通过反汇编来得到答案呢？答案是能的，经过一番查找我找到了javap这个工具，是用来对Class文件进行反汇编的。</p>
+<p>它的基本用法就是这样咯，参数带个<code>-c</code>就可以对class文件进行反编译了</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">Usage: javap <span class="token operator">&lt;</span>options<span class="token operator">></span> <span class="token operator">&lt;</span>classes<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>那么现在就可以对开头的文件操作了，反汇编之后得到如下结果</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Compiled</span> from <span class="token string">"Test.java"</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> test<span class="token punctuation">.</span><span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">public</span> test<span class="token punctuation">.</span><span class="token class-name">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">Code</span><span class="token operator">:</span>
+       <span class="token number">0</span><span class="token operator">:</span> aload_0
+       <span class="token number">1</span><span class="token operator">:</span> invokespecial #<span class="token number">1</span>                  <span class="token comment">// Method java/lang/Object."&lt;init>":()V</span>
+       <span class="token number">4</span><span class="token operator">:</span> <span class="token keyword">return</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">Code</span><span class="token operator">:</span>
+       <span class="token number">0</span><span class="token operator">:</span> bipush        <span class="token number">114</span>
+       <span class="token number">2</span><span class="token operator">:</span> invokestatic  #<span class="token number">2</span>                  <span class="token comment">// Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;</span>
+       <span class="token number">5</span><span class="token operator">:</span> astore_1
+       <span class="token number">6</span><span class="token operator">:</span> aload_1
+       <span class="token number">7</span><span class="token operator">:</span> invokevirtual #<span class="token number">3</span>                  <span class="token comment">// Method java/lang/Integer.intValue:()I</span>
+      <span class="token number">10</span><span class="token operator">:</span> istore_2
+      <span class="token number">11</span><span class="token operator">:</span> <span class="token keyword">return</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>从输出的注释中可以明显看出，在初始化Integer变量的时候，调用了<code>valueOf()</code>方法，而在将integer赋值给i的时候，又调用了<code>intValue()</code>方法。</p>
+<p>嗯，这就是所谓的拆箱装箱了，<del>显然，这是一个平淡无味的语法糖</del></p>
+<p>那么问题又来了，为什么是用了<code>valueOf()</code>方法而不是直接<code>new Integer(114)</code>呢？初学的时候我以为不了解，感觉java这做法是在脱裤子放屁。但直到我看了<code>Integer.java</code>的源码…</p>
+<p>先是constructor，甚至已经是不建议使用，而是建议使用<code>valueOf()</code>。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+* Constructs a newly allocated &#123;@code Integer&#125; object that
+* represents the specified &#123;@code int&#125; value.
+*
+* @param   value   the value to be represented by the
+*                  &#123;@code Integer&#125; object.
+*
+* @deprecated
+* It is rarely appropriate to use this constructor. The static factory
+* &#123;@link #valueOf(int)&#125; is generally a better choice, as it is
+* likely to yield significantly better space and time performance.
+*/</span>
+<span class="token annotation punctuation">@Deprecated</span><span class="token punctuation">(</span>since<span class="token operator">=</span><span class="token string">"9"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token keyword">int</span> value<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> value<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>那我继续定位到方法<code>valueOf()</code>下，发现了这么些东西</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * Returns an &#123;@code Integer&#125; instance representing the specified
+ * &#123;@code int&#125; value.  If a new &#123;@code Integer&#125; instance is not
+ * required, this method should generally be used in preference to
+ * the constructor &#123;@link #Integer(int)&#125;, as this method is likely
+ * to yield significantly better space and time performance by
+ * caching frequently requested values.
+ *
+ * This method will always cache values in the range -128 to 127,
+ * inclusive, and may cache other values outside of this range.
+ *
+ * @param  i an &#123;@code int&#125; value.
+ * @return an &#123;@code Integer&#125; instance representing &#123;@code i&#125;.
+ * @since  1.5
+ */</span>
+<span class="token annotation punctuation">@HotSpotIntrinsicCandidate</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Integer</span> <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">>=</span> <span class="token class-name">IntegerCache</span><span class="token punctuation">.</span>low <span class="token operator">&amp;&amp;</span> i <span class="token operator">&lt;=</span> <span class="token class-name">IntegerCache</span><span class="token punctuation">.</span>high<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token class-name">IntegerCache</span><span class="token punctuation">.</span>cache<span class="token punctuation">[</span>i <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token class-name">IntegerCache</span><span class="token punctuation">.</span>low<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看到有一个inner class <code>IntegerCache</code>，再次定位。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * Cache to support the object identity semantics of autoboxing for values between
+ * -128 and 127 (inclusive) as required by JLS.
+ *
+ * The cache is initialized on first usage.  The size of the cache
+ * may be controlled by the &#123;@code -XX:AutoBoxCacheMax=&lt;size>&#125; option.
+ * During VM initialization, java.lang.Integer.IntegerCache.high property
+ * may be set and saved in the private system properties in the
+ * jdk.internal.misc.VM class.
+ */</span>
+
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">IntegerCache</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> low <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">128</span><span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token keyword">int</span> high<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> cache<span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> archivedCache<span class="token punctuation">;</span>
+
+    <span class="token keyword">static</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// high value may be configured by property</span>
+        <span class="token keyword">int</span> h <span class="token operator">=</span> <span class="token number">127</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> integerCacheHighPropValue <span class="token operator">=</span>
+            VM<span class="token punctuation">.</span><span class="token function">getSavedProperty</span><span class="token punctuation">(</span><span class="token string">"java.lang.Integer.IntegerCache.high"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>integerCacheHighPropValue <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>integerCacheHighPropValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                i <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token number">127</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">// Maximum array size is Integer.MAX_VALUE</span>
+                h <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span>MAX_VALUE <span class="token operator">-</span> <span class="token punctuation">(</span><span class="token operator">-</span>low<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span><span class="token punctuation">(</span> <span class="token class-name">NumberFormatException</span> nfe<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">// If the property cannot be parsed into an int, ignore it.</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        high <span class="token operator">=</span> h<span class="token punctuation">;</span>
+
+        <span class="token comment">// Load IntegerCache.archivedCache from archive, if possible</span>
+        VM<span class="token punctuation">.</span><span class="token function">initializeFromArchive</span><span class="token punctuation">(</span><span class="token class-name">IntegerCache</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> size <span class="token operator">=</span> <span class="token punctuation">(</span>high <span class="token operator">-</span> low<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Use the archived cache if it exists and is large enough</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>archivedCache <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> size <span class="token operator">></span> archivedCache<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> c <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">[</span>size<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">int</span> j <span class="token operator">=</span> low<span class="token punctuation">;</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> k <span class="token operator">&lt;</span> c<span class="token punctuation">.</span>length<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span>
+                c<span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span>j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            archivedCache <span class="token operator">=</span> c<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        cache <span class="token operator">=</span> archivedCache<span class="token punctuation">;</span>
+        <span class="token comment">// range [-128, 127] must be interned (JLS7 5.1.7)</span>
+        <span class="token keyword">assert</span> <span class="token class-name">IntegerCache</span><span class="token punctuation">.</span>high <span class="token operator">>=</span> <span class="token number">127</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">IntegerCache</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>啊这，为了获得更好的性能，在初始化的时候，VM就直接把[-128, 127]的整数初始化一遍放入<code>cache</code>数组里啊。怪不得不用constructor新建Integer对象而是用<code>valueOf()</code>啊…</p>
+<p>那么对于之前的一些奇奇怪怪的问题如</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span> a <span class="token operator">=</span> <span class="token number">114</span><span class="token punctuation">;</span>
+<span class="token class-name">Integer</span> b <span class="token operator">=</span> <span class="token number">114</span><span class="token punctuation">;</span>
+<span class="token class-name">Integer</span> c <span class="token operator">=</span> <span class="token number">514</span><span class="token punctuation">;</span>
+<span class="token class-name">Integer</span> d <span class="token operator">=</span> <span class="token number">514</span><span class="token punctuation">;</span>
+
+<span class="token comment">// a == b is true</span>
+<span class="token comment">// c == d is false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这类的，就很好解释了。因为有-127~128的整数有缓存，所以a和b引用的，都是同一个对象。而c和d调用<code>valueOf()</code>的时候，都是new出一个新对象。</p>
+<p>既然Integer是这个样子，那么Boolean会不会更是这个样子，因为bool类型也就一个true和false。验证发现果然如此</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * The &#123;@code Boolean&#125; object corresponding to the primitive
+ * value &#123;@code true&#125;.
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Boolean</span> TRUE <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Boolean</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * The &#123;@code Boolean&#125; object corresponding to the primitive
+ * value &#123;@code false&#125;.
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Boolean</span> FALSE <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Boolean</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">/**
+ * Returns a &#123;@code Boolean&#125; instance representing the specified
+ * &#123;@code boolean&#125; value.  If the specified &#123;@code boolean&#125; value
+ * is &#123;@code true&#125;, this method returns &#123;@code Boolean.TRUE&#125;;
+ * if it is &#123;@code false&#125;, this method returns &#123;@code Boolean.FALSE&#125;.
+ * If a new &#123;@code Boolean&#125; instance is not required, this method
+ * should generally be used in preference to the constructor
+ * &#123;@link #Boolean(boolean)&#125;, as this method is likely to yield
+ * significantly better space and time performance.
+ *
+ * @param  b a boolean value.
+ * @return a &#123;@code Boolean&#125; instance representing &#123;@code b&#125;.
+ * @since  1.4
+ */</span>
+<span class="token annotation punctuation">@HotSpotIntrinsicCandidate</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Boolean</span> <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token keyword">boolean</span> b<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>b <span class="token operator">?</span> TRUE <span class="token operator">:</span> FALSE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>Character</code>类也是这样</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+ * Returns a &#123;@code Character&#125; instance representing the specified
+ * &#123;@code char&#125; value.
+ * If a new &#123;@code Character&#125; instance is not required, this method
+ * should generally be used in preference to the constructor
+ * &#123;@link #Character(char)&#125;, as this method is likely to yield
+ * significantly better space and time performance by caching
+ * frequently requested values.
+ *
+ * This method will always cache values in the range &#123;@code
+ * '\u005Cu0000'&#125; to &#123;@code '\u005Cu007F'&#125;, inclusive, and may
+ * cache other values outside of this range.
+ *
+ * @param  c a char value.
+ * @return a &#123;@code Character&#125; instance representing &#123;@code c&#125;.
+ * @since  1.5
+ */</span>
+<span class="token annotation punctuation">@HotSpotIntrinsicCandidate</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Character</span> <span class="token function">valueOf</span><span class="token punctuation">(</span><span class="token keyword">char</span> c<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">&lt;=</span> <span class="token number">127</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// must cache</span>
+        <span class="token keyword">return</span> <span class="token class-name">CharacterCache</span><span class="token punctuation">.</span>cache<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>c<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Character</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">/**
+ * Constructs a newly allocated &#123;@code Character&#125; object that
+ * represents the specified &#123;@code char&#125; value.
+ *
+ * @param  value   the value to be represented by the
+ *                  &#123;@code Character&#125; object.
+ *
+ * @deprecated
+ * It is rarely appropriate to use this constructor. The static factory
+ * &#123;@link #valueOf(char)&#125; is generally a better choice, as it is
+ * likely to yield significantly better space and time performance.
+ */</span>
+<span class="token annotation punctuation">@Deprecated</span><span class="token punctuation">(</span>since<span class="token operator">=</span><span class="token string">"9"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token class-name">Character</span><span class="token punctuation">(</span><span class="token keyword">char</span> value<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> value<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">CharacterCache</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token class-name">CharacterCache</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Character</span> cache<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Character</span><span class="token punctuation">[</span><span class="token number">127</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">static</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> cache<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+            cache<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Character</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>最后，虽然这篇文章是我军训结束后昏睡一下午起床才写的，涉及到的内容也是相当基础和简单。</p>
+<p>但是有时候，你不去摸摸源码的实现，你也比较难理解原理。（比如<code>String</code>里的<code>compareTo()</code></p>
+<p>但是他给我启示：学习嘛，学有余力的话，<strong>有的时候</strong>往往可以往深钻一下子的。还有就是要学会一些工具的使用之类的啦，要学会实际问题实际分析</p>
+<p>(<del>上面一行完全是我自己憋的尴尬套话</del>)</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>situ2001
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.situ2001.com/contents/152c3b965d2f/" title="浅谈Java的装箱与拆箱">https://blog.situ2001.com/contents/152c3b965d2f/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/contents/cab8b78811bf/" rel="prev" title="JavaFX与观察者模式">
+                  <i class="fa fa-chevron-left"></i> JavaFX与观察者模式
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">situ2001</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">64k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">59 分钟</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+    <div class="pjax">
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '25660877348ea415abbd',
+      clientSecret: 'a57f3ffb40fa5965d5211cbb8c3ddeb956a2d259',
+      repo        : 'comments',
+      owner       : 'situ2001',
+      admin       : ['situ2001'],
+      id          : 'ff7a19286ebb52d0dcf827e3df11da2f',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>
