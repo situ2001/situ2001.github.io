@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-bike.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-bike.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-bike.png">
+  <link rel="mask-icon" href="/images/logo-bike.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
+  </script>
+<meta name="description" content="(个人笔记) 要不是大一下学校的OOP课要讲MFC…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快手上手C++面向对象">
+<meta property="og:url" content="https://blog.situ2001.com/contents/a4fbad73ad9c/index.html">
+<meta property="og:site_name" content="Situ Note">
+<meta property="og:description" content="(个人笔记) 要不是大一下学校的OOP课要讲MFC…">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-26T08:00:16.000Z">
+<meta property="article:modified_time" content="2021-02-26T08:00:16.000Z">
+<meta property="article:author" content="situ2001">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://blog.situ2001.com/contents/a4fbad73ad9c/">
+
+
+<script data-pjax class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+<title>快手上手C++面向对象 | Situ Note</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Situ Note</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">光阴的月台</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+        <li class="menu-item menu-item-随记"><a href="/journals/" rel="section"><i class="fa fa-book fa-fw"></i>随记</a></li>
+        <li class="menu-item menu-item-计划"><a href="/plans/" rel="section"><i class="fa fa-flag fa-fw"></i>计划</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E5%92%8Ckeyword"><span class="nav-number">1.</span> <span class="nav-text">运算符和keyword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#member-function"><span class="nav-number">2.</span> <span class="nav-text">member function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">实例化一个对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%99%9A%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">虚函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#modifier"><span class="nav-number">5.</span> <span class="nav-text">modifier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static"><span class="nav-number">6.</span> <span class="nav-text">static</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%BB%A7%E6%89%BF"><span class="nav-number">7.</span> <span class="nav-text">关于继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#friend"><span class="nav-number">8.</span> <span class="nav-text">friend</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BB%A7%E6%89%BF"><span class="nav-number">9.</span> <span class="nav-text">多继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#constructor%E5%92%8Cde-constructor"><span class="nav-number">10.</span> <span class="nav-text">constructor和de-constructor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Copy-Constructor"><span class="nav-number">11.</span> <span class="nav-text">Copy Constructor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pointer-this"><span class="nav-number">12.</span> <span class="nav-text">pointer this</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pointer-to-an-object"><span class="nav-number">13.</span> <span class="nav-text">pointer to an object</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E4%BD%8D%E7%BD%AE"><span class="nav-number">14.</span> <span class="nav-text">函数定义位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete-AND-default"><span class="nav-number">15.</span> <span class="nav-text">delete AND default</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">situ2001</p>
+  <div class="site-description" itemprop="description">水到渠成 不须预虑</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/situ2001" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;situ2001" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://makri-hub.github.io/" title="https:&#x2F;&#x2F;makri-hub.github.io&#x2F;" rel="noopener" target="_blank">makri-hub</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://favorhau.github.io/" title="https:&#x2F;&#x2F;favorhau.github.io&#x2F;" rel="noopener" target="_blank">favorhau</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/contents/a4fbad73ad9c/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="situ2001">
+      <meta itemprop="description" content="水到渠成 不须预虑">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Situ Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          快手上手C++面向对象
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-02-26 16:00:16" itemprop="dateCreated datePublished" datetime="2021-02-26T16:00:16+08:00">2021-02-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">笔记</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>(个人笔记) 要不是大一下学校的OOP课要讲MFC…</p>
+<a id="more"></a>
+
+<p>基于java中的OOP来学习C++的OOP（可 迁 移 学 习）（爆炸预定</p>
+<p>感觉C++中的OOP多了好多东西啊（太菜了</p>
+<h2 id="运算符和keyword"><a href="#运算符和keyword" class="headerlink" title="运算符和keyword"></a>运算符和keyword</h2><p>按优先级来说的。</p>
+<p>scope qualifier: <code>::</code>，很直白，翻译过来就叫做作用域限定符</p>
+<p>member access: <code>.</code>和<code>-&gt;</code>常见，前者是非指针变量用过的，后者是指针变量用的</p>
+<p>class上的<code>:</code>，如同java里的<code>extends</code></p>
+<h2 id="member-function"><a href="#member-function" class="headerlink" title="member function"></a>member function</h2><p>这个其实怎么说呢，我就把它跟java里头的instance method混为一谈了。所以这样理解就没问题了。</p>
+<h2 id="实例化一个对象"><a href="#实例化一个对象" class="headerlink" title="实例化一个对象"></a>实例化一个对象</h2><p>无参数的话，<strong>不用带parentheses</strong>…(被坑过)，如下面的第一行…</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Test test1<span class="token punctuation">;</span>
+
+Test<span class="token operator">*</span> test2 <span class="token operator">=</span> <span class="token keyword">new</span> Test<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>前者开在stack上，后者开在heap上。（java直接扔heap上不香吗</p>
+<h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><p>函数就有非虚函数，虚函数和纯虚函数这三种了，太草了。由于java的对象方法默认就是<code>virtual</code>的（JVM调用指令<code>invokevirtual</code>），然后java可以多态，要invoke的方法都是在runtime进行动态绑定的。所以C++里头的函数虚不虚，就很好理解了。</p>
+<p>比如java里头定义一个父类抽象方法的话，子类来实现。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//father</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//son</span>
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token comment">/** do sth */</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>C++就要用到纯虚函数了</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//father</span>
+<span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token comment">//son</span>
+<span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token comment">/** do sth */</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如果父类的虚函数想有自己的实现的话，把<code>= 0</code>去掉，加自己的实现即可。</p>
+<p>那函数虚不虚有什么关系呢？比如这段</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Animal</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">eat</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"I am eating food."</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Chicken</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Animal</span></span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">eat</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"I am eating hay"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>带了<code>virtual</code>关键字的话就是这样的</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Animal<span class="token operator">*</span> a <span class="token operator">=</span> <span class="token keyword">new</span> Chicken<span class="token punctuation">;</span>
+a<span class="token operator">-></span><span class="token function">eat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// I am eating hay</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>而没有<code>virtual</code>关键字的话就是这样的</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Animal<span class="token operator">*</span> a <span class="token operator">=</span> <span class="token keyword">new</span> Chicken<span class="token punctuation">;</span>
+a<span class="token operator">-></span><span class="token function">eat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// I am eating food</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>就是相当于没有了多态特性而已。（个人理解）</p>
+<p>不过这能做到jvav做不到的东西，挺厉害的嘛（</p>
+<h2 id="modifier"><a href="#modifier" class="headerlink" title="modifier"></a>modifier</h2><p>似乎因为没有jvav的package，所以这么几个modifier<strong>都没有了package access的restriction</strong>（因为根本没有package啊）。所以就很方便了。</p>
+<p><code>public</code>类的外部都能访问。</p>
+<p><code>protected</code><strong>自己和派生类</strong>能访问。(！大不同！)</p>
+<p><code>private</code>直接是私有，类里的能访问。</p>
+<h2 id="static"><a href="#static" class="headerlink" title="static"></a>static</h2><p>这个也没啥大区别的，唯一的小区别就是访问static的方法或变量需要使用operator <code>::</code></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//class Test</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+  <span class="token keyword">static</span> <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
+
+<span class="token comment">//main</span>
+Test<span class="token operator">::</span>i <span class="token comment">// 114514</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="关于继承"><a href="#关于继承" class="headerlink" title="关于继承"></a>关于继承</h2><p>就这样</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Chicken</span> <span class="token operator">:</span> <span class="token keyword">public</span> Animal<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>继承的话，要注意，C++继承的class默认是private的，所以要加个<code>public</code>，否则外部无法使用父类的方法。（草）</p>
+<h2 id="friend"><a href="#friend" class="headerlink" title="friend"></a>friend</h2><p>然后就是友元了，友元可以直接访问class里头的private field，它不是一个成员函数也不是一个这个class的static函数。作用域不一样的。这东西有这个特性，岂不是可以少一堆getter和setter？（</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Test</span>
+<span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+  <span class="token keyword">friend</span> <span class="token keyword">void</span> <span class="token function">getNum</span><span class="token punctuation">(</span>Test test<span class="token punctuation">)</span>
+  <span class="token punctuation">&#123;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> test<span class="token punctuation">.</span>num <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token keyword">private</span><span class="token operator">:</span>
+  <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Test test<span class="token punctuation">;</span>
+<span class="token function">getNum</span><span class="token punctuation">(</span>test<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 114514</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>当然也可以在里头声明一个友元类，此时友元类里的成员函数都能访问到这个类的private field</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//In class Test</span>
+<span class="token keyword">friend</span> <span class="token keyword">class</span> <span class="token class-name">Friend</span><span class="token punctuation">;</span>
+
+<span class="token comment">//Friend</span>
+<span class="token keyword">class</span> <span class="token class-name">Friend</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token comment">/** ... */</span>
+  <span class="token comment">/** have the access to private field of Test */</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这个东西的中文怪怪的，以friend来了解可能会更好。</p>
+<h2 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h2><p>应该用不到，不写了。</p>
+<h2 id="constructor和de-constructor"><a href="#constructor和de-constructor" class="headerlink" title="constructor和de-constructor"></a>constructor和de-constructor</h2><p>常见，语法也是差不多，但是后者析构这个就没见过了（GC擦屁股太香了</p>
+<p>类的析构和构造，都是默认缺省的（无参数），这点都一样，当然也可以自己写实现</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//class Test</span>
+<span class="token operator">~</span><span class="token function">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"instance deleted"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>方法命名就这，直接是constructor前加 <code>~</code></p>
+<h2 id="Copy-Constructor"><a href="#Copy-Constructor" class="headerlink" title="Copy Constructor"></a>Copy Constructor</h2><p>然后就是这个了，同上，这个东西也是默认缺省的，它的原型像是这样的</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token class-name">Test</span><span class="token operator">::</span><span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">const</span> Point<span class="token operator">&amp;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>本来java中的引用变量赋值就是把reference to给你而已。但是C++直接给你搞了新的对象。</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//main</span>
+Test test<span class="token punctuation">;</span>
+Test test1 <span class="token operator">=</span> test<span class="token punctuation">;</span> <span class="token comment">//invoke Copy Constructor</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>就像是java中<code>Cloneable</code>对象的<code>clone()</code>方法一样，深拷贝浅拷贝这些也是差不多的，要在拷贝构造函数那里写自己的实现。</p>
+<h2 id="pointer-this"><a href="#pointer-this" class="headerlink" title="pointer this"></a>pointer this</h2><p>跟java一样，C++只有成员函数才有的。记得member access要用operator <code>-&gt;</code></p>
+<h2 id="pointer-to-an-object"><a href="#pointer-to-an-object" class="headerlink" title="pointer to an object"></a>pointer to an object</h2><p>这个java的引用变量是差不多的。声明也就这样</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ClassType<span class="token operator">*</span> pointer<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>用法也就那样，如</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Test test1<span class="token punctuation">;</span>
+Test<span class="token operator">*</span> pointer <span class="token operator">=</span> <span class="token operator">&amp;</span>test1<span class="token punctuation">;</span>
+
+Test<span class="token operator">*</span> test2 <span class="token operator">=</span> <span class="token keyword">new</span> Test<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="函数定义位置"><a href="#函数定义位置" class="headerlink" title="函数定义位置"></a>函数定义位置</h2><p>定义在类里头就是默认inline了。如下引用来自cpluscplus.com</p>
+<blockquote>
+<p>The only difference between defining a class member function completely within its class or to include only the prototype and later its definition, is that in the first case the function will automatically be considered an inline member function by the compiler, while in the second it will be a normal (not-inline) class member function, which in fact supposes no difference in behavior</p>
+</blockquote>
+<h2 id="delete-AND-default"><a href="#delete-AND-default" class="headerlink" title="delete AND default"></a>delete AND default</h2><p>如果有带参的constructor，那么可以用<code>=default</code>来写默认constructor如<code>Test()&#123;&#125;</code>，如果要禁用某个函数，可以上<code>=delete</code></p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span>
+<span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">const</span> X<span class="token operator">&amp;</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">delete</span><span class="token punctuation">;</span>
+Test<span class="token operator">&amp;</span> <span class="token keyword">operator</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">const</span> X<span class="token operator">&amp;</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">delete</span><span class="token punctuation">;</span>
+
+<span class="token comment">//main</span>
+Test test<span class="token punctuation">;</span>
+Test test1 <span class="token operator">=</span> test<span class="token punctuation">;</span> <span class="token comment">//wrong!</span>
+Test test2<span class="token punctuation">;</span>
+test2 <span class="token operator">=</span> test3<span class="token punctuation">;</span> <span class="token comment">//wrong!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>situ2001
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.situ2001.com/contents/a4fbad73ad9c/" title="快手上手C++面向对象">https://blog.situ2001.com/contents/a4fbad73ad9c/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/contents/3b19f30c2f96/" rel="prev" title="λ在Java">
+                  <i class="fa fa-chevron-left"></i> λ在Java
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">situ2001</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">75k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:08</span>
+  </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.4.0/pjax.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '.page-configurations',
+    '.main-inner',
+    '.post-toc-wrap',
+    '.languages',
+    '.pjax'
+  ],
+  analytics: false,
+  cacheBust: false,
+  scrollRestoration: false,
+  scrollTo: !CONFIG.bookmark.enable
+});
+
+document.addEventListener('pjax:success', () => {
+  pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  const hasTOC = document.querySelector('.post-toc');
+  document.querySelector('.sidebar-inner').classList.toggle('sidebar-nav-active', hasTOC);
+  document.querySelector(hasTOC ? '.sidebar-nav-toc' : '.sidebar-nav-overview').click();
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+    <div class="pjax">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '25660877348ea415abbd',
+      clientSecret: 'a57f3ffb40fa5965d5211cbb8c3ddeb956a2d259',
+      repo        : 'comments',
+      owner       : 'situ2001',
+      admin       : ['situ2001'],
+      id          : '921b8d7bae1ec3da0fdd03f873878863',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>
