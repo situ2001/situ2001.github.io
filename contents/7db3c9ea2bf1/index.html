@@ -24,20 +24,20 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta name="description" content="纸上得来终觉浅，绝知此事要躬行。——陆游  感觉下面的内容都跟这句诗有关呢 生日快乐时间过得飞快啊，快要跟这个魔幻的2020年说bye bye了。 首先在这两周内，迎来了我人生第19个生日自己上一个生日是成年生日，我自己都忘了过 这是因为收到了来自父母和舍友的祝福，我在这里感谢他们。 并趁着打折买了一本值得收藏的K&amp;R C语言圣经 也没啥感觉的，无非就是自己的法定年龄加1罢了。不过，随着人">
-<meta property="og:type" content="website">
-<meta property="og:title" content="二十不惑 那十九呢">
-<meta property="og:url" content="https://blog.situ2001.com/journals/2020/week-50-51.html">
+<meta name="description" content="学Java，怎能不知道classpath和jar呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="classpath和jar">
+<meta property="og:url" content="https://blog.situ2001.com/contents/7db3c9ea2bf1/index.html">
 <meta property="og:site_name" content="Situ Note">
-<meta property="og:description" content="纸上得来终觉浅，绝知此事要躬行。——陆游  感觉下面的内容都跟这句诗有关呢 生日快乐时间过得飞快啊，快要跟这个魔幻的2020年说bye bye了。 首先在这两周内，迎来了我人生第19个生日自己上一个生日是成年生日，我自己都忘了过 这是因为收到了来自父母和舍友的祝福，我在这里感谢他们。 并趁着打折买了一本值得收藏的K&amp;R C语言圣经 也没啥感觉的，无非就是自己的法定年龄加1罢了。不过，随着人">
+<meta property="og:description" content="学Java，怎能不知道classpath和jar呢？">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-12-19T05:04:13.000Z">
-<meta property="article:modified_time" content="2020-12-19T05:04:13.000Z">
+<meta property="article:published_time" content="2021-02-28T10:00:00.000Z">
+<meta property="article:modified_time" content="2021-02-28T10:00:00.000Z">
 <meta property="article:author" content="situ2001">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.situ2001.com/journals/2020/week-50-51">
+<link rel="canonical" href="https://blog.situ2001.com/contents/7db3c9ea2bf1/">
 
 
 <script data-pjax class="page-configurations">
@@ -45,12 +45,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
-<title>二十不惑 那十九呢 | Situ Note
-</title>
+<title>classpath和jar | Situ Note</title>
   
 
 
@@ -163,7 +162,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%97%A5%E5%BF%AB%E4%B9%90"><span class="nav-number">1.</span> <span class="nav-text">生日快乐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%E5%BC%80%E5%8F%91"><span class="nav-number">2.</span> <span class="nav-text">实战开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%80%83%E8%AF%95%E4%B8%B4%E8%BF%91"><span class="nav-number">3.</span> <span class="nav-text">考试临近</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#classpath"><span class="nav-number">1.</span> <span class="nav-text">classpath</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jar"><span class="nav-number">2.</span> <span class="nav-text">jar</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -230,80 +229,160 @@
 </noscript>
 
 
-    <div class="main-inner page posts-expand">
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
   
   
 
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/contents/7db3c9ea2bf1/">
 
-    
-    
-    
-    <div class="post-block" lang="zh-CN"><header class="post-header">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="situ2001">
+      <meta itemprop="description" content="水到渠成 不须预虑">
+    </span>
 
-<h1 class="post-title" itemprop="name headline">二十不惑 那十九呢
-</h1>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Situ Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          classpath和jar
+        </h1>
 
-<div class="post-meta-container">
-  <ul class="breadcrumb">
-            <li><a href="/journals/">JOURNALS</a></li>
-            <li><a href="/journals/2020/">2020</a></li>
-            <li>WEEK-50-51</li>
-          
-  </ul>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-02-28 18:00:00" itemprop="dateCreated datePublished" datetime="2021-02-28T18:00:00+08:00">2021-02-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
 </div>
 
-</header>
+        </div>
+      </header>
 
-      
-      
-      <div class="post-body">
-          <blockquote class="blockquote-center">纸上得来终觉浅，绝知此事要躬行。<br>——陆游</blockquote>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>学Java，怎能不知道classpath和jar呢？</p>
+<a id="more"></a>
 
-<p><del>感觉下面的内容都跟这句诗有关呢</del></p>
-<h2 id="生日快乐"><a href="#生日快乐" class="headerlink" title="生日快乐"></a>生日快乐</h2><p>时间过得飞快啊，快要跟这个魔幻的2020年说bye bye了。</p>
-<p>首先在这两周内，迎来了我人生第19个生日<del>自己上一个生日是成年生日，我自己都忘了过</del></p>
-<p><del>这是因为</del>收到了来自父母和舍友的祝福，我在这里感谢他们。</p>
-<p>并<del>趁着打折</del>买了一本值得收藏的<strong>K&amp;R C语言</strong>圣经</p>
-<p>也没啥感觉的，无非就是自己的法定年龄加1罢了。不过，随着人的成长，言行举止和思考方式都会随之发生改变，作为一个INFP，我回想之前的自己，感到是多么的可笑却又无可奈何。毕竟，没有一个人生下来就是成熟的呢。初中高中的时候心理与举止都还稚气万分，惰于思考，全凭直觉做事，遇到任何困难总是第一个打退堂鼓，很是羡慕那些能提前适应并勇敢面对生活和学习的同龄人。</p>
-<p>不过，我觉得我无非就是比他们晚一点成熟罢了。</p>
-<p>每朵花总有盛开的那一刻，只是早晚的问题而已。</p>
-<p>前期吃的苦头摔过的跤，终将使我变得强大起来。</p>
-<h2 id="实战开发"><a href="#实战开发" class="headerlink" title="实战开发"></a>实战开发</h2><p>由于Java学的也7788了，于是想找做点小型的东西练练手，想了想，打算做一个支持查询教务系统APP。正当我雄心壮志地打开Android Studio和Android Developer，访问学校教务网页并F12，才发现…</p>
-<p>事情，并没有我想象得那么简单。</p>
-<p>开发一个APP，只会编程语言，就行了吗？<del>不会语法当然不行，</del>除此之外，还要其他许许多多的东西。</p>
-<p>从安卓的网络请求，我了解到了多线程和异步；从数字校园SSO登录的过程，我了解到了HTTP的GET和POST请求，请求头与回复头，还有cookie和session，再到app本身对cookie的保存与处理；从空教室的查询，我又学会了如何解析JSON；从APP的UI，我又要去了解一下Android的Activity和Fragment等，从APP的徒手起步和方案尝试，我又用到了git进行版本控制…</p>
-<p>有了这些，我最终只做了个很简陋的工具。我思考了一下：这个过程中，有时候要推倒一些前期的内容，更改会涉及很多地方。并且有的地方我把很多要做的事，都写在一起了。要是以后维护，或者拓展添加其他功能的话，岂不是要爆炸？向大佬蹭了一份合理的源码，对比并开始整改起来，在这个过程中，我又了解到了设计模式，从中了解并运用到了单例、构建器和工厂等模式，还了解到了OOP里面的一些经验性的规则，它们可以帮我们写出更好的工程代码（我的还是小工程，<del>爬了</del>）</p>
-<p><del>现在还在装死摸鱼整改中</del></p>
-<p>并且对之前写的初步“入门”面向对象的文章感到了怀疑，掌握基本的语法是必须的，但OOP这玩意，掌握了用法<del>和茴香豆</del>就代表会用了吗？我之前认为到了开发实战，自然就会用了，而实战上手后，我还是太年轻…甚至有时幼稚</p>
-<p>所以，开发就是用编程语言吗？的确是这样，但这是以偏概全了，没有其他方面的知识储备来支撑的话，是万万不能的。</p>
-<p>虽然APP还在缓慢制作中，但这次碰到这些东西，上可遇到应用层，下可去到底层。</p>
-<p>喔，怪不得要专业课要学操作系统、计算机网络、数据库、计算机组成原理啊。存在即合理。</p>
-<p>看来，在大二到来前，得扎实好英语和编程能力了，大二就要跟专业基础战斗了。</p>
-<h2 id="考试临近"><a href="#考试临近" class="headerlink" title="考试临近"></a>考试临近</h2><p>嗯，额…离1月4号的考试还有不到14天了，这个学期浪的飞起，都是在打机看片写代码中度过的，对于考试的内容，只能靠背往年真题解决了。</p>
-<p>至于英语呢，虽然课本上的单词和课后习题几乎没怎么去看过，但是专业相关的一些原著已经可以做到流畅阅读了（前提是<strong>单词</strong>几乎都认得），但是为了考试，我还是读一下课本上面的Text来记忆一下词汇吧……</p>
-<p>线代呢，目前还在缓慢进行学习中，理解的东西也比大多数硬学的好多了，就算下学期不上了，也会继续学下去的，不过都快考试了，一些考点还没学过，，，所以先去背一下公式过了考试再说吧。</p>
-<p>高数<del>吃高中老本</del></p>
-<p>计算机导论自认为能读英语题，再结合一点经验就可以了。</p>
-<p><del>C++考试裸奔就行</del></p>
-<p>希望写在这一小节的内容别打我脸（    </p>
-<p>以上这么多，写完这篇文章，过完这个周末，也是时候开始复习了，能做到不挂科就满意了。</p>
+<h2 id="classpath"><a href="#classpath" class="headerlink" title="classpath"></a>classpath</h2><p><code>classpath</code>，顾名思义就是class path，即class的路径。网上一搜，很多文章都是关于java在windows下的环境变量配置的，但我觉得不应该在环境变量里头设置classpath。为什么呢？请看我胡乱分析</p>
+<p>只需要知道，classpath其实是JVM用到的一个环境变量，<strong>是给JVM来寻找class用的</strong>。</p>
+<p>指定classpath的方法可以是给<code>java</code>传入<code>-cp</code>或者<code>-classpath</code>，默认的话就是<code>.</code>即当前目录。</p>
+<p>比如说，我在<code>C:\Users\situ\foo\bar</code>里头有一个<code>Hello.class</code>，如果此时JVM要加载一个<code>foo.bar.Hello</code>类。而我们指定的classpath为<code>.;C:\Users\situ</code>，命令如下</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -cp <span class="token builtin class-name">.</span><span class="token punctuation">;</span>C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ foo.bar.Hello<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>那么就会这样按着classpath去找class</p>
+<p><code>&lt;current dir&gt;\foo\bar\Hello.class</code></p>
+<p><code>C:\Users\situ\foo\bar\Hello.class</code></p>
+<p>那这些都是用户自己的class，java自带的类呢？…不需要操心的，JVM自己知道的。</p>
+<h2 id="jar"><a href="#jar" class="headerlink" title="jar"></a>jar</h2><p>其实jar实质上就是一个压缩文件…就拿我的丢人井字棋client来说说吧（这个jar包是用gradle构建的）。先把这个jar解了，看下目录结构。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>SimpleTicTacToeGame<span class="token punctuation">\</span>client<span class="token punctuation">\</span>build<span class="token punctuation">\</span>libs<span class="token punctuation">\</span>client-1.0-SNAPSHOT<span class="token operator">></span>tree /F
+Folder <span class="token environment constant">PATH</span> listing <span class="token keyword">for</span> volume OS
+Volume serial number is 3C20-9E7B
+C:.
+│  Client<span class="token variable">$Cell</span>.class
+│  Client<span class="token variable">$O</span>.class
+│  Client<span class="token variable">$X</span>.class
+│  Client.class
+│
+├─META-INF
+│      MANIFEST.MF
+│
+└─res
+    Constants.class<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看出，除了编译好的class，这些class要按照package的路径来放，比如<code>res.Constants</code>就要按规矩放，放为<code>res\Constants.class</code>。</p>
+<p>这个jar里面还有一个<code>MANIFAST.MF</code>，打开一开，发现里面标明了Main-Class</p>
+<pre class="line-numbers language-inf" data-language="inf"><code class="language-inf">Manifest-Version: 1.0
+Main-Class: Client<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>怎么运行这个jar呢？很简单只需要输入这个命令就行了。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>SimpleTicTacToeGame<span class="token punctuation">\</span>client<span class="token punctuation">\</span>build<span class="token punctuation">\</span>libs<span class="token operator">></span>java -jar client-1.0-SNAPSHOT.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>我觉得这个可以不用了解太多，可以运行，知道本质就行了。剩下的东西当然是靠构建工具啊（</p>
 
-      </div>
-      
-      
-      
     </div>
-  <ul class="breadcrumb">
-            <li><a href="/journals/">JOURNALS</a></li>
-            <li><a href="/journals/2020/">2020</a></li>
-            <li>WEEK-50-51</li>
+
+    
+    
+    
+
+    <footer class="post-footer">
           
-  </ul>
 
-    
-    
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>situ2001
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.situ2001.com/contents/7db3c9ea2bf1/" title="classpath和jar">https://blog.situ2001.com/contents/7db3c9ea2bf1/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
 
 
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/contents/76029e119cb2/" rel="prev" title="项目小总结之简易井字棋">
+                  <i class="fa fa-chevron-left"></i> 项目小总结之简易井字棋
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -417,6 +496,25 @@ document.addEventListener('pjax:success', () => {
     <div class="pjax">
 
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
+
+<script>
+NexT.utils.loadComments('.gitalk-container', () => {
+  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '25660877348ea415abbd',
+      clientSecret: 'a57f3ffb40fa5965d5211cbb8c3ddeb956a2d259',
+      repo        : 'comments',
+      owner       : 'situ2001',
+      admin       : ['situ2001'],
+      id          : '69ee5a53afdf06a945925c1b6c72b6f0',
+        language: '',
+      distractionFreeMode: false
+    });
+    gitalk.render(document.querySelector('.gitalk-container'));
+  }, window.Gitalk);
+});
+</script>
 
     </div>
 </body>
