@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-bike.png">
@@ -22,7 +22,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="(个人笔记) 要不是大一下学校的OOP课要讲MFC…">
 <meta property="og:type" content="article">
@@ -330,7 +330,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>(个人笔记) 要不是大一下学校的OOP课要讲MFC…</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <p>基于java中的OOP来学习C++的OOP（可 迁 移 学 习）（爆炸预定</p>
 <p>感觉C++中的OOP多了好多东西啊（太菜了</p>
@@ -343,6 +343,7 @@
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Test test1<span class="token punctuation">;</span>
 
 Test<span class="token operator">*</span> test2 <span class="token operator">=</span> <span class="token keyword">new</span> Test<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <p>前者开在stack上，后者开在heap上。（java直接扔heap上不香吗</p>
 <h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2><p>函数就有非虚函数，虚函数和纯虚函数这三种了，太草了。由于java的对象方法默认就是<code>virtual</code>的（JVM调用指令<code>invokevirtual</code>），然后java可以多态，要invoke的方法都是在runtime进行动态绑定的。所以C++里头的函数虚不虚，就很好理解了。</p>
 <p>比如java里头定义一个父类抽象方法的话，子类来实现。</p>
@@ -353,6 +354,7 @@ Test<span class="token operator">*</span> test2 <span class="token operator">=</
 <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token comment">/** do sth */</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>C++就要用到纯虚函数了</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//father</span>
 <span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
@@ -361,6 +363,7 @@ Test<span class="token operator">*</span> test2 <span class="token operator">=</
 <span class="token punctuation">&#123;</span>
   <span class="token comment">/** do sth */</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>如果父类的虚函数想有自己的实现的话，把<code>= 0</code>去掉，加自己的实现即可。</p>
 <p>那函数虚不虚有什么关系呢？比如这段</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Animal</span>
@@ -380,12 +383,15 @@ Test<span class="token operator">*</span> test2 <span class="token operator">=</
         std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"I am eating hay"</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>带了<code>virtual</code>关键字的话就是这样的</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Animal<span class="token operator">*</span> a <span class="token operator">=</span> <span class="token keyword">new</span> Chicken<span class="token punctuation">;</span>
 a<span class="token operator">-></span><span class="token function">eat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// I am eating hay</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <p>而没有<code>virtual</code>关键字的话就是这样的</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Animal<span class="token operator">*</span> a <span class="token operator">=</span> <span class="token keyword">new</span> Chicken<span class="token punctuation">;</span>
 a<span class="token operator">-></span><span class="token function">eat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// I am eating food</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <p>就是相当于没有了多态特性而已。（个人理解）</p>
 <p>不过这能做到jvav做不到的东西，挺厉害的嘛（</p>
 <h2 id="modifier"><a href="#modifier" class="headerlink" title="modifier"></a>modifier</h2><p>似乎因为没有jvav的package，所以这么几个modifier<strong>都没有了package access的restriction</strong>（因为根本没有package啊）。所以就很方便了。</p>
@@ -399,8 +405,10 @@ a<span class="token operator">-></span><span class="token function">eat</span><s
 
 <span class="token comment">//main</span>
 Test<span class="token operator">::</span>i <span class="token comment">// 114514</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="关于继承"><a href="#关于继承" class="headerlink" title="关于继承"></a>关于继承</h2><p>就这样</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Chicken</span> <span class="token operator">:</span> <span class="token keyword">public</span> Animal<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>继承的话，要注意，C++继承的class默认是private的，所以要加个<code>public</code>，否则外部无法使用父类的方法。（草）</p>
 <p>指定父类使用哪一个constructor可不像java那样在子类的constructor里搞，要这样（不就移到了外面来？</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">public</span><span class="token operator">:</span>
@@ -408,6 +416,7 @@ Test<span class="token operator">::</span>i <span class="token comment">// 11451
   <span class="token punctuation">&#123;</span>
     <span class="token comment">/** do sth */</span>
   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>相似地，我们也可以用来给field初始化，如</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">private</span><span class="token operator">:</span>
   std<span class="token operator">::</span>string text <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
@@ -416,6 +425,7 @@ Test<span class="token operator">::</span>i <span class="token comment">// 11451
   <span class="token punctuation">&#123;</span>
     <span class="token comment">/** do sth */</span>
   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="friend"><a href="#friend" class="headerlink" title="friend"></a>friend</h2><p>然后就是友元了，友元可以直接访问class里头的private field，它不是一个成员函数也不是一个这个class的static函数。作用域不一样的。这东西有这个特性，岂不是可以少一堆getter和setter？（</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Test</span>
 <span class="token punctuation">&#123;</span>
@@ -427,8 +437,10 @@ Test<span class="token operator">::</span>i <span class="token comment">// 11451
 <span class="token keyword">private</span><span class="token operator">:</span>
   <span class="token keyword">int</span> num <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Test test<span class="token punctuation">;</span>
 <span class="token function">getNum</span><span class="token punctuation">(</span>test<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 114514</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <p>当然也可以在里头声明一个友元类，此时友元类里的成员函数都能访问到这个类的private field</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//In class Test</span>
 <span class="token keyword">friend</span> <span class="token keyword">class</span> <span class="token class-name">Friend</span><span class="token punctuation">;</span>
@@ -439,6 +451,7 @@ Test<span class="token operator">::</span>i <span class="token comment">// 11451
   <span class="token comment">/** ... */</span>
   <span class="token comment">/** have the access to private field of Test */</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>这个东西的中文怪怪的，以friend来了解可能会更好。</p>
 <h2 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h2><p>应该用不到，不写了。</p>
 <h2 id="constructor和de-constructor"><a href="#constructor和de-constructor" class="headerlink" title="constructor和de-constructor"></a>constructor和de-constructor</h2><p>常见，语法也是差不多，但是后者析构这个就没见过了（GC擦屁股太香了</p>
@@ -448,29 +461,36 @@ Test<span class="token operator">::</span>i <span class="token comment">// 11451
 <span class="token punctuation">&#123;</span>
   std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"instance deleted"</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>方法命名就这，直接是constructor前加 <code>~</code></p>
 <h2 id="Copy-Constructor"><a href="#Copy-Constructor" class="headerlink" title="Copy Constructor"></a>Copy Constructor</h2><p>然后就是这个了，同上，这个东西也是默认缺省的，它的原型像是这样的</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token class-name">Test</span><span class="token operator">::</span><span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">const</span> Point<span class="token operator">&amp;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>本来java中的引用变量赋值就是把reference to给你而已。但是C++直接给你搞了新的对象。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//main</span>
 Test test<span class="token punctuation">;</span>
 Test test1 <span class="token operator">=</span> test<span class="token punctuation">;</span> <span class="token comment">//invoke Copy Constructor</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <p>就像是java中<code>Cloneable</code>对象的<code>clone()</code>方法一样，深拷贝浅拷贝这些也是差不多的，要在拷贝构造函数那里写自己的实现。</p>
 <h2 id="Move-Constructor"><a href="#Move-Constructor" class="headerlink" title="Move Constructor"></a>Move Constructor</h2><p>C++11开始加入了Rvalue reference和std::move，类的构造器也有了移动构造函数</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//class Foo</span>
 <span class="token keyword">public</span><span class="token operator">:</span>
   <span class="token function">Foo</span><span class="token punctuation">(</span>Foo<span class="token operator">&amp;&amp;</span> bar<span class="token punctuation">)</span><span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <p>初始化并赋值一个新对象的时候，可以使用Move constructor</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Foo foo1<span class="token punctuation">;</span>
 Foo foo2 <span class="token operator">=</span> std<span class="token operator">::</span><span class="token function">move</span><span class="token punctuation">(</span>foo1<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <h2 id="pointer-this"><a href="#pointer-this" class="headerlink" title="pointer this"></a>pointer this</h2><p>跟java一样，C++只有成员函数才有的。记得member access要用operator <code>-&gt;</code></p>
 <h2 id="pointer-to-an-object"><a href="#pointer-to-an-object" class="headerlink" title="pointer to an object"></a>pointer to an object</h2><p>这个java的引用变量是差不多的。声明也就这样</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">ClassType<span class="token operator">*</span> pointer<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>用法也就那样，如</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp">Test test1<span class="token punctuation">;</span>
 Test<span class="token operator">*</span> pointer <span class="token operator">=</span> <span class="token operator">&amp;</span>test1<span class="token punctuation">;</span>
 
 Test<span class="token operator">*</span> test2 <span class="token operator">=</span> <span class="token keyword">new</span> Test<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="函数定义位置"><a href="#函数定义位置" class="headerlink" title="函数定义位置"></a>函数定义位置</h2><p>定义在类里头就是默认inline了。如下引用来自cpluscplus.com</p>
 <blockquote>
 <p>The only difference between defining a class member function completely within its class or to include only the prototype and later its definition, is that in the first case the function will automatically be considered an inline member function by the compiler, while in the second it will be a normal (not-inline) class member function, which in fact supposes no difference in behavior</p>
@@ -485,6 +505,7 @@ Test test<span class="token punctuation">;</span>
 Test test1 <span class="token operator">=</span> test<span class="token punctuation">;</span> <span class="token comment">//wrong!</span>
 Test test2<span class="token punctuation">;</span>
 test2 <span class="token operator">=</span> test3<span class="token punctuation">;</span> <span class="token comment">//wrong!</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2>
     </div>
 
@@ -661,6 +682,7 @@ NexT.utils.loadComments('.gitalk-container', () => {
       owner       : 'situ2001',
       admin       : ['situ2001'],
       id          : '921b8d7bae1ec3da0fdd03f873878863',
+      proxy       : 'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token',
         language: '',
       distractionFreeMode: false
     });

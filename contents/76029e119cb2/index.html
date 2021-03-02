@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.3.0">
+<meta name="generator" content="Hexo 5.4.0">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-bike.png">
@@ -22,7 +22,7 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
+    var CONFIG = {"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
 <meta name="description" content="(个人笔记) 就算是玩具项目，做完也会有不少收获——主要是对gradle和groovy的初步认识">
 <meta property="og:type" content="article">
@@ -330,7 +330,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>(个人笔记) 就算是玩具项目，做完也会有不少收获——主要是对gradle和groovy的初步认识</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <p>这次学到了包管理工具和jar相关，还有一门脚本语言Groovy。</p>
 <p>包管理工具常见的有maven和gradle，我选择了后者。</p>
@@ -356,6 +356,7 @@
             └── java 
                 └── demo
                     └── AppTest.java<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>比如<code>setting.gradle</code>和<code>build.gradle</code>（用IDEA的wizard新建的）</p>
 <p>其中<code>setting.gradle</code>项目的设置，里面包含着子项目和build的一些definition。而<code>build.gradle</code>就是特定的一个项目或者子项目的build script。它们都是用的groovy语言或者kotlin（这里我选择的是groovy）</p>
 <pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy"><span class="token comment">//setting.gradle</span>
@@ -381,6 +382,7 @@ dependencies <span class="token punctuation">&#123;</span>
 test <span class="token punctuation">&#123;</span>
     <span class="token function">useJUnitPlatform</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>从上面可以看出，除此之外。他生成了一些文件和文件夹，<code>gradle/wrapper</code>里头装着<code>gradle wrapper</code>，然后就还有wrapper的启动脚本。</p>
 <p>关于这个wrapper，他虽然很小，但是它可以调用来下载对应的gradle版本，帮你快速构建，免去手动下载安装gradle的麻烦。</p>
 <p>这个wrapper执行的步骤大概是：先下载dist到本地，然后解压，最后使用这个dist来构建这个项目。的确有点意思</p>
@@ -395,6 +397,7 @@ test <span class="token punctuation">&#123;</span>
 <p>要实现这个，我就需要用到子项目这个操作了，看了看官方对它的说明，我开始按葫芦画瓢。新建了文件夹<code>server</code>和<code>client</code>，然后每个下面放好<code>build.gradle</code>和文件夹<code>src</code>。最后，项目根目录下的<code>setting.gradle</code>如下所示</p>
 <pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">rootProject<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'SimpleTicTacToeGame'</span>
 include <span class="token string">'server'</span><span class="token punctuation">,</span> <span class="token string">'client'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <ul>
 <li>构建jar包</li>
 </ul>
@@ -402,6 +405,7 @@ include <span class="token string">'server'</span><span class="token punctuation
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">./gradlew jar <span class="token comment"># for the whole project</span>
 <span class="token comment">#or</span>
 ./gradlew client:jar <span class="token comment"># jar task for sub project client</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <p>这样就能在在build文件夹里头找到jar了，通过上述操作，命令大概也就是 <code>./gradlew &lt;subproject&gt;:&lt;task&gt;</code> 或者 <code>./gradlew &lt;task&gt;</code>吧</p>
 <h2 id="Groovy语言"><a href="#Groovy语言" class="headerlink" title="Groovy语言"></a>Groovy语言</h2><p>这也是一个跑在JVM上面的语言，还是一种<strong>脚本语言</strong>，<strong>动态语言</strong>…为什么要了解一下这个呢？因为gradle里面的script都用着groovy或者kotlin的DSL(Domain-Specific Language)啊。不知道一些基础的话，写起来就奇奇怪怪的。</p>
 <p>不过由于是DSL，那么就不用完全了解过一遍这个语言，事实上有java的基础，迁移学习groovy是非常容易的，并且官方也给出了<a target="_blank" rel="noopener" href="https://groovy-lang.org/differences.html">Groovy与Java的差别</a></p>
@@ -417,6 +421,7 @@ include <span class="token string">'server'</span><span class="token punctuation
 <span class="token comment">//groovy</span>
 <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">114</span><span class="token punctuation">,</span> <span class="token number">514</span><span class="token punctuation">]</span> <span class="token comment">//有py内味</span>
 <span class="token class-name">List</span> b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1919</span><span class="token punctuation">,</span> <span class="token string">'810'</span><span class="token punctuation">]</span> <span class="token comment">// powerful</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <ul>
 <li>跟Java中的Lambda比较，这边叫做闭包Closure了，主要是 <code>() -&gt;</code>变成了<code>&#123; &#125;</code>，inner class和anonymous inner class的写法跟java也差不多，但是…真香?</li>
 </ul>
@@ -428,6 +433,7 @@ list<span class="token punctuation">.</span><span class="token function">forEach
 
 <span class="token class-name">Runnable</span> run <span class="token operator">=</span> <span class="token punctuation">&#123;</span> println <span class="token string">'run'</span> <span class="token punctuation">&#125;</span> <span class="token comment">//Groovy</span>
 list<span class="token punctuation">.</span>each <span class="token punctuation">&#123;</span> println it <span class="token punctuation">&#125;</span> <span class="token comment">// or list.each(this.&amp;println)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <ul>
 <li>自 Java7 开始出现的 ARM 也变了写法</li>
 </ul>
@@ -436,6 +442,7 @@ list<span class="token punctuation">.</span>each <span class="token punctuation"
 <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">'/path/to/file'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">eachLine</span><span class="token punctuation">(</span><span class="token string">'UTF-8'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
    println it
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <ul>
 <li><p><code>==</code> 变成<code>equals()</code>了（</p>
 </li>
@@ -446,11 +453,13 @@ list<span class="token punctuation">.</span>each <span class="token punctuation"
 <span class="token keyword">def</span> <span class="token comment">// def i = 1919810</span>
 var <span class="token comment">// var i = 1919810 (from Java)</span>
 <span class="token keyword">in</span> <span class="token comment">// (Python</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <ul>
 <li>pass参数的时候，可以不需要带符号</li>
 </ul>
 <pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">print <span class="token string">'114514'</span>
 <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>start <span class="token punctuation">&#123;</span> <span class="token comment">/** closure */</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <ul>
 <li>多方法</li>
 </ul>
@@ -463,6 +472,7 @@ var <span class="token comment">// var i = 1919810 (from Java)</span>
 <span class="token punctuation">&#125;</span>
 <span class="token class-name">Object</span> o <span class="token operator">=</span> <span class="token string">"Object"</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token function">method</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>java运行就是<code>2</code>，Groovy就是<code>1</code></p>
 <ul>
 <li>字符串</li>
@@ -481,14 +491,17 @@ test<span class="token punctuation">.</span>with <span class="token punctuation"
   ds <span class="token operator">=</span> <span class="token number">114514</span>
   sq <span class="token operator">=</span> <span class="token number">1919810</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <ul>
 <li>判断非null</li>
 </ul>
 <pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">print obj<span class="token operator">?.</span>id<span class="token operator">?.</span>number<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <ul>
 <li>范围</li>
 </ul>
 <pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy"><span class="token number">114</span><span class="token operator">..</span><span class="token number">514</span> <span class="token comment">// 114(inclusive) to 514(inclusive)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <ul>
 <li>switch</li>
 </ul>
@@ -499,6 +512,7 @@ test<span class="token punctuation">.</span>with <span class="token punctuation"
   <span class="token keyword">case</span> <span class="token punctuation">&#123;</span> it <span class="token operator">></span> <span class="token number">891</span> <span class="token punctuation">&#125;</span><span class="token punctuation">:</span>
   <span class="token keyword">case</span> <span class="token number">114</span><span class="token operator">..</span><span class="token number">514</span><span class="token punctuation">:</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="继续学习"><a href="#继续学习" class="headerlink" title="继续学习"></a>继续学习</h2><p>初步入手了这几个东西，现在或以后想要用的时候，就要去gradle的文档里头查api用了。（据说难度跟CMake一样，害怕</p>
 
     </div>
@@ -676,6 +690,7 @@ NexT.utils.loadComments('.gitalk-container', () => {
       owner       : 'situ2001',
       admin       : ['situ2001'],
       id          : 'e079eaa09d35cfe64f63125253e4bf6a',
+      proxy       : 'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token',
         language: '',
       distractionFreeMode: false
     });
