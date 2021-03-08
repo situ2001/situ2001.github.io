@@ -733,6 +733,98 @@ Main-Class: Client<span aria-hidden="true" class="line-numbers-rows"><span></spa
       </categories>
   </entry>
   <entry>
+    <title>反思之概念理解不可粗糙</title>
+    <url>//contents/5a4f09596a4e/</url>
+    <content><![CDATA[<p>粗糙的学习与理解 必然会带来日后的隐患</p>
+<p>这不 咱最近就出现了一个问题</p>
+<span id="more"></span>
+
+<h2 id="危险想法"><a href="#危险想法" class="headerlink" title="危险想法"></a>危险想法</h2><p>我原来认为：包装类与基本数据类型可以相互转化，而数组是对象，所以 <code>int[]</code> 和 <code>Integer[]</code> 初始化出来的数组一定都是对象</p>
+<h2 id="咱被迷惑"><a href="#咱被迷惑" class="headerlink" title="咱被迷惑"></a>咱被迷惑</h2><p>前些天太浪了，导致咱最近在赶Java学习进度，一路高歌赶到多态<del>以集齐OOP三件套</del></p>
+<p>直到<del>在水职业指导课的时候</del>碰到一道自己难以回答的Check Point之后，才发觉暴力拔苗助长不可取，就好似人不可能一口吃下一个胖子一样</p>
+<p>这个问题是这样的</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">What</span> is wrong <span class="token keyword">with</span> <span class="token namespace">in</span> the following code<span class="token operator">?</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token class-name">Double</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list2 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12.4</span><span class="token punctuation">,</span> <span class="token number">24.0</span><span class="token punctuation">,</span> <span class="token number">55.2</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token function">printArray</span><span class="token punctuation">(</span>list1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printArray</span><span class="token punctuation">(</span>list2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printArray</span><span class="token punctuation">(</span>list3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">printArray</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> object<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>object<span class="token operator">:</span> o<span class="token punctuation">)</span>
+      <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>o <span class="token operator">+</span> <span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>上题来自Java教材 <strong>Introduction to Java Programming and Data Structures Comprehensive Version</strong> 的 Page.427 <strong>Check Point 11.8.4</strong></p>
+<h2 id="绞尽脑汁"><a href="#绞尽脑汁" class="headerlink" title="绞尽脑汁"></a>绞尽脑汁</h2><p>看到这道题的时候我只想到 pass 到 method printArray 的是对象的reference，而数组都是对象啊，这题目，哪里有错误啊</p>
+<p>“一定是粗心的坏习惯犯了！” 我想</p>
+<p>然而不管我怎么看，<del>左看右看正看倒看反复观看</del>都看不出来</p>
+<p>此时水课过了一半，响起了下课铃 <del>吓得我吃了几个好丽友蛋黄派</del></p>
+<h2 id="一瞬报错"><a href="#一瞬报错" class="headerlink" title="一瞬报错"></a>一瞬报错</h2><p>而最后中午回到宿舍，马上把代码码了上去，发现报错如下</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Exception <span class="token keyword">in</span> thread <span class="token string">"main"</span> java.lang.Error: Unresolved compilation problem:
+    The method printArray<span class="token punctuation">(</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">in</span> the <span class="token builtin class-name">type</span> Test is not applicable <span class="token keyword">for</span> the arguments <span class="token punctuation">(</span>int<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>阅读这报错内容，基本可以得知, int[] type 竟然不是对象类型???</p>
+<p>震惊，难道数组在Java中不是属于对象吗？</p>
+<p>挺秃然的.jpg</p>
+<h2 id="开始混乱"><a href="#开始混乱" class="headerlink" title="开始混乱"></a>开始混乱</h2><p><del>迷惑行为开始了</del></p>
+<p>我对比了一下这两行代码</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>不就一个用的 Integer[] type 而另一个用的 int type 吗？</p>
+<p>回想起之前看过的 <strong>A primitive type can be automatically converted to an object using a wrapper class, and vice versa.</strong></p>
+<p>也就是说，Java是允许基本数据类型和 <strong>Wrapper Class</strong> 类型相互转换的，这种转换叫做<strong>autoboxing</strong> 和 <strong>autounboxing</strong> （一般是在赋值的时候？）</p>
+<p>就好比下面这俩语句是等效的</p>
+<p><code>Integer i = new Integer(1);</code> and <code>Integer i = 1;</code> are <strong>equivalent</strong></p>
+<p><code>int i = 1;</code> and <code>int i = new Integer(1);</code> are also <strong>equivalent</strong></p>
+<p>不过</p>
+<p>在我先前的概念里面，数组不是被Java当成对象处理了吗？</p>
+<p>那用 int[] 和 Integer[] 声明出来的数组，不都是属于一个对象吗？</p>
+<p>不能pass到method printArray就奇怪了</p>
+<h2 id="仔细咀嚼"><a href="#仔细咀嚼" class="headerlink" title="仔细咀嚼"></a>仔细咀嚼</h2><p>emm能报错的话，一定有它的道理，而书上很大概率会单独开一段话提及的</p>
+<p>我尝试开始翻书阅览相关内容，终于，我找到了很明显的一段话 <del>当初肯定是仓促学习而略读了</del></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Consider</span> the following example<span class="token operator">:</span>
+  <span class="token number">1</span> <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> intArray <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token number">2</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>intArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> intArray<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> intArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token class-name">In</span> line <span class="token number">1</span><span class="token punctuation">,</span> the prmitive values <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span> and <span class="token number">3</span> are automatically boxed into objects <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> and <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+
+  <span class="token class-name">In</span> line <span class="token number">2</span><span class="token punctuation">,</span> the objects intArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> intArray<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> and intArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> are automatically unboxed into <span class="token keyword">int</span> values that are added together<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>好了，看完这段话我开始明白我的错误之处了 <del>这么长的一段话我当初怎么略读掉的</del></p>
+<p>噢原来 Integer[] type 是创建一个包含有多个Integer对象的数组啊</p>
+<p>比如，这里有一个<code>Student</code>类，我们可以用<code>Student[]</code>来声明包含多个Student对象的数组</p>
+<p>那么int[] type呢，原来创建的是包含有多个int基本数据类型的数组，里面的每一个元素都是一个基本数据类型的值</p>
+<p>如果我们把 <code>int[] array = new int[100]</code> 称之为</p>
+<p><code>An array that contains 100 numbers</code></p>
+<p>它叫做 <strong>Array of primitive values</strong></p>
+<p>那么<code>Integer[] array = new Integer[100]</code> 则是</p>
+<p><code>An array that contains 100 objects</code></p>
+<p>而它叫做 <strong>Array of objects</strong></p>
+<p><del>这个东西在OOP上手的时候就已经提到过了，不要被包装类和基本数据类型转换这玩意迷惑了眼睛</del></p>
+<h2 id="总结错误"><a href="#总结错误" class="headerlink" title="总结错误"></a>总结错误</h2><p>回到下面的代码</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>通过前面重新回顾和学习的成果</p>
+<p><strong>我们可见</strong> list1数组它本身也是一个对象，并且是一个包含了好几个<strong>对象</strong>形如<code>new Integer(1)</code>的数组；而list3数组它本身也是一个对象，只不过里面包含的是好几个基本类型的数值而已</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>做事要一步一步慢慢来，这才是符合科学和实践规律的</p>
+<p>时快时慢，马马虎虎，必将少不了翻车</p>
+<p>并且经过踏踏实实系统学习，我相信学习成果必定会比东拼西凑的学习要稳固得多</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
     <title>λ在Java</title>
     <url>//contents/3b19f30c2f96/</url>
     <content><![CDATA[<p>我之前一直以为Java里头的Lambda表达式就是SAM的语法糖…</p>
@@ -1213,260 +1305,6 @@ function<span class="token punctuation">.</span><span class="token function">app
       </categories>
   </entry>
   <entry>
-    <title>C语言之数组与指针</title>
-    <url>//contents/d34f10f99adc/</url>
-    <content><![CDATA[<p>指针和数组，关系不浅啊</p>
-<span id="more"></span>
-
-<p><del><strong>禁止茴香豆</strong></del></p>
-<p>课间写的，有点匆忙，估计有不少错误，如有，请指出，谢谢。</p>
-<p>上面不懂的可能需要下面内容的补足（写作水平太菜了）</p>
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>为什么我突然写这篇文章呢？原来是我在<a href="https://en.cppreference.com/w/c/memory/malloc">cppreference上面看malloc()</a>，了解一下简单的内存分配的时候，试了一下附带的example</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span>   </span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span> </span>
- 
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> 
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token operator">*</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// allocates enough for an array of 4 int</span>
-    <span class="token keyword">int</span> <span class="token operator">*</span>p2 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// same, naming the type directly</span>
-    <span class="token keyword">int</span> <span class="token operator">*</span>p3 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token operator">*</span><span class="token keyword">sizeof</span> <span class="token operator">*</span>p3<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// same, without repeating the type name</span>
- 
-    <span class="token keyword">if</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> n<span class="token operator">&lt;</span><span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>n<span class="token punctuation">)</span> <span class="token comment">// populate the array</span>
-            p1<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> n<span class="token operator">*</span>n<span class="token punctuation">;</span>
-        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> n<span class="token operator">&lt;</span><span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>n<span class="token punctuation">)</span> <span class="token comment">// print it back out</span>
-            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"p1[%d] == %d\n"</span><span class="token punctuation">,</span> n<span class="token punctuation">,</span> p1<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
- 
-    <span class="token function">free</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">free</span><span class="token punctuation">(</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">free</span><span class="token punctuation">(</span>p3<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这段代码运行之后，输出的结果是</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">p1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
-p1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
-p1<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">4</span>
-p1<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">9</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>诶诶诶，为什么指针也能拥有数组那样的下标呢？我的直觉告诉我：指针和数组，之间必定有不可描述的关系</p>
-<p>在开始之前，感谢一下tindy2013能抽空给我微微解释了一下<del>，缩短了我自主探索的时间</del></p>
-<h2 id="数组的下标"><a href="#数组的下标" class="headerlink" title="数组的下标"></a>数组的下标</h2><p>如同多数地方所说的，数组就是一种数据结构。是一坨<strong>连续</strong>的元素，接连着一起躺在了内存中的某一块区域。并且数组拥有operator<code>[]</code>，即是数组的下标。</p>
-<p>之前我发现数组还可以这样子</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%p"</span><span class="token punctuation">,</span> arr<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>最后的输出了一个内存地址，并且我们还可以新建一个指针并把数组变量赋值给它，并能通过指针给arr中的其中一个元素赋值</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span>
-
-arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token comment">//or</span>
-p <span class="token operator">+=</span> <span class="token number">4</span><span class="token punctuation">;</span>
-<span class="token operator">*</span>p <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token comment">//or</span>
-<span class="token operator">*</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>上面三个操作都是一样的，输出结果都是<code>1</code></p>
-<p>既然上面有<code>int *p = arr;</code>那么我把数组arr当成一个常量指针，既然arr可以拥有一个属于他自己的下标，那么一般的指针，是否也能拥有一个下标呢？</p>
-<p>不多猜测，先试一下看看是不是这样</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c">p<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>也是一个样，那么，<strong>指针变量拥有下标</strong>。</p>
-<p>但是经过一番的查询之后，发现数组和指针，这两者并不是<strong>绝对相同</strong>的。常见且有区别的，就是在使用运算符<code>sizeof</code>的时候，得到的就是数组类型<code>int[]</code>的长度了。只不过在大多数情况下，被隐式转换成指针了。</p>
-<p>下面摘抄一点ISO C标准对数组的说明（不想看可以跳过）</p>
-<p><code>Constraints : 1 One of the expressions shall have type &#39;pointer to object type&#39;,  the other expression shall have integer type, and the result has type  &#39;type&#39;.</code><br><code>Semantics : 2 A postfix expression followed by an expression in square brackets [] is a subscripted designation of an element of an array object. The definition of the subscript operator [] is that E1[E2] is identical to (*((E1)+(E2))). Because of the conversion rules that apply to the binary + operator, if E1 is an array object (equivalently, a pointer to the initial element of an array object) and E2 is an integer, E1[E2] designates the E2-th element of E1 (counting from zero).</code></p>
-<h2 id="关于内存的一点知识来讨论。"><a href="#关于内存的一点知识来讨论。" class="headerlink" title="关于内存的一点知识来讨论。"></a>关于内存的一点知识来讨论。</h2><p>前面只是基于代码和结果来猜测和讨论的，那实际上它们都干了些啥，我们可以结合关于内存的一点知识来讨论。</p>
-<p>首先，先给自己的脑子灌输一点知识：如果没有了解过内存的话，我们可以大概的形成一下印象。（大佬请跳过）</p>
-<p>内存呢，我喜欢把它形象化成一张密密麻麻的表格，它很长很长，但是宽度只有8个格子（1字节 = 8位），并且每一行都有一个专门的标号，就是内存的地址啦（字节编址）</p>
-<p>如图所示</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143617.png"></p>
-<p>数据进入内存的话，就会占据内存的一部分，比如我们熟知，在32位下，<code>int</code>型占用4个字节，<code>double</code>型占用8个字节，比如我们有一个值为1的int变量，它会在内存中占据着4个字节</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143537.png"></p>
-<p>数组是在内存上连续分布一块的数据结构。如果有一个长度为3的int数组<code>arr[3] = &#123;7, 4, 5&#125;</code>，那么它在内存里的占用是连续的，三个int类型长度的地址，还有一个数组名的变量，相当于一个常量指针（不可更改地址）</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143733.png"></p>
-<p>我们可以使用<code>arr[0] arr[1] arr[2]</code>来进行对应元素的访问。与此同时，使用一个指针<code>int *p = arr</code>来实现上述的访问</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span> <span class="token comment">// *p = 7</span>
-p<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// *p = 4</span>
-p<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// *p = 5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>由上可见，指针p进行了两次自增，每一次自增，都会对p存放的地址+4，去到下一个元素的起始地址。因此，对p解引用就会出现不同的结果，分别对应<code>arr[0] arr[1] arr[2]</code></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205144359.png"></p>
-<p>那么有，</p>
-<p><code>arr[0]</code>就是直接对arr的起始地址进行解引用，结果就是<code>7</code></p>
-<p><code>arr[1]</code>就是对arr进行+1，对指针<code>arr + 1</code>进行解引用，结果就是<code>4</code></p>
-<p><code>arr[2]</code>同理，结果是<code>5</code></p>
-<h2 id="使用指针操作数组"><a href="#使用指针操作数组" class="headerlink" title="使用指针操作数组"></a>使用指针操作数组</h2><p>一维数组的指针就是像上面那样子，那如果我们对<strong>二维、三维数组</strong>用指针进行数组操作呢？</p>
-<p>其实呢，二维数组就是一个<strong>连续的</strong>，<strong>包含多个一维数组</strong>的数组</p>
-<p>又因为，数组名就是个指针，所以，二维数组的数组名就是个指针，指向着多个一维数组名（pointer to pointer）</p>
-<p>再根据上面所提到的一句话：</p>
-<blockquote>
-<p>指针变量自增1，即是对其原来的地址加上一个对应类型的长度</p>
-</blockquote>
-<p>假设这里有一个二维数组<code>int array[3][4]</code>呢？我们用指针进行操作的时候，可以初始化这两种指针：</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> array<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token comment">//an int type pointer</span>
-<span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token operator">*</span>array<span class="token punctuation">;</span>
-<span class="token comment">//an int[4] type pointer</span>
-<span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>我们对p1和p2加一，并对其解引用</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c">p1<span class="token operator">++</span><span class="token punctuation">;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment">//output: 5</span>
-<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> array<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-p2<span class="token operator">++</span><span class="token punctuation">;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment">//output: 9</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> array<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>可以看出，两者输出结果不一样，其中p1读出来的是<code>a[0][1]  = 5</code>，而p2读出来的是<code>a[1][1] = 9</code></p>
-<p>为什么呢？仔细思考一下的话，其实也不难理解</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205145556.png"></p>
-<h2 id="注意操作的对象"><a href="#注意操作的对象" class="headerlink" title="注意操作的对象"></a>注意操作的对象</h2><p>我到底，操作着哪个对象啊……</p>
-<p>我作为一个初学者，平时也会被各种多重 asterisk(*) 搞晕，不过静下心来，发现还是要抓住这些</p>
-<ol>
-<li>优先级</li>
-<li>指针加减所表示的含义</li>
-</ol>
-<p>首先是优先级和结合性</p>
-<p>先举一个在课堂上使人晕针的东西：<strong>指针数组</strong>和<strong>数组指针</strong></p>
-<p>我觉得好晕啊，先看下它们对应的英语吧：</p>
-<table>
-<thead>
-<tr>
-<th align="center">中文</th>
-<th align="center">英语</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">指针数组</td>
-<td align="center">array of pointer</td>
-</tr>
-<tr>
-<td align="center">数组指针</td>
-<td align="center">pointer to array</td>
-</tr>
-</tbody></table>
-<p>英语表示不就直白很多了吗…</p>
-<p>再者就是优先级的问题了。比如上文这个</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//an int[4] type pointer</span>
-<span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>由于<code>[]</code>的优先级比<code>*</code>的要高，所以用了括号来强行更改优先级，先解析<code>*</code>，它的意思是p2先是一个指针，然后解析<code>int</code>与<code>[4]</code>，表明p2是一个指向<code>int[4]</code>类型的指针。</p>
-<p>不加的话，意思是这样的</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span>p2<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token comment">// p2 is an array of pointers</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>（感觉解释有点奇怪）这里情况是，根据优先级，先解析<code>[4]</code>，表明p2会是一个长度为4的数组，然后再解析<code>*</code>，表明了p2是存储指针用的数组，指针指向<code>int</code>类型</p>
-<p>举个简单的，<code>int **p = array;</code>这个呢？</p>
-<p>就是等效于<code>int *(*p)</code>这个，<code>*</code>是右结合的，所以中间的<code>*</code>先与p结合，再与左边的<code>*</code>进行结合</p>
-<p>再者就是指针加减实际的多少，在这里，我姑且把对指针的加减当做是对指针变量里头存放的地址的前移和后移吧，这东西在前面的部分，已经讲了个大概了。</p>
-<p>对于上文那个<code>array[3][4]</code>数组，语句<code>(*(p2+1)+1)</code>做了些啥呢？p2是<code>int[4]</code>类型的指针，对<code>(p2+1)</code>就是p2右移动1个<code>int[4]</code>的长度，就是<code>array[1][0]</code>的起始地址，对该地址解引用后，获得了这个二维数组中的第二个<code>int[4]</code>类型的一维数组，即<code>array[1]</code>，是一个<code>int</code>类型的指针，之后加1就是右移动1个<code>int</code>长度了，因此最后解引用后就是9</p>
-<p>并且写到这里我发现，<code>array[1][1] </code>，因为<code>[]</code>的结合性是左结合，即是<code>(array[1])[1]</code>，其实不就是相当于<code>*(*(p2+1)+1)</code>吗？？？(难道数组的下标相当于给指针进行解引用)</p>
-<p>大概是下图这样的</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205153231.png"></p>
-<p>于是输出了<code>9</code>;</p>
-<h2 id="后面"><a href="#后面" class="headerlink" title="后面"></a>后面</h2><p>还需要补一下，还有字符数组与字符串</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>反思之概念理解不可粗糙</title>
-    <url>//contents/5a4f09596a4e/</url>
-    <content><![CDATA[<p>粗糙的学习与理解 必然会带来日后的隐患</p>
-<p>这不 咱最近就出现了一个问题</p>
-<span id="more"></span>
-
-<h2 id="危险想法"><a href="#危险想法" class="headerlink" title="危险想法"></a>危险想法</h2><p>我原来认为：包装类与基本数据类型可以相互转化，而数组是对象，所以 <code>int[]</code> 和 <code>Integer[]</code> 初始化出来的数组一定都是对象</p>
-<h2 id="咱被迷惑"><a href="#咱被迷惑" class="headerlink" title="咱被迷惑"></a>咱被迷惑</h2><p>前些天太浪了，导致咱最近在赶Java学习进度，一路高歌赶到多态<del>以集齐OOP三件套</del></p>
-<p>直到<del>在水职业指导课的时候</del>碰到一道自己难以回答的Check Point之后，才发觉暴力拔苗助长不可取，就好似人不可能一口吃下一个胖子一样</p>
-<p>这个问题是这样的</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">What</span> is wrong <span class="token keyword">with</span> <span class="token namespace">in</span> the following code<span class="token operator">?</span>
-
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token class-name">Double</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list2 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12.4</span><span class="token punctuation">,</span> <span class="token number">24.0</span><span class="token punctuation">,</span> <span class="token number">55.2</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token function">printArray</span><span class="token punctuation">(</span>list1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printArray</span><span class="token punctuation">(</span>list2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printArray</span><span class="token punctuation">(</span>list3<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
-
-  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">printArray</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> object<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span>object<span class="token operator">:</span> o<span class="token punctuation">)</span>
-      <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>o <span class="token operator">+</span> <span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>上题来自Java教材 <strong>Introduction to Java Programming and Data Structures Comprehensive Version</strong> 的 Page.427 <strong>Check Point 11.8.4</strong></p>
-<h2 id="绞尽脑汁"><a href="#绞尽脑汁" class="headerlink" title="绞尽脑汁"></a>绞尽脑汁</h2><p>看到这道题的时候我只想到 pass 到 method printArray 的是对象的reference，而数组都是对象啊，这题目，哪里有错误啊</p>
-<p>“一定是粗心的坏习惯犯了！” 我想</p>
-<p>然而不管我怎么看，<del>左看右看正看倒看反复观看</del>都看不出来</p>
-<p>此时水课过了一半，响起了下课铃 <del>吓得我吃了几个好丽友蛋黄派</del></p>
-<h2 id="一瞬报错"><a href="#一瞬报错" class="headerlink" title="一瞬报错"></a>一瞬报错</h2><p>而最后中午回到宿舍，马上把代码码了上去，发现报错如下</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Exception <span class="token keyword">in</span> thread <span class="token string">"main"</span> java.lang.Error: Unresolved compilation problem:
-    The method printArray<span class="token punctuation">(</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">in</span> the <span class="token builtin class-name">type</span> Test is not applicable <span class="token keyword">for</span> the arguments <span class="token punctuation">(</span>int<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>阅读这报错内容，基本可以得知, int[] type 竟然不是对象类型???</p>
-<p>震惊，难道数组在Java中不是属于对象吗？</p>
-<p>挺秃然的.jpg</p>
-<h2 id="开始混乱"><a href="#开始混乱" class="headerlink" title="开始混乱"></a>开始混乱</h2><p><del>迷惑行为开始了</del></p>
-<p>我对比了一下这两行代码</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>不就一个用的 Integer[] type 而另一个用的 int type 吗？</p>
-<p>回想起之前看过的 <strong>A primitive type can be automatically converted to an object using a wrapper class, and vice versa.</strong></p>
-<p>也就是说，Java是允许基本数据类型和 <strong>Wrapper Class</strong> 类型相互转换的，这种转换叫做<strong>autoboxing</strong> 和 <strong>autounboxing</strong> （一般是在赋值的时候？）</p>
-<p>就好比下面这俩语句是等效的</p>
-<p><code>Integer i = new Integer(1);</code> and <code>Integer i = 1;</code> are <strong>equivalent</strong></p>
-<p><code>int i = 1;</code> and <code>int i = new Integer(1);</code> are also <strong>equivalent</strong></p>
-<p>不过</p>
-<p>在我先前的概念里面，数组不是被Java当成对象处理了吗？</p>
-<p>那用 int[] 和 Integer[] 声明出来的数组，不都是属于一个对象吗？</p>
-<p>不能pass到method printArray就奇怪了</p>
-<h2 id="仔细咀嚼"><a href="#仔细咀嚼" class="headerlink" title="仔细咀嚼"></a>仔细咀嚼</h2><p>emm能报错的话，一定有它的道理，而书上很大概率会单独开一段话提及的</p>
-<p>我尝试开始翻书阅览相关内容，终于，我找到了很明显的一段话 <del>当初肯定是仓促学习而略读了</del></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Consider</span> the following example<span class="token operator">:</span>
-  <span class="token number">1</span> <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> intArray <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-  <span class="token number">2</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>intArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> intArray<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> intArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token class-name">In</span> line <span class="token number">1</span><span class="token punctuation">,</span> the prmitive values <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span> and <span class="token number">3</span> are automatically boxed into objects <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> and <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
-
-  <span class="token class-name">In</span> line <span class="token number">2</span><span class="token punctuation">,</span> the objects intArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> intArray<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> and intArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> are automatically unboxed into <span class="token keyword">int</span> values that are added together<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>好了，看完这段话我开始明白我的错误之处了 <del>这么长的一段话我当初怎么略读掉的</del></p>
-<p>噢原来 Integer[] type 是创建一个包含有多个Integer对象的数组啊</p>
-<p>比如，这里有一个<code>Student</code>类，我们可以用<code>Student[]</code>来声明包含多个Student对象的数组</p>
-<p>那么int[] type呢，原来创建的是包含有多个int基本数据类型的数组，里面的每一个元素都是一个基本数据类型的值</p>
-<p>如果我们把 <code>int[] array = new int[100]</code> 称之为</p>
-<p><code>An array that contains 100 numbers</code></p>
-<p>它叫做 <strong>Array of primitive values</strong></p>
-<p>那么<code>Integer[] array = new Integer[100]</code> 则是</p>
-<p><code>An array that contains 100 objects</code></p>
-<p>而它叫做 <strong>Array of objects</strong></p>
-<p><del>这个东西在OOP上手的时候就已经提到过了，不要被包装类和基本数据类型转换这玩意迷惑了眼睛</del></p>
-<h2 id="总结错误"><a href="#总结错误" class="headerlink" title="总结错误"></a>总结错误</h2><p>回到下面的代码</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>通过前面重新回顾和学习的成果</p>
-<p><strong>我们可见</strong> list1数组它本身也是一个对象，并且是一个包含了好几个<strong>对象</strong>形如<code>new Integer(1)</code>的数组；而list3数组它本身也是一个对象，只不过里面包含的是好几个基本类型的数值而已</p>
-<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>做事要一步一步慢慢来，这才是符合科学和实践规律的</p>
-<p>时快时慢，马马虎虎，必将少不了翻车</p>
-<p>并且经过踏踏实实系统学习，我相信学习成果必定会比东拼西凑的学习要稳固得多</p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-  </entry>
-  <entry>
     <title>快速上手C++面向对象</title>
     <url>//contents/a4fbad73ad9c/</url>
     <content><![CDATA[<p>(个人笔记) 要不是大一下学校的OOP课要讲MFC…</p>
@@ -1534,6 +1372,9 @@ a<span class="token operator">-></span><span class="token function">eat</span><s
 
 <p>就是相当于没有了多态特性而已。（个人理解）</p>
 <p>不过这能做到jvav做不到的东西，挺厉害的嘛（</p>
+<h2 id="override-关键字"><a href="#override-关键字" class="headerlink" title="override 关键字"></a>override 关键字</h2><p>这个东西(C++11)似乎可以防止写虚函数重载的时候，不小心写错的大无语事件发生。用法如下</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">eat</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <h2 id="modifier"><a href="#modifier" class="headerlink" title="modifier"></a>modifier</h2><p>似乎因为没有jvav的package，所以这么几个modifier<strong>都没有了package access的restriction</strong>（因为根本没有package啊）。所以就很方便了。</p>
 <p><code>public</code>类的外部都能访问。</p>
 <p><code>protected</code><strong>自己和派生类</strong>能访问。(！大不同！)</p>
@@ -1566,6 +1407,7 @@ Test<span class="token operator">::</span>i <span class="token comment">// 11451
     <span class="token comment">/** do sth */</span>
   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>经查询，这个东西叫做<code>Constructors and member initializer lists</code></p>
 <h2 id="friend"><a href="#friend" class="headerlink" title="friend"></a>friend</h2><p>然后就是友元了，友元可以直接访问class里头的private field，它不是一个成员函数也不是一个这个class的static函数。作用域不一样的。这东西有这个特性，岂不是可以少一堆getter和setter？（</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Test</span>
 <span class="token punctuation">&#123;</span>
@@ -1750,7 +1592,183 @@ foo++ was called
 <span class="token number">630</span>
 <span class="token number">1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<h2 id="const-keyword"><a href="#const-keyword" class="headerlink" title="const keyword"></a>const keyword</h2><p>草了，竟然还有啊…不愧是C++…</p>
+<p>一般来说呢，<code>const</code>是作用于它左边的（如果左边啥都没有的话）。而这个关键字<code>const</code>能作用于变量、函数、类对象…</p>
+<p>不过<strong>关键</strong>是有<code>const</code>的东西，它不能修改里面成员的内存空间。</p>
+<p>变量加const就很简单，就不用说了。</p>
+<p>如果有<code>Foo const foo;</code>，那么这个对象变量（或指针）就不能访问非const方法，也不能修改成员了</p>
+<p>如果有一个const方法，那么在这个方法体内，不能访问非const方法，也不能修改成员变量。（实质在后面说了）</p>
+<p>而我查了cppreference，里面这样说</p>
+<blockquote>
+<p>const object - an object whose type is const-qualified, or a non-mutable subobject of a const object. Such object cannot be modified: attempt to do so directly is a compile-time error, and attempt to do so indirectly (e.g., by modifying the const object through a reference or pointer to non-const type) results in undefined behavior.</p>
+</blockquote>
+<p>并且const了的函数实质又是？是这样的，其实就是把这个函数里头的<code>*this</code>给const掉了。</p>
+<blockquote>
+<p>In the body of a cv-qualified function, *this is cv-qualified, e.g. in a const member function, only other const member functions may be called normally. (A non-const member function may still be called if const_cast is applied or through an access path that does not involve this.)</p>
+</blockquote>
 <h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>施工中…</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>C语言之数组与指针</title>
+    <url>//contents/d34f10f99adc/</url>
+    <content><![CDATA[<p>指针和数组，关系不浅啊</p>
+<span id="more"></span>
+
+<p><del><strong>禁止茴香豆</strong></del></p>
+<p>课间写的，有点匆忙，估计有不少错误，如有，请指出，谢谢。</p>
+<p>上面不懂的可能需要下面内容的补足（写作水平太菜了）</p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>为什么我突然写这篇文章呢？原来是我在<a href="https://en.cppreference.com/w/c/memory/malloc">cppreference上面看malloc()</a>，了解一下简单的内存分配的时候，试了一下附带的example</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span>   </span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span> </span>
+ 
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> 
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token operator">*</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// allocates enough for an array of 4 int</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>p2 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// same, naming the type directly</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>p3 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token operator">*</span><span class="token keyword">sizeof</span> <span class="token operator">*</span>p3<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// same, without repeating the type name</span>
+ 
+    <span class="token keyword">if</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> n<span class="token operator">&lt;</span><span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>n<span class="token punctuation">)</span> <span class="token comment">// populate the array</span>
+            p1<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> n<span class="token operator">*</span>n<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> n<span class="token operator">&lt;</span><span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>n<span class="token punctuation">)</span> <span class="token comment">// print it back out</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"p1[%d] == %d\n"</span><span class="token punctuation">,</span> n<span class="token punctuation">,</span> p1<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+ 
+    <span class="token function">free</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>p3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这段代码运行之后，输出的结果是</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">p1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+p1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
+p1<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">4</span>
+p1<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">9</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>诶诶诶，为什么指针也能拥有数组那样的下标呢？我的直觉告诉我：指针和数组，之间必定有不可描述的关系</p>
+<p>在开始之前，感谢一下tindy2013能抽空给我微微解释了一下<del>，缩短了我自主探索的时间</del></p>
+<h2 id="数组的下标"><a href="#数组的下标" class="headerlink" title="数组的下标"></a>数组的下标</h2><p>如同多数地方所说的，数组就是一种数据结构。是一坨<strong>连续</strong>的元素，接连着一起躺在了内存中的某一块区域。并且数组拥有operator<code>[]</code>，即是数组的下标。</p>
+<p>之前我发现数组还可以这样子</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%p"</span><span class="token punctuation">,</span> arr<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>最后的输出了一个内存地址，并且我们还可以新建一个指针并把数组变量赋值给它，并能通过指针给arr中的其中一个元素赋值</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span>
+
+arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token comment">//or</span>
+p <span class="token operator">+=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token operator">*</span>p <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token comment">//or</span>
+<span class="token operator">*</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>上面三个操作都是一样的，输出结果都是<code>1</code></p>
+<p>既然上面有<code>int *p = arr;</code>那么我把数组arr当成一个常量指针，既然arr可以拥有一个属于他自己的下标，那么一般的指针，是否也能拥有一个下标呢？</p>
+<p>不多猜测，先试一下看看是不是这样</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">p<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>也是一个样，那么，<strong>指针变量拥有下标</strong>。</p>
+<p>但是经过一番的查询之后，发现数组和指针，这两者并不是<strong>绝对相同</strong>的。常见且有区别的，就是在使用运算符<code>sizeof</code>的时候，得到的就是数组类型<code>int[]</code>的长度了。只不过在大多数情况下，被隐式转换成指针了。</p>
+<p>下面摘抄一点ISO C标准对数组的说明（不想看可以跳过）</p>
+<p><code>Constraints : 1 One of the expressions shall have type &#39;pointer to object type&#39;,  the other expression shall have integer type, and the result has type  &#39;type&#39;.</code><br><code>Semantics : 2 A postfix expression followed by an expression in square brackets [] is a subscripted designation of an element of an array object. The definition of the subscript operator [] is that E1[E2] is identical to (*((E1)+(E2))). Because of the conversion rules that apply to the binary + operator, if E1 is an array object (equivalently, a pointer to the initial element of an array object) and E2 is an integer, E1[E2] designates the E2-th element of E1 (counting from zero).</code></p>
+<h2 id="关于内存的一点知识来讨论。"><a href="#关于内存的一点知识来讨论。" class="headerlink" title="关于内存的一点知识来讨论。"></a>关于内存的一点知识来讨论。</h2><p>前面只是基于代码和结果来猜测和讨论的，那实际上它们都干了些啥，我们可以结合关于内存的一点知识来讨论。</p>
+<p>首先，先给自己的脑子灌输一点知识：如果没有了解过内存的话，我们可以大概的形成一下印象。（大佬请跳过）</p>
+<p>内存呢，我喜欢把它形象化成一张密密麻麻的表格，它很长很长，但是宽度只有8个格子（1字节 = 8位），并且每一行都有一个专门的标号，就是内存的地址啦（字节编址）</p>
+<p>如图所示</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143617.png"></p>
+<p>数据进入内存的话，就会占据内存的一部分，比如我们熟知，在32位下，<code>int</code>型占用4个字节，<code>double</code>型占用8个字节，比如我们有一个值为1的int变量，它会在内存中占据着4个字节</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143537.png"></p>
+<p>数组是在内存上连续分布一块的数据结构。如果有一个长度为3的int数组<code>arr[3] = &#123;7, 4, 5&#125;</code>，那么它在内存里的占用是连续的，三个int类型长度的地址，还有一个数组名的变量，相当于一个常量指针（不可更改地址）</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143733.png"></p>
+<p>我们可以使用<code>arr[0] arr[1] arr[2]</code>来进行对应元素的访问。与此同时，使用一个指针<code>int *p = arr</code>来实现上述的访问</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span> <span class="token comment">// *p = 7</span>
+p<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// *p = 4</span>
+p<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// *p = 5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>由上可见，指针p进行了两次自增，每一次自增，都会对p存放的地址+4，去到下一个元素的起始地址。因此，对p解引用就会出现不同的结果，分别对应<code>arr[0] arr[1] arr[2]</code></p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205144359.png"></p>
+<p>那么有，</p>
+<p><code>arr[0]</code>就是直接对arr的起始地址进行解引用，结果就是<code>7</code></p>
+<p><code>arr[1]</code>就是对arr进行+1，对指针<code>arr + 1</code>进行解引用，结果就是<code>4</code></p>
+<p><code>arr[2]</code>同理，结果是<code>5</code></p>
+<h2 id="使用指针操作数组"><a href="#使用指针操作数组" class="headerlink" title="使用指针操作数组"></a>使用指针操作数组</h2><p>一维数组的指针就是像上面那样子，那如果我们对<strong>二维、三维数组</strong>用指针进行数组操作呢？</p>
+<p>其实呢，二维数组就是一个<strong>连续的</strong>，<strong>包含多个一维数组</strong>的数组</p>
+<p>又因为，数组名就是个指针，所以，二维数组的数组名就是个指针，指向着多个一维数组名（pointer to pointer）</p>
+<p>再根据上面所提到的一句话：</p>
+<blockquote>
+<p>指针变量自增1，即是对其原来的地址加上一个对应类型的长度</p>
+</blockquote>
+<p>假设这里有一个二维数组<code>int array[3][4]</code>呢？我们用指针进行操作的时候，可以初始化这两种指针：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> array<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token comment">//an int type pointer</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token operator">*</span>array<span class="token punctuation">;</span>
+<span class="token comment">//an int[4] type pointer</span>
+<span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们对p1和p2加一，并对其解引用</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">p1<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment">//output: 5</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> array<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+p2<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment">//output: 9</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> array<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以看出，两者输出结果不一样，其中p1读出来的是<code>a[0][1]  = 5</code>，而p2读出来的是<code>a[1][1] = 9</code></p>
+<p>为什么呢？仔细思考一下的话，其实也不难理解</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205145556.png"></p>
+<h2 id="注意操作的对象"><a href="#注意操作的对象" class="headerlink" title="注意操作的对象"></a>注意操作的对象</h2><p>我到底，操作着哪个对象啊……</p>
+<p>我作为一个初学者，平时也会被各种多重 asterisk(*) 搞晕，不过静下心来，发现还是要抓住这些</p>
+<ol>
+<li>优先级</li>
+<li>指针加减所表示的含义</li>
+</ol>
+<p>首先是优先级和结合性</p>
+<p>先举一个在课堂上使人晕针的东西：<strong>指针数组</strong>和<strong>数组指针</strong></p>
+<p>我觉得好晕啊，先看下它们对应的英语吧：</p>
+<table>
+<thead>
+<tr>
+<th align="center">中文</th>
+<th align="center">英语</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">指针数组</td>
+<td align="center">array of pointer</td>
+</tr>
+<tr>
+<td align="center">数组指针</td>
+<td align="center">pointer to array</td>
+</tr>
+</tbody></table>
+<p>英语表示不就直白很多了吗…</p>
+<p>再者就是优先级的问题了。比如上文这个</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//an int[4] type pointer</span>
+<span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>由于<code>[]</code>的优先级比<code>*</code>的要高，所以用了括号来强行更改优先级，先解析<code>*</code>，它的意思是p2先是一个指针，然后解析<code>int</code>与<code>[4]</code>，表明p2是一个指向<code>int[4]</code>类型的指针。</p>
+<p>不加的话，意思是这样的</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span>p2<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">// p2 is an array of pointers</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>（感觉解释有点奇怪）这里情况是，根据优先级，先解析<code>[4]</code>，表明p2会是一个长度为4的数组，然后再解析<code>*</code>，表明了p2是存储指针用的数组，指针指向<code>int</code>类型</p>
+<p>举个简单的，<code>int **p = array;</code>这个呢？</p>
+<p>就是等效于<code>int *(*p)</code>这个，<code>*</code>是右结合的，所以中间的<code>*</code>先与p结合，再与左边的<code>*</code>进行结合</p>
+<p>再者就是指针加减实际的多少，在这里，我姑且把对指针的加减当做是对指针变量里头存放的地址的前移和后移吧，这东西在前面的部分，已经讲了个大概了。</p>
+<p>对于上文那个<code>array[3][4]</code>数组，语句<code>(*(p2+1)+1)</code>做了些啥呢？p2是<code>int[4]</code>类型的指针，对<code>(p2+1)</code>就是p2右移动1个<code>int[4]</code>的长度，就是<code>array[1][0]</code>的起始地址，对该地址解引用后，获得了这个二维数组中的第二个<code>int[4]</code>类型的一维数组，即<code>array[1]</code>，是一个<code>int</code>类型的指针，之后加1就是右移动1个<code>int</code>长度了，因此最后解引用后就是9</p>
+<p>并且写到这里我发现，<code>array[1][1] </code>，因为<code>[]</code>的结合性是左结合，即是<code>(array[1])[1]</code>，其实不就是相当于<code>*(*(p2+1)+1)</code>吗？？？(难道数组的下标相当于给指针进行解引用)</p>
+<p>大概是下图这样的</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205153231.png"></p>
+<p>于是输出了<code>9</code>;</p>
+<h2 id="后面"><a href="#后面" class="headerlink" title="后面"></a>后面</h2><p>还需要补一下，还有字符数组与字符串</p>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -1835,6 +1853,181 @@ foo++ was called
 ]]></content>
       <categories>
         <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>搭建个人博客</title>
+    <url>//contents/43abca4995a8/</url>
+    <content><![CDATA[<p>国庆回家了，先随便水一篇文章 <del>才放4天假差评</del></p>
+<p>那么，如何搭建一个属于自己的静态博客？</p>
+<span id="more"></span>
+
+<p><strong>时效性：</strong>本文在2020/12/12时，经舍友测试可用</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这个世界上有许多东西，如果我们不去刻意记录，它们也许会永远消失于自己脑海，消失于他人视野中，消失于这个世上</p>
+<p>拥有一个自己的博客，可用于随手记下自己的成长历程中的点滴与思考</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>一个自己的GitHub账户</li>
+<li>相关本地环境</li>
+<li>SSH密钥</li>
+<li>阅读相关文档的<strong>耐心</strong></li>
+</ol>
+<h2 id="选择博客框架"><a href="#选择博客框架" class="headerlink" title="选择博客框架"></a>选择博客框架</h2><p>能搭建起博客的有很多，比如</p>
+<ul>
+<li>WordPress (适合新手，不过有点臃肿，毕竟是动态博客)</li>
+<li>django (一个python-based的框架)</li>
+<li>hexo (轻量的静态博客，也是我选用的)</li>
+<li>github page一把梭 (简单粗暴适合新手<del>可以直接把github当editor</del>)</li>
+<li>Jhipster (<del>能玩得起来的人都tql</del>)</li>
+</ul>
+<p>最后我选择了hexo作为我的博客框架，基于以下一些个人的思考</p>
+<ol>
+<li>博客是否足够轻?</li>
+<li>文章文件是否<strong>易于备份</strong>(重要，毕竟文章才是自己输出的心血)</li>
+<li>支不支持Markdown</li>
+<li>是否可拓展且有比较多的插件</li>
+<li>是否可以一键部署至云端</li>
+</ol>
+<h2 id="本地环境"><a href="#本地环境" class="headerlink" title="本地环境"></a>本地环境</h2><p>github账户应该是人均一个了吧，这里不再说github账户注册相关的了</p>
+<p>在本地环境下，安装如下软件</p>
+<ol>
+<li><a href="https://git-scm.com/">Git</a></li>
+<li><a href="https://nodejs.org/en/">node.js</a></li>
+</ol>
+<p>Git用于后续的博客部署和版本控制，而hexo是powered by nodejs的</p>
+<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><p>作为用户，我们啥也不知道啊，但开发者已经把他想说的都写出来了，所以<strong>阅读文档</strong>是个好方法</p>
+<p><a href="https://hexo.io/docs/">Hexo Deocumentation</a></p>
+<p>里面写了requirement和hexo installation方法</p>
+<p><strong>耐心</strong>阅读与寻找，便能找到如下内容</p>
+<pre><code>Install Hexo
+Once all the requirements are installed, you can install Hexo with npm:
+
+$ npm install -g hexo-cli</code></pre>
+<p>读出来，就是在命令行输入</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>便能安装hexo</p>
+<p>hexo-cli安装了，所以该如何setup呢？</p>
+<p>无需多虑，开发者写了相应的文档<a href="https://hexo.io/docs/setup">hexo setup</a></p>
+<p>开局就写到</p>
+<pre><code>Once Hexo is installed, run the following commands to initialize Hexo in the target &lt;folder&gt;.
+
+$ hexo init &lt;folder&gt;
+$ cd &lt;folder&gt;
+$ npm install</code></pre>
+<p>也就是说，在目标文件夹下依次输入上面三个commands就行了</p>
+<p>初始化之后的目录结构，一些对于config文件的说明，文档里已经讲得清清楚楚了，跟着它一起配置即可</p>
+<p>关于命令行操作，<a href="https://hexo.io/docs/commands">文档</a>里面也写的很清楚了</p>
+<p>我一般也就新建新文章，本地测试，上传到github，所以大部分时候会用到如下几个</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">hexo new <span class="token punctuation">[</span>layout<span class="token punctuation">]</span> <span class="token operator">&lt;</span>title<span class="token operator">></span>
+hexo generate
+hexo publish
+hexo clean
+hexo server
+hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="撰写你的第一篇文章"><a href="#撰写你的第一篇文章" class="headerlink" title="撰写你的第一篇文章"></a>撰写你的第一篇文章</h2><p>在hexo目录下输入 <code>hexo new my-first-content</code></p>
+<p>接着，该文章的文件就会生成于子目录 <code>source/_post</code> 下</p>
+<p>该文件是 <strong>Markdown</strong> 格式，最好用支持md的editor打开（<del>vscode + markdownlint 天下第一</del></p>
+<p>typora 对于 Markdown 的支持也是很好的（<del>不过vscode能做的事为什么还要用其他编辑器啊</del></p>
+<p>此处附上 Markdown syntax 相关的网页: <a href="https://www.markdownguide.org/basic-syntax/">Markdown Guide</a></p>
+<h2 id="配置SSH密钥"><a href="#配置SSH密钥" class="headerlink" title="配置SSH密钥"></a>配置SSH密钥</h2><p>这里使用SSH密钥来进行本地与github之间的通讯</p>
+<p>官方文档如下</p>
+<p><a href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh">connecting to github with ssh Github Docs</a></p>
+<p>经阅读上方的文档可以得知</p>
+<p>先生成SSH key，下列command生成了公/私对<br><code>$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code></p>
+<p>再将其public key复制进剪贴板<br><code>$ clip &lt; ~/.ssh/id_rsa.pub</code></p>
+<p>之后到<a href="https://github.com/settings/keys">https://github.com/settings/keys</a>里，点击New SSH key，然后把它粘贴到文本框里</p>
+<p>接下来就是测试连接</p>
+<p>在命令行下输入 <code>ssh -T git@github.com</code> 以测试SSH是否配置好</p>
+<p>预期结果应如下</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> C:\Users\situ> ssh <span class="token operator">-</span>T git@github<span class="token punctuation">.</span>com
+Hi situ2001<span class="token operator">!</span> You've successfully authenticated<span class="token punctuation">,</span> but GitHub does not provide shell access<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>此时，到github的connection已经没有问题</p>
+<h2 id="关于部署"><a href="#关于部署" class="headerlink" title="关于部署"></a>关于部署</h2><p>本地写好了，当然是要部署，而部署之前，得要有地方给你放。</p>
+<p>首先先在github上建立一个这样的仓库</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003114117.png"></p>
+<p>repo的name是 yourusername.github.io ，并且这个repo要是Public的，填完之后点击 Create Repository 按钮就行了</p>
+<p>至于为什么要这样做，细看官方讲解: <a href="https://pages.github.com/">Github Pages</a></p>
+<p>新建出来的repo，github pages默认是启用着的（<del>也关不了</del></p>
+<p>再调一下 repo 里面的 setting ，进入 setting 之后一直往下跑就看到了</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003151605.png"></p>
+<p>主要是设置一下 source folder 和 branch 之类的，可以直接加一个HTTPS，也支持自定义域名</p>
+<p>至于hexo这边如何配置呢</p>
+<p>先执行如下命令，为什么，因为文档有的说啊：<a href="https://hexo.io/docs/github-pages#One-command-deployment">Github Pages | Hexo</a><br><code>$ npm install hexo-deployer-git --save</code></p>
+<p>再去到hexo文件夹下，找到 <code>_config.yml</code> 文件</p>
+<p>添加如下几行</p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">deploy:
+  type: &#39;git&#39;
+  repo: https:&#x2F;&#x2F;github.com&#x2F;yourusername&#x2F;yourusername.github.io
+  #branch: master
+  branch: main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>2020-11-01更新: GitHub repo的default branch name变成main而不是master了, 因此上方做了一些修改</p>
+</blockquote>
+<p>输入 command <code>hexo deploy</code> 等待一段时间之后，若无错误提示，便是部署成功</p>
+<h2 id="访问博客"><a href="#访问博客" class="headerlink" title="访问博客"></a>访问博客</h2><p>在部署之前可以输入command <code>hexo server</code> 进行本地访问</p>
+<p>若已经部署到github上了，直接在浏览器输入 <code>username.github.io</code> 就行</p>
+<p>如果没有问题，你的博客页面将会被加载</p>
+<p><strong>注</strong>: 绝大部分地区可能无法打开<code>*.github.io</code>，建议修改DNS为 <code>223.5.5.5</code>，能解决大部分问题，如果有域名和CDN的，推荐CNAME解析再套上CDN</p>
+<p>update: CNAME文件会在deploy之后被覆盖，翻了一下，发现<code>hexo deploy</code>用的是 <code>git push --force</code> ，因此远程仓库的内容会被现有的本地仓库覆盖掉，解决方法是在source目录下直接新建一个CNAME文件，这样在生成的时候就会出现在public目录里</p>
+<p>如下图所示</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003174322.png"></p>
+<h2 id="图床配置-Optional"><a href="#图床配置-Optional" class="headerlink" title="图床配置 (Optional)"></a>图床配置 (Optional)</h2><p>Git 这种东西，不是拿来给我们存放二进制文件（如图片）的</p>
+<p>俗话说得好， <del>Git存换删图一时爽，.git folder火葬场</del></p>
+<p>而图片在Markdown中，可以以URL形式附上，所以只要有链接，就能出图了</p>
+<p>经过一把Google之后，我认为有两种不错的方法来进行图片的</p>
+<h3 id="公共图床"><a href="#公共图床" class="headerlink" title="公共图床"></a>公共图床</h3><p>使用公共图床，可以直接0开支（免费图床的话），但有利也有弊，图床毕竟只是别人的一项服务，图片放在别人那里，万一用着的这家公共图床凉了呢？能换，但是文章中URL修改的工程量可不小呢，如果没有备份的好习惯，你的图片都还在本地吗？</p>
+<p>列一些用的比较多的图床</p>
+<ol>
+<li><a href="https://imgur.com/">imgur</a> (国外知名图床，国内访问不友好)</li>
+<li><a href="https://imgchr.com/">imgchr</a> (<del>跟1域名高度重合，一看就知道解决了什么问题</del>)</li>
+</ol>
+<h3 id="私人图床"><a href="#私人图床" class="headerlink" title="私人图床"></a>私人图床</h3><p>私人图床可以考虑使用对象存储，如七牛、腾讯、阿里的对象存储<br>对于一般的个人博客，用对象存储，金钱开支一般都会很小（存储便宜，流量价格适中但是几乎不怎么跑流量）</p>
+<h3 id="图片管理神器-PicGo"><a href="#图片管理神器-PicGo" class="headerlink" title="图片管理神器 PicGo"></a>图片管理神器 PicGo</h3><p>地址：<a href="https://github.com/Molunerfinn/PicGo">PicGo</a><br>这是github上的大佬开发的一个用于管理自己存放于图床的图片的工具</p>
+<p>下载下来并根据里面的Wiki一步一步来就行了</p>
+<p>上传图片之后，按照md的syntax <code>![text](URL)</code> 插入到文章即可</p>
+<p>不详细说怎么操作了，毕竟人家已经有文档了，我在这里说，无非就是照搬文档，甚至还可能加上自己的主观认知，从而导致方法步骤等被个人地二次加工。</p>
+<p>所以<br><strong>不会读文档的人可不是一个新时代青年哦</strong></p>
+<p><del>为了叫你们去读文档而不花费大量篇幅写作，我可真是好人呢</del></p>
+<h2 id="安装主题-Optional"><a href="#安装主题-Optional" class="headerlink" title="安装主题 (Optional)"></a>安装主题 (Optional)</h2><p>可以安装其他主题以美化自己的博客<br>我用的是Next主题：<a href="https://github.com/next-theme/hexo-theme-next">https://github.com/next-theme/hexo-theme-next</a></p>
+<p>安装很简单，直接在hexo目录下输入下面command即可<br><code>$ npm install hexo-theme-next</code></p>
+<p>之后再在 <code>_config.yml</code> 下将theme改成<br><code>theme: next</code></p>
+<p>剩下的设置都在官方文档了，自己去看吧: <a href="https://theme-next.js.org/docs/">https://theme-next.js.org/docs/</a></p>
+<p><del>我还在用着默认设置</del></p>
+<h2 id="备份博客-Optional"><a href="#备份博客-Optional" class="headerlink" title="备份博客 (Optional)"></a>备份博客 (Optional)</h2><p>虽然博客的源文件是在本地的，但是在本地也有风险啊，（猜测）并且有时候为了去其他电脑码文，你用了U盘拷过去，一次两次还好，多次之后你将会分不清那边是最新的源文件了<del>（论版本控制的重要性）</del></p>
+<h3 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h3><p>所以我们可以在github新开一个private repo(没想到已经放开使用了)</p>
+<p><strong>首次</strong>先<code>git clone</code>下来，把源文件扔进去，一波 <code>git add .</code> 一波 <code>git commit</code> 最后 <code>git push</code> 送他上路<br><strong>以后</strong>再其他设备上，只需要 <code>git clone</code> <code>git add</code> <code>git commit</code> 和 <code>git push / git pull</code> 就行了（常用的几个）</p>
+<p>Alternative: 也可以在github pages的repo下，把deployment的branch设置为master之外的（如gh-pages），然后直接push到master分支即可，不过.deploy_git文件夹没拉下来的话，可能会出事，下面有提到。</p>
+<h3 id="把-gitignore文件设置好"><a href="#把-gitignore文件设置好" class="headerlink" title="把.gitignore文件设置好"></a>把.gitignore文件设置好</h3><p><strong>一定要有</strong>.gitignore文件<br>一定要<strong>有.gitignore文件</strong><br><strong>一定要有.gitignore文件</strong></p>
+<p>如果你想git clone下来一堆或者push一堆node_moudle，请忽略此步</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003182803.png"></p>
+<p>该文件的作用如文件名本身，可以忽略上传的文件/文件夹</p>
+<p>对于hexo源文件，我一般选择忽略如下，剩下的便是文章和config文件</p>
+<pre class="line-numbers language-none"><code class="language-none">.DS_Store
+Thumbs.db
+db.json
+*.log
+node_modules&#x2F;
+public&#x2F;
+.deploy*&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>2020-11-21更新：<strong>不过</strong>在更换本地环境之后，.deploy*/是保存有静态页面仓库的.git文件夹的，并且hexo-deployer-git的<a href="https://github.com/hexojs/hexo-deployer-git#how-it-works">README</a>如是说</p>
+<blockquote>
+<p>hexo-deployer-git works by generating the site in .deploy_git and force pushing to the repo(es) in config. If .deploy_git does not exist, a repo will initialized (git init). Otherwise the curent repo (with its commit history) will be used.</p>
+</blockquote>
+<p>由于是force push，也就是说没有这个文件夹时候，重新生成的新的，会把你原有的仓库直接覆盖掉（也就是说commit啥的全没了）<br>所以在换环境的时候，记得clone一下，即是把你的username.github.io这个repo clone下来并重命名为.deploy_git，如下</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone <span class="token operator">&lt;</span>gh-pages repo<span class="token operator">></span> .deploy_git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>到这里，现在你<del>应该</del>有一个属于自己的个人博客了</p>
+<p>听说在线聊天，异性”哦”你的时候，回个”嗯”是一个很好的选择（跑</p>
+<p>那么</p>
+<p>嗯</p>
+<p>Enjoy writing</p>
+]]></content>
+      <categories>
+        <category>教程</category>
       </categories>
   </entry>
   <entry>
@@ -2511,181 +2704,6 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 </ul>
 <p>还有一个方法，学习这东西，可以到github上面浏览一下出名的repo的一些东西，比如说，它们的commit commet的写法风格是怎么样的，它们的分支是怎么样的……</p>
 <p>以上就是我这菜狗能提供的东西了，如有错误，还请指出<del>（菜是原罪）</del></p>
-]]></content>
-      <categories>
-        <category>教程</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>搭建个人博客</title>
-    <url>//contents/43abca4995a8/</url>
-    <content><![CDATA[<p>国庆回家了，先随便水一篇文章 <del>才放4天假差评</del></p>
-<p>那么，如何搭建一个属于自己的静态博客？</p>
-<span id="more"></span>
-
-<p><strong>时效性：</strong>本文在2020/12/12时，经舍友测试可用</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这个世界上有许多东西，如果我们不去刻意记录，它们也许会永远消失于自己脑海，消失于他人视野中，消失于这个世上</p>
-<p>拥有一个自己的博客，可用于随手记下自己的成长历程中的点滴与思考</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
-<li>一个自己的GitHub账户</li>
-<li>相关本地环境</li>
-<li>SSH密钥</li>
-<li>阅读相关文档的<strong>耐心</strong></li>
-</ol>
-<h2 id="选择博客框架"><a href="#选择博客框架" class="headerlink" title="选择博客框架"></a>选择博客框架</h2><p>能搭建起博客的有很多，比如</p>
-<ul>
-<li>WordPress (适合新手，不过有点臃肿，毕竟是动态博客)</li>
-<li>django (一个python-based的框架)</li>
-<li>hexo (轻量的静态博客，也是我选用的)</li>
-<li>github page一把梭 (简单粗暴适合新手<del>可以直接把github当editor</del>)</li>
-<li>Jhipster (<del>能玩得起来的人都tql</del>)</li>
-</ul>
-<p>最后我选择了hexo作为我的博客框架，基于以下一些个人的思考</p>
-<ol>
-<li>博客是否足够轻?</li>
-<li>文章文件是否<strong>易于备份</strong>(重要，毕竟文章才是自己输出的心血)</li>
-<li>支不支持Markdown</li>
-<li>是否可拓展且有比较多的插件</li>
-<li>是否可以一键部署至云端</li>
-</ol>
-<h2 id="本地环境"><a href="#本地环境" class="headerlink" title="本地环境"></a>本地环境</h2><p>github账户应该是人均一个了吧，这里不再说github账户注册相关的了</p>
-<p>在本地环境下，安装如下软件</p>
-<ol>
-<li><a href="https://git-scm.com/">Git</a></li>
-<li><a href="https://nodejs.org/en/">node.js</a></li>
-</ol>
-<p>Git用于后续的博客部署和版本控制，而hexo是powered by nodejs的</p>
-<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><p>作为用户，我们啥也不知道啊，但开发者已经把他想说的都写出来了，所以<strong>阅读文档</strong>是个好方法</p>
-<p><a href="https://hexo.io/docs/">Hexo Deocumentation</a></p>
-<p>里面写了requirement和hexo installation方法</p>
-<p><strong>耐心</strong>阅读与寻找，便能找到如下内容</p>
-<pre><code>Install Hexo
-Once all the requirements are installed, you can install Hexo with npm:
-
-$ npm install -g hexo-cli</code></pre>
-<p>读出来，就是在命令行输入</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>便能安装hexo</p>
-<p>hexo-cli安装了，所以该如何setup呢？</p>
-<p>无需多虑，开发者写了相应的文档<a href="https://hexo.io/docs/setup">hexo setup</a></p>
-<p>开局就写到</p>
-<pre><code>Once Hexo is installed, run the following commands to initialize Hexo in the target &lt;folder&gt;.
-
-$ hexo init &lt;folder&gt;
-$ cd &lt;folder&gt;
-$ npm install</code></pre>
-<p>也就是说，在目标文件夹下依次输入上面三个commands就行了</p>
-<p>初始化之后的目录结构，一些对于config文件的说明，文档里已经讲得清清楚楚了，跟着它一起配置即可</p>
-<p>关于命令行操作，<a href="https://hexo.io/docs/commands">文档</a>里面也写的很清楚了</p>
-<p>我一般也就新建新文章，本地测试，上传到github，所以大部分时候会用到如下几个</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">hexo new <span class="token punctuation">[</span>layout<span class="token punctuation">]</span> <span class="token operator">&lt;</span>title<span class="token operator">></span>
-hexo generate
-hexo publish
-hexo clean
-hexo server
-hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="撰写你的第一篇文章"><a href="#撰写你的第一篇文章" class="headerlink" title="撰写你的第一篇文章"></a>撰写你的第一篇文章</h2><p>在hexo目录下输入 <code>hexo new my-first-content</code></p>
-<p>接着，该文章的文件就会生成于子目录 <code>source/_post</code> 下</p>
-<p>该文件是 <strong>Markdown</strong> 格式，最好用支持md的editor打开（<del>vscode + markdownlint 天下第一</del></p>
-<p>typora 对于 Markdown 的支持也是很好的（<del>不过vscode能做的事为什么还要用其他编辑器啊</del></p>
-<p>此处附上 Markdown syntax 相关的网页: <a href="https://www.markdownguide.org/basic-syntax/">Markdown Guide</a></p>
-<h2 id="配置SSH密钥"><a href="#配置SSH密钥" class="headerlink" title="配置SSH密钥"></a>配置SSH密钥</h2><p>这里使用SSH密钥来进行本地与github之间的通讯</p>
-<p>官方文档如下</p>
-<p><a href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh">connecting to github with ssh Github Docs</a></p>
-<p>经阅读上方的文档可以得知</p>
-<p>先生成SSH key，下列command生成了公/私对<br><code>$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code></p>
-<p>再将其public key复制进剪贴板<br><code>$ clip &lt; ~/.ssh/id_rsa.pub</code></p>
-<p>之后到<a href="https://github.com/settings/keys">https://github.com/settings/keys</a>里，点击New SSH key，然后把它粘贴到文本框里</p>
-<p>接下来就是测试连接</p>
-<p>在命令行下输入 <code>ssh -T git@github.com</code> 以测试SSH是否配置好</p>
-<p>预期结果应如下</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> C:\Users\situ> ssh <span class="token operator">-</span>T git@github<span class="token punctuation">.</span>com
-Hi situ2001<span class="token operator">!</span> You've successfully authenticated<span class="token punctuation">,</span> but GitHub does not provide shell access<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>此时，到github的connection已经没有问题</p>
-<h2 id="关于部署"><a href="#关于部署" class="headerlink" title="关于部署"></a>关于部署</h2><p>本地写好了，当然是要部署，而部署之前，得要有地方给你放。</p>
-<p>首先先在github上建立一个这样的仓库</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003114117.png"></p>
-<p>repo的name是 yourusername.github.io ，并且这个repo要是Public的，填完之后点击 Create Repository 按钮就行了</p>
-<p>至于为什么要这样做，细看官方讲解: <a href="https://pages.github.com/">Github Pages</a></p>
-<p>新建出来的repo，github pages默认是启用着的（<del>也关不了</del></p>
-<p>再调一下 repo 里面的 setting ，进入 setting 之后一直往下跑就看到了</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003151605.png"></p>
-<p>主要是设置一下 source folder 和 branch 之类的，可以直接加一个HTTPS，也支持自定义域名</p>
-<p>至于hexo这边如何配置呢</p>
-<p>先执行如下命令，为什么，因为文档有的说啊：<a href="https://hexo.io/docs/github-pages#One-command-deployment">Github Pages | Hexo</a><br><code>$ npm install hexo-deployer-git --save</code></p>
-<p>再去到hexo文件夹下，找到 <code>_config.yml</code> 文件</p>
-<p>添加如下几行</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">deploy:
-  type: &#39;git&#39;
-  repo: https:&#x2F;&#x2F;github.com&#x2F;yourusername&#x2F;yourusername.github.io
-  #branch: master
-  branch: main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>2020-11-01更新: GitHub repo的default branch name变成main而不是master了, 因此上方做了一些修改</p>
-</blockquote>
-<p>输入 command <code>hexo deploy</code> 等待一段时间之后，若无错误提示，便是部署成功</p>
-<h2 id="访问博客"><a href="#访问博客" class="headerlink" title="访问博客"></a>访问博客</h2><p>在部署之前可以输入command <code>hexo server</code> 进行本地访问</p>
-<p>若已经部署到github上了，直接在浏览器输入 <code>username.github.io</code> 就行</p>
-<p>如果没有问题，你的博客页面将会被加载</p>
-<p><strong>注</strong>: 绝大部分地区可能无法打开<code>*.github.io</code>，建议修改DNS为 <code>223.5.5.5</code>，能解决大部分问题，如果有域名和CDN的，推荐CNAME解析再套上CDN</p>
-<p>update: CNAME文件会在deploy之后被覆盖，翻了一下，发现<code>hexo deploy</code>用的是 <code>git push --force</code> ，因此远程仓库的内容会被现有的本地仓库覆盖掉，解决方法是在source目录下直接新建一个CNAME文件，这样在生成的时候就会出现在public目录里</p>
-<p>如下图所示</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003174322.png"></p>
-<h2 id="图床配置-Optional"><a href="#图床配置-Optional" class="headerlink" title="图床配置 (Optional)"></a>图床配置 (Optional)</h2><p>Git 这种东西，不是拿来给我们存放二进制文件（如图片）的</p>
-<p>俗话说得好， <del>Git存换删图一时爽，.git folder火葬场</del></p>
-<p>而图片在Markdown中，可以以URL形式附上，所以只要有链接，就能出图了</p>
-<p>经过一把Google之后，我认为有两种不错的方法来进行图片的</p>
-<h3 id="公共图床"><a href="#公共图床" class="headerlink" title="公共图床"></a>公共图床</h3><p>使用公共图床，可以直接0开支（免费图床的话），但有利也有弊，图床毕竟只是别人的一项服务，图片放在别人那里，万一用着的这家公共图床凉了呢？能换，但是文章中URL修改的工程量可不小呢，如果没有备份的好习惯，你的图片都还在本地吗？</p>
-<p>列一些用的比较多的图床</p>
-<ol>
-<li><a href="https://imgur.com/">imgur</a> (国外知名图床，国内访问不友好)</li>
-<li><a href="https://imgchr.com/">imgchr</a> (<del>跟1域名高度重合，一看就知道解决了什么问题</del>)</li>
-</ol>
-<h3 id="私人图床"><a href="#私人图床" class="headerlink" title="私人图床"></a>私人图床</h3><p>私人图床可以考虑使用对象存储，如七牛、腾讯、阿里的对象存储<br>对于一般的个人博客，用对象存储，金钱开支一般都会很小（存储便宜，流量价格适中但是几乎不怎么跑流量）</p>
-<h3 id="图片管理神器-PicGo"><a href="#图片管理神器-PicGo" class="headerlink" title="图片管理神器 PicGo"></a>图片管理神器 PicGo</h3><p>地址：<a href="https://github.com/Molunerfinn/PicGo">PicGo</a><br>这是github上的大佬开发的一个用于管理自己存放于图床的图片的工具</p>
-<p>下载下来并根据里面的Wiki一步一步来就行了</p>
-<p>上传图片之后，按照md的syntax <code>![text](URL)</code> 插入到文章即可</p>
-<p>不详细说怎么操作了，毕竟人家已经有文档了，我在这里说，无非就是照搬文档，甚至还可能加上自己的主观认知，从而导致方法步骤等被个人地二次加工。</p>
-<p>所以<br><strong>不会读文档的人可不是一个新时代青年哦</strong></p>
-<p><del>为了叫你们去读文档而不花费大量篇幅写作，我可真是好人呢</del></p>
-<h2 id="安装主题-Optional"><a href="#安装主题-Optional" class="headerlink" title="安装主题 (Optional)"></a>安装主题 (Optional)</h2><p>可以安装其他主题以美化自己的博客<br>我用的是Next主题：<a href="https://github.com/next-theme/hexo-theme-next">https://github.com/next-theme/hexo-theme-next</a></p>
-<p>安装很简单，直接在hexo目录下输入下面command即可<br><code>$ npm install hexo-theme-next</code></p>
-<p>之后再在 <code>_config.yml</code> 下将theme改成<br><code>theme: next</code></p>
-<p>剩下的设置都在官方文档了，自己去看吧: <a href="https://theme-next.js.org/docs/">https://theme-next.js.org/docs/</a></p>
-<p><del>我还在用着默认设置</del></p>
-<h2 id="备份博客-Optional"><a href="#备份博客-Optional" class="headerlink" title="备份博客 (Optional)"></a>备份博客 (Optional)</h2><p>虽然博客的源文件是在本地的，但是在本地也有风险啊，（猜测）并且有时候为了去其他电脑码文，你用了U盘拷过去，一次两次还好，多次之后你将会分不清那边是最新的源文件了<del>（论版本控制的重要性）</del></p>
-<h3 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h3><p>所以我们可以在github新开一个private repo(没想到已经放开使用了)</p>
-<p><strong>首次</strong>先<code>git clone</code>下来，把源文件扔进去，一波 <code>git add .</code> 一波 <code>git commit</code> 最后 <code>git push</code> 送他上路<br><strong>以后</strong>再其他设备上，只需要 <code>git clone</code> <code>git add</code> <code>git commit</code> 和 <code>git push / git pull</code> 就行了（常用的几个）</p>
-<p>Alternative: 也可以在github pages的repo下，把deployment的branch设置为master之外的（如gh-pages），然后直接push到master分支即可，不过.deploy_git文件夹没拉下来的话，可能会出事，下面有提到。</p>
-<h3 id="把-gitignore文件设置好"><a href="#把-gitignore文件设置好" class="headerlink" title="把.gitignore文件设置好"></a>把.gitignore文件设置好</h3><p><strong>一定要有</strong>.gitignore文件<br>一定要<strong>有.gitignore文件</strong><br><strong>一定要有.gitignore文件</strong></p>
-<p>如果你想git clone下来一堆或者push一堆node_moudle，请忽略此步</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003182803.png"></p>
-<p>该文件的作用如文件名本身，可以忽略上传的文件/文件夹</p>
-<p>对于hexo源文件，我一般选择忽略如下，剩下的便是文章和config文件</p>
-<pre class="line-numbers language-none"><code class="language-none">.DS_Store
-Thumbs.db
-db.json
-*.log
-node_modules&#x2F;
-public&#x2F;
-.deploy*&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>2020-11-21更新：<strong>不过</strong>在更换本地环境之后，.deploy*/是保存有静态页面仓库的.git文件夹的，并且hexo-deployer-git的<a href="https://github.com/hexojs/hexo-deployer-git#how-it-works">README</a>如是说</p>
-<blockquote>
-<p>hexo-deployer-git works by generating the site in .deploy_git and force pushing to the repo(es) in config. If .deploy_git does not exist, a repo will initialized (git init). Otherwise the curent repo (with its commit history) will be used.</p>
-</blockquote>
-<p>由于是force push，也就是说没有这个文件夹时候，重新生成的新的，会把你原有的仓库直接覆盖掉（也就是说commit啥的全没了）<br>所以在换环境的时候，记得clone一下，即是把你的username.github.io这个repo clone下来并重命名为.deploy_git，如下</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone <span class="token operator">&lt;</span>gh-pages repo<span class="token operator">></span> .deploy_git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>到这里，现在你<del>应该</del>有一个属于自己的个人博客了</p>
-<p>听说在线聊天，异性”哦”你的时候，回个”嗯”是一个很好的选择（跑</p>
-<p>那么</p>
-<p>嗯</p>
-<p>Enjoy writing</p>
 ]]></content>
       <categories>
         <category>教程</category>
