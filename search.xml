@@ -17,17 +17,6 @@
     <content><![CDATA[<p>都1202年了，是时候动动手指，敲敲键盘，写点笔记了吧。</p>
 <span id="more"></span>
 
-<p>整体划分：目前使用的工具 → 什么时候用什么</p>
-<ol>
-<li>我所用的工具</li>
-<li>啥时候用哪个<ol>
-<li>分享知识的时候 → Blog + GitHub Pages</li>
-<li>专业方面的笔记 → Vuepress + GitHub Pages</li>
-<li>日常生活与其它 →  Notion</li>
-<li>日记 → markdown file + OneDrive Vault</li>
-</ol>
-</li>
-</ol>
 <h2 id="信息爆炸"><a href="#信息爆炸" class="headerlink" title="信息爆炸"></a>信息爆炸</h2><blockquote>
 <p>21世纪是信息的世纪</p>
 </blockquote>
@@ -90,9 +79,9 @@
 <h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>这些就是我平时用的笔记工具了，没有看到用笔的app，这是因为我poor，买不起iPad或者Surface</p>
 <p>那么最后在这里放一点有关的链接吧</p>
 <ol>
-<li><a href="%5Bhttps://vuepress.vuejs.org/%5D(https://vuepress.vuejs.org/)">Vuepress</a></li>
-<li><a href="%5Bhttps://blog.situ2001.com/contents/43abca4995a8/%5D(https://blog.situ2001.com/contents/43abca4995a8/)">Hexo博客搭建</a></li>
-<li><a href="%5Bhttps://www.notion.so/%5D(https://www.notion.so/)">Notion</a></li>
+<li><a href="https://vuepress.vuejs.org/">Vuepress</a></li>
+<li><a href="https://blog.situ2001.com/contents/43abca4995a8/">我写的Hexo博客搭建教程</a></li>
+<li><a href="https://www.notion.so/">Notion</a></li>
 </ol>
 <p>如果你没有写笔记的习惯，不妨现在随便挑一种方法去尝试尝试？相信我，这个习惯将会让你受益终生。</p>
 <p>因为写笔记的过程，是一次输出的过程。相当于是你把你的所看的信息给记录，给归纳总结了，等于是一次自我温习的过程。</p>
@@ -195,78 +184,6 @@
 ]]></content>
       <categories>
         <category>随笔</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>classpath和jar</title>
-    <url>//contents/7db3c9ea2bf1/</url>
-    <content><![CDATA[<p>学Java，怎能不知道classpath和jar呢？</p>
-<span id="more"></span>
-
-<h2 id="classpath"><a href="#classpath" class="headerlink" title="classpath"></a>classpath</h2><p><code>classpath</code>，顾名思义就是class path，即class的路径。网上一搜，很多文章都是关于java在windows下的环境变量配置的，但我觉得不应该在环境变量里头设置classpath。为什么呢？请看我胡乱分析</p>
-<p>只需要知道，classpath其实是JVM用到的一个环境变量，<strong>是给JVM来寻找class用的</strong>。</p>
-<p>指定classpath的方法可以是给<code>java</code>传入<code>-cp</code>或者<code>-classpath</code>，默认的话就是<code>.</code>即当前目录。</p>
-<p>比如说，我在<code>C:\Users\situ\foo\bar</code>里头有一个<code>Hello.class</code>，如果此时JVM要加载一个<code>foo.bar.Hello</code>类。而我们指定的classpath为<code>.;C:\Users\situ</code>，命令如下</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -cp <span class="token builtin class-name">.</span><span class="token punctuation">;</span>C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ foo.bar.Hello<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>那么就会这样按着classpath去找class</p>
-<p><code>&lt;current dir&gt;\foo\bar\Hello.class</code></p>
-<p><code>C:\Users\situ\foo\bar\Hello.class</code></p>
-<p>那这些都是用户自己的class，java自带的类呢？…不需要操心的，JVM自己知道的。</p>
-<h2 id="一个疑问"><a href="#一个疑问" class="headerlink" title="一个疑问"></a>一个疑问</h2><p>摘自我的笔记 – Situ Note</p>
-<p>Q: 为什么<code>javafx.scene.image.Image</code>的relative url是相对于classpath的，而<code>java.io.File</code>的path url不是？</p>
-<blockquote>
-<p>The Java IO API relies on the local disk file system, not on the classpath.</p>
-<p><code>Java.io</code>的相对路径是根据此时的working directory来决定的</p>
-</blockquote>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">test</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span><span class="token punctuation">;</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// Don't fiddle with relative paths in java.io.File. </span>
-        <span class="token comment">// They are dependent on the current working directory over which you have totally no control from inside the Java code.</span>
-        <span class="token class-name">File</span> file <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"./test.dat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">getAbsolutePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>比如这样，的确是根据工作目录来的。</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token operator">></span>java -cp C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token punctuation">\</span>experiment<span class="token punctuation">\</span>out<span class="token punctuation">\</span>production<span class="token punctuation">\</span>experiment test.Test
-C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token punctuation">\</span>test.dat<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>而之前使用JavaFX，要读图只能放在classpath下。之前搞不懂，是因为我不知道classpath到底是个什么鬼，而现在我懂了。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// The image is located in my.res package of the classpath</span>
-<span class="token class-name">Image</span> image2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Image</span><span class="token punctuation">(</span><span class="token string">"my/res/flower.png"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>如果classpath是<code>C:\Users\situ\codes\experiment\out\production\experiment</code>那么这个图片的绝对路径就是<code>C:\Users\situ\codes\experiment\out\production\experiment\my\res\flower.png</code></p>
-<h2 id="jar"><a href="#jar" class="headerlink" title="jar"></a>jar</h2><p>其实jar实质上就是一个压缩文件…就拿我的丢人井字棋client来说说吧（这个jar包是用gradle构建的）。先把这个jar解了，看下目录结构。</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>SimpleTicTacToeGame<span class="token punctuation">\</span>client<span class="token punctuation">\</span>build<span class="token punctuation">\</span>libs<span class="token punctuation">\</span>client-1.0-SNAPSHOT<span class="token operator">></span>tree /F
-Folder <span class="token environment constant">PATH</span> listing <span class="token keyword">for</span> volume OS
-Volume serial number is 3C20-9E7B
-C:.
-│  Client<span class="token variable">$Cell</span>.class
-│  Client<span class="token variable">$O</span>.class
-│  Client<span class="token variable">$X</span>.class
-│  Client.class
-│
-├─META-INF
-│      MANIFEST.MF
-│
-└─res
-    Constants.class<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>可以看出，除了编译好的class，这些class要按照package的路径来放，比如<code>res.Constants</code>就要按规矩放，放为<code>res\Constants.class</code>。</p>
-<p>这个jar里面还有一个<code>MANIFAST.MF</code>，打开一开，发现里面标明了Main-Class</p>
-<pre class="line-numbers language-inf" data-language="inf"><code class="language-inf">Manifest-Version: 1.0
-Main-Class: Client<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>怎么运行这个jar呢？很简单只需要输入这个命令就行了。</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>SimpleTicTacToeGame<span class="token punctuation">\</span>client<span class="token punctuation">\</span>build<span class="token punctuation">\</span>libs<span class="token operator">></span>java -jar client-1.0-SNAPSHOT.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>我觉得这个可以不用了解太多，可以运行，知道本质就行了。剩下的东西当然是靠构建工具啊（</p>
-]]></content>
-      <categories>
-        <category>Java</category>
       </categories>
   </entry>
   <entry>
@@ -414,6 +331,78 @@ Main-Class: Client<span aria-hidden="true" class="line-numbers-rows"><span></spa
 <p>而接口的继承关系可以这样表达 <code>String is kind of Comparable</code> 或 <code>String is a Comparable Object</code>，而这接口和类的关系就没那么关系明显了，是比较弱的一个关系</p>
 <p>那么就可以一句话解释上面的错误了 你想想 <code>Cabbage is an Animal</code> 这河里吗？</p>
 <h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>所以，抽象和接口相似但又有区别，因此设计程序的时候，最好根据实际需求进行选择</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>classpath和jar</title>
+    <url>//contents/7db3c9ea2bf1/</url>
+    <content><![CDATA[<p>学Java，怎能不知道classpath和jar呢？</p>
+<span id="more"></span>
+
+<h2 id="classpath"><a href="#classpath" class="headerlink" title="classpath"></a>classpath</h2><p><code>classpath</code>，顾名思义就是class path，即class的路径。网上一搜，很多文章都是关于java在windows下的环境变量配置的，但我觉得不应该在环境变量里头设置classpath。为什么呢？请看我胡乱分析</p>
+<p>只需要知道，classpath其实是JVM用到的一个环境变量，<strong>是给JVM来寻找class用的</strong>。</p>
+<p>指定classpath的方法可以是给<code>java</code>传入<code>-cp</code>或者<code>-classpath</code>，默认的话就是<code>.</code>即当前目录。</p>
+<p>比如说，我在<code>C:\Users\situ\foo\bar</code>里头有一个<code>Hello.class</code>，如果此时JVM要加载一个<code>foo.bar.Hello</code>类。而我们指定的classpath为<code>.;C:\Users\situ</code>，命令如下</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -cp <span class="token builtin class-name">.</span><span class="token punctuation">;</span>C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ foo.bar.Hello<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>那么就会这样按着classpath去找class</p>
+<p><code>&lt;current dir&gt;\foo\bar\Hello.class</code></p>
+<p><code>C:\Users\situ\foo\bar\Hello.class</code></p>
+<p>那这些都是用户自己的class，java自带的类呢？…不需要操心的，JVM自己知道的。</p>
+<h2 id="一个疑问"><a href="#一个疑问" class="headerlink" title="一个疑问"></a>一个疑问</h2><p>摘自我的笔记 – Situ Note</p>
+<p>Q: 为什么<code>javafx.scene.image.Image</code>的relative url是相对于classpath的，而<code>java.io.File</code>的path url不是？</p>
+<blockquote>
+<p>The Java IO API relies on the local disk file system, not on the classpath.</p>
+<p><code>Java.io</code>的相对路径是根据此时的working directory来决定的</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">test</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// Don't fiddle with relative paths in java.io.File. </span>
+        <span class="token comment">// They are dependent on the current working directory over which you have totally no control from inside the Java code.</span>
+        <span class="token class-name">File</span> file <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"./test.dat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">getAbsolutePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>比如这样，的确是根据工作目录来的。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token operator">></span>java -cp C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token punctuation">\</span>experiment<span class="token punctuation">\</span>out<span class="token punctuation">\</span>production<span class="token punctuation">\</span>experiment test.Test
+C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token punctuation">\</span>test.dat<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>而之前使用JavaFX，要读图只能放在classpath下。之前搞不懂，是因为我不知道classpath到底是个什么鬼，而现在我懂了。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// The image is located in my.res package of the classpath</span>
+<span class="token class-name">Image</span> image2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Image</span><span class="token punctuation">(</span><span class="token string">"my/res/flower.png"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>如果classpath是<code>C:\Users\situ\codes\experiment\out\production\experiment</code>那么这个图片的绝对路径就是<code>C:\Users\situ\codes\experiment\out\production\experiment\my\res\flower.png</code></p>
+<h2 id="jar"><a href="#jar" class="headerlink" title="jar"></a>jar</h2><p>其实jar实质上就是一个压缩文件…就拿我的丢人井字棋client来说说吧（这个jar包是用gradle构建的）。先把这个jar解了，看下目录结构。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>SimpleTicTacToeGame<span class="token punctuation">\</span>client<span class="token punctuation">\</span>build<span class="token punctuation">\</span>libs<span class="token punctuation">\</span>client-1.0-SNAPSHOT<span class="token operator">></span>tree /F
+Folder <span class="token environment constant">PATH</span> listing <span class="token keyword">for</span> volume OS
+Volume serial number is 3C20-9E7B
+C:.
+│  Client<span class="token variable">$Cell</span>.class
+│  Client<span class="token variable">$O</span>.class
+│  Client<span class="token variable">$X</span>.class
+│  Client.class
+│
+├─META-INF
+│      MANIFEST.MF
+│
+└─res
+    Constants.class<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以看出，除了编译好的class，这些class要按照package的路径来放，比如<code>res.Constants</code>就要按规矩放，放为<code>res\Constants.class</code>。</p>
+<p>这个jar里面还有一个<code>MANIFAST.MF</code>，打开一开，发现里面标明了Main-Class</p>
+<pre class="line-numbers language-inf" data-language="inf"><code class="language-inf">Manifest-Version: 1.0
+Main-Class: Client<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>怎么运行这个jar呢？很简单只需要输入这个命令就行了。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>SimpleTicTacToeGame<span class="token punctuation">\</span>client<span class="token punctuation">\</span>build<span class="token punctuation">\</span>libs<span class="token operator">></span>java -jar client-1.0-SNAPSHOT.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>我觉得这个可以不用了解太多，可以运行，知道本质就行了。剩下的东西当然是靠构建工具啊（</p>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -1665,199 +1654,6 @@ p2<span class="token operator">++</span><span class="token punctuation">;</span>
       </categories>
   </entry>
   <entry>
-    <title>项目小总结之简易井字棋</title>
-    <url>//contents/76029e119cb2/</url>
-    <content><![CDATA[<p>(个人笔记) 就算是玩具项目，做完也会有不少收获——主要是对gradle和groovy的初步认识</p>
-<span id="more"></span>
-
-<p>这次学到了包管理工具和jar相关，还有一门脚本语言Groovy。</p>
-<p>包管理工具常见的有maven和gradle，我选择了后者。</p>
-<p>我们知道，依赖多并复杂起来的时候，谁都想要一个可以帮忙自动处理dependency的工具。于是我就尝试使用一下gradle。</p>
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>还是日常将文档页面放在这里: <a href="https://docs.gradle.org/current/userguide/userguide.html">gradle doc</a></p>
-<h2 id="一瞥"><a href="#一瞥" class="headerlink" title="一瞥"></a>一瞥</h2><p>这次没有先去看文档，而是先用IDEA新建了一个gradle project，可以看出多了许多东西。</p>
-<p>目录结果可能如下（<strong>摘自官方</strong>）。不过IDEA中，默认gradle生成的，其中除了<code>build.gradle</code>，都在app文件夹外面。（应该是因为IDEA创建的为单项目，没有包含子项目的原因吧）</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">├── gradle 
-│   └── wrapper
-│       ├── gradle-wrapper.jar
-│       └── gradle-wrapper.properties
-├── gradlew 
-├── gradlew.bat 
-├── settings.gradle 
-└── app
-    ├── build.gradle 
-    └── src
-        ├── main
-        │   └── java 
-        │       └── demo
-        │           └── App.java
-        └── <span class="token builtin class-name">test</span>
-            └── java 
-                └── demo
-                    └── AppTest.java<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>比如<code>setting.gradle</code>和<code>build.gradle</code>（用IDEA的wizard新建的）</p>
-<p>其中<code>setting.gradle</code>项目的设置，里面包含着子项目和build的一些definition。而<code>build.gradle</code>就是特定的一个项目或者子项目的build script。它们都是用的groovy语言或者kotlin（这里我选择的是groovy）</p>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy"><span class="token comment">//setting.gradle</span>
-rootProject<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'gradletest'</span>
-
-<span class="token comment">//build.gradle</span>
-plugins <span class="token punctuation">&#123;</span>
-    id <span class="token string">'java'</span>
-<span class="token punctuation">&#125;</span>
-
-group <span class="token string">'org.example'</span>
-version <span class="token string">'1.0-SNAPSHOT'</span>
-
-repositories <span class="token punctuation">&#123;</span>
-    <span class="token function">mavenCentral</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-
-dependencies <span class="token punctuation">&#123;</span>
-    testImplementation <span class="token string">'org.junit.jupiter:junit-jupiter-api:5.6.0'</span>
-    testRuntimeOnly <span class="token string">'org.junit.jupiter:junit-jupiter-engine'</span>
-<span class="token punctuation">&#125;</span>
-
-test <span class="token punctuation">&#123;</span>
-    <span class="token function">useJUnitPlatform</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>从上面可以看出，除此之外。他生成了一些文件和文件夹，<code>gradle/wrapper</code>里头装着<code>gradle wrapper</code>，然后就还有wrapper的启动脚本。</p>
-<p>关于这个wrapper，他虽然很小，但是它可以调用来下载对应的gradle版本，帮你快速构建，免去手动下载安装gradle的麻烦。</p>
-<p>这个wrapper执行的步骤大概是：先下载dist到本地，然后解压，最后使用这个dist来构建这个项目。的确有点意思</p>
-<h2 id="我的项目"><a href="#我的项目" class="headerlink" title="我的项目"></a>我的项目</h2><p>这次实践的就是一个简单的井字棋了，大致原理也不是很难，所以就不多多解释了。这次的目的主要是：一些工具的学习与使用。</p>
-<p>先搁出这个练手小项目的github repo吧: <a href="https://github.com/situ2001/SimpleTicTacToeGame">SimpleTicTacToeGame</a></p>
-<p>从大致的目录结构中可以看出，里面有两个子项目:<code>client</code>和<code>server</code>，顾名思义，就是对应着客户端和服务端。<code>setting.gradle</code>搁在root下，而<code>build.gradle</code>搁在每个子项目文件夹里头，这符合了官方对这两个文件的解释。</p>
-<p>里面用到的东西不是很多，我用gradle来管理自己的项目的最初想法，也就是想隔离开来方便管理而已，后来才想起用它来构建jar。但是dependencies这个就没有碰过了。</p>
-<p>这次我就用到了这些东西</p>
-<ul>
-<li>将server和client隔开来</li>
-</ul>
-<p>要实现这个，我就需要用到子项目这个操作了，看了看官方对它的说明，我开始按葫芦画瓢。新建了文件夹<code>server</code>和<code>client</code>，然后每个下面放好<code>build.gradle</code>和文件夹<code>src</code>。最后，项目根目录下的<code>setting.gradle</code>如下所示</p>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">rootProject<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'SimpleTicTacToeGame'</span>
-include <span class="token string">'server'</span><span class="token punctuation">,</span> <span class="token string">'client'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<ul>
-<li>构建jar包</li>
-</ul>
-<p>既然有wrapper了，官网查询一下命令。然后在命令行里头输入</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">./gradlew jar <span class="token comment"># for the whole project</span>
-<span class="token comment">#or</span>
-./gradlew client:jar <span class="token comment"># jar task for sub project client</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>这样就能在在build文件夹里头找到jar了，通过上述操作，命令大概也就是 <code>./gradlew &lt;subproject&gt;:&lt;task&gt;</code> 或者 <code>./gradlew &lt;task&gt;</code>吧</p>
-<h2 id="Groovy语言"><a href="#Groovy语言" class="headerlink" title="Groovy语言"></a>Groovy语言</h2><p>这也是一个跑在JVM上面的语言，还是一种<strong>脚本语言</strong>，<strong>动态语言</strong>…为什么要了解一下这个呢？因为gradle里面的script都用着groovy或者kotlin的DSL(Domain-Specific Language)啊。不知道一些基础的话，写起来就奇奇怪怪的。</p>
-<p>不过由于是DSL，那么就不用完全了解过一遍这个语言，事实上有java的基础，迁移学习groovy是非常容易的，并且官方也给出了<a href="https://groovy-lang.org/differences.html">Groovy与Java的差别</a></p>
-<p>通过阅读，我大概发现了，要在gradle的配置文件里写，几点东西需要看看：</p>
-<ul>
-<li><p>默认import了一些常用包，比如<code>java.lang.*</code>也就是说可以不用<code>System.out.print</code>而是<code>print</code>即可</p>
-</li>
-<li><p>初始化数组，对比一下，groovy用的<code>[]</code></p>
-</li>
-</ul>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//java</span>
-<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> a <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">114</span><span class="token punctuation">,</span> <span class="token number">514</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span> <span class="token comment">// or new int[]&#123;114, 514&#125;</span>
-<span class="token comment">//groovy</span>
-<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">114</span><span class="token punctuation">,</span> <span class="token number">514</span><span class="token punctuation">]</span> <span class="token comment">//有py内味</span>
-<span class="token class-name">List</span> b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1919</span><span class="token punctuation">,</span> <span class="token string">'810'</span><span class="token punctuation">]</span> <span class="token comment">// powerful</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>跟Java中的Lambda比较，这边叫做闭包Closure了，主要是 <code>() -&gt;</code>变成了<code>&#123; &#125;</code>，inner class和anonymous inner class的写法跟java也差不多，但是…真香?</li>
-</ul>
-<blockquote>
-<p>The implementation of anonymous inner classes and nested classes follow Java closely, but there are some differences, e.g. local variables accessed from within such classes don’t have to be final.</p>
-</blockquote>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Runnable</span> run <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Run"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Java</span>
-list<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token operator">::</span><span class="token function">println</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token class-name">Runnable</span> run <span class="token operator">=</span> <span class="token punctuation">&#123;</span> println <span class="token string">'run'</span> <span class="token punctuation">&#125;</span> <span class="token comment">//Groovy</span>
-list<span class="token punctuation">.</span>each <span class="token punctuation">&#123;</span> println it <span class="token punctuation">&#125;</span> <span class="token comment">// or list.each(this.&amp;println)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>自 Java7 开始出现的 ARM 也变了写法</li>
-</ul>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy"><span class="token comment">//本来是 try(Scanner in = ...) &#123;&#125; 的</span>
-<span class="token comment">//But in Groovy</span>
-<span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">'/path/to/file'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">eachLine</span><span class="token punctuation">(</span><span class="token string">'UTF-8'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-   println it
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><p><code>==</code> 变成<code>equals()</code>了（</p>
-</li>
-<li><p>一些可能用到的新keyword</p>
-</li>
-</ul>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">it <span class="token comment">//in closure</span>
-<span class="token keyword">def</span> <span class="token comment">// def i = 1919810</span>
-var <span class="token comment">// var i = 1919810 (from Java)</span>
-<span class="token keyword">in</span> <span class="token comment">// (Python</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>pass参数的时候，可以不需要带符号</li>
-</ul>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">print <span class="token string">'114514'</span>
-<span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>start <span class="token punctuation">&#123;</span> <span class="token comment">/** closure */</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<ul>
-<li>多方法</li>
-</ul>
-<p>groovy动态，要运行的方法都是在运行时选择的，而不是像Java那样由declared type决定</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token class-name">String</span> arg<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">int</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token class-name">Object</span> arg<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> <span class="token number">2</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token class-name">Object</span> o <span class="token operator">=</span> <span class="token string">"Object"</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token function">method</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>java运行就是<code>2</code>，Groovy就是<code>1</code></p>
-<ul>
-<li>字符串</li>
-</ul>
-<p>就像这样，<code>&#39;i=$&#123;i&#125;&#39;</code>，接触多了js应该不陌生</p>
-<ul>
-<li>class为一等公民</li>
-</ul>
-<p>即Class可以忽略<code>.class</code></p>
-<ul>
-<li>with操作对象</li>
-</ul>
-<p>使用<code>with</code>，可以批量对一个对象进行操作</p>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">Test test <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-test<span class="token punctuation">.</span>with <span class="token punctuation">&#123;</span>
-  ds <span class="token operator">=</span> <span class="token number">114514</span>
-  sq <span class="token operator">=</span> <span class="token number">1919810</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>判断非null</li>
-</ul>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">print obj<span class="token operator">?.</span>id<span class="token operator">?.</span>number<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li>范围</li>
-</ul>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy"><span class="token number">114</span><span class="token operator">..</span><span class="token number">514</span> <span class="token comment">// 114(inclusive) to 514(inclusive)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<ul>
-<li>switch</li>
-</ul>
-<p>不仅可以是数字，字符，Enumerate，还可以是其他</p>
-<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy"><span class="token keyword">switch</span> <span class="token punctuation">(</span>test<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">case</span> Integer<span class="token punctuation">:</span>
-  <span class="token keyword">case</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">14514</span><span class="token punctuation">,</span> <span class="token string">'dssq'</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
-  <span class="token keyword">case</span> <span class="token punctuation">&#123;</span> it <span class="token operator">></span> <span class="token number">891</span> <span class="token punctuation">&#125;</span><span class="token punctuation">:</span>
-  <span class="token keyword">case</span> <span class="token number">114</span><span class="token operator">..</span><span class="token number">514</span><span class="token punctuation">:</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="继续学习"><a href="#继续学习" class="headerlink" title="继续学习"></a>继续学习</h2><p>初步入手了这几个东西，现在或以后想要用的时候，就要去gradle的文档里头查api用了。（据说难度跟CMake一样，害怕</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>快速上手C++面向对象</title>
     <url>//contents/a4fbad73ad9c/</url>
     <content><![CDATA[<p>(个人笔记) 要不是大一下学校的OOP课要讲MFC…</p>
@@ -2493,6 +2289,199 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195812.png" alt="此时的参照物为原来的自己"></p>
 <p>思考了一下，既然这个属性百分比是继承父类的属性，那father肯定没有加height，一查，果然如此，给father加个<code>height: 335px</code>之后，果然好了。</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195817.png" alt="此时的参照物为原来的自己"></p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>项目小总结之简易井字棋</title>
+    <url>//contents/76029e119cb2/</url>
+    <content><![CDATA[<p>(个人笔记) 就算是玩具项目，做完也会有不少收获——主要是对gradle和groovy的初步认识</p>
+<span id="more"></span>
+
+<p>这次学到了包管理工具和jar相关，还有一门脚本语言Groovy。</p>
+<p>包管理工具常见的有maven和gradle，我选择了后者。</p>
+<p>我们知道，依赖多并复杂起来的时候，谁都想要一个可以帮忙自动处理dependency的工具。于是我就尝试使用一下gradle。</p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>还是日常将文档页面放在这里: <a href="https://docs.gradle.org/current/userguide/userguide.html">gradle doc</a></p>
+<h2 id="一瞥"><a href="#一瞥" class="headerlink" title="一瞥"></a>一瞥</h2><p>这次没有先去看文档，而是先用IDEA新建了一个gradle project，可以看出多了许多东西。</p>
+<p>目录结果可能如下（<strong>摘自官方</strong>）。不过IDEA中，默认gradle生成的，其中除了<code>build.gradle</code>，都在app文件夹外面。（应该是因为IDEA创建的为单项目，没有包含子项目的原因吧）</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">├── gradle 
+│   └── wrapper
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+├── gradlew 
+├── gradlew.bat 
+├── settings.gradle 
+└── app
+    ├── build.gradle 
+    └── src
+        ├── main
+        │   └── java 
+        │       └── demo
+        │           └── App.java
+        └── <span class="token builtin class-name">test</span>
+            └── java 
+                └── demo
+                    └── AppTest.java<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>比如<code>setting.gradle</code>和<code>build.gradle</code>（用IDEA的wizard新建的）</p>
+<p>其中<code>setting.gradle</code>项目的设置，里面包含着子项目和build的一些definition。而<code>build.gradle</code>就是特定的一个项目或者子项目的build script。它们都是用的groovy语言或者kotlin（这里我选择的是groovy）</p>
+<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy"><span class="token comment">//setting.gradle</span>
+rootProject<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'gradletest'</span>
+
+<span class="token comment">//build.gradle</span>
+plugins <span class="token punctuation">&#123;</span>
+    id <span class="token string">'java'</span>
+<span class="token punctuation">&#125;</span>
+
+group <span class="token string">'org.example'</span>
+version <span class="token string">'1.0-SNAPSHOT'</span>
+
+repositories <span class="token punctuation">&#123;</span>
+    <span class="token function">mavenCentral</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+dependencies <span class="token punctuation">&#123;</span>
+    testImplementation <span class="token string">'org.junit.jupiter:junit-jupiter-api:5.6.0'</span>
+    testRuntimeOnly <span class="token string">'org.junit.jupiter:junit-jupiter-engine'</span>
+<span class="token punctuation">&#125;</span>
+
+test <span class="token punctuation">&#123;</span>
+    <span class="token function">useJUnitPlatform</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>从上面可以看出，除此之外。他生成了一些文件和文件夹，<code>gradle/wrapper</code>里头装着<code>gradle wrapper</code>，然后就还有wrapper的启动脚本。</p>
+<p>关于这个wrapper，他虽然很小，但是它可以调用来下载对应的gradle版本，帮你快速构建，免去手动下载安装gradle的麻烦。</p>
+<p>这个wrapper执行的步骤大概是：先下载dist到本地，然后解压，最后使用这个dist来构建这个项目。的确有点意思</p>
+<h2 id="我的项目"><a href="#我的项目" class="headerlink" title="我的项目"></a>我的项目</h2><p>这次实践的就是一个简单的井字棋了，大致原理也不是很难，所以就不多多解释了。这次的目的主要是：一些工具的学习与使用。</p>
+<p>先搁出这个练手小项目的github repo吧: <a href="https://github.com/situ2001/SimpleTicTacToeGame">SimpleTicTacToeGame</a></p>
+<p>从大致的目录结构中可以看出，里面有两个子项目:<code>client</code>和<code>server</code>，顾名思义，就是对应着客户端和服务端。<code>setting.gradle</code>搁在root下，而<code>build.gradle</code>搁在每个子项目文件夹里头，这符合了官方对这两个文件的解释。</p>
+<p>里面用到的东西不是很多，我用gradle来管理自己的项目的最初想法，也就是想隔离开来方便管理而已，后来才想起用它来构建jar。但是dependencies这个就没有碰过了。</p>
+<p>这次我就用到了这些东西</p>
+<ul>
+<li>将server和client隔开来</li>
+</ul>
+<p>要实现这个，我就需要用到子项目这个操作了，看了看官方对它的说明，我开始按葫芦画瓢。新建了文件夹<code>server</code>和<code>client</code>，然后每个下面放好<code>build.gradle</code>和文件夹<code>src</code>。最后，项目根目录下的<code>setting.gradle</code>如下所示</p>
+<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">rootProject<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">'SimpleTicTacToeGame'</span>
+include <span class="token string">'server'</span><span class="token punctuation">,</span> <span class="token string">'client'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li>构建jar包</li>
+</ul>
+<p>既然有wrapper了，官网查询一下命令。然后在命令行里头输入</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">./gradlew jar <span class="token comment"># for the whole project</span>
+<span class="token comment">#or</span>
+./gradlew client:jar <span class="token comment"># jar task for sub project client</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>这样就能在在build文件夹里头找到jar了，通过上述操作，命令大概也就是 <code>./gradlew &lt;subproject&gt;:&lt;task&gt;</code> 或者 <code>./gradlew &lt;task&gt;</code>吧</p>
+<h2 id="Groovy语言"><a href="#Groovy语言" class="headerlink" title="Groovy语言"></a>Groovy语言</h2><p>这也是一个跑在JVM上面的语言，还是一种<strong>脚本语言</strong>，<strong>动态语言</strong>…为什么要了解一下这个呢？因为gradle里面的script都用着groovy或者kotlin的DSL(Domain-Specific Language)啊。不知道一些基础的话，写起来就奇奇怪怪的。</p>
+<p>不过由于是DSL，那么就不用完全了解过一遍这个语言，事实上有java的基础，迁移学习groovy是非常容易的，并且官方也给出了<a href="https://groovy-lang.org/differences.html">Groovy与Java的差别</a></p>
+<p>通过阅读，我大概发现了，要在gradle的配置文件里写，几点东西需要看看：</p>
+<ul>
+<li><p>默认import了一些常用包，比如<code>java.lang.*</code>也就是说可以不用<code>System.out.print</code>而是<code>print</code>即可</p>
+</li>
+<li><p>初始化数组，对比一下，groovy用的<code>[]</code></p>
+</li>
+</ul>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//java</span>
+<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> a <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">114</span><span class="token punctuation">,</span> <span class="token number">514</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span> <span class="token comment">// or new int[]&#123;114, 514&#125;</span>
+<span class="token comment">//groovy</span>
+<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">114</span><span class="token punctuation">,</span> <span class="token number">514</span><span class="token punctuation">]</span> <span class="token comment">//有py内味</span>
+<span class="token class-name">List</span> b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1919</span><span class="token punctuation">,</span> <span class="token string">'810'</span><span class="token punctuation">]</span> <span class="token comment">// powerful</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>跟Java中的Lambda比较，这边叫做闭包Closure了，主要是 <code>() -&gt;</code>变成了<code>&#123; &#125;</code>，inner class和anonymous inner class的写法跟java也差不多，但是…真香?</li>
+</ul>
+<blockquote>
+<p>The implementation of anonymous inner classes and nested classes follow Java closely, but there are some differences, e.g. local variables accessed from within such classes don’t have to be final.</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Runnable</span> run <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Run"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Java</span>
+list<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token operator">::</span><span class="token function">println</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name">Runnable</span> run <span class="token operator">=</span> <span class="token punctuation">&#123;</span> println <span class="token string">'run'</span> <span class="token punctuation">&#125;</span> <span class="token comment">//Groovy</span>
+list<span class="token punctuation">.</span>each <span class="token punctuation">&#123;</span> println it <span class="token punctuation">&#125;</span> <span class="token comment">// or list.each(this.&amp;println)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>自 Java7 开始出现的 ARM 也变了写法</li>
+</ul>
+<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy"><span class="token comment">//本来是 try(Scanner in = ...) &#123;&#125; 的</span>
+<span class="token comment">//But in Groovy</span>
+<span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">'/path/to/file'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">eachLine</span><span class="token punctuation">(</span><span class="token string">'UTF-8'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+   println it
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p><code>==</code> 变成<code>equals()</code>了（</p>
+</li>
+<li><p>一些可能用到的新keyword</p>
+</li>
+</ul>
+<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">it <span class="token comment">//in closure</span>
+<span class="token keyword">def</span> <span class="token comment">// def i = 1919810</span>
+var <span class="token comment">// var i = 1919810 (from Java)</span>
+<span class="token keyword">in</span> <span class="token comment">// (Python</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>pass参数的时候，可以不需要带符号</li>
+</ul>
+<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">print <span class="token string">'114514'</span>
+<span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>start <span class="token punctuation">&#123;</span> <span class="token comment">/** closure */</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ul>
+<li>多方法</li>
+</ul>
+<p>groovy动态，要运行的方法都是在运行时选择的，而不是像Java那样由declared type决定</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">int</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token class-name">String</span> arg<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">int</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token class-name">Object</span> arg<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token class-name">Object</span> o <span class="token operator">=</span> <span class="token string">"Object"</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token function">method</span><span class="token punctuation">(</span>o<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>java运行就是<code>2</code>，Groovy就是<code>1</code></p>
+<ul>
+<li>字符串</li>
+</ul>
+<p>就像这样，<code>&#39;i=$&#123;i&#125;&#39;</code>，接触多了js应该不陌生</p>
+<ul>
+<li>class为一等公民</li>
+</ul>
+<p>即Class可以忽略<code>.class</code></p>
+<ul>
+<li>with操作对象</li>
+</ul>
+<p>使用<code>with</code>，可以批量对一个对象进行操作</p>
+<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">Test test <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+test<span class="token punctuation">.</span>with <span class="token punctuation">&#123;</span>
+  ds <span class="token operator">=</span> <span class="token number">114514</span>
+  sq <span class="token operator">=</span> <span class="token number">1919810</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>判断非null</li>
+</ul>
+<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">print obj<span class="token operator">?.</span>id<span class="token operator">?.</span>number<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>范围</li>
+</ul>
+<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy"><span class="token number">114</span><span class="token operator">..</span><span class="token number">514</span> <span class="token comment">// 114(inclusive) to 514(inclusive)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ul>
+<li>switch</li>
+</ul>
+<p>不仅可以是数字，字符，Enumerate，还可以是其他</p>
+<pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy"><span class="token keyword">switch</span> <span class="token punctuation">(</span>test<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">case</span> Integer<span class="token punctuation">:</span>
+  <span class="token keyword">case</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">14514</span><span class="token punctuation">,</span> <span class="token string">'dssq'</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+  <span class="token keyword">case</span> <span class="token punctuation">&#123;</span> it <span class="token operator">></span> <span class="token number">891</span> <span class="token punctuation">&#125;</span><span class="token punctuation">:</span>
+  <span class="token keyword">case</span> <span class="token number">114</span><span class="token operator">..</span><span class="token number">514</span><span class="token punctuation">:</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="继续学习"><a href="#继续学习" class="headerlink" title="继续学习"></a>继续学习</h2><p>初步入手了这几个东西，现在或以后想要用的时候，就要去gradle的文档里头查api用了。（据说难度跟CMake一样，害怕</p>
 ]]></content>
       <categories>
         <category>笔记</category>
