@@ -12,6 +12,228 @@
 ]]></content>
   </entry>
   <entry>
+    <title>初识抽象与接口</title>
+    <url>//contents/de7e01688b2c/</url>
+    <content><![CDATA[<p>这篇记录了咱对Java面向对象编程中抽象与接口的初步理解</p>
+<span id="more"></span>
+
+<p>在了解了OOP中的封装、继承与多态之后，我继续前行到抽象与接口的学习</p>
+<p>因为是初次接触一下这个内容就开始输出文章了，估计问题不少，希望大神能指正</p>
+<h2 id="修订记录"><a href="#修订记录" class="headerlink" title="修订记录"></a>修订记录</h2><ol>
+<li>2020-10-24 初版</li>
+</ol>
+<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p>抽象是什么？什么是抽象？在了解OOP的抽象之前，我在一本计算机导论书里面读过这段话</p>
+<blockquote>
+<p>The term <strong>abstraction</strong>, as we are using it here, refers to the distinction between the external properties of an entity and the details of the entity’s internal composition. It is abstraction that allows us to ignore the internal details of a complex device and use it as a single, comprehensible unit.</p>
+</blockquote>
+<p>这段话大概是说了抽象存在的作用，它使得我们的社会分工更加妥当，在许多地方，你只需要做好你自己的本能，而不必刻意去理解你所作所为的背后的原理</p>
+<p>这就像计算机与用户之间的关系一样，当你作为用户，你不用去了解程序的运行过程和CPU的原理，这些东西并不会影响你的日常使用，你作为用户只需要好好去使用计算机就行了，此时这些原理就像黑盒子一样，被封装被抽象起来了</p>
+<p>那么OOP语言中的抽象也是这个道理吗？</p>
+<p>那我这里还是拿上一篇文章所用的类GeometricObject和Circle来举例</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/** UML diagram */</span>
+               <span class="token class-name">GeometricObject</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+<span class="token operator">-</span>color<span class="token operator">:</span> <span class="token class-name">String</span>
+<span class="token operator">-</span>filled<span class="token operator">:</span> <span class="token keyword">boolean</span>
+<span class="token operator">-</span>dateCreated<span class="token operator">:</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span><span class="token class-name">Date</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+<span class="token operator">+</span><span class="token class-name">GeometricObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token operator">+</span><span class="token class-name">GeometricObject</span><span class="token punctuation">(</span>color<span class="token operator">:</span> <span class="token class-name">String</span><span class="token punctuation">,</span> filled<span class="token operator">:</span> <span class="token keyword">boolean</span><span class="token punctuation">)</span>
+<span class="token operator">+</span><span class="token function">getColor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token class-name">String</span>
+<span class="token operator">+</span><span class="token function">isFilled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">boolean</span>
+<span class="token operator">+</span><span class="token function">setFilled</span><span class="token punctuation">(</span>filled<span class="token operator">:</span> <span class="token keyword">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+<span class="token operator">+</span><span class="token function">getDataCreated</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span><span class="token class-name">Date</span>
+<span class="token operator">+</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token class-name">String</span>
+
+
+                      <span class="token class-name">Circle</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+<span class="token operator">-</span>radius<span class="token operator">:</span> <span class="token keyword">double</span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
+<span class="token operator">+</span><span class="token class-name">Circle</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token operator">+</span><span class="token class-name">Circle</span><span class="token punctuation">(</span>radius<span class="token operator">:</span> <span class="token keyword">double</span><span class="token punctuation">)</span>
+<span class="token operator">+</span><span class="token class-name">Circle</span><span class="token punctuation">(</span>radius<span class="token operator">:</span> <span class="token keyword">double</span><span class="token punctuation">,</span> color<span class="token operator">:</span> <span class="token class-name">String</span><span class="token punctuation">,</span> filled<span class="token operator">:</span> <span class="token keyword">boolean</span><span class="token punctuation">)</span>
+<span class="token operator">+</span><span class="token function">getRadius</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">double</span>
+<span class="token operator">+</span><span class="token function">setRadius</span><span class="token punctuation">(</span>radius<span class="token operator">:</span> <span class="token keyword">double</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
+<span class="token operator">+</span><span class="token function">getArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">double</span>
+<span class="token operator">+</span><span class="token function">getPerimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">double</span>
+<span class="token operator">+</span><span class="token function">getDiameter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">double</span>
+<span class="token operator">+</span><span class="token function">printCircle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>还是这熟悉的两个类，只不过仔细观察，你会发现，计算周长和面积的方法<code>getPerimeter()</code>和<code>getArea()</code>都位于Circle类，但是每一个GeometricObject理论上都要计算面积和周长啊，然而由于每种几何图形的面积周长的计算方法都不一样，因此这两个方法都是依赖于特定图形的类如Circle的</p>
+<p>那我们应该怎么样让GeometricObject的实例使用<code>getPerimeter()</code>和<code>getArea()</code>方法呢？</p>
+<p>我们可以把类改成抽象类，然后在这个类里面添加抽象方法<code>getPerimeter()</code>和<code>getArea()</code></p>
+<p>于是将其class header</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GeometricObject</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>加个 modifier <strong>abstract</strong> 改变为如下</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">GeometricObject</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>并在GeometricObject类里，加入抽象方法</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**abstract classes */</span>
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">double</span> <span class="token function">getArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">double</span> <span class="token function">getPerimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>抽象方法body都是空的，虽然这个抽象方法存在于GeometricObject类里面，但是并不由这个类实现，这个方法的实现交给了继承它的子类来实现</p>
+<p>我们在原Circle类里面重写这个方法（已经重写了，如下）</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">double</span> radius<span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> radius <span class="token operator">*</span> radius <span class="token operator">*</span> <span class="token class-name">Math</span><span class="token punctuation">.</span>PI<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>此时我们可以进行如下操作</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">GeometricObject</span> circle <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Circle</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Area is "</span> <span class="token operator">+</span> circle<span class="token punctuation">.</span><span class="token function">getArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//output: Area is 12.566370614359172</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>GeometricObject类型的对象也能调用getArea()方法了，这个方法实际是在Circle类里面实现的（这个实现方法的类的调用是由JVM动态决定的，取决于actual type），这跟我之前看到的关于抽象的描述岂不是有神似之处，虽然这方法实际上是在子类的那一层实现的，但是父类只管知道有这个方法并且自己可以用它就行</p>
+<p>就这个例子来说，在GeometricObject类中加这俩抽象方法有什么好处呢？</p>
+<p>我认为相比于哲学的抽象定义，更实际的用途就是在<strong>更加通用化的父类中使用子类中比较特殊化的方法</strong>吧</p>
+<p>这样定义了抽象类与方法，我们就可以直接比较两个不同子类对象的面积和周长了（而不用进行typecast）</p>
+<p><strong>并且</strong>由于抽象类中的抽象方法必须要有继承这个类的子类进行重写实现，因此抽象类的constructor不能直接被调用，从而无法直接创建一个actual type为抽象类的对象，其constructor在子类对象被创建的时候通过继承链进行调用</p>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>接口是什么呢？接口是一个与类非常相似的结构，它可以指定通用行为给相关或不相关的类，你可以指定这个类是不是如 可以比较(Comparable) 可以克隆(Cloneable)等</p>
+<p>接口继承的方式与类继承的方式也是差不多，只不过Java不允许一个子类继承多个子类，但是允许实现多个interface</p>
+<p>要实现一个接口，只需要在类上加上 <code>implements interface1, interface2, ... interfaceN</code> 即可，此时这个类实现了这多个接口，并且同时也是这些个接口的对象</p>
+<p>有什么例子吗？</p>
+<p>我们用了非常多的一个<code>String</code>类，拥有一个方法<code>compareTo(String s)</code>，当我们想要表示两个字符串的时候，便可以调用这个方法</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"ABC"</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> s2 <span class="token operator">=</span> <span class="token string">"ABCD"</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span><span class="token function">compareTo</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//output: -1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>经过API文档的查阅，我们可以得出这么点东西</p>
+<p>在String页面下有如下的class header</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">String</span> <span class="token keyword">extends</span> <span class="token class-name">Object</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span><span class="token punctuation">,</span> <span class="token class-name">Comparable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">,</span> <span class="token class-name">CharSequence</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>对于<code>interface Comparable&lt;String&gt;</code> 我们也能在API Doc下面找到如下的</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Interface</span> <span class="token class-name">Comparable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> <span class="token function">compareTo</span><span class="token punctuation">(</span><span class="token class-name">T</span> o<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>其中的T其实就是type parameter, T 代表着任意一个 type</p>
+<p>也就是说，这个方法在接口中定义，在实现它的类中进行接口方法的实现，这点与抽象类非常相似</p>
+<h2 id="接口与抽象的区别"><a href="#接口与抽象的区别" class="headerlink" title="接口与抽象的区别"></a>接口与抽象的区别</h2><p>既然抽象类与接口如此相似，那差别是什么呢？</p>
+<p>一个类包含了data field, constructor和method, 而接口与类也差不多，只是没了constructor，并且在另外两个上也有那么一丢丢差别</p>
+<p>我拿<strong>Java 8或以上</strong>的来讲讲区别吧</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>data field</th>
+<th>constructor</th>
+<th>method</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>抽象类</td>
+<td>跟个正常类一样</td>
+<td>有 但是只能由子类调用</td>
+<td>跟个正常类一样 只是多了抽象方法</td>
+</tr>
+<tr>
+<td>接口</td>
+<td>必须都是final</td>
+<td>无</td>
+<td>只能是抽象方法 <strong>default</strong>方法 <strong>static</strong>方法</td>
+</tr>
+</tbody></table>
+<p>并且，一个子类可以实现多个接口，而一个子类只能继承一个父类</p>
+<p>也许你会问：好像除了一类实现多个接口的特性，接口好像一无是处诶？</p>
+<p>其实我认为存在即合理吧，从某种情况来讲，接口比抽象类更加<strong>普适通用</strong></p>
+<p>写这篇文章的时候，咱还没有什么实际项目经验，是个云玩家，举个小实例吧</p>
+<p>比如我们定义那么一个接口 <code>Edible</code>, 含有一个 <code>howToEat()</code> 抽象方法</p>
+<p>那么，任意能吃的实体类都能实现它</p>
+<p>而我们把 <code>howToEat()</code> 方法定义在一个抽象类<code>Animal</code>中，那么只有继承它的子类才能实现这个方法，那一些蔬菜也能吃啊，把一种植物强行继承在动物类中，这有点不合继承的一些规则（不遵守is-a关系，乱来）</p>
+<p>而接口并没有这个情况出现，他很通用，只要能实现，都能在类中用 <code>implements</code> 来继承它</p>
+<p>这里应该可以用 <strong>is-a</strong> 和 <strong>is-kind-of</strong> 关系来描述接口与子类，抽象父类与子类的关系</p>
+<p>我们在继承的时候知道了is-a关系，可以 <code>Circle is a GeometricObject</code> 这样表示一个继承关系，这个父类子类关系比较明显</p>
+<p>而接口的继承关系可以这样表达 <code>String is kind of Comparable</code> 或 <code>String is a Comparable Object</code>，而这接口和类的关系就没那么关系明显了，是比较弱的一个关系</p>
+<p>那么就可以一句话解释上面的错误了 你想想 <code>Cabbage is an Animal</code> 这河里吗？</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>所以，抽象和接口相似但又有区别，因此设计程序的时候，最好根据实际需求进行选择</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>classpath和jar</title>
+    <url>//contents/7db3c9ea2bf1/</url>
+    <content><![CDATA[<p>学Java，怎能不知道classpath和jar呢？</p>
+<span id="more"></span>
+
+<h2 id="classpath"><a href="#classpath" class="headerlink" title="classpath"></a>classpath</h2><p><code>classpath</code>，顾名思义就是class path，即class的路径。网上一搜，很多文章都是关于java在windows下的环境变量配置的，但我觉得不应该在环境变量里头设置classpath。为什么呢？请看我胡乱分析</p>
+<p>只需要知道，classpath其实是JVM用到的一个环境变量，<strong>是给JVM来寻找class用的</strong>。</p>
+<p>指定classpath的方法可以是给<code>java</code>传入<code>-cp</code>或者<code>-classpath</code>，默认的话就是<code>.</code>即当前目录。</p>
+<p>比如说，我在<code>C:\Users\situ\foo\bar</code>里头有一个<code>Hello.class</code>，如果此时JVM要加载一个<code>foo.bar.Hello</code>类。而我们指定的classpath为<code>.;C:\Users\situ</code>，命令如下</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -cp <span class="token builtin class-name">.</span><span class="token punctuation">;</span>C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ foo.bar.Hello<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>那么就会这样按着classpath去找class</p>
+<p><code>&lt;current dir&gt;\foo\bar\Hello.class</code></p>
+<p><code>C:\Users\situ\foo\bar\Hello.class</code></p>
+<p>那这些都是用户自己的class，java自带的类呢？…不需要操心的，JVM自己知道的。</p>
+<h2 id="一个疑问"><a href="#一个疑问" class="headerlink" title="一个疑问"></a>一个疑问</h2><p>摘自我的笔记 – Situ Note</p>
+<p>Q: 为什么<code>javafx.scene.image.Image</code>的relative url是相对于classpath的，而<code>java.io.File</code>的path url不是？</p>
+<blockquote>
+<p>The Java IO API relies on the local disk file system, not on the classpath.</p>
+<p><code>Java.io</code>的相对路径是根据此时的working directory来决定的</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">test</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// Don't fiddle with relative paths in java.io.File. </span>
+        <span class="token comment">// They are dependent on the current working directory over which you have totally no control from inside the Java code.</span>
+        <span class="token class-name">File</span> file <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"./test.dat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">getAbsolutePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>比如这样，的确是根据工作目录来的。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token operator">></span>java -cp C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token punctuation">\</span>experiment<span class="token punctuation">\</span>out<span class="token punctuation">\</span>production<span class="token punctuation">\</span>experiment test.Test
+C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token punctuation">\</span>test.dat<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>而之前使用JavaFX，要读图只能放在classpath下。之前搞不懂，是因为我不知道classpath到底是个什么鬼，而现在我懂了。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// The image is located in my.res package of the classpath</span>
+<span class="token class-name">Image</span> image2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Image</span><span class="token punctuation">(</span><span class="token string">"my/res/flower.png"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>如果classpath是<code>C:\Users\situ\codes\experiment\out\production\experiment</code>那么这个图片的绝对路径就是<code>C:\Users\situ\codes\experiment\out\production\experiment\my\res\flower.png</code></p>
+<h2 id="jar"><a href="#jar" class="headerlink" title="jar"></a>jar</h2><p>其实jar实质上就是一个压缩文件…就拿我的丢人井字棋client来说说吧（这个jar包是用gradle构建的）。先把这个jar解了，看下目录结构。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>SimpleTicTacToeGame<span class="token punctuation">\</span>client<span class="token punctuation">\</span>build<span class="token punctuation">\</span>libs<span class="token punctuation">\</span>client-1.0-SNAPSHOT<span class="token operator">></span>tree /F
+Folder <span class="token environment constant">PATH</span> listing <span class="token keyword">for</span> volume OS
+Volume serial number is 3C20-9E7B
+C:.
+│  Client<span class="token variable">$Cell</span>.class
+│  Client<span class="token variable">$O</span>.class
+│  Client<span class="token variable">$X</span>.class
+│  Client.class
+│
+├─META-INF
+│      MANIFEST.MF
+│
+└─res
+    Constants.class<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以看出，除了编译好的class，这些class要按照package的路径来放，比如<code>res.Constants</code>就要按规矩放，放为<code>res\Constants.class</code>。</p>
+<p>这个jar里面还有一个<code>MANIFAST.MF</code>，打开一开，发现里面标明了Main-Class</p>
+<pre class="line-numbers language-inf" data-language="inf"><code class="language-inf">Manifest-Version: 1.0
+Main-Class: Client<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>怎么运行这个jar呢？很简单只需要输入这个命令就行了。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>SimpleTicTacToeGame<span class="token punctuation">\</span>client<span class="token punctuation">\</span>build<span class="token punctuation">\</span>libs<span class="token operator">></span>java -jar client-1.0-SNAPSHOT.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>我觉得这个可以不用了解太多，可以运行，知道本质就行了。剩下的东西当然是靠构建工具啊（</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
     <title>我是如何进行知识管理的</title>
     <url>//contents/729ea92e9046/</url>
     <content><![CDATA[<p>好久没写的个人小分享~</p>
@@ -190,78 +412,6 @@
 ]]></content>
       <categories>
         <category>随笔</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>classpath和jar</title>
-    <url>//contents/7db3c9ea2bf1/</url>
-    <content><![CDATA[<p>学Java，怎能不知道classpath和jar呢？</p>
-<span id="more"></span>
-
-<h2 id="classpath"><a href="#classpath" class="headerlink" title="classpath"></a>classpath</h2><p><code>classpath</code>，顾名思义就是class path，即class的路径。网上一搜，很多文章都是关于java在windows下的环境变量配置的，但我觉得不应该在环境变量里头设置classpath。为什么呢？请看我胡乱分析</p>
-<p>只需要知道，classpath其实是JVM用到的一个环境变量，<strong>是给JVM来寻找class用的</strong>。</p>
-<p>指定classpath的方法可以是给<code>java</code>传入<code>-cp</code>或者<code>-classpath</code>，默认的话就是<code>.</code>即当前目录。</p>
-<p>比如说，我在<code>C:\Users\situ\foo\bar</code>里头有一个<code>Hello.class</code>，如果此时JVM要加载一个<code>foo.bar.Hello</code>类。而我们指定的classpath为<code>.;C:\Users\situ</code>，命令如下</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -cp <span class="token builtin class-name">.</span><span class="token punctuation">;</span>C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ foo.bar.Hello<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>那么就会这样按着classpath去找class</p>
-<p><code>&lt;current dir&gt;\foo\bar\Hello.class</code></p>
-<p><code>C:\Users\situ\foo\bar\Hello.class</code></p>
-<p>那这些都是用户自己的class，java自带的类呢？…不需要操心的，JVM自己知道的。</p>
-<h2 id="一个疑问"><a href="#一个疑问" class="headerlink" title="一个疑问"></a>一个疑问</h2><p>摘自我的笔记 – Situ Note</p>
-<p>Q: 为什么<code>javafx.scene.image.Image</code>的relative url是相对于classpath的，而<code>java.io.File</code>的path url不是？</p>
-<blockquote>
-<p>The Java IO API relies on the local disk file system, not on the classpath.</p>
-<p><code>Java.io</code>的相对路径是根据此时的working directory来决定的</p>
-</blockquote>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">test</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span><span class="token punctuation">;</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// Don't fiddle with relative paths in java.io.File. </span>
-        <span class="token comment">// They are dependent on the current working directory over which you have totally no control from inside the Java code.</span>
-        <span class="token class-name">File</span> file <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"./test.dat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">getAbsolutePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>比如这样，的确是根据工作目录来的。</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token operator">></span>java -cp C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token punctuation">\</span>experiment<span class="token punctuation">\</span>out<span class="token punctuation">\</span>production<span class="token punctuation">\</span>experiment test.Test
-C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token punctuation">\</span>test.dat<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>而之前使用JavaFX，要读图只能放在classpath下。之前搞不懂，是因为我不知道classpath到底是个什么鬼，而现在我懂了。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// The image is located in my.res package of the classpath</span>
-<span class="token class-name">Image</span> image2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Image</span><span class="token punctuation">(</span><span class="token string">"my/res/flower.png"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>如果classpath是<code>C:\Users\situ\codes\experiment\out\production\experiment</code>那么这个图片的绝对路径就是<code>C:\Users\situ\codes\experiment\out\production\experiment\my\res\flower.png</code></p>
-<h2 id="jar"><a href="#jar" class="headerlink" title="jar"></a>jar</h2><p>其实jar实质上就是一个压缩文件…就拿我的丢人井字棋client来说说吧（这个jar包是用gradle构建的）。先把这个jar解了，看下目录结构。</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>SimpleTicTacToeGame<span class="token punctuation">\</span>client<span class="token punctuation">\</span>build<span class="token punctuation">\</span>libs<span class="token punctuation">\</span>client-1.0-SNAPSHOT<span class="token operator">></span>tree /F
-Folder <span class="token environment constant">PATH</span> listing <span class="token keyword">for</span> volume OS
-Volume serial number is 3C20-9E7B
-C:.
-│  Client<span class="token variable">$Cell</span>.class
-│  Client<span class="token variable">$O</span>.class
-│  Client<span class="token variable">$X</span>.class
-│  Client.class
-│
-├─META-INF
-│      MANIFEST.MF
-│
-└─res
-    Constants.class<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>可以看出，除了编译好的class，这些class要按照package的路径来放，比如<code>res.Constants</code>就要按规矩放，放为<code>res\Constants.class</code>。</p>
-<p>这个jar里面还有一个<code>MANIFAST.MF</code>，打开一开，发现里面标明了Main-Class</p>
-<pre class="line-numbers language-inf" data-language="inf"><code class="language-inf">Manifest-Version: 1.0
-Main-Class: Client<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>怎么运行这个jar呢？很简单只需要输入这个命令就行了。</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>SimpleTicTacToeGame<span class="token punctuation">\</span>client<span class="token punctuation">\</span>build<span class="token punctuation">\</span>libs<span class="token operator">></span>java -jar client-1.0-SNAPSHOT.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>我觉得这个可以不用了解太多，可以运行，知道本质就行了。剩下的东西当然是靠构建工具啊（</p>
-]]></content>
-      <categories>
-        <category>Java</category>
       </categories>
   </entry>
   <entry>
@@ -916,6 +1066,98 @@ function<span class="token punctuation">.</span><span class="token function">app
       </categories>
   </entry>
   <entry>
+    <title>反思之概念理解不可粗糙</title>
+    <url>//contents/5a4f09596a4e/</url>
+    <content><![CDATA[<p>粗糙的学习与理解 必然会带来日后的隐患</p>
+<p>这不 咱最近就出现了一个问题</p>
+<span id="more"></span>
+
+<h2 id="危险想法"><a href="#危险想法" class="headerlink" title="危险想法"></a>危险想法</h2><p>我原来认为：包装类与基本数据类型可以相互转化，而数组是对象，所以 <code>int[]</code> 和 <code>Integer[]</code> 初始化出来的数组一定都是对象</p>
+<h2 id="咱被迷惑"><a href="#咱被迷惑" class="headerlink" title="咱被迷惑"></a>咱被迷惑</h2><p>前些天太浪了，导致咱最近在赶Java学习进度，一路高歌赶到多态<del>以集齐OOP三件套</del></p>
+<p>直到<del>在水职业指导课的时候</del>碰到一道自己难以回答的Check Point之后，才发觉暴力拔苗助长不可取，就好似人不可能一口吃下一个胖子一样</p>
+<p>这个问题是这样的</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">What</span> is wrong <span class="token keyword">with</span> <span class="token namespace">in</span> the following code<span class="token operator">?</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token class-name">Double</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list2 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12.4</span><span class="token punctuation">,</span> <span class="token number">24.0</span><span class="token punctuation">,</span> <span class="token number">55.2</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token function">printArray</span><span class="token punctuation">(</span>list1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printArray</span><span class="token punctuation">(</span>list2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printArray</span><span class="token punctuation">(</span>list3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">printArray</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> object<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>object<span class="token operator">:</span> o<span class="token punctuation">)</span>
+      <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>o <span class="token operator">+</span> <span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>上题来自Java教材 <strong>Introduction to Java Programming and Data Structures Comprehensive Version</strong> 的 Page.427 <strong>Check Point 11.8.4</strong></p>
+<h2 id="绞尽脑汁"><a href="#绞尽脑汁" class="headerlink" title="绞尽脑汁"></a>绞尽脑汁</h2><p>看到这道题的时候我只想到 pass 到 method printArray 的是对象的reference，而数组都是对象啊，这题目，哪里有错误啊</p>
+<p>“一定是粗心的坏习惯犯了！” 我想</p>
+<p>然而不管我怎么看，<del>左看右看正看倒看反复观看</del>都看不出来</p>
+<p>此时水课过了一半，响起了下课铃 <del>吓得我吃了几个好丽友蛋黄派</del></p>
+<h2 id="一瞬报错"><a href="#一瞬报错" class="headerlink" title="一瞬报错"></a>一瞬报错</h2><p>而最后中午回到宿舍，马上把代码码了上去，发现报错如下</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Exception <span class="token keyword">in</span> thread <span class="token string">"main"</span> java.lang.Error: Unresolved compilation problem:
+    The method printArray<span class="token punctuation">(</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">in</span> the <span class="token builtin class-name">type</span> Test is not applicable <span class="token keyword">for</span> the arguments <span class="token punctuation">(</span>int<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>阅读这报错内容，基本可以得知, int[] type 竟然不是对象类型???</p>
+<p>震惊，难道数组在Java中不是属于对象吗？</p>
+<p>挺秃然的.jpg</p>
+<h2 id="开始混乱"><a href="#开始混乱" class="headerlink" title="开始混乱"></a>开始混乱</h2><p><del>迷惑行为开始了</del></p>
+<p>我对比了一下这两行代码</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>不就一个用的 Integer[] type 而另一个用的 int type 吗？</p>
+<p>回想起之前看过的 <strong>A primitive type can be automatically converted to an object using a wrapper class, and vice versa.</strong></p>
+<p>也就是说，Java是允许基本数据类型和 <strong>Wrapper Class</strong> 类型相互转换的，这种转换叫做<strong>autoboxing</strong> 和 <strong>autounboxing</strong> （一般是在赋值的时候？）</p>
+<p>就好比下面这俩语句是等效的</p>
+<p><code>Integer i = new Integer(1);</code> and <code>Integer i = 1;</code> are <strong>equivalent</strong></p>
+<p><code>int i = 1;</code> and <code>int i = new Integer(1);</code> are also <strong>equivalent</strong></p>
+<p>不过</p>
+<p>在我先前的概念里面，数组不是被Java当成对象处理了吗？</p>
+<p>那用 int[] 和 Integer[] 声明出来的数组，不都是属于一个对象吗？</p>
+<p>不能pass到method printArray就奇怪了</p>
+<h2 id="仔细咀嚼"><a href="#仔细咀嚼" class="headerlink" title="仔细咀嚼"></a>仔细咀嚼</h2><p>emm能报错的话，一定有它的道理，而书上很大概率会单独开一段话提及的</p>
+<p>我尝试开始翻书阅览相关内容，终于，我找到了很明显的一段话 <del>当初肯定是仓促学习而略读了</del></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Consider</span> the following example<span class="token operator">:</span>
+  <span class="token number">1</span> <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> intArray <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token number">2</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>intArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> intArray<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> intArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token class-name">In</span> line <span class="token number">1</span><span class="token punctuation">,</span> the prmitive values <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span> and <span class="token number">3</span> are automatically boxed into objects <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> and <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+
+  <span class="token class-name">In</span> line <span class="token number">2</span><span class="token punctuation">,</span> the objects intArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> intArray<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> and intArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> are automatically unboxed into <span class="token keyword">int</span> values that are added together<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>好了，看完这段话我开始明白我的错误之处了 <del>这么长的一段话我当初怎么略读掉的</del></p>
+<p>噢原来 Integer[] type 是创建一个包含有多个Integer对象的数组啊</p>
+<p>比如，这里有一个<code>Student</code>类，我们可以用<code>Student[]</code>来声明包含多个Student对象的数组</p>
+<p>那么int[] type呢，原来创建的是包含有多个int基本数据类型的数组，里面的每一个元素都是一个基本数据类型的值</p>
+<p>如果我们把 <code>int[] array = new int[100]</code> 称之为</p>
+<p><code>An array that contains 100 numbers</code></p>
+<p>它叫做 <strong>Array of primitive values</strong></p>
+<p>那么<code>Integer[] array = new Integer[100]</code> 则是</p>
+<p><code>An array that contains 100 objects</code></p>
+<p>而它叫做 <strong>Array of objects</strong></p>
+<p><del>这个东西在OOP上手的时候就已经提到过了，不要被包装类和基本数据类型转换这玩意迷惑了眼睛</del></p>
+<h2 id="总结错误"><a href="#总结错误" class="headerlink" title="总结错误"></a>总结错误</h2><p>回到下面的代码</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>通过前面重新回顾和学习的成果</p>
+<p><strong>我们可见</strong> list1数组它本身也是一个对象，并且是一个包含了好几个<strong>对象</strong>形如<code>new Integer(1)</code>的数组；而list3数组它本身也是一个对象，只不过里面包含的是好几个基本类型的数值而已</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>做事要一步一步慢慢来，这才是符合科学和实践规律的</p>
+<p>时快时慢，马马虎虎，必将少不了翻车</p>
+<p>并且经过踏踏实实系统学习，我相信学习成果必定会比东拼西凑的学习要稳固得多</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
     <title>浅谈Java的装箱与拆箱</title>
     <url>//contents/152c3b965d2f/</url>
     <content><![CDATA[<p>基操，见得多了，只不过之前没往里头摸。行文诡异，可能错漏百出，也许为午后昏睡过久所致。</p>
@@ -1172,410 +1414,6 @@ function<span class="token punctuation">.</span><span class="token function">app
 ]]></content>
       <categories>
         <category>Java</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>反思之概念理解不可粗糙</title>
-    <url>//contents/5a4f09596a4e/</url>
-    <content><![CDATA[<p>粗糙的学习与理解 必然会带来日后的隐患</p>
-<p>这不 咱最近就出现了一个问题</p>
-<span id="more"></span>
-
-<h2 id="危险想法"><a href="#危险想法" class="headerlink" title="危险想法"></a>危险想法</h2><p>我原来认为：包装类与基本数据类型可以相互转化，而数组是对象，所以 <code>int[]</code> 和 <code>Integer[]</code> 初始化出来的数组一定都是对象</p>
-<h2 id="咱被迷惑"><a href="#咱被迷惑" class="headerlink" title="咱被迷惑"></a>咱被迷惑</h2><p>前些天太浪了，导致咱最近在赶Java学习进度，一路高歌赶到多态<del>以集齐OOP三件套</del></p>
-<p>直到<del>在水职业指导课的时候</del>碰到一道自己难以回答的Check Point之后，才发觉暴力拔苗助长不可取，就好似人不可能一口吃下一个胖子一样</p>
-<p>这个问题是这样的</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">What</span> is wrong <span class="token keyword">with</span> <span class="token namespace">in</span> the following code<span class="token operator">?</span>
-
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token class-name">Double</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list2 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12.4</span><span class="token punctuation">,</span> <span class="token number">24.0</span><span class="token punctuation">,</span> <span class="token number">55.2</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token function">printArray</span><span class="token punctuation">(</span>list1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printArray</span><span class="token punctuation">(</span>list2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printArray</span><span class="token punctuation">(</span>list3<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
-
-  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">printArray</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> object<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span>object<span class="token operator">:</span> o<span class="token punctuation">)</span>
-      <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>o <span class="token operator">+</span> <span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>上题来自Java教材 <strong>Introduction to Java Programming and Data Structures Comprehensive Version</strong> 的 Page.427 <strong>Check Point 11.8.4</strong></p>
-<h2 id="绞尽脑汁"><a href="#绞尽脑汁" class="headerlink" title="绞尽脑汁"></a>绞尽脑汁</h2><p>看到这道题的时候我只想到 pass 到 method printArray 的是对象的reference，而数组都是对象啊，这题目，哪里有错误啊</p>
-<p>“一定是粗心的坏习惯犯了！” 我想</p>
-<p>然而不管我怎么看，<del>左看右看正看倒看反复观看</del>都看不出来</p>
-<p>此时水课过了一半，响起了下课铃 <del>吓得我吃了几个好丽友蛋黄派</del></p>
-<h2 id="一瞬报错"><a href="#一瞬报错" class="headerlink" title="一瞬报错"></a>一瞬报错</h2><p>而最后中午回到宿舍，马上把代码码了上去，发现报错如下</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Exception <span class="token keyword">in</span> thread <span class="token string">"main"</span> java.lang.Error: Unresolved compilation problem:
-    The method printArray<span class="token punctuation">(</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">in</span> the <span class="token builtin class-name">type</span> Test is not applicable <span class="token keyword">for</span> the arguments <span class="token punctuation">(</span>int<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>阅读这报错内容，基本可以得知, int[] type 竟然不是对象类型???</p>
-<p>震惊，难道数组在Java中不是属于对象吗？</p>
-<p>挺秃然的.jpg</p>
-<h2 id="开始混乱"><a href="#开始混乱" class="headerlink" title="开始混乱"></a>开始混乱</h2><p><del>迷惑行为开始了</del></p>
-<p>我对比了一下这两行代码</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>不就一个用的 Integer[] type 而另一个用的 int type 吗？</p>
-<p>回想起之前看过的 <strong>A primitive type can be automatically converted to an object using a wrapper class, and vice versa.</strong></p>
-<p>也就是说，Java是允许基本数据类型和 <strong>Wrapper Class</strong> 类型相互转换的，这种转换叫做<strong>autoboxing</strong> 和 <strong>autounboxing</strong> （一般是在赋值的时候？）</p>
-<p>就好比下面这俩语句是等效的</p>
-<p><code>Integer i = new Integer(1);</code> and <code>Integer i = 1;</code> are <strong>equivalent</strong></p>
-<p><code>int i = 1;</code> and <code>int i = new Integer(1);</code> are also <strong>equivalent</strong></p>
-<p>不过</p>
-<p>在我先前的概念里面，数组不是被Java当成对象处理了吗？</p>
-<p>那用 int[] 和 Integer[] 声明出来的数组，不都是属于一个对象吗？</p>
-<p>不能pass到method printArray就奇怪了</p>
-<h2 id="仔细咀嚼"><a href="#仔细咀嚼" class="headerlink" title="仔细咀嚼"></a>仔细咀嚼</h2><p>emm能报错的话，一定有它的道理，而书上很大概率会单独开一段话提及的</p>
-<p>我尝试开始翻书阅览相关内容，终于，我找到了很明显的一段话 <del>当初肯定是仓促学习而略读了</del></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Consider</span> the following example<span class="token operator">:</span>
-  <span class="token number">1</span> <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> intArray <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-  <span class="token number">2</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>intArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> intArray<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> intArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token class-name">In</span> line <span class="token number">1</span><span class="token punctuation">,</span> the prmitive values <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span> and <span class="token number">3</span> are automatically boxed into objects <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> and <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
-
-  <span class="token class-name">In</span> line <span class="token number">2</span><span class="token punctuation">,</span> the objects intArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> intArray<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> and intArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> are automatically unboxed into <span class="token keyword">int</span> values that are added together<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>好了，看完这段话我开始明白我的错误之处了 <del>这么长的一段话我当初怎么略读掉的</del></p>
-<p>噢原来 Integer[] type 是创建一个包含有多个Integer对象的数组啊</p>
-<p>比如，这里有一个<code>Student</code>类，我们可以用<code>Student[]</code>来声明包含多个Student对象的数组</p>
-<p>那么int[] type呢，原来创建的是包含有多个int基本数据类型的数组，里面的每一个元素都是一个基本数据类型的值</p>
-<p>如果我们把 <code>int[] array = new int[100]</code> 称之为</p>
-<p><code>An array that contains 100 numbers</code></p>
-<p>它叫做 <strong>Array of primitive values</strong></p>
-<p>那么<code>Integer[] array = new Integer[100]</code> 则是</p>
-<p><code>An array that contains 100 objects</code></p>
-<p>而它叫做 <strong>Array of objects</strong></p>
-<p><del>这个东西在OOP上手的时候就已经提到过了，不要被包装类和基本数据类型转换这玩意迷惑了眼睛</del></p>
-<h2 id="总结错误"><a href="#总结错误" class="headerlink" title="总结错误"></a>总结错误</h2><p>回到下面的代码</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>通过前面重新回顾和学习的成果</p>
-<p><strong>我们可见</strong> list1数组它本身也是一个对象，并且是一个包含了好几个<strong>对象</strong>形如<code>new Integer(1)</code>的数组；而list3数组它本身也是一个对象，只不过里面包含的是好几个基本类型的数值而已</p>
-<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>做事要一步一步慢慢来，这才是符合科学和实践规律的</p>
-<p>时快时慢，马马虎虎，必将少不了翻车</p>
-<p>并且经过踏踏实实系统学习，我相信学习成果必定会比东拼西凑的学习要稳固得多</p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>初识抽象与接口</title>
-    <url>//contents/de7e01688b2c/</url>
-    <content><![CDATA[<p>这篇记录了咱对Java面向对象编程中抽象与接口的初步理解</p>
-<span id="more"></span>
-
-<p>在了解了OOP中的封装、继承与多态之后，我继续前行到抽象与接口的学习</p>
-<p>因为是初次接触一下这个内容就开始输出文章了，估计问题不少，希望大神能指正</p>
-<h2 id="修订记录"><a href="#修订记录" class="headerlink" title="修订记录"></a>修订记录</h2><ol>
-<li>2020-10-24 初版</li>
-</ol>
-<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p>抽象是什么？什么是抽象？在了解OOP的抽象之前，我在一本计算机导论书里面读过这段话</p>
-<blockquote>
-<p>The term <strong>abstraction</strong>, as we are using it here, refers to the distinction between the external properties of an entity and the details of the entity’s internal composition. It is abstraction that allows us to ignore the internal details of a complex device and use it as a single, comprehensible unit.</p>
-</blockquote>
-<p>这段话大概是说了抽象存在的作用，它使得我们的社会分工更加妥当，在许多地方，你只需要做好你自己的本能，而不必刻意去理解你所作所为的背后的原理</p>
-<p>这就像计算机与用户之间的关系一样，当你作为用户，你不用去了解程序的运行过程和CPU的原理，这些东西并不会影响你的日常使用，你作为用户只需要好好去使用计算机就行了，此时这些原理就像黑盒子一样，被封装被抽象起来了</p>
-<p>那么OOP语言中的抽象也是这个道理吗？</p>
-<p>那我这里还是拿上一篇文章所用的类GeometricObject和Circle来举例</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/** UML diagram */</span>
-               <span class="token class-name">GeometricObject</span>
-<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
-<span class="token operator">-</span>color<span class="token operator">:</span> <span class="token class-name">String</span>
-<span class="token operator">-</span>filled<span class="token operator">:</span> <span class="token keyword">boolean</span>
-<span class="token operator">-</span>dateCreated<span class="token operator">:</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span><span class="token class-name">Date</span>
-<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
-<span class="token operator">+</span><span class="token class-name">GeometricObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">+</span><span class="token class-name">GeometricObject</span><span class="token punctuation">(</span>color<span class="token operator">:</span> <span class="token class-name">String</span><span class="token punctuation">,</span> filled<span class="token operator">:</span> <span class="token keyword">boolean</span><span class="token punctuation">)</span>
-<span class="token operator">+</span><span class="token function">getColor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token class-name">String</span>
-<span class="token operator">+</span><span class="token function">isFilled</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">boolean</span>
-<span class="token operator">+</span><span class="token function">setFilled</span><span class="token punctuation">(</span>filled<span class="token operator">:</span> <span class="token keyword">boolean</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
-<span class="token operator">+</span><span class="token function">getDataCreated</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span><span class="token class-name">Date</span>
-<span class="token operator">+</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token class-name">String</span>
-
-
-                      <span class="token class-name">Circle</span>
-<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
-<span class="token operator">-</span>radius<span class="token operator">:</span> <span class="token keyword">double</span>
-<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>
-<span class="token operator">+</span><span class="token class-name">Circle</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token operator">+</span><span class="token class-name">Circle</span><span class="token punctuation">(</span>radius<span class="token operator">:</span> <span class="token keyword">double</span><span class="token punctuation">)</span>
-<span class="token operator">+</span><span class="token class-name">Circle</span><span class="token punctuation">(</span>radius<span class="token operator">:</span> <span class="token keyword">double</span><span class="token punctuation">,</span> color<span class="token operator">:</span> <span class="token class-name">String</span><span class="token punctuation">,</span> filled<span class="token operator">:</span> <span class="token keyword">boolean</span><span class="token punctuation">)</span>
-<span class="token operator">+</span><span class="token function">getRadius</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">double</span>
-<span class="token operator">+</span><span class="token function">setRadius</span><span class="token punctuation">(</span>radius<span class="token operator">:</span> <span class="token keyword">double</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span>
-<span class="token operator">+</span><span class="token function">getArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">double</span>
-<span class="token operator">+</span><span class="token function">getPerimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">double</span>
-<span class="token operator">+</span><span class="token function">getDiameter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">double</span>
-<span class="token operator">+</span><span class="token function">printCircle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>还是这熟悉的两个类，只不过仔细观察，你会发现，计算周长和面积的方法<code>getPerimeter()</code>和<code>getArea()</code>都位于Circle类，但是每一个GeometricObject理论上都要计算面积和周长啊，然而由于每种几何图形的面积周长的计算方法都不一样，因此这两个方法都是依赖于特定图形的类如Circle的</p>
-<p>那我们应该怎么样让GeometricObject的实例使用<code>getPerimeter()</code>和<code>getArea()</code>方法呢？</p>
-<p>我们可以把类改成抽象类，然后在这个类里面添加抽象方法<code>getPerimeter()</code>和<code>getArea()</code></p>
-<p>于是将其class header</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GeometricObject</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>加个 modifier <strong>abstract</strong> 改变为如下</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">GeometricObject</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>并在GeometricObject类里，加入抽象方法</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**abstract classes */</span>
-<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">double</span> <span class="token function">getArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">double</span> <span class="token function">getPerimeter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>抽象方法body都是空的，虽然这个抽象方法存在于GeometricObject类里面，但是并不由这个类实现，这个方法的实现交给了继承它的子类来实现</p>
-<p>我们在原Circle类里面重写这个方法（已经重写了，如下）</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">double</span> radius<span class="token punctuation">;</span>
-
-<span class="token annotation punctuation">@Override</span>
-<span class="token keyword">public</span> <span class="token keyword">double</span> <span class="token function">getArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> radius <span class="token operator">*</span> radius <span class="token operator">*</span> <span class="token class-name">Math</span><span class="token punctuation">.</span>PI<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>此时我们可以进行如下操作</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">GeometricObject</span> circle <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Circle</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Area is "</span> <span class="token operator">+</span> circle<span class="token punctuation">.</span><span class="token function">getArea</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment">//output: Area is 12.566370614359172</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>GeometricObject类型的对象也能调用getArea()方法了，这个方法实际是在Circle类里面实现的（这个实现方法的类的调用是由JVM动态决定的，取决于actual type），这跟我之前看到的关于抽象的描述岂不是有神似之处，虽然这方法实际上是在子类的那一层实现的，但是父类只管知道有这个方法并且自己可以用它就行</p>
-<p>就这个例子来说，在GeometricObject类中加这俩抽象方法有什么好处呢？</p>
-<p>我认为相比于哲学的抽象定义，更实际的用途就是在<strong>更加通用化的父类中使用子类中比较特殊化的方法</strong>吧</p>
-<p>这样定义了抽象类与方法，我们就可以直接比较两个不同子类对象的面积和周长了（而不用进行typecast）</p>
-<p><strong>并且</strong>由于抽象类中的抽象方法必须要有继承这个类的子类进行重写实现，因此抽象类的constructor不能直接被调用，从而无法直接创建一个actual type为抽象类的对象，其constructor在子类对象被创建的时候通过继承链进行调用</p>
-<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>接口是什么呢？接口是一个与类非常相似的结构，它可以指定通用行为给相关或不相关的类，你可以指定这个类是不是如 可以比较(Comparable) 可以克隆(Cloneable)等</p>
-<p>接口继承的方式与类继承的方式也是差不多，只不过Java不允许一个子类继承多个子类，但是允许实现多个interface</p>
-<p>要实现一个接口，只需要在类上加上 <code>implements interface1, interface2, ... interfaceN</code> 即可，此时这个类实现了这多个接口，并且同时也是这些个接口的对象</p>
-<p>有什么例子吗？</p>
-<p>我们用了非常多的一个<code>String</code>类，拥有一个方法<code>compareTo(String s)</code>，当我们想要表示两个字符串的时候，便可以调用这个方法</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">String</span> s1 <span class="token operator">=</span> <span class="token string">"ABC"</span><span class="token punctuation">;</span>
-<span class="token class-name">String</span> s2 <span class="token operator">=</span> <span class="token string">"ABCD"</span><span class="token punctuation">;</span>
-<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1<span class="token punctuation">.</span><span class="token function">compareTo</span><span class="token punctuation">(</span>s2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//output: -1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>经过API文档的查阅，我们可以得出这么点东西</p>
-<p>在String页面下有如下的class header</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">String</span> <span class="token keyword">extends</span> <span class="token class-name">Object</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span><span class="token punctuation">,</span> <span class="token class-name">Comparable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span><span class="token punctuation">,</span> <span class="token class-name">CharSequence</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>对于<code>interface Comparable&lt;String&gt;</code> 我们也能在API Doc下面找到如下的</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Interface</span> <span class="token class-name">Comparable</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">></span></span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">int</span> <span class="token function">compareTo</span><span class="token punctuation">(</span><span class="token class-name">T</span> o<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>其中的T其实就是type parameter, T 代表着任意一个 type</p>
-<p>也就是说，这个方法在接口中定义，在实现它的类中进行接口方法的实现，这点与抽象类非常相似</p>
-<h2 id="接口与抽象的区别"><a href="#接口与抽象的区别" class="headerlink" title="接口与抽象的区别"></a>接口与抽象的区别</h2><p>既然抽象类与接口如此相似，那差别是什么呢？</p>
-<p>一个类包含了data field, constructor和method, 而接口与类也差不多，只是没了constructor，并且在另外两个上也有那么一丢丢差别</p>
-<p>我拿<strong>Java 8或以上</strong>的来讲讲区别吧</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>data field</th>
-<th>constructor</th>
-<th>method</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>抽象类</td>
-<td>跟个正常类一样</td>
-<td>有 但是只能由子类调用</td>
-<td>跟个正常类一样 只是多了抽象方法</td>
-</tr>
-<tr>
-<td>接口</td>
-<td>必须都是final</td>
-<td>无</td>
-<td>只能是抽象方法 <strong>default</strong>方法 <strong>static</strong>方法</td>
-</tr>
-</tbody></table>
-<p>并且，一个子类可以实现多个接口，而一个子类只能继承一个父类</p>
-<p>也许你会问：好像除了一类实现多个接口的特性，接口好像一无是处诶？</p>
-<p>其实我认为存在即合理吧，从某种情况来讲，接口比抽象类更加<strong>普适通用</strong></p>
-<p>写这篇文章的时候，咱还没有什么实际项目经验，是个云玩家，举个小实例吧</p>
-<p>比如我们定义那么一个接口 <code>Edible</code>, 含有一个 <code>howToEat()</code> 抽象方法</p>
-<p>那么，任意能吃的实体类都能实现它</p>
-<p>而我们把 <code>howToEat()</code> 方法定义在一个抽象类<code>Animal</code>中，那么只有继承它的子类才能实现这个方法，那一些蔬菜也能吃啊，把一种植物强行继承在动物类中，这有点不合继承的一些规则（不遵守is-a关系，乱来）</p>
-<p>而接口并没有这个情况出现，他很通用，只要能实现，都能在类中用 <code>implements</code> 来继承它</p>
-<p>这里应该可以用 <strong>is-a</strong> 和 <strong>is-kind-of</strong> 关系来描述接口与子类，抽象父类与子类的关系</p>
-<p>我们在继承的时候知道了is-a关系，可以 <code>Circle is a GeometricObject</code> 这样表示一个继承关系，这个父类子类关系比较明显</p>
-<p>而接口的继承关系可以这样表达 <code>String is kind of Comparable</code> 或 <code>String is a Comparable Object</code>，而这接口和类的关系就没那么关系明显了，是比较弱的一个关系</p>
-<p>那么就可以一句话解释上面的错误了 你想想 <code>Cabbage is an Animal</code> 这河里吗？</p>
-<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>所以，抽象和接口相似但又有区别，因此设计程序的时候，最好根据实际需求进行选择</p>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>C语言之数组与指针</title>
-    <url>//contents/d34f10f99adc/</url>
-    <content><![CDATA[<p>指针和数组，关系不浅啊</p>
-<span id="more"></span>
-
-<p><del><strong>禁止茴香豆</strong></del></p>
-<p>课间写的，有点匆忙，估计有不少错误，如有，请指出，谢谢。</p>
-<p>上面不懂的可能需要下面内容的补足（写作水平太菜了）</p>
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>为什么我突然写这篇文章呢？原来是我在<a href="https://en.cppreference.com/w/c/memory/malloc">cppreference上面看malloc()</a>，了解一下简单的内存分配的时候，试了一下附带的example</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span>   </span>
-<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span> </span>
- 
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> 
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token operator">*</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// allocates enough for an array of 4 int</span>
-    <span class="token keyword">int</span> <span class="token operator">*</span>p2 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// same, naming the type directly</span>
-    <span class="token keyword">int</span> <span class="token operator">*</span>p3 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token operator">*</span><span class="token keyword">sizeof</span> <span class="token operator">*</span>p3<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// same, without repeating the type name</span>
- 
-    <span class="token keyword">if</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> n<span class="token operator">&lt;</span><span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>n<span class="token punctuation">)</span> <span class="token comment">// populate the array</span>
-            p1<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> n<span class="token operator">*</span>n<span class="token punctuation">;</span>
-        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> n<span class="token operator">&lt;</span><span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>n<span class="token punctuation">)</span> <span class="token comment">// print it back out</span>
-            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"p1[%d] == %d\n"</span><span class="token punctuation">,</span> n<span class="token punctuation">,</span> p1<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
- 
-    <span class="token function">free</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">free</span><span class="token punctuation">(</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">free</span><span class="token punctuation">(</span>p3<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这段代码运行之后，输出的结果是</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">p1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
-p1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
-p1<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">4</span>
-p1<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">9</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>诶诶诶，为什么指针也能拥有数组那样的下标呢？我的直觉告诉我：指针和数组，之间必定有不可描述的关系</p>
-<p>在开始之前，感谢一下tindy2013能抽空给我微微解释了一下<del>，缩短了我自主探索的时间</del></p>
-<h2 id="数组的下标"><a href="#数组的下标" class="headerlink" title="数组的下标"></a>数组的下标</h2><p>如同多数地方所说的，数组就是一种数据结构。是一坨<strong>连续</strong>的元素，接连着一起躺在了内存中的某一块区域。并且数组拥有operator<code>[]</code>，即是数组的下标。</p>
-<p>之前我发现数组还可以这样子</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%p"</span><span class="token punctuation">,</span> arr<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>最后的输出了一个内存地址，并且我们还可以新建一个指针并把数组变量赋值给它，并能通过指针给arr中的其中一个元素赋值</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span>
-
-arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token comment">//or</span>
-p <span class="token operator">+=</span> <span class="token number">4</span><span class="token punctuation">;</span>
-<span class="token operator">*</span>p <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token comment">//or</span>
-<span class="token operator">*</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>上面三个操作都是一样的，输出结果都是<code>1</code></p>
-<p>既然上面有<code>int *p = arr;</code>那么我把数组arr当成一个常量指针，既然arr可以拥有一个属于他自己的下标，那么一般的指针，是否也能拥有一个下标呢？</p>
-<p>不多猜测，先试一下看看是不是这样</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c">p<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>也是一个样，那么，<strong>指针变量拥有下标</strong>。</p>
-<p>但是经过一番的查询之后，发现数组和指针，这两者并不是<strong>绝对相同</strong>的。常见且有区别的，就是在使用运算符<code>sizeof</code>的时候，得到的就是数组类型<code>int[]</code>的长度了。只不过在大多数情况下，被隐式转换成指针了。</p>
-<p>下面摘抄一点ISO C标准对数组的说明（不想看可以跳过）</p>
-<p><code>Constraints : 1 One of the expressions shall have type &#39;pointer to object type&#39;,  the other expression shall have integer type, and the result has type  &#39;type&#39;.</code><br><code>Semantics : 2 A postfix expression followed by an expression in square brackets [] is a subscripted designation of an element of an array object. The definition of the subscript operator [] is that E1[E2] is identical to (*((E1)+(E2))). Because of the conversion rules that apply to the binary + operator, if E1 is an array object (equivalently, a pointer to the initial element of an array object) and E2 is an integer, E1[E2] designates the E2-th element of E1 (counting from zero).</code></p>
-<h2 id="关于内存的一点知识来讨论。"><a href="#关于内存的一点知识来讨论。" class="headerlink" title="关于内存的一点知识来讨论。"></a>关于内存的一点知识来讨论。</h2><p>前面只是基于代码和结果来猜测和讨论的，那实际上它们都干了些啥，我们可以结合关于内存的一点知识来讨论。</p>
-<p>首先，先给自己的脑子灌输一点知识：如果没有了解过内存的话，我们可以大概的形成一下印象。（大佬请跳过）</p>
-<p>内存呢，我喜欢把它形象化成一张密密麻麻的表格，它很长很长，但是宽度只有8个格子（1字节 = 8位），并且每一行都有一个专门的标号，就是内存的地址啦（字节编址）</p>
-<p>如图所示</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143617.png"></p>
-<p>数据进入内存的话，就会占据内存的一部分，比如我们熟知，在32位下，<code>int</code>型占用4个字节，<code>double</code>型占用8个字节，比如我们有一个值为1的int变量，它会在内存中占据着4个字节</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143537.png"></p>
-<p>数组是在内存上连续分布一块的数据结构。如果有一个长度为3的int数组<code>arr[3] = &#123;7, 4, 5&#125;</code>，那么它在内存里的占用是连续的，三个int类型长度的地址，还有一个数组名的变量，相当于一个常量指针（不可更改地址）</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143733.png"></p>
-<p>我们可以使用<code>arr[0] arr[1] arr[2]</code>来进行对应元素的访问。与此同时，使用一个指针<code>int *p = arr</code>来实现上述的访问</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span> <span class="token comment">// *p = 7</span>
-p<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// *p = 4</span>
-p<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// *p = 5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>由上可见，指针p进行了两次自增，每一次自增，都会对p存放的地址+4，去到下一个元素的起始地址。因此，对p解引用就会出现不同的结果，分别对应<code>arr[0] arr[1] arr[2]</code></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205144359.png"></p>
-<p>那么有，</p>
-<p><code>arr[0]</code>就是直接对arr的起始地址进行解引用，结果就是<code>7</code></p>
-<p><code>arr[1]</code>就是对arr进行+1，对指针<code>arr + 1</code>进行解引用，结果就是<code>4</code></p>
-<p><code>arr[2]</code>同理，结果是<code>5</code></p>
-<h2 id="使用指针操作数组"><a href="#使用指针操作数组" class="headerlink" title="使用指针操作数组"></a>使用指针操作数组</h2><p>一维数组的指针就是像上面那样子，那如果我们对<strong>二维、三维数组</strong>用指针进行数组操作呢？</p>
-<p>其实呢，二维数组就是一个<strong>连续的</strong>，<strong>包含多个一维数组</strong>的数组</p>
-<p>又因为，数组名就是个指针，所以，二维数组的数组名就是个指针，指向着多个一维数组名（pointer to pointer）</p>
-<p>再根据上面所提到的一句话：</p>
-<blockquote>
-<p>指针变量自增1，即是对其原来的地址加上一个对应类型的长度</p>
-</blockquote>
-<p>假设这里有一个二维数组<code>int array[3][4]</code>呢？我们用指针进行操作的时候，可以初始化这两种指针：</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> array<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token comment">//an int type pointer</span>
-<span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token operator">*</span>array<span class="token punctuation">;</span>
-<span class="token comment">//an int[4] type pointer</span>
-<span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>我们对p1和p2加一，并对其解引用</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c">p1<span class="token operator">++</span><span class="token punctuation">;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment">//output: 5</span>
-<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> array<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-p2<span class="token operator">++</span><span class="token punctuation">;</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment">//output: 9</span>
-<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> array<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>可以看出，两者输出结果不一样，其中p1读出来的是<code>a[0][1]  = 5</code>，而p2读出来的是<code>a[1][1] = 9</code></p>
-<p>为什么呢？仔细思考一下的话，其实也不难理解</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205145556.png"></p>
-<h2 id="注意操作的对象"><a href="#注意操作的对象" class="headerlink" title="注意操作的对象"></a>注意操作的对象</h2><p>我到底，操作着哪个对象啊……</p>
-<p>我作为一个初学者，平时也会被各种多重 asterisk(*) 搞晕，不过静下心来，发现还是要抓住这些</p>
-<ol>
-<li>优先级</li>
-<li>指针加减所表示的含义</li>
-</ol>
-<p>首先是优先级和结合性</p>
-<p>先举一个在课堂上使人晕针的东西：<strong>指针数组</strong>和<strong>数组指针</strong></p>
-<p>我觉得好晕啊，先看下它们对应的英语吧：</p>
-<table>
-<thead>
-<tr>
-<th align="center">中文</th>
-<th align="center">英语</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">指针数组</td>
-<td align="center">array of pointer</td>
-</tr>
-<tr>
-<td align="center">数组指针</td>
-<td align="center">pointer to array</td>
-</tr>
-</tbody></table>
-<p>英语表示不就直白很多了吗…</p>
-<p>再者就是优先级的问题了。比如上文这个</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//an int[4] type pointer</span>
-<span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>由于<code>[]</code>的优先级比<code>*</code>的要高，所以用了括号来强行更改优先级，先解析<code>*</code>，它的意思是p2先是一个指针，然后解析<code>int</code>与<code>[4]</code>，表明p2是一个指向<code>int[4]</code>类型的指针。</p>
-<p>不加的话，意思是这样的</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span>p2<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token comment">// p2 is an array of pointers</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>（感觉解释有点奇怪）这里情况是，根据优先级，先解析<code>[4]</code>，表明p2会是一个长度为4的数组，然后再解析<code>*</code>，表明了p2是存储指针用的数组，指针指向<code>int</code>类型</p>
-<p>举个简单的，<code>int **p = array;</code>这个呢？</p>
-<p>就是等效于<code>int *(*p)</code>这个，<code>*</code>是右结合的，所以中间的<code>*</code>先与p结合，再与左边的<code>*</code>进行结合</p>
-<p>再者就是指针加减实际的多少，在这里，我姑且把对指针的加减当做是对指针变量里头存放的地址的前移和后移吧，这东西在前面的部分，已经讲了个大概了。</p>
-<p>对于上文那个<code>array[3][4]</code>数组，语句<code>(*(p2+1)+1)</code>做了些啥呢？p2是<code>int[4]</code>类型的指针，对<code>(p2+1)</code>就是p2右移动1个<code>int[4]</code>的长度，就是<code>array[1][0]</code>的起始地址，对该地址解引用后，获得了这个二维数组中的第二个<code>int[4]</code>类型的一维数组，即<code>array[1]</code>，是一个<code>int</code>类型的指针，之后加1就是右移动1个<code>int</code>长度了，因此最后解引用后就是9</p>
-<p>并且写到这里我发现，<code>array[1][1] </code>，因为<code>[]</code>的结合性是左结合，即是<code>(array[1])[1]</code>，其实不就是相当于<code>*(*(p2+1)+1)</code>吗？？？(难道数组的下标相当于给指针进行解引用)</p>
-<p>大概是下图这样的</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205153231.png"></p>
-<p>于是输出了<code>9</code>;</p>
-<h2 id="后面"><a href="#后面" class="headerlink" title="后面"></a>后面</h2><p>还需要补一下，还有字符数组与字符串</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
       </categories>
   </entry>
   <entry>
@@ -1837,87 +1675,6 @@ test2 <span class="token operator">=</span> test3<span class="token punctuation"
       </categories>
   </entry>
   <entry>
-    <title>记一次JSON入门</title>
-    <url>//contents/681cfff66470/</url>
-    <content><![CDATA[<p>咋感觉最近学的小东西越来越多了…</p>
-<span id="more"></span>
-
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>其实JSON这个东西我也不是第一次听到了，只不过之前看json文件看得云里雾里，但因为不是要自己上手使用<del>（之前的想法是读json只需知道它大概说了啥就行）</del>所以一直没去了解，一直拖延到现在，才打算学习一下json。</p>
-<h2 id="这是啥啊"><a href="#这是啥啊" class="headerlink" title="这是啥啊"></a>这是啥啊</h2><p>俗话说：“知己知彼，百战百胜。”所以我特地去找了找其介绍</p>
-<blockquote>
-<p><strong>JSON</strong>(JavaScript Object Notation) 是一种轻量级的数据交换格式。 易于人阅读和编写。同时也易于机器解析和生成。 它基于<a href="http://www.crockford.com/javascript">JavaScript Programming Language</a>, <a href="http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf">Standard ECMA-262 3rd Edition - December 1999</a>的一个子集。 JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C, C++, C#, Java, JavaScript, Perl, Python等）。 这些特性使JSON成为理想的数据交换语言。</p>
-</blockquote>
-<p>现在我对json的认识是：</p>
-<ol>
-<li>是一种用于数据交换的文本格式</li>
-<li>使用了C-liked的风格</li>
-</ol>
-<p>那么相对于之前一股脑乱读json，停下脚步，静下心来思考，也许json并不是很难呢？</p>
-<p>事实证明，思维的懒惰才是最为可怕的，花了一小段时间来阅读了一下<a href="https://www.json.org/json-en.html">JSON官网</a>的介绍，发现json这东西，真的不是很难</p>
-<p><strong>由于目前咱有一点程序语言的知识储备</strong>，所以这里只记录一些我自己需要记录的东西。</p>
-<h2 id="两大结构"><a href="#两大结构" class="headerlink" title="两大结构"></a>两大结构</h2><p>如同HTML有属性和元素，JSON也有两大结构</p>
-<blockquote>
-<p>JSON is built on two structures:</p>
-<ul>
-<li>A collection of name/value pairs. In various languages, this is realized as an <em>object</em>, record, struct, dictionary, hash table, keyed list, or associative array.</li>
-<li>An ordered list of values. In most languages, this is realized as an <em>array</em>, vector, list, or sequence.</li>
-</ul>
-</blockquote>
-<p>它们分别是</p>
-<ol>
-<li>名称/值 pair 的集合</li>
-<li>值的有序列表（这个跟数组array很像的）</li>
-</ol>
-<h2 id="一些形式"><a href="#一些形式" class="headerlink" title="一些形式"></a>一些形式</h2><h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>对象呢，就是一堆无序的名称/值的集合，以<code>&#123;</code>开始并以<code>&#125;</code>结束，里面的每个pair都是以<code>name: value</code>这样的格式表示的，然后每个pair<strong>之间</strong>都要用逗号<code>,</code>来<strong>分隔开</strong><del>（之前一直以为是每次换行都要加个逗号</del></p>
-<p>我觉得官网上面的这个图画的挺厉害的，就收下来了</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193252.png" alt="Object 选自json官网"></p>
-<h3 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h3><p>数组嘛，见得太多了，就不多说了，跟<code>[ele1, ele2 ... eleN]</code>这东西长得是差不多的，只不过其中的元素就是名次/值pair</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193253.png" alt="Array 选自json官网"></p>
-<h3 id="Value"><a href="#Value" class="headerlink" title="Value"></a>Value</h3><p>为什么我要把见得太多了的value给记录下呢？因为之前我是不知道json的值可以是object或者array的，所以也要用小本本记下来。</p>
-<blockquote>
-<p>A <em>value</em> can be a <em>string</em> in double quotes, or a <em>number</em>, or <code>true</code> or <code>false</code> or <code>null</code>, or an <strong>object</strong>  or an <strong>array</strong>. These structures can be nested.</p>
-</blockquote>
-<h2 id="阅读实例"><a href="#阅读实例" class="headerlink" title="阅读实例"></a>阅读实例</h2><p>json就顺手在刚刚查询的空教室记录里面抽取了一段，如下</p>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
-  <span class="token property">"currentPage"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"currentResult"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"entityOrField"</span><span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
-  <span class="token property">"items"</span><span class="token operator">:</span><span class="token punctuation">[</span>
-     <span class="token punctuation">&#123;</span>
-        <span class="token property">"cd_id"</span><span class="token operator">:</span><span class="token string">"1011230"</span><span class="token punctuation">,</span>
-        <span class="token property">"cdbh"</span><span class="token operator">:</span><span class="token string">"1011230"</span><span class="token punctuation">,</span>
-        <span class="token property">"cdjylx"</span><span class="token operator">:</span><span class="token string">"教学类,活动类"</span><span class="token punctuation">,</span>
-        <span class="token property">"cdmc"</span><span class="token operator">:</span><span class="token string">"文新123#"</span><span class="token punctuation">,</span>
-        <span class="token property">"dateDigit"</span><span class="token operator">:</span><span class="token string">"2020年11月27日"</span><span class="token punctuation">,</span>
-        <span class="token property">"dateDigitSeparator"</span><span class="token operator">:</span><span class="token string">"2020-11-27"</span><span class="token punctuation">,</span>
-        <span class="token property">"month"</span><span class="token operator">:</span><span class="token string">"11"</span><span class="token punctuation">,</span>
-        <span class="token property">"queryModel"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
-           <span class="token property">"currentPage"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
-           <span class="token property">"currentResult"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"entityOrField"</span><span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
-           <span class="token property">"limit"</span><span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span>
-           <span class="token property">"offset"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"pageNo"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"pageSize"</span><span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span>
-           <span class="token property">"showCount"</span><span class="token operator">:</span><span class="token number">10</span><span class="token punctuation">,</span>
-           <span class="token property">"sorts"</span><span class="token operator">:</span><span class="token punctuation">[</span>
-              
-           <span class="token punctuation">]</span><span class="token punctuation">,</span>
-           <span class="token property">"totalCount"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"totalPage"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"totalResult"</span><span class="token operator">:</span><span class="token number">0</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-        <span class="token property">"rangeable"</span><span class="token operator">:</span><span class="token boolean">true</span>
-     <span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>结合上面的知识储备，就能看懂这段json想表示啥了<del>，但为什么部分混入了拼音首字母缩写啊我擦</del></p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>项目小总结之简易井字棋</title>
     <url>//contents/76029e119cb2/</url>
     <content><![CDATA[<p>(个人笔记) 就算是玩具项目，做完也会有不少收获——主要是对gradle和groovy的初步认识</p>
@@ -2111,6 +1868,168 @@ test<span class="token punctuation">.</span>with <span class="token punctuation"
       </categories>
   </entry>
   <entry>
+    <title>C语言之数组与指针</title>
+    <url>//contents/d34f10f99adc/</url>
+    <content><![CDATA[<p>指针和数组，关系不浅啊</p>
+<span id="more"></span>
+
+<p><del><strong>禁止茴香豆</strong></del></p>
+<p>课间写的，有点匆忙，估计有不少错误，如有，请指出，谢谢。</p>
+<p>上面不懂的可能需要下面内容的补足（写作水平太菜了）</p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>为什么我突然写这篇文章呢？原来是我在<a href="https://en.cppreference.com/w/c/memory/malloc">cppreference上面看malloc()</a>，了解一下简单的内存分配的时候，试了一下附带的example</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span>   </span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span> </span>
+ 
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> 
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token operator">*</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// allocates enough for an array of 4 int</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>p2 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// same, naming the type directly</span>
+    <span class="token keyword">int</span> <span class="token operator">*</span>p3 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token operator">*</span><span class="token keyword">sizeof</span> <span class="token operator">*</span>p3<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// same, without repeating the type name</span>
+ 
+    <span class="token keyword">if</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> n<span class="token operator">&lt;</span><span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>n<span class="token punctuation">)</span> <span class="token comment">// populate the array</span>
+            p1<span class="token punctuation">[</span>n<span class="token punctuation">]</span> <span class="token operator">=</span> n<span class="token operator">*</span>n<span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> n<span class="token operator">&lt;</span><span class="token number">4</span><span class="token punctuation">;</span> <span class="token operator">++</span>n<span class="token punctuation">)</span> <span class="token comment">// print it back out</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"p1[%d] == %d\n"</span><span class="token punctuation">,</span> n<span class="token punctuation">,</span> p1<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+ 
+    <span class="token function">free</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>p3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这段代码运行之后，输出的结果是</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">p1<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+p1<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
+p1<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">4</span>
+p1<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">9</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>诶诶诶，为什么指针也能拥有数组那样的下标呢？我的直觉告诉我：指针和数组，之间必定有不可描述的关系</p>
+<p>在开始之前，感谢一下tindy2013能抽空给我微微解释了一下<del>，缩短了我自主探索的时间</del></p>
+<h2 id="数组的下标"><a href="#数组的下标" class="headerlink" title="数组的下标"></a>数组的下标</h2><p>如同多数地方所说的，数组就是一种数据结构。是一坨<strong>连续</strong>的元素，接连着一起躺在了内存中的某一块区域。并且数组拥有operator<code>[]</code>，即是数组的下标。</p>
+<p>之前我发现数组还可以这样子</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%p"</span><span class="token punctuation">,</span> arr<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>最后的输出了一个内存地址，并且我们还可以新建一个指针并把数组变量赋值给它，并能通过指针给arr中的其中一个元素赋值</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span>
+
+arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token comment">//or</span>
+p <span class="token operator">+=</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span class="token operator">*</span>p <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token comment">//or</span>
+<span class="token operator">*</span><span class="token punctuation">(</span>arr <span class="token operator">+</span> <span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>上面三个操作都是一样的，输出结果都是<code>1</code></p>
+<p>既然上面有<code>int *p = arr;</code>那么我把数组arr当成一个常量指针，既然arr可以拥有一个属于他自己的下标，那么一般的指针，是否也能拥有一个下标呢？</p>
+<p>不多猜测，先试一下看看是不是这样</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">p<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>也是一个样，那么，<strong>指针变量拥有下标</strong>。</p>
+<p>但是经过一番的查询之后，发现数组和指针，这两者并不是<strong>绝对相同</strong>的。常见且有区别的，就是在使用运算符<code>sizeof</code>的时候，得到的就是数组类型<code>int[]</code>的长度了。只不过在大多数情况下，被隐式转换成指针了。</p>
+<p>下面摘抄一点ISO C标准对数组的说明（不想看可以跳过）</p>
+<p><code>Constraints : 1 One of the expressions shall have type &#39;pointer to object type&#39;,  the other expression shall have integer type, and the result has type  &#39;type&#39;.</code><br><code>Semantics : 2 A postfix expression followed by an expression in square brackets [] is a subscripted designation of an element of an array object. The definition of the subscript operator [] is that E1[E2] is identical to (*((E1)+(E2))). Because of the conversion rules that apply to the binary + operator, if E1 is an array object (equivalently, a pointer to the initial element of an array object) and E2 is an integer, E1[E2] designates the E2-th element of E1 (counting from zero).</code></p>
+<h2 id="关于内存的一点知识来讨论。"><a href="#关于内存的一点知识来讨论。" class="headerlink" title="关于内存的一点知识来讨论。"></a>关于内存的一点知识来讨论。</h2><p>前面只是基于代码和结果来猜测和讨论的，那实际上它们都干了些啥，我们可以结合关于内存的一点知识来讨论。</p>
+<p>首先，先给自己的脑子灌输一点知识：如果没有了解过内存的话，我们可以大概的形成一下印象。（大佬请跳过）</p>
+<p>内存呢，我喜欢把它形象化成一张密密麻麻的表格，它很长很长，但是宽度只有8个格子（1字节 = 8位），并且每一行都有一个专门的标号，就是内存的地址啦（字节编址）</p>
+<p>如图所示</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143617.png"></p>
+<p>数据进入内存的话，就会占据内存的一部分，比如我们熟知，在32位下，<code>int</code>型占用4个字节，<code>double</code>型占用8个字节，比如我们有一个值为1的int变量，它会在内存中占据着4个字节</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143537.png"></p>
+<p>数组是在内存上连续分布一块的数据结构。如果有一个长度为3的int数组<code>arr[3] = &#123;7, 4, 5&#125;</code>，那么它在内存里的占用是连续的，三个int类型长度的地址，还有一个数组名的变量，相当于一个常量指针（不可更改地址）</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143733.png"></p>
+<p>我们可以使用<code>arr[0] arr[1] arr[2]</code>来进行对应元素的访问。与此同时，使用一个指针<code>int *p = arr</code>来实现上述的访问</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span> <span class="token comment">// *p = 7</span>
+p<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// *p = 4</span>
+p<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// *p = 5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>由上可见，指针p进行了两次自增，每一次自增，都会对p存放的地址+4，去到下一个元素的起始地址。因此，对p解引用就会出现不同的结果，分别对应<code>arr[0] arr[1] arr[2]</code></p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205144359.png"></p>
+<p>那么有，</p>
+<p><code>arr[0]</code>就是直接对arr的起始地址进行解引用，结果就是<code>7</code></p>
+<p><code>arr[1]</code>就是对arr进行+1，对指针<code>arr + 1</code>进行解引用，结果就是<code>4</code></p>
+<p><code>arr[2]</code>同理，结果是<code>5</code></p>
+<h2 id="使用指针操作数组"><a href="#使用指针操作数组" class="headerlink" title="使用指针操作数组"></a>使用指针操作数组</h2><p>一维数组的指针就是像上面那样子，那如果我们对<strong>二维、三维数组</strong>用指针进行数组操作呢？</p>
+<p>其实呢，二维数组就是一个<strong>连续的</strong>，<strong>包含多个一维数组</strong>的数组</p>
+<p>又因为，数组名就是个指针，所以，二维数组的数组名就是个指针，指向着多个一维数组名（pointer to pointer）</p>
+<p>再根据上面所提到的一句话：</p>
+<blockquote>
+<p>指针变量自增1，即是对其原来的地址加上一个对应类型的长度</p>
+</blockquote>
+<p>假设这里有一个二维数组<code>int array[3][4]</code>呢？我们用指针进行操作的时候，可以初始化这两种指针：</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> array<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token comment">//an int type pointer</span>
+<span class="token keyword">int</span> <span class="token operator">*</span>p1 <span class="token operator">=</span> <span class="token operator">*</span>array<span class="token punctuation">;</span>
+<span class="token comment">//an int[4] type pointer</span>
+<span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>我们对p1和p2加一，并对其解引用</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">p1<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment">//output: 5</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> array<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+p2<span class="token operator">++</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d\n"</span><span class="token punctuation">,</span> <span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">;</span>	<span class="token comment">//output: 9</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> array<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以看出，两者输出结果不一样，其中p1读出来的是<code>a[0][1]  = 5</code>，而p2读出来的是<code>a[1][1] = 9</code></p>
+<p>为什么呢？仔细思考一下的话，其实也不难理解</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205145556.png"></p>
+<h2 id="注意操作的对象"><a href="#注意操作的对象" class="headerlink" title="注意操作的对象"></a>注意操作的对象</h2><p>我到底，操作着哪个对象啊……</p>
+<p>我作为一个初学者，平时也会被各种多重 asterisk(*) 搞晕，不过静下心来，发现还是要抓住这些</p>
+<ol>
+<li>优先级</li>
+<li>指针加减所表示的含义</li>
+</ol>
+<p>首先是优先级和结合性</p>
+<p>先举一个在课堂上使人晕针的东西：<strong>指针数组</strong>和<strong>数组指针</strong></p>
+<p>我觉得好晕啊，先看下它们对应的英语吧：</p>
+<table>
+<thead>
+<tr>
+<th align="center">中文</th>
+<th align="center">英语</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">指针数组</td>
+<td align="center">array of pointer</td>
+</tr>
+<tr>
+<td align="center">数组指针</td>
+<td align="center">pointer to array</td>
+</tr>
+</tbody></table>
+<p>英语表示不就直白很多了吗…</p>
+<p>再者就是优先级的问题了。比如上文这个</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token comment">//an int[4] type pointer</span>
+<span class="token keyword">int</span> <span class="token punctuation">(</span><span class="token operator">*</span>p2<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span> <span class="token operator">=</span> array<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>由于<code>[]</code>的优先级比<code>*</code>的要高，所以用了括号来强行更改优先级，先解析<code>*</code>，它的意思是p2先是一个指针，然后解析<code>int</code>与<code>[4]</code>，表明p2是一个指向<code>int[4]</code>类型的指针。</p>
+<p>不加的话，意思是这样的</p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token operator">*</span>p2<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">// p2 is an array of pointers</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>（感觉解释有点奇怪）这里情况是，根据优先级，先解析<code>[4]</code>，表明p2会是一个长度为4的数组，然后再解析<code>*</code>，表明了p2是存储指针用的数组，指针指向<code>int</code>类型</p>
+<p>举个简单的，<code>int **p = array;</code>这个呢？</p>
+<p>就是等效于<code>int *(*p)</code>这个，<code>*</code>是右结合的，所以中间的<code>*</code>先与p结合，再与左边的<code>*</code>进行结合</p>
+<p>再者就是指针加减实际的多少，在这里，我姑且把对指针的加减当做是对指针变量里头存放的地址的前移和后移吧，这东西在前面的部分，已经讲了个大概了。</p>
+<p>对于上文那个<code>array[3][4]</code>数组，语句<code>(*(p2+1)+1)</code>做了些啥呢？p2是<code>int[4]</code>类型的指针，对<code>(p2+1)</code>就是p2右移动1个<code>int[4]</code>的长度，就是<code>array[1][0]</code>的起始地址，对该地址解引用后，获得了这个二维数组中的第二个<code>int[4]</code>类型的一维数组，即<code>array[1]</code>，是一个<code>int</code>类型的指针，之后加1就是右移动1个<code>int</code>长度了，因此最后解引用后就是9</p>
+<p>并且写到这里我发现，<code>array[1][1] </code>，因为<code>[]</code>的结合性是左结合，即是<code>(array[1])[1]</code>，其实不就是相当于<code>*(*(p2+1)+1)</code>吗？？？(难道数组的下标相当于给指针进行解引用)</p>
+<p>大概是下图这样的</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205153231.png"></p>
+<p>于是输出了<code>9</code>;</p>
+<h2 id="后面"><a href="#后面" class="headerlink" title="后面"></a>后面</h2><p>还需要补一下，还有字符数组与字符串</p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
     <title>搭建个人博客</title>
     <url>//contents/43abca4995a8/</url>
     <content><![CDATA[<p>国庆回家了，先随便水一篇文章 <del>才放4天假差评</del></p>
@@ -2283,6 +2202,87 @@ public&#x2F;
 ]]></content>
       <categories>
         <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>记一次JSON入门</title>
+    <url>//contents/681cfff66470/</url>
+    <content><![CDATA[<p>咋感觉最近学的小东西越来越多了…</p>
+<span id="more"></span>
+
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>其实JSON这个东西我也不是第一次听到了，只不过之前看json文件看得云里雾里，但因为不是要自己上手使用<del>（之前的想法是读json只需知道它大概说了啥就行）</del>所以一直没去了解，一直拖延到现在，才打算学习一下json。</p>
+<h2 id="这是啥啊"><a href="#这是啥啊" class="headerlink" title="这是啥啊"></a>这是啥啊</h2><p>俗话说：“知己知彼，百战百胜。”所以我特地去找了找其介绍</p>
+<blockquote>
+<p><strong>JSON</strong>(JavaScript Object Notation) 是一种轻量级的数据交换格式。 易于人阅读和编写。同时也易于机器解析和生成。 它基于<a href="http://www.crockford.com/javascript">JavaScript Programming Language</a>, <a href="http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf">Standard ECMA-262 3rd Edition - December 1999</a>的一个子集。 JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C, C++, C#, Java, JavaScript, Perl, Python等）。 这些特性使JSON成为理想的数据交换语言。</p>
+</blockquote>
+<p>现在我对json的认识是：</p>
+<ol>
+<li>是一种用于数据交换的文本格式</li>
+<li>使用了C-liked的风格</li>
+</ol>
+<p>那么相对于之前一股脑乱读json，停下脚步，静下心来思考，也许json并不是很难呢？</p>
+<p>事实证明，思维的懒惰才是最为可怕的，花了一小段时间来阅读了一下<a href="https://www.json.org/json-en.html">JSON官网</a>的介绍，发现json这东西，真的不是很难</p>
+<p><strong>由于目前咱有一点程序语言的知识储备</strong>，所以这里只记录一些我自己需要记录的东西。</p>
+<h2 id="两大结构"><a href="#两大结构" class="headerlink" title="两大结构"></a>两大结构</h2><p>如同HTML有属性和元素，JSON也有两大结构</p>
+<blockquote>
+<p>JSON is built on two structures:</p>
+<ul>
+<li>A collection of name/value pairs. In various languages, this is realized as an <em>object</em>, record, struct, dictionary, hash table, keyed list, or associative array.</li>
+<li>An ordered list of values. In most languages, this is realized as an <em>array</em>, vector, list, or sequence.</li>
+</ul>
+</blockquote>
+<p>它们分别是</p>
+<ol>
+<li>名称/值 pair 的集合</li>
+<li>值的有序列表（这个跟数组array很像的）</li>
+</ol>
+<h2 id="一些形式"><a href="#一些形式" class="headerlink" title="一些形式"></a>一些形式</h2><h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>对象呢，就是一堆无序的名称/值的集合，以<code>&#123;</code>开始并以<code>&#125;</code>结束，里面的每个pair都是以<code>name: value</code>这样的格式表示的，然后每个pair<strong>之间</strong>都要用逗号<code>,</code>来<strong>分隔开</strong><del>（之前一直以为是每次换行都要加个逗号</del></p>
+<p>我觉得官网上面的这个图画的挺厉害的，就收下来了</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193252.png" alt="Object 选自json官网"></p>
+<h3 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h3><p>数组嘛，见得太多了，就不多说了，跟<code>[ele1, ele2 ... eleN]</code>这东西长得是差不多的，只不过其中的元素就是名次/值pair</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193253.png" alt="Array 选自json官网"></p>
+<h3 id="Value"><a href="#Value" class="headerlink" title="Value"></a>Value</h3><p>为什么我要把见得太多了的value给记录下呢？因为之前我是不知道json的值可以是object或者array的，所以也要用小本本记下来。</p>
+<blockquote>
+<p>A <em>value</em> can be a <em>string</em> in double quotes, or a <em>number</em>, or <code>true</code> or <code>false</code> or <code>null</code>, or an <strong>object</strong>  or an <strong>array</strong>. These structures can be nested.</p>
+</blockquote>
+<h2 id="阅读实例"><a href="#阅读实例" class="headerlink" title="阅读实例"></a>阅读实例</h2><p>json就顺手在刚刚查询的空教室记录里面抽取了一段，如下</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"currentPage"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">"currentResult"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">"entityOrField"</span><span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token property">"items"</span><span class="token operator">:</span><span class="token punctuation">[</span>
+     <span class="token punctuation">&#123;</span>
+        <span class="token property">"cd_id"</span><span class="token operator">:</span><span class="token string">"1011230"</span><span class="token punctuation">,</span>
+        <span class="token property">"cdbh"</span><span class="token operator">:</span><span class="token string">"1011230"</span><span class="token punctuation">,</span>
+        <span class="token property">"cdjylx"</span><span class="token operator">:</span><span class="token string">"教学类,活动类"</span><span class="token punctuation">,</span>
+        <span class="token property">"cdmc"</span><span class="token operator">:</span><span class="token string">"文新123#"</span><span class="token punctuation">,</span>
+        <span class="token property">"dateDigit"</span><span class="token operator">:</span><span class="token string">"2020年11月27日"</span><span class="token punctuation">,</span>
+        <span class="token property">"dateDigitSeparator"</span><span class="token operator">:</span><span class="token string">"2020-11-27"</span><span class="token punctuation">,</span>
+        <span class="token property">"month"</span><span class="token operator">:</span><span class="token string">"11"</span><span class="token punctuation">,</span>
+        <span class="token property">"queryModel"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+           <span class="token property">"currentPage"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+           <span class="token property">"currentResult"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"entityOrField"</span><span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
+           <span class="token property">"limit"</span><span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span>
+           <span class="token property">"offset"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"pageNo"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"pageSize"</span><span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span>
+           <span class="token property">"showCount"</span><span class="token operator">:</span><span class="token number">10</span><span class="token punctuation">,</span>
+           <span class="token property">"sorts"</span><span class="token operator">:</span><span class="token punctuation">[</span>
+              
+           <span class="token punctuation">]</span><span class="token punctuation">,</span>
+           <span class="token property">"totalCount"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"totalPage"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"totalResult"</span><span class="token operator">:</span><span class="token number">0</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token property">"rangeable"</span><span class="token operator">:</span><span class="token boolean">true</span>
+     <span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>结合上面的知识储备，就能看懂这段json想表示啥了<del>，但为什么部分混入了拼音首字母缩写啊我擦</del></p>
+]]></content>
+      <categories>
+        <category>笔记</category>
       </categories>
   </entry>
   <entry>
