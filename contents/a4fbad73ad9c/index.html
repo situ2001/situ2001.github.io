@@ -24,15 +24,15 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="(个人笔记) 要不是大一下学校的OOP课要讲MFC…">
+<meta name="description" content="要不是大一下学校的OOP课要讲MFC… update: 感谢学校push我学习C++，现在读底层代码舒服好多好多（ 最后更新于2020&#x2F;04&#x2F;07">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速上手C++面向对象">
+<meta property="og:title" content="Java使用者眼中的C++面向对象">
 <meta property="og:url" content="https://blog.situ2001.com/contents/a4fbad73ad9c/index.html">
 <meta property="og:site_name" content="Situ Note">
-<meta property="og:description" content="(个人笔记) 要不是大一下学校的OOP课要讲MFC…">
+<meta property="og:description" content="要不是大一下学校的OOP课要讲MFC… update: 感谢学校push我学习C++，现在读底层代码舒服好多好多（ 最后更新于2020&#x2F;04&#x2F;07">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-03-05T14:00:16.000Z">
-<meta property="article:modified_time" content="2021-03-05T14:00:16.000Z">
+<meta property="article:published_time" content="2021-04-07T07:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-07T07:00:00.000Z">
 <meta property="article:author" content="situ2001">
 <meta name="twitter:card" content="summary">
 
@@ -49,7 +49,7 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>快速上手C++面向对象 | Situ Note</title>
+<title>Java使用者眼中的C++面向对象 | Situ Note</title>
   
 
 
@@ -191,7 +191,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Operator-amp-Keyword"><span class="nav-number">1.</span> <span class="nav-text">Operator &amp; Keyword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Member-function"><span class="nav-number">2.</span> <span class="nav-text">Member function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Instantiation"><span class="nav-number">3.</span> <span class="nav-text">Instantiation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Virtual-function"><span class="nav-number">4.</span> <span class="nav-text">Virtual function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Override-keyword"><span class="nav-number">5.</span> <span class="nav-text">Override keyword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modifier"><span class="nav-number">6.</span> <span class="nav-text">Modifier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Static-keyword"><span class="nav-number">7.</span> <span class="nav-text">Static keyword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inheritance"><span class="nav-number">8.</span> <span class="nav-text">Inheritance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Constructors-amp-member-initializer-lists"><span class="nav-number">9.</span> <span class="nav-text">Constructors &amp; member initializer lists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Friend-keyword"><span class="nav-number">10.</span> <span class="nav-text">Friend keyword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiple-inheritance"><span class="nav-number">11.</span> <span class="nav-text">Multiple inheritance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Constructor-amp-Destructor"><span class="nav-number">12.</span> <span class="nav-text">Constructor &amp; Destructor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Copy-Constructor"><span class="nav-number">13.</span> <span class="nav-text">Copy Constructor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-Constructor"><span class="nav-number">14.</span> <span class="nav-text">Move Constructor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pointer"><span class="nav-number">15.</span> <span class="nav-text">Pointer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Where-to-define"><span class="nav-number">16.</span> <span class="nav-text">Where to define</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#default-amp-delete"><span class="nav-number">17.</span> <span class="nav-text">default &amp; delete</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operator-overloading"><span class="nav-number">18.</span> <span class="nav-text">Operator overloading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Const-keyword"><span class="nav-number">19.</span> <span class="nav-text">Const keyword</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Operators"><span class="nav-number">1.</span> <span class="nav-text">Operators</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Member-function"><span class="nav-number">2.</span> <span class="nav-text">Member function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Instantiation"><span class="nav-number">3.</span> <span class="nav-text">Instantiation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Virtual-function"><span class="nav-number">4.</span> <span class="nav-text">Virtual function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Override"><span class="nav-number">5.</span> <span class="nav-text">Override</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Modifier"><span class="nav-number">6.</span> <span class="nav-text">Modifier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Static-keyword"><span class="nav-number">7.</span> <span class="nav-text">Static keyword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Friend-keyword"><span class="nav-number">8.</span> <span class="nav-text">Friend keyword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inheritance"><span class="nav-number">9.</span> <span class="nav-text">Inheritance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiple-inheritance"><span class="nav-number">10.</span> <span class="nav-text">Multiple inheritance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Constructors-and-member-initializer-lists"><span class="nav-number">11.</span> <span class="nav-text">Constructors and member initializer lists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Constructor-and-Destructor"><span class="nav-number">12.</span> <span class="nav-text">Constructor and Destructor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Copy-Constructor"><span class="nav-number">13.</span> <span class="nav-text">Copy Constructor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Move-Constructor"><span class="nav-number">14.</span> <span class="nav-text">Move Constructor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pointer"><span class="nav-number">15.</span> <span class="nav-text">Pointer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Function-definition"><span class="nav-number">16.</span> <span class="nav-text">Function definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Default-and-delete"><span class="nav-number">17.</span> <span class="nav-text">Default and delete</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operator-overloading"><span class="nav-number">18.</span> <span class="nav-text">Operator overloading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Const-keyword"><span class="nav-number">19.</span> <span class="nav-text">Const keyword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type-casting"><span class="nav-number">20.</span> <span class="nav-text">Type casting</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -269,7 +269,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          快速上手C++面向对象
+          Java使用者眼中的C++面向对象
         </h1>
 
         <div class="post-meta-container">
@@ -280,7 +280,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-03-05 22:00:16" itemprop="dateCreated datePublished" datetime="2021-03-05T22:00:16+08:00">2021-03-05</time>
+      <time title="创建时间：2021-04-07 15:00:00" itemprop="dateCreated datePublished" datetime="2021-04-07T15:00:00+08:00">2021-04-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -300,14 +300,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5.6k</span>
+      <span>7.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>7 分钟</span>
     </span>
 </div>
 
@@ -318,14 +318,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>(个人笔记) 要不是大一下学校的OOP课要讲MFC…</p>
+        <p><del>要不是大一下学校的OOP课要讲MFC…</del></p>
+<p>update: 感谢学校push我学习C++，现在读底层代码舒服好多好多（</p>
+<p>最后更新于2020/04/07</p>
 <span id="more"></span>
 
-<p><strong>最后更新</strong>于:2020/03/29，最新的更新就在这里看吧: <a target="_blank" rel="noopener" href="https://note.situ2001.com/cpp/OOP.html">个人笔记</a></p>
+<p><strong>最后更新</strong>于:2020/04/07，最新的就在这里看吧: <a target="_blank" rel="noopener" href="https://note.situ2001.com/cpp/OOP.html">个人笔记</a></p>
 <hr>
 <p>基于java中的OOP来学习C++的OOP（可 迁 移 学 习）（爆炸预定</p>
 <p>感觉C++中的OOP多了好多东西啊（太菜了）</p>
-<h2 id="Operator-amp-Keyword"><a href="#Operator-amp-Keyword" class="headerlink" title="Operator &amp; Keyword"></a>Operator &amp; Keyword</h2><p>按优先级来说的。</p>
+<h2 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h2><p>按优先级来说的。</p>
 <p>scope qualifier: <code>::</code>，很直白，翻译过来就叫做作用域限定符</p>
 <p>member access: <code>.</code>和<code>-&gt;</code>常见，前者是非指针变量用过的，后者是指针变量用的</p>
 <p>class上的<code>:</code>，如同java里的<code>extends</code></p>
@@ -374,7 +376,7 @@ Test<span class="token operator">*</span> test2 <span class="token operator">=</
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="Override-keyword"><a href="#Override-keyword" class="headerlink" title="Override keyword"></a>Override keyword</h2><p>(C++11)可以防止写虚函数重载的时候，不小心写错的大无语事件发生。</p>
+<h2 id="Override"><a href="#Override" class="headerlink" title="Override"></a>Override</h2><p>该关键字(C++11)可以防止写虚函数重载的时候，不小心写错的大无语事件发生。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">virtual</span> <span class="token keyword">void</span> <span class="token function">eat</span><span class="token punctuation">(</span><span class="token punctuation">)</span> override<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="Modifier"><a href="#Modifier" class="headerlink" title="Modifier"></a>Modifier</h2><p>似乎因为没有jvav的package，所以这么几个modifier<strong>都没有了package access的restriction</strong>（因为根本没有package啊）。所以就很方便了。</p>
@@ -394,52 +396,6 @@ Test<span class="token operator">*</span> test2 <span class="token operator">=</
 Test<span class="token operator">::</span>i <span class="token comment">// 114514</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>为什么要这样做呢？估计要等到了解csapp之后了（</p>
-<h2 id="Inheritance"><a href="#Inheritance" class="headerlink" title="Inheritance"></a>Inheritance</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Chicken</span> <span class="token operator">:</span> <span class="token keyword">public</span> Animal<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>继承的话，要注意，C++继承的class默认是private的，（前期naive认知）所以（不一定）要加个<code>public</code>，<del>否则外部无法使用父类的方法。</del>（<del>原来还能用scope qualifier艹</del>）</p>
-<p>经查询继承类型有如下，比如上面的<code>public Animal</code>就是公有继承了</p>
-<ol>
-<li>公有继承</li>
-<li>保护继承</li>
-<li>私有继承</li>
-</ol>
-<p>原理是将所继承的父类member的accessibility给降级…<code>public</code>-&gt;<code>protected</code>-&gt;<code>private</code></p>
-<p>比如在保护继承和私有的继承的情况下，如果想改变某一个member的accessibility（比如原来是public或protected的，但是继承后降级），可以使用scope qualifier…(差不多得了)</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Animal</span>
-<span class="token punctuation">&#123;</span>
-    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1141514</span><span class="token punctuation">;</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    <span class="token function">Animal</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span>
-    <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-<span class="token keyword">class</span> <span class="token class-name">Chicken</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token class-name">Animal</span></span>
-<span class="token punctuation">&#123;</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-    Animal<span class="token operator">::</span>foo<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#123;</span>
-    Chicken foo<span class="token punctuation">;</span>
-    foo<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="Constructors-amp-member-initializer-lists"><a href="#Constructors-amp-member-initializer-lists" class="headerlink" title="Constructors &amp; member initializer lists"></a>Constructors &amp; member initializer lists</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">public</span><span class="token operator">:</span>
-  <span class="token function">Chicken</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Animal</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span>
-  <span class="token punctuation">&#123;</span>
-    <span class="token comment">/** do sth */</span>
-  <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>相似地，我们也可以用来给field初始化</p>
-<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">private</span><span class="token operator">:</span>
-  std<span class="token operator">::</span>string text <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
-<span class="token keyword">public</span><span class="token operator">:</span>
-  <span class="token function">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">text</span><span class="token punctuation">(</span><span class="token string">"114514"</span><span class="token punctuation">)</span>
-  <span class="token punctuation">&#123;</span>
-    <span class="token comment">/** do sth */</span>
-  <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <h2 id="Friend-keyword"><a href="#Friend-keyword" class="headerlink" title="Friend keyword"></a>Friend keyword</h2><blockquote>
 <p>The friend declaration appears in a class body and grants a function or another class access to private and protected members of the class where the friend declaration appears.</p>
 </blockquote>
@@ -478,8 +434,121 @@ Test<span class="token operator">::</span>i <span class="token comment">// 11451
   <span class="token comment">/** have the access to private field of Test */</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="Multiple-inheritance"><a href="#Multiple-inheritance" class="headerlink" title="Multiple inheritance"></a>Multiple inheritance</h2><p>估计用不到了，不写了。</p>
-<h2 id="Constructor-amp-Destructor"><a href="#Constructor-amp-Destructor" class="headerlink" title="Constructor &amp; Destructor"></a>Constructor &amp; Destructor</h2><p>常见，语法也是差不多，但是后者析构这个就没见过了（GC擦屁股太香了</p>
+<h2 id="Inheritance"><a href="#Inheritance" class="headerlink" title="Inheritance"></a>Inheritance</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Chicken</span> <span class="token operator">:</span> <span class="token keyword">public</span> Animal<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>继承的话，要注意，C++继承的class默认是private的，（前期naive认知）所以（不一定）要加个<code>public</code>，<del>否则外部无法使用父类的方法。</del>（<del>原来还能用scope qualifier艹</del>）</p>
+<p>经查询继承类型有如下，比如上面的<code>public Animal</code>就是公有继承了</p>
+<ol>
+<li>公有继承</li>
+<li>保护继承</li>
+<li>私有继承</li>
+</ol>
+<p>原理是将所继承的父类member的accessibility给降级…<code>public</code>-&gt;<code>protected</code>-&gt;<code>private</code></p>
+<p>比如在保护继承和私有的继承的情况下，如果想改变某一个member的accessibility（比如原来是public或protected的，但是继承后降级），可以使用scope qualifier…(差不多得了)</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Animal</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1141514</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">Animal</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Chicken</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token class-name">Animal</span></span>
+<span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    Animal<span class="token operator">::</span>foo<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    Chicken foo<span class="token punctuation">;</span>
+    foo<span class="token punctuation">.</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Multiple-inheritance"><a href="#Multiple-inheritance" class="headerlink" title="Multiple inheritance"></a>Multiple inheritance</h2><p>主要是用来当Interface用吧（C++的OOP没有Interface…</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">class</span> <span class="token class-name">Foo</span> <span class="token operator">:</span> <span class="token keyword">public</span> BaseFoo<span class="token punctuation">,</span> <span class="token keyword">public</span> BaseBar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果有命名冲突就用scope qualifier吧…</p>
+<p>然后还有歧义的问题，就是这样的</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+
+<span class="token keyword">class</span> <span class="token class-name">Base</span>
+<span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+  <span class="token function">Base</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Base was constructed"</span> <span class="token operator">&lt;&lt;</span> <span class="token string">'\n'</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+  <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#123;</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"tested"</span> <span class="token operator">&lt;&lt;</span> <span class="token string">'\n'</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Bar</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Base</span></span>
+<span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+  <span class="token function">Bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Bar was constructed"</span> <span class="token operator">&lt;&lt;</span> <span class="token string">'\n'</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Bar1</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Base</span></span>
+<span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+  <span class="token function">Bar1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Bar1 was constructed"</span> <span class="token operator">&lt;&lt;</span> <span class="token string">'\n'</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Foo</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Bar</span><span class="token punctuation">,</span> <span class="token keyword">public</span> <span class="token class-name">Bar1</span></span>
+<span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+  <span class="token function">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Foo was constructed"</span> <span class="token operator">&lt;&lt;</span> <span class="token string">'\n'</span><span class="token punctuation">;</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  Foo foo<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>输出</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">Base was constructed
+Bar was constructed
+Base was constructed
+Bar1 was constructed
+Foo was constructed<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果main里加<code>foo.test()</code>会报错<code>ambiguous access of &#39;test&#39;</code>，因为每个Bar类都分别有自己的一个父类对象。如下所示</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">Base   Base
+ <span class="token operator">|</span>      <span class="token operator">|</span>
+Bar    Bar1
+   <span class="token punctuation">\</span>  /
+    Foo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>为避免这个问题，我们使用虚继承（virtual inheritance）…</p>
+<p>把两个Bar类的继承里的modifier加上关键字<code>virtual</code>，就会得到如下，两者继承到了同一个父类对象上。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">Base was constructed
+Bar was constructed
+Bar1 was constructed
+Foo was constructed<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>此时的继承关系为</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">   Base
+  /   <span class="token punctuation">\</span>
+Bar    Bar1
+  <span class="token punctuation">\</span>   /
+   Foo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Constructors-and-member-initializer-lists"><a href="#Constructors-and-member-initializer-lists" class="headerlink" title="Constructors and member initializer lists"></a>Constructors and member initializer lists</h2><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">public</span><span class="token operator">:</span>
+  <span class="token function">Chicken</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Animal</span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token comment">/** do sth */</span>
+  <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>相似地，我们也可以用来给field初始化</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">private</span><span class="token operator">:</span>
+  std<span class="token operator">::</span>string text <span class="token operator">=</span> <span class="token keyword">nullptr</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+  <span class="token function">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">text</span><span class="token punctuation">(</span><span class="token string">"114514"</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token comment">/** do sth */</span>
+  <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Constructor-and-Destructor"><a href="#Constructor-and-Destructor" class="headerlink" title="Constructor and Destructor"></a>Constructor and Destructor</h2><p>常见，语法也是差不多，但是后者析构这个就没见过了（GC擦屁股太香了</p>
 <p>类的析构和构造，都是默认缺省的（无参数），这点都一样，当然也可以自己写实现</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//class Test</span>
 <span class="token operator">~</span><span class="token function">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -489,10 +558,14 @@ Test<span class="token operator">::</span>i <span class="token comment">// 11451
 
 <p>出栈或者<code>delete</code>的时候会被隐式调用</p>
 <p>方法命名就这，直接是constructor前加 <code>~</code></p>
-<h2 id="Copy-Constructor"><a href="#Copy-Constructor" class="headerlink" title="Copy Constructor"></a>Copy Constructor</h2><p>然后就是这个了，同上，这个东西也是默认缺省的，它的原型像是这样的</p>
+<h2 id="Copy-Constructor"><a href="#Copy-Constructor" class="headerlink" title="Copy Constructor"></a>Copy Constructor</h2><p>然后就是这个了，同上，这个东西也是默认缺省的，像这样，传的必须要是一个引用类型（不传引用？你可以想想套娃调用…）。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token class-name">Test</span><span class="token operator">::</span><span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">const</span> Point<span class="token operator">&amp;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>本来java中的引用变量赋值就是把reference to给你而已。但是C++直接给你搞了新的对象。</p>
+<p>其中这个类型，可以cv-qualified，其中<code>const</code>主要是用来应对<code>rvalue</code>的（<code>const T&amp;</code>和<code>T&amp;&amp;</code>都能被赋值一个临时对象），如果copy constructor的参数类型不加<code>const</code>那么这个就会报错</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">// in a function body</span>
+<span class="token keyword">return</span> obj<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>本来java中的引用变量赋值就是把reference给你而已。但是C++直接给你弄了个了新对象。</p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token comment">//main</span>
 Test test<span class="token punctuation">;</span>
 Test test1 <span class="token operator">=</span> test<span class="token punctuation">;</span> <span class="token comment">//invoke Copy Constructor</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
@@ -502,6 +575,7 @@ Test test1 <span class="token operator">=</span> test<span class="token punctuat
 Test test1<span class="token punctuation">;</span>
 test1 <span class="token operator">=</span> test<span class="token punctuation">;</span> <span class="token comment">// This is operator overloading, NOT invoking copy constructor</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
+<p>此外，函数返回一个对象，传参(一个对象)进去函数的时候，也会调用copy constructor</p>
 <h2 id="Move-Constructor"><a href="#Move-Constructor" class="headerlink" title="Move Constructor"></a>Move Constructor</h2><p>C++11开始加入了rvalue reference，这是什么呢，一查cpprefernce就能看到短小精悍的解释</p>
 <blockquote>
 <p>Rvalue references can be used to extend the lifetimes of temporary objects</p>
@@ -532,11 +606,11 @@ Test<span class="token operator">*</span> pointer <span class="token operator">=
 
 Test<span class="token operator">*</span> test2 <span class="token operator">=</span> <span class="token keyword">new</span> Test<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="Where-to-define"><a href="#Where-to-define" class="headerlink" title="Where to define"></a>Where to define</h2><p>来自cpluscplus.com</p>
+<h2 id="Function-definition"><a href="#Function-definition" class="headerlink" title="Function definition"></a>Function definition</h2><p>来自cpluscplus.com</p>
 <blockquote>
 <p>The only difference between defining a class member function completely within its class or to include only the prototype and later its definition, is that in the first case the function will automatically be considered an inline member function by the compiler, while in the second it will be a normal (not-inline) class member function, which in fact supposes no difference in behavior</p>
 </blockquote>
-<h2 id="default-amp-delete"><a href="#default-amp-delete" class="headerlink" title="default &amp; delete"></a>default &amp; delete</h2><p>如果有带参的constructor，那么可以用<code>=default</code>来写默认constructor如<code>Test()&#123;&#125;</code>。</p>
+<h2 id="Default-and-delete"><a href="#Default-and-delete" class="headerlink" title="Default and delete"></a>Default and delete</h2><p>如果有带参的constructor，那么可以用<code>=default</code>来写默认constructor如<code>Test()&#123;&#125;</code>。</p>
 <p>如果要禁用某个函数，可以上<code>=delete</code></p>
 <pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token function">Test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">;</span>
 <span class="token function">Test</span><span class="token punctuation">(</span><span class="token keyword">const</span> X<span class="token operator">&amp;</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">delete</span><span class="token punctuation">;</span>
@@ -568,6 +642,34 @@ test2 <span class="token operator">=</span> test3<span class="token punctuation"
 <blockquote>
 <p>In the body of a cv-qualified function, *this is cv-qualified, e.g. in a const member function, only other const member functions may be called normally. (A non-const member function may still be called if const_cast is applied or through an access path that does not involve this.)</p>
 </blockquote>
+<h2 id="Type-casting"><a href="#Type-casting" class="headerlink" title="Type casting"></a>Type casting</h2><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/332030/when-should-static-cast-dynamic-cast-const-cast-and-reinterpret-cast-be-used">面向SO编程</a></p>
+<p>在OOP里头一般用到的casting关键字，一般有<code>static_cast</code>, <code>dynamic_cast</code>, <code>const_cast</code>和<code>reinterpret_cast</code>和C风格cast）</p>
+<ul>
+<li><code>static_cast</code>是安全地，隐式地在类型之间进行转换(比如void, int, double, float)</li>
+<li><code>dynamic_cast</code>是在有继承关系的类之间的up cast, down cast and side cast（虽然上者也可以</li>
+<li><code>const_cast</code>可以加减<code>const</code>约束</li>
+<li><code>reinterpret_cast</code>暴力casting，不管啥的</li>
+</ul>
+<p>一个例子</p>
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+
+<span class="token keyword">struct</span> <span class="token class-name">Base</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">D</span> <span class="token operator">:</span> <span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">Base</span></span>
+<span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1919810</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  D<span class="token operator">*</span> d <span class="token operator">=</span> <span class="token keyword">new</span> D<span class="token punctuation">;</span>
+  std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> d<span class="token operator">-></span>a <span class="token operator">&lt;&lt;</span> <span class="token string">'\n'</span><span class="token punctuation">;</span> <span class="token comment">// 1919810</span>
+  Base<span class="token operator">*</span> b <span class="token operator">=</span> <span class="token keyword">dynamic_cast</span><span class="token operator">&lt;</span>Base<span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// upcast</span>
+  std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> b<span class="token operator">-></span>a<span class="token punctuation">;</span> <span class="token comment">// 114514</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
     </div>
 
@@ -585,7 +687,7 @@ test2 <span class="token operator">=</span> test3<span class="token punctuation"
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://blog.situ2001.com/contents/a4fbad73ad9c/" title="快速上手C++面向对象">https://blog.situ2001.com/contents/a4fbad73ad9c/</a>
+      <a href="https://blog.situ2001.com/contents/a4fbad73ad9c/" title="Java使用者眼中的C++面向对象">https://blog.situ2001.com/contents/a4fbad73ad9c/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
@@ -598,14 +700,11 @@ test2 <span class="token operator">=</span> test3<span class="token punctuation"
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/contents/7db3c9ea2bf1/" rel="prev" title="classpath和jar">
-                  <i class="fa fa-chevron-left"></i> classpath和jar
+                <a href="/contents/729ea92e9046/" rel="prev" title="我是如何进行知识管理的">
+                  <i class="fa fa-chevron-left"></i> 我是如何进行知识管理的
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/contents/729ea92e9046/" rel="next" title="我是如何进行知识管理的">
-                  我是如何进行知识管理的 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -660,13 +759,13 @@ test2 <span class="token operator">=</span> test3<span class="token punctuation"
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">85k</span>
+    <span title="站点总字数">87k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:17</span>
+    <span title="站点阅读时长">1:19</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
