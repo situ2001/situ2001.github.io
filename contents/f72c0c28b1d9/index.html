@@ -24,20 +24,20 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="文章们终于能有一个家了">
+<meta name="description" content="这个小知识，估计是人人都会了吧 嗯，但我突然想写一篇胡无卵用的文章…">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://blog.situ2001.com/contents/3861b188dd27/index.html">
+<meta property="og:title" content="只能pass-by-value的Java">
+<meta property="og:url" content="https://blog.situ2001.com/contents/f72c0c28b1d9/index.html">
 <meta property="og:site_name" content="Situ Note">
-<meta property="og:description" content="文章们终于能有一个家了">
+<meta property="og:description" content="这个小知识，估计是人人都会了吧 嗯，但我突然想写一篇胡无卵用的文章…">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-09-12T08:45:32.000Z">
-<meta property="article:modified_time" content="2020-09-12T08:45:32.000Z">
+<meta property="article:published_time" content="2021-04-09T07:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-09T07:00:00.000Z">
 <meta property="article:author" content="situ2001">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.situ2001.com/contents/3861b188dd27/">
+<link rel="canonical" href="https://blog.situ2001.com/contents/f72c0c28b1d9/">
 
 
 <script data-pjax class="page-configurations">
@@ -49,7 +49,7 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>Hello World | Situ Note</title>
+<title>只能pass-by-value的Java | Situ Note</title>
   
 
 
@@ -178,7 +178,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -191,6 +191,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">字节码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -255,7 +256,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/contents/3861b188dd27/">
+    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/contents/f72c0c28b1d9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -268,7 +269,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          只能pass-by-value的Java
         </h1>
 
         <div class="post-meta-container">
@@ -279,7 +280,16 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2020-09-12 16:45:32" itemprop="dateCreated datePublished" datetime="2020-09-12T16:45:32+08:00">2020-09-12</time>
+      <time title="创建时间：2021-04-09 15:00:00" itemprop="dateCreated datePublished" datetime="2021-04-09T15:00:00+08:00">2021-04-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
+        </span>
     </span>
 
   
@@ -290,7 +300,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>163</span>
+      <span>1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -308,12 +318,55 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>文章们终于能有一个家了</p>
+        <p>这个小知识，估计是人人都会了吧</p>
+<p>嗯，但我突然想写一篇胡无卵用的文章…</p>
 <span id="more"></span>
 
-<p>快开学了，而我也有了一个比较正式的博客了<br>（之前是高中弄得用的WordPress，太臃肿了<del>并且里面大多是一些没有什么技术或生活营养的输出</del>）<br>前博客的备份被我备份放在了备份盘的备份文件夹里作为备份躺着吃灰 <del>套娃警告</del></p>
-<p>本博客用的hexo + github pages，图床用的阿里OSS</p>
-<p>希望这个博客能伴我很长很长的一段时间</p>
+<p>众所周知，在学习Java或者JavaScript的时候，到面向对象部分，一定会碰到reference variable吧。即是对对象的引用变量。</p>
+<p>然后来到调用方法的时候，会有这种东西</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token comment">// main</span>
+<span class="token class-name">Foo</span> foo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">test</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>书上告诉我，这种属于pass-by-value，并且在Java里头也只能以值传参。</p>
+<p>之前的我：这不是传对对象的引用变量吗，怎么是按值传递呢？</p>
+<p>现在的我：噢…之前的我太naive了</p>
+<p>首先，大家都知道Java的对象都是new在堆上的（除了一些wrapper type比如Integer、Boolean这些会有一部分存在stack上）。</p>
+<p>执行<code>new</code> operator之后，就会新建一个对象，并且把这个对象的引用这个值赋给这个变量</p>
+<p>那比较细节的流程是什么呢？</p>
+<h2 id="字节码"><a href="#字节码" class="headerlink" title="字节码"></a>字节码</h2><p>当然还是要靠<code>javap</code>来得到字节码。比如下面这段代码</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Foo</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Foo</span> foo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>javap</code>后得到</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">0</span><span class="token operator">:</span> <span class="token keyword">new</span>           #<span class="token number">7</span>                  <span class="token comment">// class test/Foo</span>
+<span class="token number">3</span><span class="token operator">:</span> dup
+<span class="token number">4</span><span class="token operator">:</span> invokespecial #<span class="token number">9</span>                  <span class="token comment">// Method test/Foo."&lt;init>":()V</span>
+<span class="token number">7</span><span class="token operator">:</span> astore_1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>那么短短的一句<code>Foo foo = new Foo()</code>就出现了。这么几条</p>
+<ol>
+<li>在堆上开辟一段未初始化的空间，并把object（应该是这块空间的内存地址）压入栈</li>
+<li>使用dup来复制多一份这个object</li>
+<li>使用invokespecial来调用<code>Foo.&lt;init&gt;</code>，初始化这个对象</li>
+<li>把栈顶的object赋值给局部变量</li>
+</ol>
+<p>那如果不把这个栈上的值赋值给一个局部变量呢？我们把原代码中的新建对象并赋值给干掉，只剩<code>new Foo()</code>。就会得到如下</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">0</span><span class="token operator">:</span> <span class="token keyword">new</span>           #<span class="token number">7</span>                  <span class="token comment">// class test/Foo</span>
+<span class="token number">3</span><span class="token operator">:</span> dup
+<span class="token number">4</span><span class="token operator">:</span> invokespecial #<span class="token number">9</span>                  <span class="token comment">// Method test/Foo."&lt;init>":()V</span>
+<span class="token number">7</span><span class="token operator">:</span> pop<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>直接pop掉了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实Java只能<code>pass-by-value</code>是因为，变量上面存的都是值啊。基本类型是这样，对象类型变量存着的也是值</p>
+<p><del>所以我为什么会写这篇文章…是为了水吗</del></p>
 
     </div>
 
@@ -331,7 +384,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://blog.situ2001.com/contents/3861b188dd27/" title="Hello World">https://blog.situ2001.com/contents/3861b188dd27/</a>
+      <a href="https://blog.situ2001.com/contents/f72c0c28b1d9/" title="只能pass-by-value的Java">https://blog.situ2001.com/contents/f72c0c28b1d9/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
@@ -344,11 +397,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/contents/a4fbad73ad9c/" rel="prev" title="Java使用者眼中的C++面向对象">
+                  <i class="fa fa-chevron-left"></i> Java使用者眼中的C++面向对象
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/contents/f88ff2f50f29/" rel="next" title="初识类与对象">
-                  初识类与对象 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -486,7 +539,7 @@ NexT.utils.loadComments('.gitalk-container', () => {
       repo        : 'comments',
       owner       : 'situ2001',
       admin       : ['situ2001'],
-      id          : '416968c25b8be1d979b22547a912e3a5',
+      id          : '77da3a5344ec8c7bb4ac482fd6a30eeb',
       proxy       : 'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token',
         language: '',
       distractionFreeMode: false
