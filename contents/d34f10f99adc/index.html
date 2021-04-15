@@ -24,12 +24,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.2.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="指针和数组，关系不浅啊">
+<meta name="description" content="发觉指针和数组的关系不浅">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言之数组与指针">
 <meta property="og:url" content="https://blog.situ2001.com/contents/d34f10f99adc/index.html">
 <meta property="og:site_name" content="Situ Note">
-<meta property="og:description" content="指针和数组，关系不浅啊">
+<meta property="og:description" content="发觉指针和数组的关系不浅">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143617.png">
 <meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143537.png">
@@ -325,10 +325,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>指针和数组，关系不浅啊</p>
+        <p>发觉指针和数组的关系不浅</p>
 <span id="more"></span>
 
-<p><del><strong>禁止茴香豆</strong></del></p>
 <p>课间写的，有点匆忙，估计有不少错误，如有，请指出，谢谢。</p>
 <p>上面不懂的可能需要下面内容的补足（写作水平太菜了）</p>
 <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>为什么我突然写这篇文章呢？原来是我在<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/c/memory/malloc">cppreference上面看malloc()</a>，了解一下简单的内存分配的时候，试了一下附带的example</p>
