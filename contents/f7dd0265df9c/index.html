@@ -386,7 +386,7 @@ foo<span class="token punctuation">.</span><span class="token function">bar</spa
 
 foo<span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [ 's', 'i', 't', 'u' ]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>箭头函数没有属于自己的<code>this</code>，在箭头函数里头的<code>this</code>，都是从外面capture进来(就是你定义这个箭头函数的地方)的。比如</p>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>箭头函数没有属于自己的<code>this</code>，在箭头函数里头的<code>this</code>，都是从外面capture进来(就是你定义这个箭头函数的地方)的，可以理解为静态的<code>this</code>。比如</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> <span class="token function-variable function">test</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
 
@@ -403,7 +403,7 @@ foo<span class="token punctuation">.</span><span class="token function">fn</span
 <span class="token comment">// undefined</span>
 <span class="token comment">// 114514</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>什么叫做箭头函数的this是在定义时候就已经被capture?举个例子吧，看下面这个</p>
+<p>再举一个例子以说明这个<code>this</code>到底怎么来的</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> <span class="token function-variable function">foo</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token comment">// Whatever `this` is here...</span>
     <span class="token keyword">var</span> chopper <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
