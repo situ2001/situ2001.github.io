@@ -389,7 +389,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>且优先做<strong>primitive numeric comparison</strong>，即把值转到<code>primitive</code>(使用<code>valueOf()</code>或者<code>toString()</code>，下面讲了优先级)，再转为<code>number</code>（如果还不是数字）进行比较</p>
 <p>比如说，如果一边为数字一边为<code>string</code>，那么<code>string</code>就会转化为<code>number</code>比较，一边数字一边是<code>boolean</code>也是如此转（primitive numeric comparison）</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">114514</span> <span class="token operator">==</span> <span class="token string">"114514"</span> <span class="token comment">// true</span>
-<span class="token number">0</span> <span class="token operator">==</span> <span class="token boolean">true</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token number">0</span> <span class="token operator">==</span> <span class="token boolean">true</span> <span class="token comment">// false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>对于数组的话，用<code>==</code>作比较的时候，会发生类型转换，使用了<code>toString()</code>或<code>valueOf()</code></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ""</span>
