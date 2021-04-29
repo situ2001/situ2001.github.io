@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hello World</title>
+    <url>//contents/3861b188dd27/</url>
+    <content><![CDATA[<p>文章们终于能有一个家了</p>
+<span id="more"></span>
+
+<p>快开学了，而我也有了一个比较正式的博客了<br>（之前是高中弄得用的WordPress，太臃肿了<del>并且里面大多是一些没有什么技术或生活营养的输出</del>）<br>前博客的备份被我备份放在了备份盘的备份文件夹里作为备份躺着吃灰 <del>套娃警告</del></p>
+<p>本博客用的hexo + github pages，图床用的阿里OSS</p>
+<p>希望这个博客能伴我很长很长的一段时间</p>
+]]></content>
+  </entry>
+  <entry>
     <title>我是如何进行知识管理的</title>
     <url>//contents/729ea92e9046/</url>
     <content><![CDATA[<p>Intro: 信息爆炸，如何管理自己的知识?</p>
@@ -86,17 +97,6 @@
       <categories>
         <category>分享</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>//contents/3861b188dd27/</url>
-    <content><![CDATA[<p>文章们终于能有一个家了</p>
-<span id="more"></span>
-
-<p>快开学了，而我也有了一个比较正式的博客了<br>（之前是高中弄得用的WordPress，太臃肿了<del>并且里面大多是一些没有什么技术或生活营养的输出</del>）<br>前博客的备份被我备份放在了备份盘的备份文件夹里作为备份躺着吃灰 <del>套娃警告</del></p>
-<p>本博客用的hexo + github pages，图床用的阿里OSS</p>
-<p>希望这个博客能伴我很长很长的一段时间</p>
-]]></content>
   </entry>
   <entry>
     <title>记一次CTF新生赛</title>
@@ -191,136 +191,6 @@
 ]]></content>
       <categories>
         <category>随笔</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>为什么Java只能按值传递</title>
-    <url>//contents/f72c0c28b1d9/</url>
-    <content><![CDATA[<p><del>硬生生的小知识就这样被水出一篇文章</del></p>
-<p>嗯，只是因为我突然想写一篇胡无卵用的文章…</p>
-<p><del>都分类到随笔了</del></p>
-<span id="more"></span>
-
-<p>众所周知，在学习Java或者JavaScript（亦或者更多其他的OOP语言）的时候，到面向对象部分，一定会碰到reference variable吧。即是对对象的引用变量。</p>
-<p>然后来到调用方法传参的时候，会有这种东西</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-
-<span class="token comment">// main</span>
-<span class="token class-name">Foo</span> foo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token function">test</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>书上告诉我，这种属于pass-by-value，并且在Java里头也只能以值传参。</p>
-<p>之前的我：这不是传对对象的引用变量吗，怎么是按值传递呢？</p>
-<p>现在的我：噢…之前的我太naive了</p>
-<p>首先，大家都知道Java的对象都是new在堆上的（除了一些wrapper type比如Integer、Boolean这些会有一部分存在stack上）。</p>
-<p>那<code>new</code>之后的具体流程是什么呢？</p>
-<h2 id="字节码"><a href="#字节码" class="headerlink" title="字节码"></a>字节码</h2><p>当然还是要靠<code>javap</code>来得到字节码。比如下面这段代码</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Foo</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">Foo</span> foo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><code>javap</code>后得到</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">0</span><span class="token operator">:</span> <span class="token keyword">new</span>           #<span class="token number">7</span>                  <span class="token comment">// class test/Foo</span>
-<span class="token number">3</span><span class="token operator">:</span> dup
-<span class="token number">4</span><span class="token operator">:</span> invokespecial #<span class="token number">9</span>                  <span class="token comment">// Method test/Foo."&lt;init>":()V</span>
-<span class="token number">7</span><span class="token operator">:</span> astore_1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>那么短短的一句<code>Foo foo = new Foo()</code>就出现了。这么几条</p>
-<ol>
-<li>在堆上开辟一段未初始化的空间，并把object（应该是这块空间的内存地址）压入栈</li>
-<li>使用dup来复制多一份这个object</li>
-<li>使用invokespecial来调用<code>Foo.&lt;init&gt;</code>，初始化这个对象，栈顶object被消耗，出栈</li>
-<li>把此时栈顶的object赋值给局部变量</li>
-</ol>
-<p>那如果不把这个栈上的值赋值给一个局部变量呢？我们把原代码中的新建对象并赋值给干掉，只剩<code>new Foo()</code>。就会得到如下</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">0</span><span class="token operator">:</span> <span class="token keyword">new</span>           #<span class="token number">7</span>                  <span class="token comment">// class test/Foo</span>
-<span class="token number">3</span><span class="token operator">:</span> dup
-<span class="token number">4</span><span class="token operator">:</span> invokespecial #<span class="token number">9</span>                  <span class="token comment">// Method test/Foo."&lt;init>":()V</span>
-<span class="token number">7</span><span class="token operator">:</span> pop<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>直接pop掉了。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>类类型的变量上存的估计就是一个具体对象的地址的值了，而在赋值给其他变量或者传参时，传的就是这个值。</p>
-<p>所以Java只能<code>pass-by-value</code>是很合理的</p>
-<p><del>所以我为什么会写这篇文章…是为了水吗</del></p>
-]]></content>
-      <categories>
-        <category>随笔</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>classpath和jar</title>
-    <url>//contents/7db3c9ea2bf1/</url>
-    <content><![CDATA[<p>学Java，怎能不知道classpath和jar呢？</p>
-<span id="more"></span>
-
-<h2 id="classpath"><a href="#classpath" class="headerlink" title="classpath"></a>classpath</h2><p><code>classpath</code>，顾名思义就是class path，即class的路径。网上一搜，很多文章都是关于java在windows下的环境变量配置的，但我觉得不应该在环境变量里头设置classpath。为什么呢？请看我胡乱分析</p>
-<p>只需要知道，classpath其实是JVM用到的一个环境变量，<strong>是给JVM来寻找class用的</strong>。</p>
-<p>指定classpath的方法可以是给<code>java</code>传入<code>-cp</code>或者<code>-classpath</code>，默认的话就是<code>.</code>即当前目录。</p>
-<p>比如说，我在<code>C:\Users\situ\foo\bar</code>里头有一个<code>Hello.class</code>，如果此时JVM要加载一个<code>foo.bar.Hello</code>类。而我们指定的classpath为<code>.;C:\Users\situ</code>，命令如下</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -cp <span class="token builtin class-name">.</span><span class="token punctuation">;</span>C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ foo.bar.Hello<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>那么就会这样按着classpath去找class</p>
-<p><code>&lt;current dir&gt;\foo\bar\Hello.class</code></p>
-<p><code>C:\Users\situ\foo\bar\Hello.class</code></p>
-<p>那这些都是用户自己的class，java自带的类呢？…不需要操心的，JVM自己知道的。</p>
-<h2 id="一个疑问"><a href="#一个疑问" class="headerlink" title="一个疑问"></a>一个疑问</h2><p>摘自我的笔记 – Situ Note</p>
-<p>Q: 为什么<code>javafx.scene.image.Image</code>的relative url是相对于classpath的，而<code>java.io.File</code>的path url不是？</p>
-<blockquote>
-<p>The Java IO API relies on the local disk file system, not on the classpath.</p>
-<p><code>Java.io</code>的相对路径是根据此时的working directory来决定的</p>
-</blockquote>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">test</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span><span class="token punctuation">;</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// Don't fiddle with relative paths in java.io.File. </span>
-        <span class="token comment">// They are dependent on the current working directory over which you have totally no control from inside the Java code.</span>
-        <span class="token class-name">File</span> file <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"./test.dat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">getAbsolutePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>比如这样，的确是根据工作目录来的。</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token operator">></span>java -cp C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token punctuation">\</span>experiment<span class="token punctuation">\</span>out<span class="token punctuation">\</span>production<span class="token punctuation">\</span>experiment test.Test
-C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token punctuation">\</span>test.dat<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>而之前使用JavaFX，要读图只能放在classpath下。之前搞不懂，是因为我不知道classpath到底是个什么鬼，而现在我懂了。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// The image is located in my.res package of the classpath</span>
-<span class="token class-name">Image</span> image2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Image</span><span class="token punctuation">(</span><span class="token string">"my/res/flower.png"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>如果classpath是<code>C:\Users\situ\codes\experiment\out\production\experiment</code>那么这个图片的绝对路径就是<code>C:\Users\situ\codes\experiment\out\production\experiment\my\res\flower.png</code></p>
-<h2 id="jar"><a href="#jar" class="headerlink" title="jar"></a>jar</h2><p>其实jar实质上就是一个压缩文件…就拿我的丢人井字棋client来说说吧（这个jar包是用gradle构建的）。先把这个jar解了，看下目录结构。</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>SimpleTicTacToeGame<span class="token punctuation">\</span>client<span class="token punctuation">\</span>build<span class="token punctuation">\</span>libs<span class="token punctuation">\</span>client-1.0-SNAPSHOT<span class="token operator">></span>tree /F
-Folder <span class="token environment constant">PATH</span> listing <span class="token keyword">for</span> volume OS
-Volume serial number is 3C20-9E7B
-C:.
-│  Client<span class="token variable">$Cell</span>.class
-│  Client<span class="token variable">$O</span>.class
-│  Client<span class="token variable">$X</span>.class
-│  Client.class
-│
-├─META-INF
-│      MANIFEST.MF
-│
-└─res
-    Constants.class<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>可以看出，除了编译好的class，这些class要按照package的路径来放，比如<code>res.Constants</code>就要按规矩放，放为<code>res\Constants.class</code>。</p>
-<p>这个jar里面还有一个<code>MANIFAST.MF</code>，打开一开，发现里面标明了Main-Class</p>
-<pre class="line-numbers language-inf" data-language="inf"><code class="language-inf">Manifest-Version: 1.0
-Main-Class: Client<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>怎么运行这个jar呢？很简单只需要输入这个命令就行了。</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>SimpleTicTacToeGame<span class="token punctuation">\</span>client<span class="token punctuation">\</span>build<span class="token punctuation">\</span>libs<span class="token operator">></span>java -jar client-1.0-SNAPSHOT.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>我觉得这个可以不用了解太多，可以运行，知道本质就行了。剩下的东西当然是靠构建工具啊（</p>
-]]></content>
-      <categories>
-        <category>Java</category>
       </categories>
   </entry>
   <entry>
@@ -468,6 +338,78 @@ Main-Class: Client<span aria-hidden="true" class="line-numbers-rows"><span></spa
 <p>而接口的继承关系可以这样表达 <code>String is kind of Comparable</code> 或 <code>String is a Comparable Object</code>，而这接口和类的关系就没那么关系明显了，是比较弱的一个关系</p>
 <p>那么就可以一句话解释上面的错误了 你想想 <code>Cabbage is an Animal</code> 这河里吗？</p>
 <h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>所以，抽象和接口相似但又有区别，因此设计程序的时候，最好根据实际需求进行选择</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>classpath和jar</title>
+    <url>//contents/7db3c9ea2bf1/</url>
+    <content><![CDATA[<p>学Java，怎能不知道classpath和jar呢？</p>
+<span id="more"></span>
+
+<h2 id="classpath"><a href="#classpath" class="headerlink" title="classpath"></a>classpath</h2><p><code>classpath</code>，顾名思义就是class path，即class的路径。网上一搜，很多文章都是关于java在windows下的环境变量配置的，但我觉得不应该在环境变量里头设置classpath。为什么呢？请看我胡乱分析</p>
+<p>只需要知道，classpath其实是JVM用到的一个环境变量，<strong>是给JVM来寻找class用的</strong>。</p>
+<p>指定classpath的方法可以是给<code>java</code>传入<code>-cp</code>或者<code>-classpath</code>，默认的话就是<code>.</code>即当前目录。</p>
+<p>比如说，我在<code>C:\Users\situ\foo\bar</code>里头有一个<code>Hello.class</code>，如果此时JVM要加载一个<code>foo.bar.Hello</code>类。而我们指定的classpath为<code>.;C:\Users\situ</code>，命令如下</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">java -cp <span class="token builtin class-name">.</span><span class="token punctuation">;</span>C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ foo.bar.Hello<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>那么就会这样按着classpath去找class</p>
+<p><code>&lt;current dir&gt;\foo\bar\Hello.class</code></p>
+<p><code>C:\Users\situ\foo\bar\Hello.class</code></p>
+<p>那这些都是用户自己的class，java自带的类呢？…不需要操心的，JVM自己知道的。</p>
+<h2 id="一个疑问"><a href="#一个疑问" class="headerlink" title="一个疑问"></a>一个疑问</h2><p>摘自我的笔记 – Situ Note</p>
+<p>Q: 为什么<code>javafx.scene.image.Image</code>的relative url是相对于classpath的，而<code>java.io.File</code>的path url不是？</p>
+<blockquote>
+<p>The Java IO API relies on the local disk file system, not on the classpath.</p>
+<p><code>Java.io</code>的相对路径是根据此时的working directory来决定的</p>
+</blockquote>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">test</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">File</span><span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// Don't fiddle with relative paths in java.io.File. </span>
+        <span class="token comment">// They are dependent on the current working directory over which you have totally no control from inside the Java code.</span>
+        <span class="token class-name">File</span> file <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"./test.dat"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>file<span class="token punctuation">.</span><span class="token function">getAbsolutePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>比如这样，的确是根据工作目录来的。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token operator">></span>java -cp C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token punctuation">\</span>experiment<span class="token punctuation">\</span>out<span class="token punctuation">\</span>production<span class="token punctuation">\</span>experiment test.Test
+C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>codes<span class="token punctuation">\</span>test.dat<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>而之前使用JavaFX，要读图只能放在classpath下。之前搞不懂，是因为我不知道classpath到底是个什么鬼，而现在我懂了。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// The image is located in my.res package of the classpath</span>
+<span class="token class-name">Image</span> image2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Image</span><span class="token punctuation">(</span><span class="token string">"my/res/flower.png"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>如果classpath是<code>C:\Users\situ\codes\experiment\out\production\experiment</code>那么这个图片的绝对路径就是<code>C:\Users\situ\codes\experiment\out\production\experiment\my\res\flower.png</code></p>
+<h2 id="jar"><a href="#jar" class="headerlink" title="jar"></a>jar</h2><p>其实jar实质上就是一个压缩文件…就拿我的丢人井字棋client来说说吧（这个jar包是用gradle构建的）。先把这个jar解了，看下目录结构。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>SimpleTicTacToeGame<span class="token punctuation">\</span>client<span class="token punctuation">\</span>build<span class="token punctuation">\</span>libs<span class="token punctuation">\</span>client-1.0-SNAPSHOT<span class="token operator">></span>tree /F
+Folder <span class="token environment constant">PATH</span> listing <span class="token keyword">for</span> volume OS
+Volume serial number is 3C20-9E7B
+C:.
+│  Client<span class="token variable">$Cell</span>.class
+│  Client<span class="token variable">$O</span>.class
+│  Client<span class="token variable">$X</span>.class
+│  Client.class
+│
+├─META-INF
+│      MANIFEST.MF
+│
+└─res
+    Constants.class<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以看出，除了编译好的class，这些class要按照package的路径来放，比如<code>res.Constants</code>就要按规矩放，放为<code>res\Constants.class</code>。</p>
+<p>这个jar里面还有一个<code>MANIFAST.MF</code>，打开一开，发现里面标明了Main-Class</p>
+<pre class="line-numbers language-inf" data-language="inf"><code class="language-inf">Manifest-Version: 1.0
+Main-Class: Client<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>怎么运行这个jar呢？很简单只需要输入这个命令就行了。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>SimpleTicTacToeGame<span class="token punctuation">\</span>client<span class="token punctuation">\</span>build<span class="token punctuation">\</span>libs<span class="token operator">></span>java -jar client-1.0-SNAPSHOT.jar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>我觉得这个可以不用了解太多，可以运行，知道本质就行了。剩下的东西当然是靠构建工具啊（</p>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -1384,6 +1326,154 @@ function<span class="token punctuation">.</span><span class="token function">app
       </categories>
   </entry>
   <entry>
+    <title>反思之概念理解不可粗糙</title>
+    <url>//contents/5a4f09596a4e/</url>
+    <content><![CDATA[<p>粗糙的学习与理解 必然会带来日后的隐患</p>
+<p>这不 咱最近就出现了一个问题</p>
+<span id="more"></span>
+
+<h2 id="危险想法"><a href="#危险想法" class="headerlink" title="危险想法"></a>危险想法</h2><p>我原来认为：包装类与基本数据类型可以相互转化，而数组是对象，所以 <code>int[]</code> 和 <code>Integer[]</code> 初始化出来的数组一定都是对象</p>
+<h2 id="咱被迷惑"><a href="#咱被迷惑" class="headerlink" title="咱被迷惑"></a>咱被迷惑</h2><p>前些天太浪了，导致咱最近在赶Java学习进度，一路高歌赶到多态<del>以集齐OOP三件套</del></p>
+<p>直到<del>在水职业指导课的时候</del>碰到一道自己难以回答的Check Point之后，才发觉暴力拔苗助长不可取，就好似人不可能一口吃下一个胖子一样</p>
+<p>这个问题是这样的</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">What</span> is wrong <span class="token keyword">with</span> <span class="token namespace">in</span> the following code<span class="token operator">?</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token class-name">Double</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list2 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12.4</span><span class="token punctuation">,</span> <span class="token number">24.0</span><span class="token punctuation">,</span> <span class="token number">55.2</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token function">printArray</span><span class="token punctuation">(</span>list1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printArray</span><span class="token punctuation">(</span>list2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printArray</span><span class="token punctuation">(</span>list3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">printArray</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> object<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>object<span class="token operator">:</span> o<span class="token punctuation">)</span>
+      <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>o <span class="token operator">+</span> <span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>上题来自Java教材 <strong>Introduction to Java Programming and Data Structures Comprehensive Version</strong> 的 Page.427 <strong>Check Point 11.8.4</strong></p>
+<h2 id="绞尽脑汁"><a href="#绞尽脑汁" class="headerlink" title="绞尽脑汁"></a>绞尽脑汁</h2><p>看到这道题的时候我只想到 pass 到 method printArray 的是对象的reference，而数组都是对象啊，这题目，哪里有错误啊</p>
+<p>“一定是粗心的坏习惯犯了！” 我想</p>
+<p>然而不管我怎么看，<del>左看右看正看倒看反复观看</del>都看不出来</p>
+<p>此时水课过了一半，响起了下课铃 <del>吓得我吃了几个好丽友蛋黄派</del></p>
+<h2 id="一瞬报错"><a href="#一瞬报错" class="headerlink" title="一瞬报错"></a>一瞬报错</h2><p>而最后中午回到宿舍，马上把代码码了上去，发现报错如下</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Exception <span class="token keyword">in</span> thread <span class="token string">"main"</span> java.lang.Error: Unresolved compilation problem:
+    The method printArray<span class="token punctuation">(</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">in</span> the <span class="token builtin class-name">type</span> Test is not applicable <span class="token keyword">for</span> the arguments <span class="token punctuation">(</span>int<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>阅读这报错内容，基本可以得知, int[] type 竟然不是对象类型???</p>
+<p>震惊，难道数组在Java中不是属于对象吗？</p>
+<p>挺秃然的.jpg</p>
+<h2 id="开始混乱"><a href="#开始混乱" class="headerlink" title="开始混乱"></a>开始混乱</h2><p><del>迷惑行为开始了</del></p>
+<p>我对比了一下这两行代码</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>不就一个用的 Integer[] type 而另一个用的 int type 吗？</p>
+<p>回想起之前看过的 <strong>A primitive type can be automatically converted to an object using a wrapper class, and vice versa.</strong></p>
+<p>也就是说，Java是允许基本数据类型和 <strong>Wrapper Class</strong> 类型相互转换的，这种转换叫做<strong>autoboxing</strong> 和 <strong>autounboxing</strong> （一般是在赋值的时候？）</p>
+<p>就好比下面这俩语句是等效的</p>
+<p><code>Integer i = new Integer(1);</code> and <code>Integer i = 1;</code> are <strong>equivalent</strong></p>
+<p><code>int i = 1;</code> and <code>int i = new Integer(1);</code> are also <strong>equivalent</strong></p>
+<p>不过</p>
+<p>在我先前的概念里面，数组不是被Java当成对象处理了吗？</p>
+<p>那用 int[] 和 Integer[] 声明出来的数组，不都是属于一个对象吗？</p>
+<p>不能pass到method printArray就奇怪了</p>
+<h2 id="仔细咀嚼"><a href="#仔细咀嚼" class="headerlink" title="仔细咀嚼"></a>仔细咀嚼</h2><p>emm能报错的话，一定有它的道理，而书上很大概率会单独开一段话提及的</p>
+<p>我尝试开始翻书阅览相关内容，终于，我找到了很明显的一段话 <del>当初肯定是仓促学习而略读了</del></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Consider</span> the following example<span class="token operator">:</span>
+  <span class="token number">1</span> <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> intArray <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+  <span class="token number">2</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>intArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> intArray<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> intArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token class-name">In</span> line <span class="token number">1</span><span class="token punctuation">,</span> the prmitive values <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span> and <span class="token number">3</span> are automatically boxed into objects <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> and <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+
+  <span class="token class-name">In</span> line <span class="token number">2</span><span class="token punctuation">,</span> the objects intArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> intArray<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> and intArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> are automatically unboxed into <span class="token keyword">int</span> values that are added together<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>好了，看完这段话我开始明白我的错误之处了 <del>这么长的一段话我当初怎么略读掉的</del></p>
+<p>噢原来 Integer[] type 是创建一个包含有多个Integer对象的数组啊</p>
+<p>比如，这里有一个<code>Student</code>类，我们可以用<code>Student[]</code>来声明包含多个Student对象的数组</p>
+<p>那么int[] type呢，原来创建的是包含有多个int基本数据类型的数组，里面的每一个元素都是一个基本数据类型的值</p>
+<p>如果我们把 <code>int[] array = new int[100]</code> 称之为</p>
+<p><code>An array that contains 100 numbers</code></p>
+<p>它叫做 <strong>Array of primitive values</strong></p>
+<p>那么<code>Integer[] array = new Integer[100]</code> 则是</p>
+<p><code>An array that contains 100 objects</code></p>
+<p>而它叫做 <strong>Array of objects</strong></p>
+<p><del>这个东西在OOP上手的时候就已经提到过了，不要被包装类和基本数据类型转换这玩意迷惑了眼睛</del></p>
+<h2 id="总结错误"><a href="#总结错误" class="headerlink" title="总结错误"></a>总结错误</h2><p>回到下面的代码</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>通过前面重新回顾和学习的成果</p>
+<p><strong>我们可见</strong> list1数组它本身也是一个对象，并且是一个包含了好几个<strong>对象</strong>形如<code>new Integer(1)</code>的数组；而list3数组它本身也是一个对象，只不过里面包含的是好几个基本类型的数值而已</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>做事要一步一步慢慢来，这才是符合科学和实践规律的</p>
+<p>时快时慢，马马虎虎，必将少不了翻车</p>
+<p>并且经过踏踏实实系统学习，我相信学习成果必定会比东拼西凑的学习要稳固得多</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>为什么Java只能按值传递</title>
+    <url>//contents/f72c0c28b1d9/</url>
+    <content><![CDATA[<p>为什么我会突然想写一篇毫无卵用的文章…</p>
+<span id="more"></span>
+
+<p>众所周知，在学习Java或者JavaScript（亦或者更多其他的OOP语言）的时候，到面向对象部分，一定会碰到reference variable吧。即是对对象的引用变量。</p>
+<p>然后来到调用方法传参的时候，会有这种东西</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token comment">// main</span>
+<span class="token class-name">Foo</span> foo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">test</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>书上告诉我，这种属于pass-by-value，并且在Java里头也只能以值传参。</p>
+<p>之前的我：这不是传对对象的引用变量吗，怎么是按值传递呢？</p>
+<p>现在的我：噢…之前的我太naive了</p>
+<p>首先，大家都知道Java的对象都是new在堆上的（除了一些wrapper type比如Integer、Boolean这些会有一部分存在stack上）。</p>
+<p>那<code>new</code>之后的具体流程是什么呢？</p>
+<h2 id="字节码"><a href="#字节码" class="headerlink" title="字节码"></a>字节码</h2><p>当然还是要靠<code>javap</code>来得到字节码。比如下面这段代码</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Foo</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Foo</span> foo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>javap</code>后得到</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">0</span><span class="token operator">:</span> <span class="token keyword">new</span>           #<span class="token number">7</span>                  <span class="token comment">// class test/Foo</span>
+<span class="token number">3</span><span class="token operator">:</span> dup
+<span class="token number">4</span><span class="token operator">:</span> invokespecial #<span class="token number">9</span>                  <span class="token comment">// Method test/Foo."&lt;init>":()V</span>
+<span class="token number">7</span><span class="token operator">:</span> astore_1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>那么短短的一句<code>Foo foo = new Foo()</code>就出现了。这么几条</p>
+<ol>
+<li>在堆上开辟一段未初始化的空间，并把object（应该是这块空间的内存地址）压入栈</li>
+<li>使用dup来复制多一份这个object</li>
+<li>使用invokespecial来调用<code>Foo.&lt;init&gt;</code>，初始化这个对象，栈顶object被消耗，出栈</li>
+<li>把此时栈顶的object赋值给局部变量</li>
+</ol>
+<p>那如果不把这个栈上的值赋值给一个局部变量呢？我们把原代码中的新建对象并赋值给干掉，只剩<code>new Foo()</code>。就会得到如下</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token number">0</span><span class="token operator">:</span> <span class="token keyword">new</span>           #<span class="token number">7</span>                  <span class="token comment">// class test/Foo</span>
+<span class="token number">3</span><span class="token operator">:</span> dup
+<span class="token number">4</span><span class="token operator">:</span> invokespecial #<span class="token number">9</span>                  <span class="token comment">// Method test/Foo."&lt;init>":()V</span>
+<span class="token number">7</span><span class="token operator">:</span> pop<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>直接pop掉了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>类类型的变量上存的估计就是一个具体对象的地址的值了，而在赋值给其他变量或者传参时，传的就是这个值。</p>
+<p>所以Java只能<code>pass-by-value</code>是很合理的</p>
+<p><del>所以我为什么会写这篇文章…是为了水吗</del></p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+  </entry>
+  <entry>
     <title>JavaScript之作用域与变量提升</title>
     <url>//contents/d5c78114ba70/</url>
     <content><![CDATA[<p>全局变量不管好，调试时候两行泪</p>
@@ -1661,95 +1751,157 @@ console<span class="token punctuation">.</span><span class="token function">log<
       </categories>
   </entry>
   <entry>
-    <title>反思之概念理解不可粗糙</title>
-    <url>//contents/5a4f09596a4e/</url>
-    <content><![CDATA[<p>粗糙的学习与理解 必然会带来日后的隐患</p>
-<p>这不 咱最近就出现了一个问题</p>
+    <title>JavaScript之值的比较</title>
+    <url>//contents/d2b42a9c0258/</url>
+    <content><![CDATA[<p>inspired by 海绵宝宝meme（</p>
 <span id="more"></span>
 
-<h2 id="危险想法"><a href="#危险想法" class="headerlink" title="危险想法"></a>危险想法</h2><p>我原来认为：包装类与基本数据类型可以相互转化，而数组是对象，所以 <code>int[]</code> 和 <code>Integer[]</code> 初始化出来的数组一定都是对象</p>
-<h2 id="咱被迷惑"><a href="#咱被迷惑" class="headerlink" title="咱被迷惑"></a>咱被迷惑</h2><p>前些天太浪了，导致咱最近在赶Java学习进度，一路高歌赶到多态<del>以集齐OOP三件套</del></p>
-<p>直到<del>在水职业指导课的时候</del>碰到一道自己难以回答的Check Point之后，才发觉暴力拔苗助长不可取，就好似人不可能一口吃下一个胖子一样</p>
-<p>这个问题是这样的</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">What</span> is wrong <span class="token keyword">with</span> <span class="token namespace">in</span> the following code<span class="token operator">?</span>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>如图所示（其实是因为不熟悉，导致平时用起来有点抗拒</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210424234347.png" alt="MEME"></p>
+<p>好啦，meme归meme，那么JS这令人诟病的值比较究竟是怎么样的呢？</p>
+<h2 id="Type-of-value"><a href="#Type-of-value" class="headerlink" title="Type of value"></a>Type of value</h2><p>在JS里头，value有两种：primitive和object</p>
+<p>primitive分别是 <code>string</code>, <code>number</code>, <code>bigint</code>, <code>boolean</code>, <code>undefined</code>, <code>symbol</code>, <code>null</code></p>
+<p>其特点就是immutable，即它们的值不能被更改。不像数组，对象，函数那样，可以把自身的property给更改。如果一个被赋值了primitive的变量的value被更改，那就是这个变量被赋了个新值。</p>
+<p>至于object类型，Objects are held by reference。这跟Java是差不多的。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token punctuation">&#123;</span> x<span class="token operator">:</span> <span class="token number">114514</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> b <span class="token operator">=</span> a<span class="token punctuation">;</span> <span class="token comment">// copy the reference and assign to b</span>
+b<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">1919810</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1919810</span>
 
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token class-name">Double</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list2 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12.4</span><span class="token punctuation">,</span> <span class="token number">24.0</span><span class="token punctuation">,</span> <span class="token number">55.2</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-    <span class="token function">printArray</span><span class="token punctuation">(</span>list1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printArray</span><span class="token punctuation">(</span>list2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token function">printArray</span><span class="token punctuation">(</span>list3<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
+<span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> d <span class="token operator">=</span> c<span class="token punctuation">;</span> <span class="token comment">// assigning a new primitive, but not copying the reference</span>
+d <span class="token operator">=</span> <span class="token number">1919810</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 114514</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">printArray</span><span class="token punctuation">(</span><span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span> object<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span>object<span class="token operator">:</span> o<span class="token punctuation">)</span>
-      <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>o <span class="token operator">+</span> <span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><code>undefined</code>指的是一个变量的值为空（没有赋值），这跟<code>null</code>不一样</p>
+<p><code>Symbol</code>是一个有特殊用途的primitive，平时表现为一个隐藏的值。通常作为一个对象的特殊key。</p>
+<p><code>function</code>和<code>array</code>是特殊的Object类型</p>
+<p><code>typeof</code>这里也有一点坑，理论上primitive就显示对应的类型，但是<code>null</code>却不是如此</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">typeof</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// "function"</span>
+<span class="token keyword">typeof</span> <span class="token punctuation">[</span><span class="token number">1919</span><span class="token punctuation">,</span> <span class="token number">810</span><span class="token punctuation">]</span> <span class="token comment">// "object" but not "array"</span>
+<span class="token keyword">typeof</span> <span class="token keyword">null</span> <span class="token comment">// "object" but not "null"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>上题来自Java教材 <strong>Introduction to Java Programming and Data Structures Comprehensive Version</strong> 的 Page.427 <strong>Check Point 11.8.4</strong></p>
-<h2 id="绞尽脑汁"><a href="#绞尽脑汁" class="headerlink" title="绞尽脑汁"></a>绞尽脑汁</h2><p>看到这道题的时候我只想到 pass 到 method printArray 的是对象的reference，而数组都是对象啊，这题目，哪里有错误啊</p>
-<p>“一定是粗心的坏习惯犯了！” 我想</p>
-<p>然而不管我怎么看，<del>左看右看正看倒看反复观看</del>都看不出来</p>
-<p>此时水课过了一半，响起了下课铃 <del>吓得我吃了几个好丽友蛋黄派</del></p>
-<h2 id="一瞬报错"><a href="#一瞬报错" class="headerlink" title="一瞬报错"></a>一瞬报错</h2><p>而最后中午回到宿舍，马上把代码码了上去，发现报错如下</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">Exception <span class="token keyword">in</span> thread <span class="token string">"main"</span> java.lang.Error: Unresolved compilation problem:
-    The method printArray<span class="token punctuation">(</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">in</span> the <span class="token builtin class-name">type</span> Test is not applicable <span class="token keyword">for</span> the arguments <span class="token punctuation">(</span>int<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="Falsy-values"><a href="#Falsy-values" class="headerlink" title="Falsy values"></a>Falsy values</h2><p>这里插入falsy value，为后面比较做铺垫</p>
+<p>下面这些值都是false</p>
+<ul>
+<li><code>false</code></li>
+<li><code>null</code></li>
+<li><code>undefined</code></li>
+<li><code>NaN</code></li>
+<li><code>0</code> (zero)</li>
+<li><code>-0</code> (Number negative zero)</li>
+<li><code>0n</code> (BigInt zero)</li>
+<li>empty string (“” or ‘’ or ``)</li>
+</ul>
+<h2 id="Operator-amp-amp"><a href="#Operator-amp-amp" class="headerlink" title="Operator || &amp;&amp;"></a>Operator || &amp;&amp;</h2><p>与此同时，顺便插入跟其他常见语言行为有点不同的<code>&amp;&amp;</code>和<code>||</code>运算符运算规则</p>
+<table>
+<thead>
+<tr>
+<th>meaning</th>
+<th>statement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Logic OR</td>
+<td>If expr1 can be converted to true, returns expr1; else, returns expr2.</td>
+</tr>
+<tr>
+<td>Logic AND</td>
+<td>If expr1 can be converted to true, returns expr2; else, returns expr1.</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token keyword">undefined</span> <span class="token operator">||</span> <span class="token number">114514</span><span class="token punctuation">;</span> <span class="token comment">// a = 114514</span>
+<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token keyword">undefined</span> <span class="token operator">&amp;&amp;</span> <span class="token number">1919810</span><span class="token punctuation">;</span> <span class="token comment">// b = undefined</span>
+<span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token string">"you"</span> <span class="token operator">||</span> <span class="token string">"me"</span><span class="token punctuation">;</span> <span class="token comment">// c = you</span>
+<span class="token keyword">let</span> d <span class="token operator">=</span> <span class="token string">"you"</span> <span class="token operator">&amp;&amp;</span> <span class="token string">"me"</span><span class="token punctuation">;</span> <span class="token comment">// d = me</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>阅读这报错内容，基本可以得知, int[] type 竟然不是对象类型???</p>
-<p>震惊，难道数组在Java中不是属于对象吗？</p>
-<p>挺秃然的.jpg</p>
-<h2 id="开始混乱"><a href="#开始混乱" class="headerlink" title="开始混乱"></a>开始混乱</h2><p><del>迷惑行为开始了</del></p>
-<p>我对比了一下这两行代码</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>根据<strong>短路运算</strong>的规则来理解就行了，比如Logic OR，第一个true就扔回第一个，否则就会比较第二个，因此第一个false就会扔回第二个。Logic AND也是如此</p>
+<p>并且因为js用来判断false和true的是用falsy value和truthy value，所以使用if语句的时候，要注意哪些东西在js里头是falsy的。</p>
+<h2 id=""><a href="#" class="headerlink" title="=="></a>==</h2><p><code>==</code>与<code>===</code>这两个在同类型比较的时候，行为是<strong>一样</strong>的。</p>
+<p>但是在两个待比较的值的类型不同的时候，就会产生差别，<code>==</code>会把类型做转换后再进行比较值（强制比较，即Coercive equality）。（注意：这区别于value的单独出现，比如<code>[]</code>是truthy value，但是在做<code>==</code>比较的时候就会强制转换类型）</p>
+<p>且优先做<strong>primitive numeric comparison</strong>，即</p>
+<ol>
+<li>把<code>object</code>(如果不是<code>primitive</code>)类型的值转到<code>primitive</code>(使用<code>valueOf()</code>或者<code>toString()</code>)</li>
+<li>再转为<code>number</code>(如果此时的<code>primitive</code>还不是数字)进行比较</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">114514</span> <span class="token operator">==</span> <span class="token string">"114514"</span> <span class="token comment">// true, (string -> number)</span>
+<span class="token number">0</span> <span class="token operator">==</span> <span class="token boolean">true</span> <span class="token comment">// false (boolean -> number)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>不就一个用的 Integer[] type 而另一个用的 int type 吗？</p>
-<p>回想起之前看过的 <strong>A primitive type can be automatically converted to an object using a wrapper class, and vice versa.</strong></p>
-<p>也就是说，Java是允许基本数据类型和 <strong>Wrapper Class</strong> 类型相互转换的，这种转换叫做<strong>autoboxing</strong> 和 <strong>autounboxing</strong> （一般是在赋值的时候？）</p>
-<p>就好比下面这俩语句是等效的</p>
-<p><code>Integer i = new Integer(1);</code> and <code>Integer i = 1;</code> are <strong>equivalent</strong></p>
-<p><code>int i = 1;</code> and <code>int i = new Integer(1);</code> are also <strong>equivalent</strong></p>
-<p>不过</p>
-<p>在我先前的概念里面，数组不是被Java当成对象处理了吗？</p>
-<p>那用 int[] 和 Integer[] 声明出来的数组，不都是属于一个对象吗？</p>
-<p>不能pass到method printArray就奇怪了</p>
-<h2 id="仔细咀嚼"><a href="#仔细咀嚼" class="headerlink" title="仔细咀嚼"></a>仔细咀嚼</h2><p>emm能报错的话，一定有它的道理，而书上很大概率会单独开一段话提及的</p>
-<p>我尝试开始翻书阅览相关内容，终于，我找到了很明显的一段话 <del>当初肯定是仓促学习而略读了</del></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Consider</span> the following example<span class="token operator">:</span>
-  <span class="token number">1</span> <span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> intArray <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-  <span class="token number">2</span> <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>intArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> intArray<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> intArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<p>对于数组的话，用<code>==</code>作比较的时候，会发生类型转换，使用了<code>toString()</code>或<code>valueOf()</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ""</span>
+<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">""</span> <span class="token comment">// true</span>
+<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"0"</span> <span class="token comment">// true</span>
+<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token comment">// true</span>
+<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token boolean">false</span> <span class="token comment">// true</span>
 
-  <span class="token class-name">In</span> line <span class="token number">1</span><span class="token punctuation">,</span> the prmitive values <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span> and <span class="token number">3</span> are automatically boxed into objects <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> and <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+<span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// "114514"</span>
+<span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"114514"</span> <span class="token comment">// true</span>
+<span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">114514</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-  <span class="token class-name">In</span> line <span class="token number">2</span><span class="token punctuation">,</span> the objects intArray<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> intArray<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> and intArray<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> are automatically unboxed into <span class="token keyword">int</span> values that are added together<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>所以海绵宝宝meme里头的<code>&quot;0&quot; == 0</code>, <code>0 == []</code>都是<code>true</code>。<code>[].toString()</code>得到<code>&quot;&quot;</code>，所以<code>&quot;0&quot; == []</code>是<code>false</code>而<code>&#39;&#39; == []</code>为<code>true</code></p>
+<p>对于<code>null</code>和<code>undefined</code>，spec里面也说了</p>
+<blockquote>
+<p>The Undefined type has exactly one value, called undefined. Any variable that has not been assigned a value has the value undefined.(8.1)<br>The Null type has exactly one value, called null.(8.2)<br>If x is null and y is undefined, return true.(11.9.3)<br>If x is undefined and y is null, return true.(11.9.3)</p>
+</blockquote>
+<p>因此</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">null</span> <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token comment">// true</span>
+<span class="token keyword">undefined</span> <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token comment">// true</span>
+<span class="token keyword">null</span> <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token comment">// true</span>
+<span class="token keyword">undefined</span> <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>好了，看完这段话我开始明白我的错误之处了 <del>这么长的一段话我当初怎么略读掉的</del></p>
-<p>噢原来 Integer[] type 是创建一个包含有多个Integer对象的数组啊</p>
-<p>比如，这里有一个<code>Student</code>类，我们可以用<code>Student[]</code>来声明包含多个Student对象的数组</p>
-<p>那么int[] type呢，原来创建的是包含有多个int基本数据类型的数组，里面的每一个元素都是一个基本数据类型的值</p>
-<p>如果我们把 <code>int[] array = new int[100]</code> 称之为</p>
-<p><code>An array that contains 100 numbers</code></p>
-<p>它叫做 <strong>Array of primitive values</strong></p>
-<p>那么<code>Integer[] array = new Integer[100]</code> 则是</p>
-<p><code>An array that contains 100 objects</code></p>
-<p>而它叫做 <strong>Array of objects</strong></p>
-<p><del>这个东西在OOP上手的时候就已经提到过了，不要被包装类和基本数据类型转换这玩意迷惑了眼睛</del></p>
-<h2 id="总结错误"><a href="#总结错误" class="headerlink" title="总结错误"></a>总结错误</h2><p>回到下面的代码</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Integer</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list1 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">55</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> list3 <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>对于一边对象一边string或number的情况，那么对象就是转化为<code>primitive</code></p>
+<p><strong>优先</strong>使用的是<code>Symbol.toPrimitive</code>。没有的话，就还是<code>toString()</code>和<code>valueOf()</code>,hint为<code>string</code>就是优先<code>toString()</code>再<code>valueOf()</code>，hint为其他就是反之。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token punctuation">[</span>Symbol<span class="token punctuation">.</span>toPrimitive<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token parameter">hint</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>hint <span class="token operator">===</span> <span class="token string">"default"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// default, number or string</span>
+            <span class="token keyword">return</span> <span class="token string">"114514"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
-<p>通过前面重新回顾和学习的成果</p>
-<p><strong>我们可见</strong> list1数组它本身也是一个对象，并且是一个包含了好几个<strong>对象</strong>形如<code>new Integer(1)</code>的数组；而list3数组它本身也是一个对象，只不过里面包含的是好几个基本类型的数值而已</p>
-<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>做事要一步一步慢慢来，这才是符合科学和实践规律的</p>
-<p>时快时慢，马马虎虎，必将少不了翻车</p>
-<p>并且经过踏踏实实系统学习，我相信学习成果必定会比东拼西凑的学习要稳固得多</p>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj <span class="token operator">==</span> <span class="token number">114514</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="gt-lt-gt-lt"><a href="#gt-lt-gt-lt" class="headerlink" title="&gt; &lt; &gt;= &lt;="></a>&gt; &lt; &gt;= &lt;=</h2><p>那<code>&lt;</code>和<code>&gt;</code>和<code>&gt;=</code>和<code>&lt;=</code>呢？其比较的原理跟<code>==</code>的一样(没有<code>&lt;==</code>这种东西)，所以<code>==</code>的规则还是要懂的</p>
+<p>还要注意字符串的比较，是一个一个字符的进行比较(像Java里头String的<code>compareTo()</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token string">"10"</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token string">"9"</span><span class="token punctuation">;</span>
+
+x <span class="token operator">&lt;</span> y <span class="token comment">// false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="-1"><a href="#-1" class="headerlink" title="==="></a>===</h2><p><code>===</code>是比较严格的比较。<strong>先</strong>比较类型，类型相同，再比较值。</p>
+<p>但也不是真正的strict equal comparison</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">NaN</span> <span class="token operator">===</span> <span class="token number">NaN</span> <span class="token comment">// false</span>
+<span class="token number">0</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">0</span> <span class="token comment">// true</span>
+<span class="token operator">+</span><span class="token number">0</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">0</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Object-is"><a href="#Object-is" class="headerlink" title="Object.is"></a>Object.is</h2><p>刚刚<code>===</code>出现的这些个问题都可以用<code>Object.is()</code>来解决，所以<code>Object.is()</code>就是<code>====</code>了（手滑</p>
+<p>一个polyfill如下（摘自MDN）</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Object<span class="token punctuation">.</span>is<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>Object<span class="token punctuation">,</span> <span class="token string">"is"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+    <span class="token function-variable function">value</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span> y</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// SameValue algorithm</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">===</span> y<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// return true if x and y are not 0, OR</span>
+        <span class="token comment">// if x and y are both 0 of the same sign.</span>
+        <span class="token comment">// This checks for cases 1 and 2 above.</span>
+        <span class="token keyword">return</span> x <span class="token operator">!==</span> <span class="token number">0</span> <span class="token operator">||</span> <span class="token number">1</span> <span class="token operator">/</span> x <span class="token operator">===</span> <span class="token number">1</span> <span class="token operator">/</span> y<span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// return true if both x AND y evaluate to NaN.</span>
+        <span class="token comment">// The only possibility for a variable to not be strictly equal to itself</span>
+        <span class="token comment">// is when that variable evaluates to NaN (example: Number.NaN, 0/0, NaN).</span>
+        <span class="token comment">// This checks for case 3.</span>
+        <span class="token keyword">return</span> x <span class="token operator">!==</span> x <span class="token operator">&amp;&amp;</span> y <span class="token operator">!==</span> y<span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>知道了一些规矩，感觉也不像之前那么玄学了</p>
+<p>虽然被说是糟粕，但是比较大于小于的时候必须要用啊…</p>
+<p>所以，玄学来源于未知（强行解释）</p>
 ]]></content>
       <categories>
-        <category>Java</category>
+        <category>JavaScript</category>
       </categories>
   </entry>
   <entry>
@@ -1914,157 +2066,84 @@ p2<span class="token operator">++</span><span class="token punctuation">;</span>
       </categories>
   </entry>
   <entry>
-    <title>JavaScript之值的比较</title>
-    <url>//contents/d2b42a9c0258/</url>
-    <content><![CDATA[<p>inspired by 海绵宝宝meme（</p>
+    <title>记一次JSON入门</title>
+    <url>//contents/681cfff66470/</url>
+    <content><![CDATA[<p>咋感觉最近学的小东西越来越多了…</p>
 <span id="more"></span>
 
-<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>如图所示（其实是因为不熟悉，导致平时用起来有点抗拒</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210424234347.png" alt="MEME"></p>
-<p>好啦，meme归meme，那么JS这令人诟病的值比较究竟是怎么样的呢？</p>
-<h2 id="Type-of-value"><a href="#Type-of-value" class="headerlink" title="Type of value"></a>Type of value</h2><p>在JS里头，value有两种：primitive和object</p>
-<p>primitive分别是 <code>string</code>, <code>number</code>, <code>bigint</code>, <code>boolean</code>, <code>undefined</code>, <code>symbol</code>, <code>null</code></p>
-<p>其特点就是immutable，即它们的值不能被更改。不像数组，对象，函数那样，可以把自身的property给更改。如果一个被赋值了primitive的变量的value被更改，那就是这个变量被赋了个新值。</p>
-<p>至于object类型，Objects are held by reference。这跟Java是差不多的。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token punctuation">&#123;</span> x<span class="token operator">:</span> <span class="token number">114514</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> b <span class="token operator">=</span> a<span class="token punctuation">;</span> <span class="token comment">// copy the reference and assign to b</span>
-b<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">1919810</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1919810</span>
-
-<span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> d <span class="token operator">=</span> c<span class="token punctuation">;</span> <span class="token comment">// assigning a new primitive, but not copying the reference</span>
-d <span class="token operator">=</span> <span class="token number">1919810</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 114514</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><code>undefined</code>指的是一个变量的值为空（没有赋值），这跟<code>null</code>不一样</p>
-<p><code>Symbol</code>是一个有特殊用途的primitive，平时表现为一个隐藏的值。通常作为一个对象的特殊key。</p>
-<p><code>function</code>和<code>array</code>是特殊的Object类型</p>
-<p><code>typeof</code>这里也有一点坑，理论上primitive就显示对应的类型，但是<code>null</code>却不是如此</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">typeof</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// "function"</span>
-<span class="token keyword">typeof</span> <span class="token punctuation">[</span><span class="token number">1919</span><span class="token punctuation">,</span> <span class="token number">810</span><span class="token punctuation">]</span> <span class="token comment">// "object" but not "array"</span>
-<span class="token keyword">typeof</span> <span class="token keyword">null</span> <span class="token comment">// "object" but not "null"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="Falsy-values"><a href="#Falsy-values" class="headerlink" title="Falsy values"></a>Falsy values</h2><p>这里插入falsy value，为后面比较做铺垫</p>
-<p>下面这些值都是false</p>
-<ul>
-<li><code>false</code></li>
-<li><code>null</code></li>
-<li><code>undefined</code></li>
-<li><code>NaN</code></li>
-<li><code>0</code> (zero)</li>
-<li><code>-0</code> (Number negative zero)</li>
-<li><code>0n</code> (BigInt zero)</li>
-<li>empty string (“” or ‘’ or ``)</li>
-</ul>
-<h2 id="Operator-amp-amp"><a href="#Operator-amp-amp" class="headerlink" title="Operator || &amp;&amp;"></a>Operator || &amp;&amp;</h2><p>与此同时，顺便插入跟其他常见语言行为有点不同的<code>&amp;&amp;</code>和<code>||</code>运算符运算规则</p>
-<table>
-<thead>
-<tr>
-<th>meaning</th>
-<th>statement</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Logic OR</td>
-<td>If expr1 can be converted to true, returns expr1; else, returns expr2.</td>
-</tr>
-<tr>
-<td>Logic AND</td>
-<td>If expr1 can be converted to true, returns expr2; else, returns expr1.</td>
-</tr>
-</tbody></table>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token keyword">undefined</span> <span class="token operator">||</span> <span class="token number">114514</span><span class="token punctuation">;</span> <span class="token comment">// a = 114514</span>
-<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token keyword">undefined</span> <span class="token operator">&amp;&amp;</span> <span class="token number">1919810</span><span class="token punctuation">;</span> <span class="token comment">// b = undefined</span>
-<span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token string">"you"</span> <span class="token operator">||</span> <span class="token string">"me"</span><span class="token punctuation">;</span> <span class="token comment">// c = you</span>
-<span class="token keyword">let</span> d <span class="token operator">=</span> <span class="token string">"you"</span> <span class="token operator">&amp;&amp;</span> <span class="token string">"me"</span><span class="token punctuation">;</span> <span class="token comment">// d = me</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>根据<strong>短路运算</strong>的规则来理解就行了，比如Logic OR，第一个true就扔回第一个，否则就会比较第二个，因此第一个false就会扔回第二个。Logic AND也是如此</p>
-<p>并且因为js用来判断false和true的是用falsy value和truthy value，所以使用if语句的时候，要注意哪些东西在js里头是falsy的。</p>
-<h2 id=""><a href="#" class="headerlink" title="=="></a>==</h2><p><code>==</code>与<code>===</code>这两个在同类型比较的时候，行为是<strong>一样</strong>的。</p>
-<p>但是在两个待比较的值的类型不同的时候，就会产生差别，<code>==</code>会把类型做转换后再进行比较值（强制比较，即Coercive equality）。（注意：这区别于value的单独出现，比如<code>[]</code>是truthy value，但是在做<code>==</code>比较的时候就会强制转换类型）</p>
-<p>且优先做<strong>primitive numeric comparison</strong>，即</p>
-<ol>
-<li>把<code>object</code>(如果不是<code>primitive</code>)类型的值转到<code>primitive</code>(使用<code>valueOf()</code>或者<code>toString()</code>)</li>
-<li>再转为<code>number</code>(如果此时的<code>primitive</code>还不是数字)进行比较</li>
-</ol>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">114514</span> <span class="token operator">==</span> <span class="token string">"114514"</span> <span class="token comment">// true, (string -> number)</span>
-<span class="token number">0</span> <span class="token operator">==</span> <span class="token boolean">true</span> <span class="token comment">// false (boolean -> number)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>对于数组的话，用<code>==</code>作比较的时候，会发生类型转换，使用了<code>toString()</code>或<code>valueOf()</code></p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ""</span>
-<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">""</span> <span class="token comment">// true</span>
-<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"0"</span> <span class="token comment">// true</span>
-<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token comment">// true</span>
-<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token boolean">false</span> <span class="token comment">// true</span>
-
-<span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// "114514"</span>
-<span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"114514"</span> <span class="token comment">// true</span>
-<span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">114514</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>所以海绵宝宝meme里头的<code>&quot;0&quot; == 0</code>, <code>0 == []</code>都是<code>true</code>。<code>[].toString()</code>得到<code>&quot;&quot;</code>，所以<code>&quot;0&quot; == []</code>是<code>false</code>而<code>&#39;&#39; == []</code>为<code>true</code></p>
-<p>对于<code>null</code>和<code>undefined</code>，spec里面也说了</p>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>其实JSON这个东西我也不是第一次听到了，只不过之前看json文件看得云里雾里，但因为不是要自己上手使用<del>（之前的想法是读json只需知道它大概说了啥就行）</del>所以一直没去了解，一直拖延到现在，才打算学习一下json。</p>
+<h2 id="这是啥啊"><a href="#这是啥啊" class="headerlink" title="这是啥啊"></a>这是啥啊</h2><p>俗话说：“知己知彼，百战百胜。”所以我特地去找了找其介绍</p>
 <blockquote>
-<p>The Undefined type has exactly one value, called undefined. Any variable that has not been assigned a value has the value undefined.(8.1)<br>The Null type has exactly one value, called null.(8.2)<br>If x is null and y is undefined, return true.(11.9.3)<br>If x is undefined and y is null, return true.(11.9.3)</p>
+<p><strong>JSON</strong>(JavaScript Object Notation) 是一种轻量级的数据交换格式。 易于人阅读和编写。同时也易于机器解析和生成。 它基于<a href="http://www.crockford.com/javascript">JavaScript Programming Language</a>, <a href="http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf">Standard ECMA-262 3rd Edition - December 1999</a>的一个子集。 JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C, C++, C#, Java, JavaScript, Perl, Python等）。 这些特性使JSON成为理想的数据交换语言。</p>
 </blockquote>
-<p>因此</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">null</span> <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token comment">// true</span>
-<span class="token keyword">undefined</span> <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token comment">// true</span>
-<span class="token keyword">null</span> <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token comment">// true</span>
-<span class="token keyword">undefined</span> <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>现在我对json的认识是：</p>
+<ol>
+<li>是一种用于数据交换的文本格式</li>
+<li>使用了C-liked的风格</li>
+</ol>
+<p>那么相对于之前一股脑乱读json，停下脚步，静下心来思考，也许json并不是很难呢？</p>
+<p>事实证明，思维的懒惰才是最为可怕的，花了一小段时间来阅读了一下<a href="https://www.json.org/json-en.html">JSON官网</a>的介绍，发现json这东西，真的不是很难</p>
+<p><strong>由于目前咱有一点程序语言的知识储备</strong>，所以这里只记录一些我自己需要记录的东西。</p>
+<h2 id="两大结构"><a href="#两大结构" class="headerlink" title="两大结构"></a>两大结构</h2><p>如同HTML有属性和元素，JSON也有两大结构</p>
+<blockquote>
+<p>JSON is built on two structures:</p>
+<ul>
+<li>A collection of name/value pairs. In various languages, this is realized as an <em>object</em>, record, struct, dictionary, hash table, keyed list, or associative array.</li>
+<li>An ordered list of values. In most languages, this is realized as an <em>array</em>, vector, list, or sequence.</li>
+</ul>
+</blockquote>
+<p>它们分别是</p>
+<ol>
+<li>名称/值 pair 的集合</li>
+<li>值的有序列表（这个跟数组array很像的）</li>
+</ol>
+<h2 id="一些形式"><a href="#一些形式" class="headerlink" title="一些形式"></a>一些形式</h2><h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>对象呢，就是一堆无序的名称/值的集合，以<code>&#123;</code>开始并以<code>&#125;</code>结束，里面的每个pair都是以<code>name: value</code>这样的格式表示的，然后每个pair<strong>之间</strong>都要用逗号<code>,</code>来<strong>分隔开</strong><del>（之前一直以为是每次换行都要加个逗号</del></p>
+<p>我觉得官网上面的这个图画的挺厉害的，就收下来了</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193252.png" alt="Object 选自json官网"></p>
+<h3 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h3><p>数组嘛，见得太多了，就不多说了，跟<code>[ele1, ele2 ... eleN]</code>这东西长得是差不多的，只不过其中的元素就是名次/值pair</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193253.png" alt="Array 选自json官网"></p>
+<h3 id="Value"><a href="#Value" class="headerlink" title="Value"></a>Value</h3><p>为什么我要把见得太多了的value给记录下呢？因为之前我是不知道json的值可以是object或者array的，所以也要用小本本记下来。</p>
+<blockquote>
+<p>A <em>value</em> can be a <em>string</em> in double quotes, or a <em>number</em>, or <code>true</code> or <code>false</code> or <code>null</code>, or an <strong>object</strong>  or an <strong>array</strong>. These structures can be nested.</p>
+</blockquote>
+<h2 id="阅读实例"><a href="#阅读实例" class="headerlink" title="阅读实例"></a>阅读实例</h2><p>json就顺手在刚刚查询的空教室记录里面抽取了一段，如下</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"currentPage"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">"currentResult"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">"entityOrField"</span><span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token property">"items"</span><span class="token operator">:</span><span class="token punctuation">[</span>
+     <span class="token punctuation">&#123;</span>
+        <span class="token property">"cd_id"</span><span class="token operator">:</span><span class="token string">"1011230"</span><span class="token punctuation">,</span>
+        <span class="token property">"cdbh"</span><span class="token operator">:</span><span class="token string">"1011230"</span><span class="token punctuation">,</span>
+        <span class="token property">"cdjylx"</span><span class="token operator">:</span><span class="token string">"教学类,活动类"</span><span class="token punctuation">,</span>
+        <span class="token property">"cdmc"</span><span class="token operator">:</span><span class="token string">"文新123#"</span><span class="token punctuation">,</span>
+        <span class="token property">"dateDigit"</span><span class="token operator">:</span><span class="token string">"2020年11月27日"</span><span class="token punctuation">,</span>
+        <span class="token property">"dateDigitSeparator"</span><span class="token operator">:</span><span class="token string">"2020-11-27"</span><span class="token punctuation">,</span>
+        <span class="token property">"month"</span><span class="token operator">:</span><span class="token string">"11"</span><span class="token punctuation">,</span>
+        <span class="token property">"queryModel"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+           <span class="token property">"currentPage"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+           <span class="token property">"currentResult"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"entityOrField"</span><span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
+           <span class="token property">"limit"</span><span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span>
+           <span class="token property">"offset"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"pageNo"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"pageSize"</span><span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span>
+           <span class="token property">"showCount"</span><span class="token operator">:</span><span class="token number">10</span><span class="token punctuation">,</span>
+           <span class="token property">"sorts"</span><span class="token operator">:</span><span class="token punctuation">[</span>
+              
+           <span class="token punctuation">]</span><span class="token punctuation">,</span>
+           <span class="token property">"totalCount"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"totalPage"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"totalResult"</span><span class="token operator">:</span><span class="token number">0</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token property">"rangeable"</span><span class="token operator">:</span><span class="token boolean">true</span>
+     <span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>对于一边对象一边string或number的情况，那么对象就是转化为<code>primitive</code></p>
-<p><strong>优先</strong>使用的是<code>Symbol.toPrimitive</code>。没有的话，就还是<code>toString()</code>和<code>valueOf()</code>,hint为<code>string</code>就是优先<code>toString()</code>再<code>valueOf()</code>，hint为其他就是反之。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">[</span>Symbol<span class="token punctuation">.</span>toPrimitive<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token parameter">hint</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>hint <span class="token operator">===</span> <span class="token string">"default"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// default, number or string</span>
-            <span class="token keyword">return</span> <span class="token string">"114514"</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj <span class="token operator">==</span> <span class="token number">114514</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="gt-lt-gt-lt"><a href="#gt-lt-gt-lt" class="headerlink" title="&gt; &lt; &gt;= &lt;="></a>&gt; &lt; &gt;= &lt;=</h2><p>那<code>&lt;</code>和<code>&gt;</code>和<code>&gt;=</code>和<code>&lt;=</code>呢？其比较的原理跟<code>==</code>的一样(没有<code>&lt;==</code>这种东西)，所以<code>==</code>的规则还是要懂的</p>
-<p>还要注意字符串的比较，是一个一个字符的进行比较(像Java里头String的<code>compareTo()</code></p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token string">"10"</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token string">"9"</span><span class="token punctuation">;</span>
-
-x <span class="token operator">&lt;</span> y <span class="token comment">// false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="-1"><a href="#-1" class="headerlink" title="==="></a>===</h2><p><code>===</code>是比较严格的比较。<strong>先</strong>比较类型，类型相同，再比较值。</p>
-<p>但也不是真正的strict equal comparison</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">NaN</span> <span class="token operator">===</span> <span class="token number">NaN</span> <span class="token comment">// false</span>
-<span class="token number">0</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">0</span> <span class="token comment">// true</span>
-<span class="token operator">+</span><span class="token number">0</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">0</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="Object-is"><a href="#Object-is" class="headerlink" title="Object.is"></a>Object.is</h2><p>刚刚<code>===</code>出现的这些个问题都可以用<code>Object.is()</code>来解决，所以<code>Object.is()</code>就是<code>====</code>了（手滑</p>
-<p>一个polyfill如下（摘自MDN）</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Object<span class="token punctuation">.</span>is<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>Object<span class="token punctuation">,</span> <span class="token string">"is"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
-    <span class="token function-variable function">value</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span> y</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      <span class="token comment">// SameValue algorithm</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">===</span> y<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// return true if x and y are not 0, OR</span>
-        <span class="token comment">// if x and y are both 0 of the same sign.</span>
-        <span class="token comment">// This checks for cases 1 and 2 above.</span>
-        <span class="token keyword">return</span> x <span class="token operator">!==</span> <span class="token number">0</span> <span class="token operator">||</span> <span class="token number">1</span> <span class="token operator">/</span> x <span class="token operator">===</span> <span class="token number">1</span> <span class="token operator">/</span> y<span class="token punctuation">;</span>
-      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// return true if both x AND y evaluate to NaN.</span>
-        <span class="token comment">// The only possibility for a variable to not be strictly equal to itself</span>
-        <span class="token comment">// is when that variable evaluates to NaN (example: Number.NaN, 0/0, NaN).</span>
-        <span class="token comment">// This checks for case 3.</span>
-        <span class="token keyword">return</span> x <span class="token operator">!==</span> x <span class="token operator">&amp;&amp;</span> y <span class="token operator">!==</span> y<span class="token punctuation">;</span>
-      <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>知道了一些规矩，感觉也不像之前那么玄学了</p>
-<p>虽然被说是糟粕，但是比较大于小于的时候必须要用啊…</p>
-<p>所以，玄学来源于未知（强行解释）</p>
+<p>结合上面的知识储备，就能看懂这段json想表示啥了<del>，但为什么部分混入了拼音首字母缩写啊我擦</del></p>
 ]]></content>
       <categories>
-        <category>JavaScript</category>
+        <category>笔记</category>
       </categories>
   </entry>
   <entry>
@@ -2422,87 +2501,6 @@ test2 <span class="token operator">=</span> test3<span class="token punctuation"
   Base<span class="token operator">*</span> b <span class="token operator">=</span> <span class="token keyword">dynamic_cast</span><span class="token operator">&lt;</span>Base<span class="token operator">*</span><span class="token operator">></span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// upcast</span>
   std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> b<span class="token operator">-></span>a<span class="token punctuation">;</span> <span class="token comment">// 114514</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>记一次JSON入门</title>
-    <url>//contents/681cfff66470/</url>
-    <content><![CDATA[<p>咋感觉最近学的小东西越来越多了…</p>
-<span id="more"></span>
-
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>其实JSON这个东西我也不是第一次听到了，只不过之前看json文件看得云里雾里，但因为不是要自己上手使用<del>（之前的想法是读json只需知道它大概说了啥就行）</del>所以一直没去了解，一直拖延到现在，才打算学习一下json。</p>
-<h2 id="这是啥啊"><a href="#这是啥啊" class="headerlink" title="这是啥啊"></a>这是啥啊</h2><p>俗话说：“知己知彼，百战百胜。”所以我特地去找了找其介绍</p>
-<blockquote>
-<p><strong>JSON</strong>(JavaScript Object Notation) 是一种轻量级的数据交换格式。 易于人阅读和编写。同时也易于机器解析和生成。 它基于<a href="http://www.crockford.com/javascript">JavaScript Programming Language</a>, <a href="http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf">Standard ECMA-262 3rd Edition - December 1999</a>的一个子集。 JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C, C++, C#, Java, JavaScript, Perl, Python等）。 这些特性使JSON成为理想的数据交换语言。</p>
-</blockquote>
-<p>现在我对json的认识是：</p>
-<ol>
-<li>是一种用于数据交换的文本格式</li>
-<li>使用了C-liked的风格</li>
-</ol>
-<p>那么相对于之前一股脑乱读json，停下脚步，静下心来思考，也许json并不是很难呢？</p>
-<p>事实证明，思维的懒惰才是最为可怕的，花了一小段时间来阅读了一下<a href="https://www.json.org/json-en.html">JSON官网</a>的介绍，发现json这东西，真的不是很难</p>
-<p><strong>由于目前咱有一点程序语言的知识储备</strong>，所以这里只记录一些我自己需要记录的东西。</p>
-<h2 id="两大结构"><a href="#两大结构" class="headerlink" title="两大结构"></a>两大结构</h2><p>如同HTML有属性和元素，JSON也有两大结构</p>
-<blockquote>
-<p>JSON is built on two structures:</p>
-<ul>
-<li>A collection of name/value pairs. In various languages, this is realized as an <em>object</em>, record, struct, dictionary, hash table, keyed list, or associative array.</li>
-<li>An ordered list of values. In most languages, this is realized as an <em>array</em>, vector, list, or sequence.</li>
-</ul>
-</blockquote>
-<p>它们分别是</p>
-<ol>
-<li>名称/值 pair 的集合</li>
-<li>值的有序列表（这个跟数组array很像的）</li>
-</ol>
-<h2 id="一些形式"><a href="#一些形式" class="headerlink" title="一些形式"></a>一些形式</h2><h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>对象呢，就是一堆无序的名称/值的集合，以<code>&#123;</code>开始并以<code>&#125;</code>结束，里面的每个pair都是以<code>name: value</code>这样的格式表示的，然后每个pair<strong>之间</strong>都要用逗号<code>,</code>来<strong>分隔开</strong><del>（之前一直以为是每次换行都要加个逗号</del></p>
-<p>我觉得官网上面的这个图画的挺厉害的，就收下来了</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193252.png" alt="Object 选自json官网"></p>
-<h3 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h3><p>数组嘛，见得太多了，就不多说了，跟<code>[ele1, ele2 ... eleN]</code>这东西长得是差不多的，只不过其中的元素就是名次/值pair</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193253.png" alt="Array 选自json官网"></p>
-<h3 id="Value"><a href="#Value" class="headerlink" title="Value"></a>Value</h3><p>为什么我要把见得太多了的value给记录下呢？因为之前我是不知道json的值可以是object或者array的，所以也要用小本本记下来。</p>
-<blockquote>
-<p>A <em>value</em> can be a <em>string</em> in double quotes, or a <em>number</em>, or <code>true</code> or <code>false</code> or <code>null</code>, or an <strong>object</strong>  or an <strong>array</strong>. These structures can be nested.</p>
-</blockquote>
-<h2 id="阅读实例"><a href="#阅读实例" class="headerlink" title="阅读实例"></a>阅读实例</h2><p>json就顺手在刚刚查询的空教室记录里面抽取了一段，如下</p>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
-  <span class="token property">"currentPage"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"currentResult"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"entityOrField"</span><span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
-  <span class="token property">"items"</span><span class="token operator">:</span><span class="token punctuation">[</span>
-     <span class="token punctuation">&#123;</span>
-        <span class="token property">"cd_id"</span><span class="token operator">:</span><span class="token string">"1011230"</span><span class="token punctuation">,</span>
-        <span class="token property">"cdbh"</span><span class="token operator">:</span><span class="token string">"1011230"</span><span class="token punctuation">,</span>
-        <span class="token property">"cdjylx"</span><span class="token operator">:</span><span class="token string">"教学类,活动类"</span><span class="token punctuation">,</span>
-        <span class="token property">"cdmc"</span><span class="token operator">:</span><span class="token string">"文新123#"</span><span class="token punctuation">,</span>
-        <span class="token property">"dateDigit"</span><span class="token operator">:</span><span class="token string">"2020年11月27日"</span><span class="token punctuation">,</span>
-        <span class="token property">"dateDigitSeparator"</span><span class="token operator">:</span><span class="token string">"2020-11-27"</span><span class="token punctuation">,</span>
-        <span class="token property">"month"</span><span class="token operator">:</span><span class="token string">"11"</span><span class="token punctuation">,</span>
-        <span class="token property">"queryModel"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
-           <span class="token property">"currentPage"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
-           <span class="token property">"currentResult"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"entityOrField"</span><span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
-           <span class="token property">"limit"</span><span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span>
-           <span class="token property">"offset"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"pageNo"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"pageSize"</span><span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span>
-           <span class="token property">"showCount"</span><span class="token operator">:</span><span class="token number">10</span><span class="token punctuation">,</span>
-           <span class="token property">"sorts"</span><span class="token operator">:</span><span class="token punctuation">[</span>
-              
-           <span class="token punctuation">]</span><span class="token punctuation">,</span>
-           <span class="token property">"totalCount"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"totalPage"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"totalResult"</span><span class="token operator">:</span><span class="token number">0</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-        <span class="token property">"rangeable"</span><span class="token operator">:</span><span class="token boolean">true</span>
-     <span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>结合上面的知识储备，就能看懂这段json想表示啥了<del>，但为什么部分混入了拼音首字母缩写啊我擦</del></p>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -3364,7 +3362,7 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
   </entry>
   <entry>
     <title>庚子年 冬月</title>
-    <url>//contents/life/2020-11</url>
+    <url>//contents/life/2020-11/</url>
     <content><![CDATA[<p>新生般的忙碌</p>
 <span id="more"></span>
 
@@ -3541,7 +3539,7 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
   </entry>
   <entry>
     <title>庚子年 十月</title>
-    <url>//contents/life/2020-10</url>
+    <url>//contents/life/2020-10/</url>
     <content><![CDATA[<p>那就开始记录生活吧！</p>
 <span id="more"></span>
 
@@ -3633,7 +3631,7 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
   </entry>
   <entry>
     <title>庚子年 腊月</title>
-    <url>//contents/life/2020-12</url>
+    <url>//contents/life/2020-12/</url>
     <content><![CDATA[<p>寒冷的十二月~</p>
 <span id="more"></span>
 
@@ -3723,7 +3721,7 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
   </entry>
   <entry>
     <title>辛丑年 一月</title>
-    <url>//contents/life/2021-01</url>
+    <url>//contents/life/2021-01/</url>
     <content><![CDATA[<p>时间过得可真快，一下子就又过去了一个月。这个月都做了些什么呢？我回想了一下<del>（拿起了日记本）</del></p>
 <span id="more"></span>
 
@@ -3746,8 +3744,35 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
       </categories>
   </entry>
   <entry>
+    <title>辛丑年 二月</title>
+    <url>//contents/life/2021-02/</url>
+    <content><![CDATA[<p>时光飞逝，又一个月过去了。但是不管怎么说，人都是会有成长的吧，没错()，这个月做了一些不值得的东西，也做了一些值得的。</p>
+<span id="more"></span>
+
+<p>四个月没回家了，回到家，感觉周边环境还是如此亲切。整个月都是在放假，这个月我都是在家度过的。但是回到家，家乡里面的沙县小吃都没开过门…</p>
+<blockquote class="blockquote-center">
+<p>因为鸽子，所以我所处的世界线发生了变化?</p>
+
+</blockquote>
+
+<p>还以为寒假可以参与图书馆经典白薯小程序项目，玩玩CRUD的，结果被鸽了，没掉了，只好做点自己的小玩具了，<del>然后没想到是误打误撞进入了创新班</del></p>
+<p>专业相关的，也是我喜欢的。这个寒假，我便根据自己的需求，做了一些个人小项目。比如kindle剪贴板(Android app)，COCA排词工具(nodejs+vue前后端)和查绩点工具(Python脚本)，并，都丢人地扔到了github上面。有一说一，实战可以让人对理论知识有深厚的认知，本来纸上谈兵的东西，直接开用了，做的时候，是会有许多额外的工具的，也会获取许多额外的知识的，也是会有很多坑的。意味着只会理论，可以避开理论上的坑，但是实际遇到的坑还是一个也不缺，甚至更多了（</p>
+<p>综上，我这个寒假的开发能力感觉在不断上升，Java使用<strong>感觉</strong>已经熟练了，并且会了一堆动态语言：Python / JavaScript / Groovy（最后一个简直是jvav的好帮手</p>
+<p>也看了不少的13 14年的老番，不错，好番经典番才符合我的口味。（才几年就叫老了？</p>
+<p>然后是入了创新班，虽然学院公众号上面的学长说是搞开发的，但是进来才发现是搞人工智能的…草，直觉出问题了，不过既然进来了，就好好做事吧。不过由于寒假项目堆积成山，一开IDE就沉迷一天，所以先搁后吧（开学还要补缓考，哭了）</p>
+<p>最后就是完成了成就——不早于九点半起床…这就是当代大学生吗…i了i了（</p>
+<p>开发 + 动画 + 休息，是个不错的二月。</p>
+<hr>
+<p>附个湿度</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330234114.jpg" alt="湿度"></p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+  </entry>
+  <entry>
     <title>辛丑年 三月</title>
-    <url>//contents/life/2021-03</url>
+    <url>//contents/life/2021-03/</url>
     <content><![CDATA[<blockquote class="blockquote-center">
 <p>人心不足蛇吞象，世事无常鼠戏猫</p>
 
@@ -3821,33 +3846,6 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 <hr>
 <p>附个湿度</p>
 <p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210331235204.jpg" alt="湿度"></p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>辛丑年 二月</title>
-    <url>//contents/life/2021-02</url>
-    <content><![CDATA[<p>时光飞逝，又一个月过去了。但是不管怎么说，人都是会有成长的吧，没错()，这个月做了一些不值得的东西，也做了一些值得的。</p>
-<span id="more"></span>
-
-<p>四个月没回家了，回到家，感觉周边环境还是如此亲切。整个月都是在放假，这个月我都是在家度过的。但是回到家，家乡里面的沙县小吃都没开过门…</p>
-<blockquote class="blockquote-center">
-<p>因为鸽子，所以我所处的世界线发生了变化?</p>
-
-</blockquote>
-
-<p>还以为寒假可以参与图书馆经典白薯小程序项目，玩玩CRUD的，结果被鸽了，没掉了，只好做点自己的小玩具了，<del>然后没想到是误打误撞进入了创新班</del></p>
-<p>专业相关的，也是我喜欢的。这个寒假，我便根据自己的需求，做了一些个人小项目。比如kindle剪贴板(Android app)，COCA排词工具(nodejs+vue前后端)和查绩点工具(Python脚本)，并，都丢人地扔到了github上面。有一说一，实战可以让人对理论知识有深厚的认知，本来纸上谈兵的东西，直接开用了，做的时候，是会有许多额外的工具的，也会获取许多额外的知识的，也是会有很多坑的。意味着只会理论，可以避开理论上的坑，但是实际遇到的坑还是一个也不缺，甚至更多了（</p>
-<p>综上，我这个寒假的开发能力感觉在不断上升，Java使用<strong>感觉</strong>已经熟练了，并且会了一堆动态语言：Python / JavaScript / Groovy（最后一个简直是jvav的好帮手</p>
-<p>也看了不少的13 14年的老番，不错，好番经典番才符合我的口味。（才几年就叫老了？</p>
-<p>然后是入了创新班，虽然学院公众号上面的学长说是搞开发的，但是进来才发现是搞人工智能的…草，直觉出问题了，不过既然进来了，就好好做事吧。不过由于寒假项目堆积成山，一开IDE就沉迷一天，所以先搁后吧（开学还要补缓考，哭了）</p>
-<p>最后就是完成了成就——不早于九点半起床…这就是当代大学生吗…i了i了（</p>
-<p>开发 + 动画 + 休息，是个不错的二月。</p>
-<hr>
-<p>附个湿度</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330234114.jpg" alt="湿度"></p>
 ]]></content>
       <categories>
         <category>生活</category>
