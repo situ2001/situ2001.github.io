@@ -24,20 +24,22 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="文章们终于能有一个家了">
+<meta name="description" content="时间过得可真快，一下子就又过去了一个月。这个月都做了些什么呢？我回想了一下（拿起了日记本）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://blog.situ2001.com/contents/3861b188dd27/index.html">
+<meta property="og:title" content="辛丑年 一月">
+<meta property="og:url" content="https://blog.situ2001.com/contents/life/2021-01">
 <meta property="og:site_name" content="Situ Note">
-<meta property="og:description" content="文章们终于能有一个家了">
+<meta property="og:description" content="时间过得可真快，一下子就又过去了一个月。这个月都做了些什么呢？我回想了一下（拿起了日记本）">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-09-12T08:45:32.000Z">
-<meta property="article:modified_time" content="2020-09-12T08:45:32.000Z">
+<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330234203.jpg">
+<meta property="article:published_time" content="2021-02-03T15:59:59.000Z">
+<meta property="article:modified_time" content="2021-02-03T15:59:59.000Z">
 <meta property="article:author" content="situ2001">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330234203.jpg">
 
 
-<link rel="canonical" href="https://blog.situ2001.com/contents/3861b188dd27/">
+<link rel="canonical" href="https://blog.situ2001.com/contents/life/2021-01">
 
 
 <script data-pjax class="page-configurations">
@@ -49,7 +51,7 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>Hello World | Situ Note</title>
+<title>辛丑年 一月 | Situ Note</title>
   
 
 
@@ -254,7 +256,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/contents/3861b188dd27/">
+    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/contents/life/2021-01">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -267,7 +269,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          辛丑年 一月
         </h1>
 
         <div class="post-meta-container">
@@ -278,7 +280,16 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2020-09-12 16:45:32" itemprop="dateCreated datePublished" datetime="2020-09-12T16:45:32+08:00">2020-09-12</time>
+      <time title="创建时间：2021-02-03 23:59:59" itemprop="dateCreated datePublished" datetime="2021-02-03T23:59:59+08:00">2021-02-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
+        </span>
     </span>
 
   
@@ -289,7 +300,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>163</span>
+      <span>731</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -307,12 +318,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>文章们终于能有一个家了</p>
+        <p>时间过得可真快，一下子就又过去了一个月。这个月都做了些什么呢？我回想了一下<del>（拿起了日记本）</del></p>
 <span id="more"></span>
 
-<p>快开学了，而我也有了一个比较正式的博客了<br>（之前是高中弄得用的WordPress，太臃肿了<del>并且里面大多是一些没有什么技术或生活营养的输出</del>）<br>前博客的备份被我备份放在了备份盘的备份文件夹里作为备份躺着吃灰 <del>套娃警告</del></p>
-<p>本博客用的hexo + github pages，图床用的阿里OSS</p>
-<p>希望这个博客能伴我很长很长的一段时间</p>
+<p>先是发烧与考试撞车了，现在发个烧都要被隔离了，所以我完美地缓考了英语和数学…还好后来考的专业概论和C++都还行，拿了个4.0。</p>
+<p>接着就是学校的第一次冬季军训，虽然有点寒冷和干燥，甚至有一天下冻雨过于寒冷导致了停训。并且广州在我军训的头几天，宣布继2016后，广州再次入冬成功……这酸爽可想而知。军训的时候也没什么事情可以做的，毕竟一天到晚就是训练，晚上回去洗澡休息一下就到点睡觉了。不过我还是看了一下Python，并做了一些小工具来玩耍。虽然不怎么样，但是是在军训里嘛，满足了。</p>
+<p>军训期间，报名了学院的小程序的活，军训之后要留校7天做点discussion。</p>
+<p>军训结束后，个个都收拾行李回家，周围就只有我一个人留在宿舍了。既然没什么事情可以做，那我就快速学了下JavaSE的多线程和Collection，然后了解了一下Springboot。最后第一天开始的时候，直接雷击——图书馆已经把这个project外包给另外一公司做了，还是在两个月前。草，真是大乌龙了。得知这个消息的时候，我们所有人都突然僵住了，不过可以早点回家了，我又开心了（？）。不过有一说一，少人的学校，真的很像一个欧洲大花园，安静又舒适。</p>
+<p>这次事情，让我懂的了。</p>
+<blockquote class="blockquote-center">需求是学习的驱动力</blockquote>
+
+<p>然后一月剩下的几天就是在家里度过了，四个月没回家了，还是有一丝怀念之感的。不过既然都放假了，当然是在家休息几天。</p>
+<p>在家看到有hgame，就去佛系打了下，这佛系打题的过程，我用Python写脚本的能力又提升了。然后是学院的创新班招新，抱着大一可以试错的态度，报了个名去试了试。不知道结果怎么样，至少是去报名了。</p>
+<p>然后一月就这样完了。</p>
+<hr>
+<p>附个湿度</p>
+<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330234203.jpg" alt="湿度"></p>
 
     </div>
 
@@ -330,7 +351,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://blog.situ2001.com/contents/3861b188dd27/" title="Hello World">https://blog.situ2001.com/contents/3861b188dd27/</a>
+      <a href="https://blog.situ2001.com/contents/life/2021-01" title="辛丑年 一月">https://blog.situ2001.com/contents/life/2021-01</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
@@ -343,10 +364,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/contents/152c3b965d2f/" rel="prev" title="浅谈Java的装箱与拆箱">
+                  <i class="fa fa-chevron-left"></i> 浅谈Java的装箱与拆箱
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/contents/f88ff2f50f29/" rel="next" title="初识类与对象">
-                  初识类与对象 <i class="fa fa-chevron-right"></i>
+                <a href="/contents/3b19f30c2f96/" rel="next" title="λ在Java">
+                  λ在Java <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -359,7 +383,6 @@
 
 
 
-    <div class="comments gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -474,26 +497,6 @@ document.addEventListener('pjax:success', () => {
     <div class="pjax">
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css">
-
-<script>
-NexT.utils.loadComments('.gitalk-container', () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '25660877348ea415abbd',
-      clientSecret: 'a57f3ffb40fa5965d5211cbb8c3ddeb956a2d259',
-      repo        : 'comments',
-      owner       : 'situ2001',
-      admin       : ['situ2001'],
-      id          : '416968c25b8be1d979b22547a912e3a5',
-      proxy       : 'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token',
-        language: '',
-      distractionFreeMode: false
-    });
-    gitalk.render(document.querySelector('.gitalk-container'));
-  }, window.Gitalk);
-});
-</script>
 
     </div>
 </body>

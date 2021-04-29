@@ -24,12 +24,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="庚子四九 | 由一次维修想到的世界并没有你想象的这么单纯  最近我的Elitebook风扇炸了，具体情况是在中低转速的时候，会出现咔咔响的声音，很是扰人（这本本除了散热模块很垃圾，CPU常年100度徘徊之外都很不错的，相信它可以像MI6那样坚挺 机子才买几个月，自然是在保的，本来可以工程师上门服务，但是在学校不是很方便，于是拿去HP的服务点免费换了风扇，3天不到就解决了，第一天自己拿过去，第二天风">
-<meta property="og:type" content="website">
-<meta property="og:title" content="十二月">
-<meta property="og:url" content="https://blog.situ2001.com/journals/2020/month-12.html">
+<meta name="description" content="寒冷的十二月~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="庚子年 腊月">
+<meta property="og:url" content="https://blog.situ2001.com/contents/life/2020-12">
 <meta property="og:site_name" content="Situ Note">
-<meta property="og:description" content="庚子四九 | 由一次维修想到的世界并没有你想象的这么单纯  最近我的Elitebook风扇炸了，具体情况是在中低转速的时候，会出现咔咔响的声音，很是扰人（这本本除了散热模块很垃圾，CPU常年100度徘徊之外都很不错的，相信它可以像MI6那样坚挺 机子才买几个月，自然是在保的，本来可以工程师上门服务，但是在学校不是很方便，于是拿去HP的服务点免费换了风扇，3天不到就解决了，第一天自己拿过去，第二天风">
+<meta property="og:description" content="寒冷的十二月~">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-05T13:04:13.000Z">
 <meta property="article:modified_time" content="2020-12-05T13:04:13.000Z">
@@ -37,7 +37,7 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://blog.situ2001.com/journals/2020/month-12">
+<link rel="canonical" href="https://blog.situ2001.com/contents/life/2020-12">
 
 
 <script data-pjax class="page-configurations">
@@ -45,12 +45,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
-<title>十二月 | Situ Note
-</title>
+<title>庚子年 腊月 | Situ Note</title>
   
 
 
@@ -132,7 +131,6 @@
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
         <li class="menu-item menu-item-笔记"><a href="https://note.situ2001.com/" rel="noopener" target="_blank"><i class="fa fa-sticky-note fa-fw"></i>笔记</a></li>
-        <li class="menu-item menu-item-月记"><a href="/journals/" rel="section"><i class="fa fa-book fa-fw"></i>月记</a></li>
         <li class="menu-item menu-item-计划"><a href="/plans/" rel="section"><i class="fa fa-flag fa-fw"></i>计划</a></li>
         <li class="menu-item menu-item-友链"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
@@ -206,14 +204,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -246,34 +244,83 @@
 </noscript>
 
 
-    <div class="main-inner page posts-expand">
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
   
   
 
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/contents/life/2020-12">
 
-    
-    
-    
-    <div class="post-block" lang="zh-CN"><header class="post-header">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="situ2001">
+      <meta itemprop="description" content="水到渠成 不须预虑">
+    </span>
 
-<h1 class="post-title" itemprop="name headline">十二月
-</h1>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Situ Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          庚子年 腊月
+        </h1>
 
-<div class="post-meta-container">
-  <ul class="breadcrumb">
-            <li><a href="/journals/">JOURNALS</a></li>
-            <li><a href="/journals/2020/">2020</a></li>
-            <li>MONTH-12</li>
-          
-  </ul>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-05 21:04:13" itemprop="dateCreated datePublished" datetime="2020-12-05T21:04:13+08:00">2020-12-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
 </div>
 
-</header>
+        </div>
+      </header>
 
-      
-      
-      <div class="post-body">
-          <h2 id="庚子四九-由一次维修想到的"><a href="#庚子四九-由一次维修想到的" class="headerlink" title="庚子四九 | 由一次维修想到的"></a>庚子四九 | 由一次维修想到的</h2><blockquote class="blockquote-center">世界并没有你想象的这么单纯</blockquote>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>寒冷的十二月~</p>
+<span id="more"></span>
+
+<h2 id="庚子四九-由一次维修想到的"><a href="#庚子四九-由一次维修想到的" class="headerlink" title="庚子四九 | 由一次维修想到的"></a>庚子四九 | 由一次维修想到的</h2><blockquote class="blockquote-center">世界并没有你想象的这么单纯</blockquote>
 
 <p>最近我的Elitebook风扇炸了，具体情况是在中低转速的时候，会出现咔咔响的声音，很是扰人<del>（这本本除了散热模块很垃圾，CPU常年100度徘徊之外都很不错的，相信它可以像MI6那样坚挺</del></p>
 <p>机子才买几个月，自然是在保的，<strong>本来可以工程师上门服务</strong>，但是在学校不是很方便，于是拿去HP的服务点免费换了风扇，3天不到就解决了，第一天自己拿过去，第二天风扇到货开始维修，第三天自己去维修点取回。</p>
@@ -353,20 +400,52 @@
 <p>2020/09/15 - 2020/11<br>开始读大学了，这段时间开始在图书馆和自习室看书学习，在宿舍则是打游戏和看动漫。<br>看了不少的动漫，<del>音游水平也提高了</del>。<br>为了记录下自己的足迹，特意开了博客，并开始在上面做记录并反思。</p>
 <p>2020/11 - 2020/12/31<br>开始误打误撞地加了一些技术社团和组织，也认识了一小些有相同兴趣爱好的本校同学。<br>继续习惯理性思考，现在除了在搜索的时候会凭感觉乱跳，其他地方已经会较好地使用逻辑和理性思维了。<br>在专业上，还是选择了坚持泡在全英语的环境中，相比高考时期的英语阅读能力，上升了许多许多。<br>尝试读一些小项目的源码，并尝试上手写一个小项目，从中学到了不少有用的东西，切身体会到啥是学以致用。<br>组织的需求，源码阅读，除了还在主线学习的Java，还学到了HTML/CSS和其他语言如C/JavaScript/PHP/Python。<br>在年末，预订了小米11，钉子户下号了。</p>
 
-      </div>
-      
-      
-      
     </div>
-  <ul class="breadcrumb">
-            <li><a href="/journals/">JOURNALS</a></li>
-            <li><a href="/journals/2020/">2020</a></li>
-            <li>MONTH-12</li>
-          
-  </ul>
 
     
     
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>situ2001
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.situ2001.com/contents/life/2020-12" title="庚子年 腊月">https://blog.situ2001.com/contents/life/2020-12</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/contents/d34f10f99adc/" rel="prev" title="C语言之数组与指针">
+                  <i class="fa fa-chevron-left"></i> C语言之数组与指针
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/contents/cab8b78811bf/" rel="next" title="JavaFX与观察者模式">
+                  JavaFX与观察者模式 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
 
 
 
@@ -411,13 +490,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">97k</span>
+    <span title="站点总字数">114k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:43</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

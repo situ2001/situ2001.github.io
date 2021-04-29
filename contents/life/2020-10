@@ -24,12 +24,12 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.3.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}};
   </script>
-<meta name="description" content="第四十三周 | 当今与将来 何去又何从我的高考 高考于我我这个人啊，重要关头总是会翻车，比较刺激的一次是2018年12月代表高中学校去佛山参加创客比赛，比赛参展的前一晚就因为调试过度导致一块继电器驱动板坏掉5V供能部分，并且出发前也没有带一块备用驱动板，那个慌张程度啊，我以为这就凉凉了，还好点了份宵夜吃完后镇定下来(?)，用我并不扎实的电路知识魔改了一通，将5V部分引向USB电源但是让GND仍接到">
-<meta property="og:type" content="website">
-<meta property="og:title" content="庚子 十月">
-<meta property="og:url" content="https://blog.situ2001.com/journals/2020/month-10.html">
+<meta name="description" content="那就开始记录生活吧！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="庚子年 十月">
+<meta property="og:url" content="https://blog.situ2001.com/contents/life/2020-10">
 <meta property="og:site_name" content="Situ Note">
-<meta property="og:description" content="第四十三周 | 当今与将来 何去又何从我的高考 高考于我我这个人啊，重要关头总是会翻车，比较刺激的一次是2018年12月代表高中学校去佛山参加创客比赛，比赛参展的前一晚就因为调试过度导致一块继电器驱动板坏掉5V供能部分，并且出发前也没有带一块备用驱动板，那个慌张程度啊，我以为这就凉凉了，还好点了份宵夜吃完后镇定下来(?)，用我并不扎实的电路知识魔改了一通，将5V部分引向USB电源但是让GND仍接到">
+<meta property="og:description" content="那就开始记录生活吧！">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/Screenshot%202020-10-24%20205416.png">
 <meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/Screenshot%202020-10-24%20220809.png">
@@ -46,7 +46,7 @@
 <meta name="twitter:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/Screenshot%202020-10-24%20205416.png">
 
 
-<link rel="canonical" href="https://blog.situ2001.com/journals/2020/month-10">
+<link rel="canonical" href="https://blog.situ2001.com/contents/life/2020-10">
 
 
 <script data-pjax class="page-configurations">
@@ -54,12 +54,11 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
-<title>庚子 十月 | Situ Note
-</title>
+<title>庚子年 十月 | Situ Note</title>
   
 
 
@@ -141,7 +140,6 @@
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
         <li class="menu-item menu-item-笔记"><a href="https://note.situ2001.com/" rel="noopener" target="_blank"><i class="fa fa-sticky-note fa-fw"></i>笔记</a></li>
-        <li class="menu-item menu-item-月记"><a href="/journals/" rel="section"><i class="fa fa-book fa-fw"></i>月记</a></li>
         <li class="menu-item menu-item-计划"><a href="/plans/" rel="section"><i class="fa fa-flag fa-fw"></i>计划</a></li>
         <li class="menu-item menu-item-友链"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>友链</a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
@@ -215,14 +213,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -255,34 +253,83 @@
 </noscript>
 
 
-    <div class="main-inner page posts-expand">
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
   
   
 
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.situ2001.com/contents/life/2020-10">
 
-    
-    
-    
-    <div class="post-block" lang="zh-CN"><header class="post-header">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="situ2001">
+      <meta itemprop="description" content="水到渠成 不须预虑">
+    </span>
 
-<h1 class="post-title" itemprop="name headline">庚子 十月
-</h1>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Situ Note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          庚子年 十月
+        </h1>
 
-<div class="post-meta-container">
-  <ul class="breadcrumb">
-            <li><a href="/journals/">JOURNALS</a></li>
-            <li><a href="/journals/2020/">2020</a></li>
-            <li>MONTH-10</li>
-          
-  </ul>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-24 22:27:48" itemprop="dateCreated datePublished" datetime="2020-10-24T22:27:48+08:00">2020-10-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%94%9F%E6%B4%BB/" itemprop="url" rel="index"><span itemprop="name">生活</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.7k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
 </div>
 
-</header>
+        </div>
+      </header>
 
-      
-      
-      <div class="post-body">
-          <h2 id="第四十三周-当今与将来-何去又何从"><a href="#第四十三周-当今与将来-何去又何从" class="headerlink" title="第四十三周 | 当今与将来 何去又何从"></a>第四十三周 | 当今与将来 何去又何从</h2><h3 id="我的高考-高考于我"><a href="#我的高考-高考于我" class="headerlink" title="我的高考 高考于我"></a>我的高考 高考于我</h3><p>我这个人啊，重要关头总是会翻车，比较刺激的一次是2018年12月代表高中学校去佛山参加创客比赛，比赛参展的前一晚就因为调试过度导致一块继电器驱动板坏掉5V供能部分，并且出发前也没有带一块备用驱动板，那个慌张程度啊，我以为这就凉凉了，还好点了份宵夜吃完后镇定下来(?)，用我并不扎实的电路知识魔改了一通，将5V部分引向USB电源但是让GND仍接到于Arduino的电路部分上以保持正常的端口通讯，成功的挺过了一个早中下午的展览。最后成功混了个奖</p>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>那就开始记录生活吧！</p>
+<span id="more"></span>
+
+<h2 id="第四十三周-当今与将来-何去又何从"><a href="#第四十三周-当今与将来-何去又何从" class="headerlink" title="第四十三周 | 当今与将来 何去又何从"></a>第四十三周 | 当今与将来 何去又何从</h2><h3 id="我的高考-高考于我"><a href="#我的高考-高考于我" class="headerlink" title="我的高考 高考于我"></a>我的高考 高考于我</h3><p>我这个人啊，重要关头总是会翻车，比较刺激的一次是2018年12月代表高中学校去佛山参加创客比赛，比赛参展的前一晚就因为调试过度导致一块继电器驱动板坏掉5V供能部分，并且出发前也没有带一块备用驱动板，那个慌张程度啊，我以为这就凉凉了，还好点了份宵夜吃完后镇定下来(?)，用我并不扎实的电路知识魔改了一通，将5V部分引向USB电源但是让GND仍接到于Arduino的电路部分上以保持正常的端口通讯，成功的挺过了一个早中下午的展览。最后成功混了个奖</p>
 <p>哦不这应该叫做翻车后翻回来（至今还是一中创客社的翻车传说</p>
 <p>而高考就没那么客气了，我一直以为应试教育，理解清楚概念然后看一下真题就够了（注意：这里指的是只看少做），最后因为缺乏足够的训练，在考试场上，所有坏习惯同时爆发了出来，平时的粗枝大叶的坏习惯还是这鸟样丝毫没变，选择题纠结的情况第一次爆了出来，简单的没做对，难的也不会做，结果就等于翻车（简的来说就是我菜）</p>
 <p>最后成就了高中尖子班唯一一个高考语文没过百的人（笑） <del>（回校探访语文老师的时候她还跟我们说这次高考我们班语文很好，没有人低过百分的</del></p>
@@ -364,20 +411,52 @@
 <p>这周大概是娱乐摸鱼占一大半吧 工作只有在还算精神的情况下才开展</p>
 <p>就这样吧，希望天气能冷下来，给人一个精致的睡眠</p>
 
-      </div>
-      
-      
-      
     </div>
-  <ul class="breadcrumb">
-            <li><a href="/journals/">JOURNALS</a></li>
-            <li><a href="/journals/2020/">2020</a></li>
-            <li>MONTH-10</li>
-          
-  </ul>
 
     
     
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>situ2001
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://blog.situ2001.com/contents/life/2020-10" title="庚子年 十月">https://blog.situ2001.com/contents/life/2020-10</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/contents/de7e01688b2c/" rel="prev" title="初识抽象与接口">
+                  <i class="fa fa-chevron-left"></i> 初识抽象与接口
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/contents/0d721ec073c6/" rel="next" title="记一次CTF新生赛">
+                  记一次CTF新生赛 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
 
 
 
@@ -422,13 +501,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">97k</span>
+    <span title="站点总字数">114k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:43</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
