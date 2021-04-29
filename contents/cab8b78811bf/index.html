@@ -31,14 +31,14 @@
 <meta property="og:site_name" content="Situ Note">
 <meta property="og:description" content="大一菜鸡，竟敢作死读源码">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210113131956.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210113132012.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210113132029.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210113131956.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210113132012.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210113132029.jpg">
 <meta property="article:published_time" content="2021-01-13T21:14:19.000Z">
 <meta property="article:modified_time" content="2021-01-13T21:14:19.000Z">
 <meta property="article:author" content="situ2001">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210113131956.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210113131956.png">
 
 
 <link rel="canonical" href="https://blog.situ2001.com/contents/cab8b78811bf/">
@@ -208,7 +208,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -411,7 +411,7 @@ NumberExpression, Observable, Property&lt;Number&gt;, ReadOnlyProperty&lt;Number
 public abstract class ReadOnlyDoubleProperty extends DoubleExpression implements ReadOnlyProperty&lt;Number&gt;
 public class ReadOnlyDoubleWrapper extends SimpleDoubleProperty<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210113131956.png" alt="ReadOnlyDoubleWrapper"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210113131956.png" alt="ReadOnlyDoubleWrapper"></p>
 <p>由上可见，<code>ReadOnlyDoubleProperty</code>是一个抽象类，而<code>ReadOnlyDoubleWrapper</code>是一个concrete的实实在在的类。通过下面的分析可以查出，一个<code>ReadOnlyDoubleWrapper</code>是如何被construct的。</p>
 <p>我们首先在<code>ReadOnlyDoubleWrapper</code>的constructor里头发现了<code>with-arg</code>的<code>super()</code>，也就是说它显示地invoke了父类的constructor。父类里的constructor也是如此的操作，直到来到了类<code>DoublePropertyBase</code>才停了下来。</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//class ReadOnlyDoubleWrapper</span>
@@ -471,7 +471,7 @@ javafx.beans.property.ReadOnlyDoubleWrapper.ReadOnlyPropertyImpl
 All Implemented Interfaces:
 NumberExpression, Observable, ReadOnlyProperty&lt;Number&gt;, ObservableDoubleValue, ObservableNumberValue, ObservableValue&lt;Number&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210113132012.png" alt="ReadOnlyPropertyImpl"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210113132012.png" alt="ReadOnlyPropertyImpl"></p>
 <p>啊，因为在Stage里头的width需要更改，所以要是个可读可写的property。但可以用一个内部私有类，把一个property肛成一个read-only property。并根据dynamic binding将<code>ObservableDoubleValue</code>和<code>ReadOnlyProperty</code>里头的方法给实现掉（原先是在类<code>DoublePropertyBase</code>和<code>SimpleDoubleProperty</code>里头实现的）。实在是妙！</p>
 <p>并且查阅文档可以发现内部私有类<code>ReadOnlyPropertyImpl</code>与Listener有关的方法，全部在<code>ReadOnlyDoublePropertyBase</code>类里头。</p>
 <p>所以我们要看<code>addListener</code>的实现，就要去<code>DoublePropertyBase</code>这个类里头看了。如下所示</p>
@@ -669,7 +669,7 @@ NumberExpression, Observable, ReadOnlyProperty&lt;Number&gt;, ObservableDoubleVa
 <span class="token class-name">ExpressionHelper</span><span class="token punctuation">.</span><span class="token function">fireValueChangedEvent</span><span class="token punctuation">(</span>helper<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//breakpoint here</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>从Frame来看，我的思路被验证了，是正确的</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210113132029.jpg" alt="Debug"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210113132029.jpg" alt="Debug"></p>
 <h2 id="亲手试错"><a href="#亲手试错" class="headerlink" title="亲手试错"></a>亲手试错</h2><p>竟然不明不白地就这样分析了一通InvalidationListener的实现，对Observer Pattern也有了更进一步的了解。于是垃圾地模拟了一下好像现实的场景：有一个商店里面有商品要抢购，而顾客们迫切地想知道商品的补货信息。但是，你是一个Customer，而不一定是一个Subscriber。</p>
 <p>思路就是，实现一个Subscription接口，然后由Customer实现，最后Store里头存储着subscribers，并会提醒subscriber们关于价格和库存的更新。</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">test</span><span class="token punctuation">;</span>
@@ -893,13 +893,13 @@ A subscriber unsubscribes the product!<span aria-hidden="true" class="line-numbe
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">114k</span>
+    <span title="站点总字数">116k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:43</span>
+    <span title="站点阅读时长">1:46</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

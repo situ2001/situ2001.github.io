@@ -31,17 +31,17 @@
 <meta property="og:site_name" content="Situ Note">
 <meta property="og:description" content="发觉指针和数组的关系不浅">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143617.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143537.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143733.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205144359.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205145556.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205153231.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205143617.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205143537.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205143733.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205144359.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205145556.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205153231.png">
 <meta property="article:published_time" content="2020-12-05T07:44:12.000Z">
 <meta property="article:modified_time" content="2020-12-05T07:44:12.000Z">
 <meta property="article:author" content="situ2001">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143617.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205143617.png">
 
 
 <link rel="canonical" href="https://blog.situ2001.com/contents/d34f10f99adc/">
@@ -211,7 +211,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -390,11 +390,11 @@ p <span class="token operator">+=</span> <span class="token number">4</span><spa
 <p>首先，先给自己的脑子灌输一点知识：如果没有了解过内存的话，我们可以大概的形成一下印象。（大佬请跳过）</p>
 <p>内存呢，我喜欢把它形象化成一张密密麻麻的表格，它很长很长，但是宽度只有8个格子（1字节 = 8位），并且每一行都有一个专门的标号，就是内存的地址啦（字节编址）</p>
 <p>如图所示</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143617.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205143617.png"></p>
 <p>数据进入内存的话，就会占据内存的一部分，比如我们熟知，在32位下，<code>int</code>型占用4个字节，<code>double</code>型占用8个字节，比如我们有一个值为1的int变量，它会在内存中占据着4个字节</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143537.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205143537.png"></p>
 <p>数组是在内存上连续分布一块的数据结构。如果有一个长度为3的int数组<code>arr[3] = &#123;7, 4, 5&#125;</code>，那么它在内存里的占用是连续的，三个int类型长度的地址，还有一个数组名的变量，相当于一个常量指针（不可更改地址）</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143733.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205143733.png"></p>
 <p>我们可以使用<code>arr[0] arr[1] arr[2]</code>来进行对应元素的访问。与此同时，使用一个指针<code>int *p = arr</code>来实现上述的访问</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span> <span class="token comment">// *p = 7</span>
@@ -402,7 +402,7 @@ p<span class="token operator">++</span><span class="token punctuation">;</span> 
 p<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// *p = 5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>由上可见，指针p进行了两次自增，每一次自增，都会对p存放的地址+4，去到下一个元素的起始地址。因此，对p解引用就会出现不同的结果，分别对应<code>arr[0] arr[1] arr[2]</code></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205144359.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205144359.png"></p>
 <p>那么有，</p>
 <p><code>arr[0]</code>就是直接对arr的起始地址进行解引用，结果就是<code>7</code></p>
 <p><code>arr[1]</code>就是对arr进行+1，对指针<code>arr + 1</code>进行解引用，结果就是<code>4</code></p>
@@ -431,7 +431,7 @@ p2<span class="token operator">++</span><span class="token punctuation">;</span>
 
 <p>可以看出，两者输出结果不一样，其中p1读出来的是<code>a[0][1]  = 5</code>，而p2读出来的是<code>a[1][1] = 9</code></p>
 <p>为什么呢？仔细思考一下的话，其实也不难理解</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205145556.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205145556.png"></p>
 <h2 id="注意操作的对象"><a href="#注意操作的对象" class="headerlink" title="注意操作的对象"></a>注意操作的对象</h2><p>我到底，操作着哪个对象啊……</p>
 <p>我作为一个初学者，平时也会被各种多重 asterisk(*) 搞晕，不过静下心来，发现还是要抓住这些</p>
 <ol>
@@ -474,7 +474,7 @@ p2<span class="token operator">++</span><span class="token punctuation">;</span>
 <p>对于上文那个<code>array[3][4]</code>数组，语句<code>(*(p2+1)+1)</code>做了些啥呢？p2是<code>int[4]</code>类型的指针，对<code>(p2+1)</code>就是p2右移动1个<code>int[4]</code>的长度，就是<code>array[1][0]</code>的起始地址，对该地址解引用后，获得了这个二维数组中的第二个<code>int[4]</code>类型的一维数组，即<code>array[1]</code>，是一个<code>int</code>类型的指针，之后加1就是右移动1个<code>int</code>长度了，因此最后解引用后就是9</p>
 <p>并且写到这里我发现，<code>array[1][1] </code>，因为<code>[]</code>的结合性是左结合，即是<code>(array[1])[1]</code>，其实不就是相当于<code>*(*(p2+1)+1)</code>吗？？？(难道数组的下标相当于给指针进行解引用)</p>
 <p>大概是下图这样的</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205153231.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205153231.png"></p>
 <p>于是输出了<code>9</code>;</p>
 <h2 id="后面"><a href="#后面" class="headerlink" title="后面"></a>后面</h2><p>还需要补一下，还有字符数组与字符串</p>
 
@@ -569,13 +569,13 @@ p2<span class="token operator">++</span><span class="token punctuation">;</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">114k</span>
+    <span title="站点总字数">116k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:43</span>
+    <span title="站点阅读时长">1:46</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

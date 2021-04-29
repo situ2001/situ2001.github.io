@@ -31,17 +31,17 @@
 <meta property="og:site_name" content="Situ Note">
 <meta property="og:description" content="Web安全方向试探路">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195627.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195646.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195703.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195749.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195812.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195817.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195627.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195646.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195703.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195749.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195812.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195817.png">
 <meta property="article:published_time" content="2020-11-28T09:51:43.000Z">
 <meta property="article:modified_time" content="2020-11-28T09:51:43.000Z">
 <meta property="article:author" content="situ2001">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195627.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195627.png">
 
 
 <link rel="canonical" href="https://blog.situ2001.com/contents/7bce767300fa/">
@@ -211,7 +211,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -586,16 +586,16 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>页面长这个样子，如图所示。</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195627.png" alt="原始页面"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195627.png" alt="原始页面"></p>
 <p>然后我们给son2加上这么一段css</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
 <span class="token property">left</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
 <span class="token property">top</span><span class="token punctuation">:</span> 120px<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195646.png" alt="此时的参照物为body"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195646.png" alt="此时的参照物为body"></p>
 <p>如图所示，son3直接顶上来了，son2仿佛就像是“跳”出了文档本身一样，并且以页面（此时没有其他的father设置了non-static的position）左上角，相对左边向右偏移了40px，相对上面向下偏移了120px</p>
 <p>如果我们把<code>position</code>改为<code>relative</code>，那么便会出现下图的情况</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195703.png" alt="此时的参照物为原来的自己"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195703.png" alt="此时的参照物为原来的自己"></p>
 <p>可以看出，son2在文档原本的位置依旧存在，只不过son2以原位置，右偏移了40px且向下偏移了120px</p>
 <p>然而，上面这些是根据像素点（pixel缩写为px）来偏移的，既然是相对的位置表示，用百分比又会如何呢？</p>
 <p>这就涉及到参照物的情况了，我<strong>目前</strong>碰到有这些</p>
@@ -612,12 +612,12 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
 <span class="token property">top</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>就会出现下图的这种情况</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195749.png" alt="此时的参照物为grandpa"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195749.png" alt="此时的参照物为grandpa"></p>
 <p>此时百分比是<strong>占得father的宽度和高度</strong></p>
 <p>但是我们把son2改成<code>position: relative</code>的话，发现son2只向右移动了一个father宽度的像素而没有额外的下移</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195812.png" alt="此时的参照物为原来的自己"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195812.png" alt="此时的参照物为原来的自己"></p>
 <p>思考了一下，既然这个属性百分比是继承父类的属性，那father肯定没有加height，一查，果然如此，给father加个<code>height: 335px</code>之后，果然好了。</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195817.png" alt="此时的参照物为原来的自己"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195817.png" alt="此时的参照物为原来的自己"></p>
 
     </div>
 
@@ -710,13 +710,13 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">114k</span>
+    <span title="站点总字数">116k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:43</span>
+    <span title="站点阅读时长">1:46</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

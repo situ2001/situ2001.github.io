@@ -31,15 +31,15 @@
 <meta property="og:site_name" content="Situ Note">
 <meta property="og:description" content="国庆回家了，先随便水一篇文章 才放4天假差评 那么，如何搭建一个属于自己的静态博客？">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003114117.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003151605.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003174322.png">
-<meta property="og:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003182803.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201003114117.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201003151605.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201003174322.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201003182803.png">
 <meta property="article:published_time" content="2020-10-03T09:18:19.000Z">
 <meta property="article:modified_time" content="2020-10-03T09:18:19.000Z">
 <meta property="article:author" content="situ2001">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003114117.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201003114117.png">
 
 
 <link rel="canonical" href="https://blog.situ2001.com/contents/43abca4995a8/">
@@ -209,7 +209,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -410,12 +410,12 @@ Hi situ2001<span class="token operator">!</span> You've successfully authenticat
 <p>此时，到github的connection已经没有问题</p>
 <h2 id="关于部署"><a href="#关于部署" class="headerlink" title="关于部署"></a>关于部署</h2><p>本地写好了，当然是要部署，而部署之前，得要有地方给你放。</p>
 <p>首先先在github上建立一个这样的仓库</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003114117.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201003114117.png"></p>
 <p>repo的name是 yourusername.github.io ，并且这个repo要是Public的，填完之后点击 Create Repository 按钮就行了</p>
 <p>至于为什么要这样做，细看官方讲解: <a target="_blank" rel="noopener" href="https://pages.github.com/">Github Pages</a></p>
 <p>新建出来的repo，github pages默认是启用着的（<del>也关不了</del></p>
 <p>再调一下 repo 里面的 setting ，进入 setting 之后一直往下跑就看到了</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003151605.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201003151605.png"></p>
 <p>主要是设置一下 source folder 和 branch 之类的，可以直接加一个HTTPS，也支持自定义域名</p>
 <p>至于hexo这边如何配置呢</p>
 <p>先执行如下命令，为什么，因为文档有的说啊：<a target="_blank" rel="noopener" href="https://hexo.io/docs/github-pages#One-command-deployment">Github Pages | Hexo</a><br><code>$ npm install hexo-deployer-git --save</code></p>
@@ -437,7 +437,7 @@ Hi situ2001<span class="token operator">!</span> You've successfully authenticat
 <p><strong>注</strong>: 绝大部分地区可能无法打开<code>*.github.io</code>，建议修改DNS为 <code>223.5.5.5</code>，能解决大部分问题，如果有域名和CDN的，推荐CNAME解析再套上CDN</p>
 <p>update: CNAME文件会在deploy之后被覆盖，翻了一下，发现<code>hexo deploy</code>用的是 <code>git push --force</code> ，因此远程仓库的内容会被现有的本地仓库覆盖掉，解决方法是在source目录下直接新建一个CNAME文件，这样在生成的时候就会出现在public目录里</p>
 <p>如下图所示</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003174322.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201003174322.png"></p>
 <h2 id="图床配置-Optional"><a href="#图床配置-Optional" class="headerlink" title="图床配置 (Optional)"></a>图床配置 (Optional)</h2><p>Git 这种东西，不是拿来给我们存放二进制文件（如图片）的</p>
 <p>俗话说得好， <del>Git存换删图一时爽，.git folder火葬场</del></p>
 <p>而图片在Markdown中，可以以URL形式附上，所以只要有链接，就能出图了</p>
@@ -466,7 +466,7 @@ Hi situ2001<span class="token operator">!</span> You've successfully authenticat
 <p>Alternative: 也可以在github pages的repo下，把deployment的branch设置为master之外的（如gh-pages），然后直接push到master分支即可，不过.deploy_git文件夹没拉下来的话，可能会出事，下面有提到。</p>
 <h3 id="把-gitignore文件设置好"><a href="#把-gitignore文件设置好" class="headerlink" title="把.gitignore文件设置好"></a>把.gitignore文件设置好</h3><p><strong>一定要有</strong>.gitignore文件<br>一定要<strong>有.gitignore文件</strong><br><strong>一定要有.gitignore文件</strong></p>
 <p>如果你想git clone下来一堆或者push一堆node_moudle，请忽略此步</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003182803.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201003182803.png"></p>
 <p>该文件的作用如文件名本身，可以忽略上传的文件/文件夹</p>
 <p>对于hexo源文件，我一般选择忽略如下，剩下的便是文章和config文件</p>
 <pre class="line-numbers language-none"><code class="language-none">.DS_Store
@@ -581,13 +581,13 @@ public&#x2F;
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">114k</span>
+    <span title="站点总字数">116k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:43</span>
+    <span title="站点阅读时长">1:46</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动

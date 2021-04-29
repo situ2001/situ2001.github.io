@@ -12,6 +12,101 @@
 ]]></content>
   </entry>
   <entry>
+    <title>记一次CTF新生赛</title>
+    <url>//contents/0d721ec073c6/</url>
+    <content><![CDATA[<p>新手上路，大佬们轻喷</p>
+<span id="more"></span>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>昨天举办了一场CTF新生赛，比赛时间是早八到凌晨结束 <del>我一觉睡到下午三点半才发现</del></p>
+<p>既然是咸鱼的周六，最近也累得很没啥事情想做，那就<del>先看一集yuru yuri</del>再参加耍耍呗</p>
+<h2 id="一瞥"><a href="#一瞥" class="headerlink" title="一瞥"></a>一瞥</h2><p>题目还挺综合的，Android web reverse misc和crypto都有涉及，难度大多数都还算是EZ级别的，就挑三四道<del>我会的</del>题记录一下吧</p>
+<ol>
+<li>这网站真眼熟</li>
+<li>二次元？二刺猿！</li>
+<li>g2uc_android1</li>
+<li>g2uc_android2</li>
+</ol>
+<h2 id="题目部分"><a href="#题目部分" class="headerlink" title="题目部分"></a>题目部分</h2><h3 id="这网站真眼熟"><a href="#这网站真眼熟" class="headerlink" title="这网站真眼熟"></a>这网站真眼熟</h3><p>题目给出了一个URL，在浏览器打开之后会跳到学校官网</p>
+<p>下意识想到是不是有可能是302跳转，如果是这样的话，直接F12看看跳转部分有啥就行<br>果不其然，在header的部分找到了flag</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201108145848.png" alt="世界上最好的语言(?)"></p>
+<h3 id="二次元-二刺猿"><a href="#二次元-二刺猿" class="headerlink" title="二次元? 二刺猿"></a>二次元? 二刺猿</h3><p>题目如图所示</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201108145907.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201108145856.png" alt="不 愧 是 你"></p>
+<p>hint如下，我表示这是GHS的行为 <del>赤裸裸的扒裤子</del></p>
+<blockquote>
+<p>这图只有上半身，这合理吗，<strong>下半身</strong>表示很淦，快把<strong>下半身</strong>放出来</p>
+</blockquote>
+<p>那综合现有条件进行分析，应该是通过某种手段将下半部分隐藏起来了，而下半部分的实际信息还是存在的</p>
+<p>之前参加过一个学院的讲座，好像是介绍啥方班的，里面的大佬也一展身手，我印象中好像有个十六进制编辑器是常用到的，便匆忙下载了UltraEdit，然后把图扔进去打开，出现一坨码</p>
+<p>先冷静一下，进行第一次尝试，会不会是这se图的高度被改掉了？查看一下分辨率，其高度是1754，十六进制转换过去就是06DA，于是把06DA扔入搜索框内进行搜索，果不其然在开头部分找到了</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201108145926.png"></p>
+<p>那么图片高度属性应该就可以通过修改这个hex值进行更改了</p>
+<p>过于疲惫，做人要暴力一点，直接把06更成0F再保存（</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201108145935.png"></p>
+<p>一瞬爆出flag</p>
+<h3 id="g2uc-android1"><a href="#g2uc-android1" class="headerlink" title="g2uc_android1"></a>g2uc_android1</h3><p>这个题差点把我整吐了，前期没有hint也不能安装，打开jadx也就是一个创建mainactivity的方法，并没有什么特殊之处，死磕了好久，太菜了<br>不过最后admin加了hint。。。</p>
+<p>题目没啥的，就提供了一个apk，两个hint如下</p>
+<blockquote>
+<p>Hint1: 我被盖住了嘤嘤嘤<br>Hint2: 为什么同样都是图片，他就是能在我上面</p>
+</blockquote>
+<p>思考了一下，难不成这个apk打开其实有张图片被盖住了？那既然是图片，直接把apk解开不就行了吗。</p>
+<p>解开之后，根据高中用app inventor(?)写apk现在用AS的我的一点经验，<del>直接搜索筛选较大文件啊这apk这么小</del></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201108145950.png"></p>
+<p>最后找出了flag所在图，图片名为f，<del>我表示我的此刻的心情也是F</del></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201108145959.png"></p>
+<h3 id="g2uc-android2"><a href="#g2uc-android2" class="headerlink" title="g2uc_android2"></a>g2uc_android2</h3><p>这个还行，直接jadx打开就看到获取flag的方法了，应用如果能安装运行的话，那应该是一个输入框+按钮进行flag输入与比对</p>
+<p>有用的部分在下面，很直接写在MainActivity里了</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">click</span><span class="token punctuation">(</span><span class="token class-name">View</span> view<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Intrinsics</span><span class="token punctuation">.</span><span class="token function">checkParameterIsNotNull</span><span class="token punctuation">(</span>view<span class="token punctuation">,</span> <span class="token string">"view"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>view<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token class-name">R</span><span class="token punctuation">.</span>id<span class="token punctuation">.</span>button<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">boolean</span> correct <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token class-name">View</span> findViewById <span class="token operator">=</span> <span class="token function">findViewById</span><span class="token punctuation">(</span><span class="token class-name">R</span><span class="token punctuation">.</span>id<span class="token punctuation">.</span>editTextTextPersonName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Intrinsics</span><span class="token punctuation">.</span><span class="token function">checkExpressionValueIsNotNull</span><span class="token punctuation">(</span>findViewById<span class="token punctuation">,</span> <span class="token string">"findViewById&lt;EditText>(R…d.editTextTextPersonName)"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Editable</span> <span class="token class-name">Flag</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">EditText</span><span class="token punctuation">)</span> findViewById<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">153</span><span class="token punctuation">,</span> <span class="token number">147</span><span class="token punctuation">,</span> <span class="token number">158</span><span class="token punctuation">,</span> <span class="token number">152</span><span class="token punctuation">,</span> <span class="token number">132</span><span class="token punctuation">,</span> <span class="token number">167</span><span class="token punctuation">,</span> <span class="token number">144</span><span class="token punctuation">,</span> <span class="token number">141</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">,</span> <span class="token number">206</span><span class="token punctuation">,</span> <span class="token number">140</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">,</span> <span class="token number">154</span><span class="token punctuation">,</span> <span class="token number">158</span><span class="token punctuation">,</span> <span class="token number">140</span><span class="token punctuation">,</span> <span class="token number">134</span><span class="token punctuation">,</span> <span class="token number">134</span><span class="token punctuation">,</span> <span class="token number">134</span><span class="token punctuation">,</span> <span class="token number">130</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i2 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i2 <span class="token operator">&lt;</span> <span class="token class-name">Flag</span><span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i2<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">Flag</span><span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i2<span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token number">255</span><span class="token punctuation">)</span> <span class="token operator">!=</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                correct <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            i<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token class-name">TextView</span> text <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">TextView</span><span class="token punctuation">)</span> <span class="token function">findViewById</span><span class="token punctuation">(</span><span class="token class-name">R</span><span class="token punctuation">.</span>id<span class="token punctuation">.</span>textView2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>correct<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">Intrinsics</span><span class="token punctuation">.</span><span class="token function">checkExpressionValueIsNotNull</span><span class="token punctuation">(</span>text<span class="token punctuation">,</span> <span class="token string">"text"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            text<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span><span class="token string">"Correct"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token class-name">Intrinsics</span><span class="token punctuation">.</span><span class="token function">checkExpressionValueIsNotNull</span><span class="token punctuation">(</span>text<span class="token punctuation">,</span> <span class="token string">"text"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        text<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span><span class="token string">"False"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>一眼看出是个简单的异或拿flag，根据异或可以反向日回去，我们可以直接反向用arr数组里面数字跟255进行异或处理，就可以得到flag</p>
+<p><del>下面是简陋jvav coding时间</del></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">153</span><span class="token punctuation">,</span> <span class="token number">147</span><span class="token punctuation">,</span> <span class="token number">158</span><span class="token punctuation">,</span> <span class="token number">152</span><span class="token punctuation">,</span> <span class="token number">132</span><span class="token punctuation">,</span> <span class="token number">167</span><span class="token punctuation">,</span> <span class="token number">144</span><span class="token punctuation">,</span> <span class="token number">141</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">,</span> <span class="token number">206</span><span class="token punctuation">,</span> <span class="token number">140</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">,</span> <span class="token number">154</span><span class="token punctuation">,</span> <span class="token number">158</span><span class="token punctuation">,</span> <span class="token number">140</span><span class="token punctuation">,</span> <span class="token number">134</span><span class="token punctuation">,</span> <span class="token number">134</span><span class="token punctuation">,</span> <span class="token number">134</span><span class="token punctuation">,</span> <span class="token number">130</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最后获得flag <code>flag&#123;Xor_1s_easyyy&#125;</code><br>嗯，以后可能没那么EZ了<br><del>不会有easy的题目，但可能有难到要写essay总结的题目</del></p>
+<h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>这新生赛竟然开了16小时，听说真正比赛是肝一天多的<br>我才断断续续肝四小时多就累趴下了，<del>体能有待提升</del></p>
+<p>然后，笔记本比赛下来，没有linux虚拟机，所有操作全靠奇怪操作，一圈下来，<del>奇怪的工具增多了</del><br>最好还是要备一个kali-linux VM，这样一来，什么工具都能有</p>
+<p>做题的时候脑洞要放开多多思考，还有知识的储备量要足够大（不然就像我那样解不出PHP相关的web题了</p>
+<p>新手上路也只能做这么多了</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201108150040.png" alt="惨不忍睹1"><br><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201108150044.png" alt="惨不忍睹2"></p>
+<p>也就这样了，希望前排的大佬能带带萌新</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201108150102.png" alt="求带"></p>
+<p><del>先溜去把一团糟的笔记本环境整理一下了</del></p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+  </entry>
+  <entry>
     <title>我是如何进行知识管理的</title>
     <url>//contents/729ea92e9046/</url>
     <content><![CDATA[<p>Intro: 信息爆炸，如何管理自己的知识?</p>
@@ -99,95 +194,194 @@
       </categories>
   </entry>
   <entry>
-    <title>记一次CTF新生赛</title>
-    <url>//contents/0d721ec073c6/</url>
-    <content><![CDATA[<p>新手上路，大佬们轻喷</p>
+    <title>Kindle PaperWhite 上手</title>
+    <url>/contents/ad8cbcffb002/</url>
+    <content><![CDATA[<p>Note: Migrated from preceding blog WordPress<br>Update: Source of pictures changed</p>
 <span id="more"></span>
-
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>昨天举办了一场CTF新生赛，比赛时间是早八到凌晨结束 <del>我一觉睡到下午三点半才发现</del></p>
-<p>既然是咸鱼的周六，最近也累得很没啥事情想做，那就<del>先看一集yuru yuri</del>再参加耍耍呗</p>
-<h2 id="一瞥"><a href="#一瞥" class="headerlink" title="一瞥"></a>一瞥</h2><p>题目还挺综合的，Android web reverse misc和crypto都有涉及，难度大多数都还算是EZ级别的，就挑三四道<del>我会的</del>题记录一下吧</p>
+<h2 id="购买"><a href="#购买" class="headerlink" title="购买"></a>购买</h2><h3 id="书与阅读器"><a href="#书与阅读器" class="headerlink" title="书与阅读器"></a>书与阅读器</h3><p>电脑工具书，新华大字典，牛津高阶……好累的说，要是有一个阅读器能把它们都装下就好了</p>
+<p>别看虽然现在只（<strong>只</strong>）有两三本的电脑书和几本字典，万一以后多了起来呢？（不）</p>
+<p>这个时候，入手一个阅读器就显得非常重要了，优点也是很显著的</p>
 <ol>
-<li>这网站真眼熟</li>
-<li>二次元？二刺猿！</li>
-<li>g2uc_android1</li>
-<li>g2uc_android2</li>
+<li>出行看书非常便携（无需带大量纸质书在包包里）</li>
+<li>可以大量减少买实体书的数量</li>
+<li>由上可知这样做可以省下一个或多个书架</li>
+<li>可以腾出放一个或多个书架的地方</li>
+<li><del>买书架的钱可以用来买个阅读器（误）</del></li>
+<li><del>可以上个保护盖，也可以当做泡面盖</del></li>
 </ol>
-<h2 id="题目部分"><a href="#题目部分" class="headerlink" title="题目部分"></a>题目部分</h2><h3 id="这网站真眼熟"><a href="#这网站真眼熟" class="headerlink" title="这网站真眼熟"></a>这网站真眼熟</h3><p>题目给出了一个URL，在浏览器打开之后会跳到学校官网</p>
-<p>下意识想到是不是有可能是302跳转，如果是这样的话，直接F12看看跳转部分有啥就行<br>果不其然，在header的部分找到了flag</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145848.png" alt="世界上最好的语言(?)"></p>
-<h3 id="二次元-二刺猿"><a href="#二次元-二刺猿" class="headerlink" title="二次元? 二刺猿"></a>二次元? 二刺猿</h3><p>题目如图所示</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145907.png"></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145856.png" alt="不 愧 是 你"></p>
-<p>hint如下，我表示这是GHS的行为 <del>赤裸裸的扒裤子</del></p>
+<p>所以…</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120421.gif"></p>
+<p><del>其实纯粹只是想要个泡面盖而已</del></p>
+<p>废话不少说，早买早<del>泡面</del></p>
+<h3 id="选购"><a href="#选购" class="headerlink" title="选购"></a>选购</h3><p>之前想过要买一个阅读器，在Kindle和当当阅读器之间徘徊</p>
+<p>不过后来想了一下，就算有某某方面比对方好，但这些鸡毛玩意就不用过多顾虑了</p>
+<p>因为既然买下李是为了<strong>看书</strong>，那么选择<strong>生态</strong>最佳的牌子买就行了</p>
+<p>所以为了避免各种坑，这里选择<strong>Amazon Kindle</strong></p>
+<p>查过谷哥，了解到当初kindle只是Amazon的软件平台和阅读设备，原本只有一种阅读设备，但经过多年的发展，已经有各种系列了</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120442.jpg"></p>
+<p>△第一代kindle</p>
+<p>不同系列之间的对比</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Kindle</th>
+<th>Kindle Paperwhite</th>
+<th>Kindle Oasis</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>价格</td>
+<td>558</td>
+<td>998</td>
+<td>2399</td>
+</tr>
+<tr>
+<td>屏幕尺寸</td>
+<td>6’’</td>
+<td>6’’</td>
+<td>7’’</td>
+</tr>
+<tr>
+<td>显示密度</td>
+<td>167 ppi</td>
+<td>300 ppi</td>
+<td>300 ppi</td>
+</tr>
+<tr>
+<td>防水</td>
+<td>–</td>
+<td>IPX8</td>
+<td>IPX8</td>
+</tr>
+<tr>
+<td>储存空间</td>
+<td>4GB</td>
+<td>8 / 32 GB</td>
+<td>8 / 32 GB</td>
+</tr>
+<tr>
+<td>重量</td>
+<td>161 g</td>
+<td>182 g</td>
+<td>182 g</td>
+</tr>
+<tr>
+<td>厚度</td>
+<td>9.1 mm</td>
+<td>8.18 mm</td>
+<td>3.4 - 3.8 mm</td>
+</tr>
+<tr>
+<td>内置阅读灯</td>
+<td>–</td>
+<td>5 LEDs</td>
+<td>12 LEDs</td>
+</tr>
+<tr>
+<td>颜色</td>
+<td>黑 / 白</td>
+<td>黑</td>
+<td>灰 / 金</td>
+</tr>
+</tbody></table>
+<p>自己整理一下表格，应该还算可以</p>
+<p>实质上，之前的Kindle Voyage消失不见了，据说是定位尴尬而停产的（下有Paperwhite上有Oasis而Voyage定价为1499…）</p>
+<p>所以18年10月份发布的Paperwhite 4身上，就可以看见许多Voyage的影子，其中最明显的就是<strong>全平的屏幕</strong>了</p>
+<p>虽说从日本免税购买会便宜非常多，但是考虑到是电子产品的原因，还是直接在狗东入手算了</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120443.png"></p>
+<h2 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h2><h3 id="开箱"><a href="#开箱" class="headerlink" title="开箱"></a>开箱</h3><p>不得不说京东快递果然够快，第二天午饭之前就到了</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120440.jpg"></p>
+<p>以上图文无关（</p>
+<p>快递叔叔把我的998拿走了，</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120449.jpg"></p>
+<p>然后给了我一个小纸袋…</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120441.jpg"></p>
+<p>京喜连连，现在人人都这么节约的吗？（下面依旧图文无关</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120439.jpg"></p>
+<p>很好(F)…快递打包成怎么样不重要了，只要能完好地送过来就行了…我们把包裹拆开，出来的是…</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120434.jpg"></p>
+<p>包装也是简单到环保额……既然如此那算了，京东快递包装什么的，都已经不在意了（</p>
+<p>非常简约的包装，上面的打字说完了物品的名称，下面印有Amazon的logo，中间还有露出一大半的kindle，上面写着，“小明的Kindle”</p>
+<p>Emmm，果然都9102年了，小明都看《未来简史》《肯福莱特悬疑经典》《我们仨》《绚烂的世界帝国》这些书了，果然时代在进步啊<del>（文艺青年小明）</del></p>
+<p>背部也写明了这款Kindle的特点：<strong>轻薄</strong>，<strong>纯平</strong>，<strong>防水</strong>，<strong>屏幕清晰</strong>，<strong>阅读灯</strong>与<strong>长续航</strong></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120436.jpg"></p>
+<p>拆开这层外壳，出来了一黑色的东西，特别黑的地方组成了一男孩在树下阅读的经典图案…</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120435.jpg"></p>
+<p>紧接着，被爆开的来的，就是阅读器本体了</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120437.jpg"></p>
+<p>Emm还行，，非常简约<del>（简陋）</del></p>
+<p>正面的字其实不是一张膜而是在墨水屏上的<del>，我刚还想着把它撕下来呢</del></p>
+<p>背面呢，就是和正面一样，黑黑的，还有个Amazon的logo，下面写了输入电压电流参数</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120430.jpg"></p>
+<p>黑不溜秋的，不过材质摸起来，是真**爽</p>
+<h3 id="开机"><a href="#开机" class="headerlink" title="开机"></a>开机</h3><p>摁下下面的突起的电源键，一瞬亮机</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120424.jpg"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120423.jpg"></p>
+<p>Emm开机后第一屏先介绍了这Kindle的特性</p>
+<p>之后的就是语言选择和开机向导了</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120444.jpg"></p>
+<p><del>I’m Chinese!!!</del></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120445.jpg"></p>
+<p>登录亚马逊账户（分地区，在中国大陆坑定是国区了啦）</p>
+<p>然后就没有然后啦，现在进入主页面</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120438.jpg"></p>
+<p>主页非常简洁，除了书还是书<del>，还有上面的设置和搜索</del></p>
+<h3 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h3><p>当年买了iPad回来第一时间就是升级，买了猴米6回来也是第一时间就跑去解锁（虽然要三天等待）</p>
+<p>Kindle虽然只能看书，但是也有<a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=G54HPVAW86CHYHKS">软件升级</a>的啊</p>
+<p>进入下载页面，点击下载</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120427.jpg"></p>
+<p>然后连接电脑将刚刚下载的固件拖进去根目录就行了，接着再在Kindle的设置里面找到更新我的Kindle即可</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120426.jpg"></p>
+<p>点击确定便重启进入更新</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120428.jpg"></p>
+<p>接着就是等待更新完成重启回到主页面了</p>
+<h3 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h3><p>8GB的存储空间，如果用来看漫画的嫌不够的可以购买32GB版本的。塞下了二十几本漫画和十本电子书吧，也就耗费了不到三分之一的空间</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120422.jpg"></p>
+<p>久了不看的书籍可以选择快速删除，等再要看的时候联网下载回来，个人文档啊，不看的塞在电脑硬盘上吧</p>
+<h3 id="商店"><a href="#商店" class="headerlink" title="商店"></a>商店</h3><h4 id="一览"><a href="#一览" class="headerlink" title="一览"></a>一览</h4><p>Kindle的商店才是精髓，里面汇聚了各种各样的电子书籍，</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120425.jpg"></p>
+<p>上面还有不少的小说和折扣，可谓是种种白菜价了，<del>适合国人消费心理</del></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120450.jpg"></p>
+<p>其实如果想要购买电子书，还是推荐使用手机版的Kindle阅读APP，在上面选购书籍，都不知道比在阅读器的墨水屏上选购浏览快多少了。</p>
+<p>不过还是摆脱不了纸质书，因为目前<del>不是所有的书都是有电子版的比如《他改变了中国》</del></p>
+<h4 id="购买-1"><a href="#购买-1" class="headerlink" title="购买"></a>购买</h4><p>Kindle阅读器到货不久后，便买下来了第一本书——<del>《Python编程 入门到实践》</del></p>
+<p>在Kindle上面的购买流程也不是特别复杂，进入书籍详情，点击购买，然后微信支付宝扫码一步到位</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120431.jpg"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120448.jpg"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120447.jpg"></p>
+<p>接着就到了付款成功页面，电子书会自动下载至阅读器上面</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120446.jpg"></p>
+<p>这样一本书就买完了，下面还有各种书籍的安利，<del>等我啃完再说吧</del></p>
+<p><del>总的来说，非常简单，只需有钱</del></p>
+<h3 id="阅读体验"><a href="#阅读体验" class="headerlink" title="阅读体验"></a>阅读体验</h3><p>前面瞎比比了这么久，最重要的阅读体验才刚刚开头…</p>
+<h4 id="主观感受"><a href="#主观感受" class="headerlink" title="主观感受"></a>主观感受</h4><p>阅读还真的没得好说的，就像在纸书上面阅读一样，细看的话，高PPI也保证了每一个字的锋利（官方说是像激光刻印一样）</p>
+<p>对着屏幕拍摄，辣鸡猴6相机，字有涂抹感，与真实观感可能有出入</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120419.jpg"></p>
+<p>把它放大</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120420.jpg"></p>
+<p>是几乎看不到的了</p>
+<h4 id="阅读灯"><a href="#阅读灯" class="headerlink" title="阅读灯"></a>阅读灯</h4><p>阅读器带有了阅读灯，不过不是背光灯，是前光灯，<del>光从下♂面来</del></p>
+<p>不然一下子就眼累了</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120418.jpg"></p>
+<p>1 2 3 4 5 的确是5颗</p>
+<p><del>被窝里面看书可谓是满分</del>（好孩子不要这样子做哦）</p>
+<h4 id="看漫画"><a href="#看漫画" class="headerlink" title="看漫画"></a>看漫画</h4><p>其实高PPI设备看漫画也是相当不错的喔</p>
+<p>漫画国区就有，比如腾讯漫画啊爆笑校园之类的，也可以找资源并使用个人文档服务或者USB连接进行拷贝</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120433.jpg"></p>
+<p>效果真是棒极了呢</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Kindle阅读器呢，真的是为了看书而看书的，如果想干点其他的，出门左转iPad</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120429.jpg"></p>
+<p>与多年依旧坚挺的Air2合影</p>
+<p>大小不大不小单手握持干干好，塞入口袋刚刚好，大小和纸质书差不多甚至更小</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20200828120432.jpg"></p>
+<p><del>只想知道什么时候商城有他改变了中国的电子版</del></p>
+<p>大概是一个用来阅读的神器了，按商店的白菜价来看，读多点书甚至还会回本</p>
 <blockquote>
-<p>这图只有上半身，这合理吗，<strong>下半身</strong>表示很淦，快把<strong>下半身</strong>放出来</p>
+<p><del>单反穷三代，Kindle富一生</del></p>
 </blockquote>
-<p>那综合现有条件进行分析，应该是通过某种手段将下半部分隐藏起来了，而下半部分的实际信息还是存在的</p>
-<p>之前参加过一个学院的讲座，好像是介绍啥方班的，里面的大佬也一展身手，我印象中好像有个十六进制编辑器是常用到的，便匆忙下载了UltraEdit，然后把图扔进去打开，出现一坨码</p>
-<p>先冷静一下，进行第一次尝试，会不会是这se图的高度被改掉了？查看一下分辨率，其高度是1754，十六进制转换过去就是06DA，于是把06DA扔入搜索框内进行搜索，果不其然在开头部分找到了</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145926.png"></p>
-<p>那么图片高度属性应该就可以通过修改这个hex值进行更改了</p>
-<p>过于疲惫，做人要暴力一点，直接把06更成0F再保存（</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145935.png"></p>
-<p>一瞬爆出flag</p>
-<h3 id="g2uc-android1"><a href="#g2uc-android1" class="headerlink" title="g2uc_android1"></a>g2uc_android1</h3><p>这个题差点把我整吐了，前期没有hint也不能安装，打开jadx也就是一个创建mainactivity的方法，并没有什么特殊之处，死磕了好久，太菜了<br>不过最后admin加了hint。。。</p>
-<p>题目没啥的，就提供了一个apk，两个hint如下</p>
-<blockquote>
-<p>Hint1: 我被盖住了嘤嘤嘤<br>Hint2: 为什么同样都是图片，他就是能在我上面</p>
-</blockquote>
-<p>思考了一下，难不成这个apk打开其实有张图片被盖住了？那既然是图片，直接把apk解开不就行了吗。</p>
-<p>解开之后，根据高中用app inventor(?)写apk现在用AS的我的一点经验，<del>直接搜索筛选较大文件啊这apk这么小</del></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145950.png"></p>
-<p>最后找出了flag所在图，图片名为f，<del>我表示我的此刻的心情也是F</del></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108145959.png"></p>
-<h3 id="g2uc-android2"><a href="#g2uc-android2" class="headerlink" title="g2uc_android2"></a>g2uc_android2</h3><p>这个还行，直接jadx打开就看到获取flag的方法了，应用如果能安装运行的话，那应该是一个输入框+按钮进行flag输入与比对</p>
-<p>有用的部分在下面，很直接写在MainActivity里了</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">click</span><span class="token punctuation">(</span><span class="token class-name">View</span> view<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">Intrinsics</span><span class="token punctuation">.</span><span class="token function">checkParameterIsNotNull</span><span class="token punctuation">(</span>view<span class="token punctuation">,</span> <span class="token string">"view"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>view<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token class-name">R</span><span class="token punctuation">.</span>id<span class="token punctuation">.</span>button<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">boolean</span> correct <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-        <span class="token class-name">View</span> findViewById <span class="token operator">=</span> <span class="token function">findViewById</span><span class="token punctuation">(</span><span class="token class-name">R</span><span class="token punctuation">.</span>id<span class="token punctuation">.</span>editTextTextPersonName<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">Intrinsics</span><span class="token punctuation">.</span><span class="token function">checkExpressionValueIsNotNull</span><span class="token punctuation">(</span>findViewById<span class="token punctuation">,</span> <span class="token string">"findViewById&lt;EditText>(R…d.editTextTextPersonName)"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token class-name">Editable</span> <span class="token class-name">Flag</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">EditText</span><span class="token punctuation">)</span> findViewById<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">153</span><span class="token punctuation">,</span> <span class="token number">147</span><span class="token punctuation">,</span> <span class="token number">158</span><span class="token punctuation">,</span> <span class="token number">152</span><span class="token punctuation">,</span> <span class="token number">132</span><span class="token punctuation">,</span> <span class="token number">167</span><span class="token punctuation">,</span> <span class="token number">144</span><span class="token punctuation">,</span> <span class="token number">141</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">,</span> <span class="token number">206</span><span class="token punctuation">,</span> <span class="token number">140</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">,</span> <span class="token number">154</span><span class="token punctuation">,</span> <span class="token number">158</span><span class="token punctuation">,</span> <span class="token number">140</span><span class="token punctuation">,</span> <span class="token number">134</span><span class="token punctuation">,</span> <span class="token number">134</span><span class="token punctuation">,</span> <span class="token number">134</span><span class="token punctuation">,</span> <span class="token number">130</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i2 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i2 <span class="token operator">&lt;</span> <span class="token class-name">Flag</span><span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i2<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">Flag</span><span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i2<span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token number">255</span><span class="token punctuation">)</span> <span class="token operator">!=</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                correct <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-            i<span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token class-name">TextView</span> text <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">TextView</span><span class="token punctuation">)</span> <span class="token function">findViewById</span><span class="token punctuation">(</span><span class="token class-name">R</span><span class="token punctuation">.</span>id<span class="token punctuation">.</span>textView2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>correct<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token class-name">Intrinsics</span><span class="token punctuation">.</span><span class="token function">checkExpressionValueIsNotNull</span><span class="token punctuation">(</span>text<span class="token punctuation">,</span> <span class="token string">"text"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            text<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span><span class="token string">"Correct"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token class-name">Intrinsics</span><span class="token punctuation">.</span><span class="token function">checkExpressionValueIsNotNull</span><span class="token punctuation">(</span>text<span class="token punctuation">,</span> <span class="token string">"text"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        text<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span><span class="token string">"False"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>一眼看出是个简单的异或拿flag，根据异或可以反向日回去，我们可以直接反向用arr数组里面数字跟255进行异或处理，就可以得到flag</p>
-<p><del>下面是简陋jvav coding时间</del></p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">153</span><span class="token punctuation">,</span> <span class="token number">147</span><span class="token punctuation">,</span> <span class="token number">158</span><span class="token punctuation">,</span> <span class="token number">152</span><span class="token punctuation">,</span> <span class="token number">132</span><span class="token punctuation">,</span> <span class="token number">167</span><span class="token punctuation">,</span> <span class="token number">144</span><span class="token punctuation">,</span> <span class="token number">141</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">,</span> <span class="token number">206</span><span class="token punctuation">,</span> <span class="token number">140</span><span class="token punctuation">,</span> <span class="token number">160</span><span class="token punctuation">,</span> <span class="token number">154</span><span class="token punctuation">,</span> <span class="token number">158</span><span class="token punctuation">,</span> <span class="token number">140</span><span class="token punctuation">,</span> <span class="token number">134</span><span class="token punctuation">,</span> <span class="token number">134</span><span class="token punctuation">,</span> <span class="token number">134</span><span class="token punctuation">,</span> <span class="token number">130</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
-            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">^</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>最后获得flag <code>flag&#123;Xor_1s_easyyy&#125;</code><br>嗯，以后可能没那么EZ了<br><del>不会有easy的题目，但可能有难到要写essay总结的题目</del></p>
-<h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>这新生赛竟然开了16小时，听说真正比赛是肝一天多的<br>我才断断续续肝四小时多就累趴下了，<del>体能有待提升</del></p>
-<p>然后，笔记本比赛下来，没有linux虚拟机，所有操作全靠奇怪操作，一圈下来，<del>奇怪的工具增多了</del><br>最好还是要备一个kali-linux VM，这样一来，什么工具都能有</p>
-<p>做题的时候脑洞要放开多多思考，还有知识的储备量要足够大（不然就像我那样解不出PHP相关的web题了</p>
-<p>新手上路也只能做这么多了</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108150040.png" alt="惨不忍睹1"><br><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108150044.png" alt="惨不忍睹2"></p>
-<p>也就这样了，希望前排的大佬能带带萌新</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108150102.png" alt="求带"></p>
-<p><del>先溜去把一团糟的笔记本环境整理一下了</del></p>
+<p><del>不缺钱的或者</del>想读书的，入手Kindle阅读器绝对不后悔</p>
+<p>End</p>
 ]]></content>
       <categories>
         <category>随笔</category>
@@ -1580,6 +1774,160 @@ x <span class="token operator">=</span> <span class="token number">114514</span>
       </categories>
   </entry>
   <entry>
+    <title>JavaScript之值的比较</title>
+    <url>//contents/d2b42a9c0258/</url>
+    <content><![CDATA[<p>inspired by 海绵宝宝meme（</p>
+<span id="more"></span>
+
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>如图所示（其实是因为不熟悉，导致平时用起来有点抗拒</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210424234347.png" alt="MEME"></p>
+<p>好啦，meme归meme，那么JS这令人诟病的值比较究竟是怎么样的呢？</p>
+<h2 id="Type-of-value"><a href="#Type-of-value" class="headerlink" title="Type of value"></a>Type of value</h2><p>在JS里头，value有两种：primitive和object</p>
+<p>primitive分别是 <code>string</code>, <code>number</code>, <code>bigint</code>, <code>boolean</code>, <code>undefined</code>, <code>symbol</code>, <code>null</code></p>
+<p>其特点就是immutable，即它们的值不能被更改。不像数组，对象，函数那样，可以把自身的property给更改。如果一个被赋值了primitive的变量的value被更改，那就是这个变量被赋了个新值。</p>
+<p>至于object类型，Objects are held by reference。这跟Java是差不多的。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token punctuation">&#123;</span> x<span class="token operator">:</span> <span class="token number">114514</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> b <span class="token operator">=</span> a<span class="token punctuation">;</span> <span class="token comment">// copy the reference and assign to b</span>
+b<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">1919810</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1919810</span>
+
+<span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> d <span class="token operator">=</span> c<span class="token punctuation">;</span> <span class="token comment">// assigning a new primitive, but not copying the reference</span>
+d <span class="token operator">=</span> <span class="token number">1919810</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 114514</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><code>undefined</code>指的是一个变量的值为空（没有赋值），这跟<code>null</code>不一样</p>
+<p><code>Symbol</code>是一个有特殊用途的primitive，平时表现为一个隐藏的值。通常作为一个对象的特殊key。</p>
+<p><code>function</code>和<code>array</code>是特殊的Object类型</p>
+<p><code>typeof</code>这里也有一点坑，理论上primitive就显示对应的类型，但是<code>null</code>却不是如此</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">typeof</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// "function"</span>
+<span class="token keyword">typeof</span> <span class="token punctuation">[</span><span class="token number">1919</span><span class="token punctuation">,</span> <span class="token number">810</span><span class="token punctuation">]</span> <span class="token comment">// "object" but not "array"</span>
+<span class="token keyword">typeof</span> <span class="token keyword">null</span> <span class="token comment">// "object" but not "null"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Falsy-values"><a href="#Falsy-values" class="headerlink" title="Falsy values"></a>Falsy values</h2><p>这里插入falsy value，为后面比较做铺垫</p>
+<p>下面这些值都是false</p>
+<ul>
+<li><code>false</code></li>
+<li><code>null</code></li>
+<li><code>undefined</code></li>
+<li><code>NaN</code></li>
+<li><code>0</code> (zero)</li>
+<li><code>-0</code> (Number negative zero)</li>
+<li><code>0n</code> (BigInt zero)</li>
+<li>empty string (“” or ‘’ or ``)</li>
+</ul>
+<h2 id="Operator-amp-amp"><a href="#Operator-amp-amp" class="headerlink" title="Operator || &amp;&amp;"></a>Operator || &amp;&amp;</h2><p>与此同时，顺便插入跟其他常见语言行为有点不同的<code>&amp;&amp;</code>和<code>||</code>运算符运算规则</p>
+<table>
+<thead>
+<tr>
+<th>meaning</th>
+<th>statement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Logic OR</td>
+<td>If expr1 can be converted to true, returns expr1; else, returns expr2.</td>
+</tr>
+<tr>
+<td>Logic AND</td>
+<td>If expr1 can be converted to true, returns expr2; else, returns expr1.</td>
+</tr>
+</tbody></table>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token keyword">undefined</span> <span class="token operator">||</span> <span class="token number">114514</span><span class="token punctuation">;</span> <span class="token comment">// a = 114514</span>
+<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token keyword">undefined</span> <span class="token operator">&amp;&amp;</span> <span class="token number">1919810</span><span class="token punctuation">;</span> <span class="token comment">// b = undefined</span>
+<span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token string">"you"</span> <span class="token operator">||</span> <span class="token string">"me"</span><span class="token punctuation">;</span> <span class="token comment">// c = you</span>
+<span class="token keyword">let</span> d <span class="token operator">=</span> <span class="token string">"you"</span> <span class="token operator">&amp;&amp;</span> <span class="token string">"me"</span><span class="token punctuation">;</span> <span class="token comment">// d = me</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>根据<strong>短路运算</strong>的规则来理解就行了，比如Logic OR，第一个true就扔回第一个，否则就会比较第二个，因此第一个false就会扔回第二个。Logic AND也是如此</p>
+<p>并且因为js用来判断false和true的是用falsy value和truthy value，所以使用if语句的时候，要注意哪些东西在js里头是falsy的。</p>
+<h2 id=""><a href="#" class="headerlink" title="=="></a>==</h2><p><code>==</code>与<code>===</code>这两个在同类型比较的时候，行为是<strong>一样</strong>的。</p>
+<p>但是在两个待比较的值的类型不同的时候，就会产生差别，<code>==</code>会把类型做转换后再进行比较值（强制比较，即Coercive equality）。（注意：这区别于value的单独出现，比如<code>[]</code>是truthy value，但是在做<code>==</code>比较的时候就会强制转换类型）</p>
+<p>且优先做<strong>primitive numeric comparison</strong>，即</p>
+<ol>
+<li>把<code>object</code>(如果不是<code>primitive</code>)类型的值转到<code>primitive</code>(使用<code>valueOf()</code>或者<code>toString()</code>)</li>
+<li>再转为<code>number</code>(如果此时的<code>primitive</code>还不是数字)进行比较</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">114514</span> <span class="token operator">==</span> <span class="token string">"114514"</span> <span class="token comment">// true, (string -> number)</span>
+<span class="token number">0</span> <span class="token operator">==</span> <span class="token boolean">true</span> <span class="token comment">// false (boolean -> number)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>对于数组的话，用<code>==</code>作比较的时候，会发生类型转换，使用了<code>toString()</code>或<code>valueOf()</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ""</span>
+<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">""</span> <span class="token comment">// true</span>
+<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"0"</span> <span class="token comment">// true</span>
+<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token comment">// true</span>
+<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token boolean">false</span> <span class="token comment">// true</span>
+
+<span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// "114514"</span>
+<span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"114514"</span> <span class="token comment">// true</span>
+<span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">114514</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>所以海绵宝宝meme里头的<code>&quot;0&quot; == 0</code>, <code>0 == []</code>都是<code>true</code>。<code>[].toString()</code>得到<code>&quot;&quot;</code>，所以<code>&quot;0&quot; == []</code>是<code>false</code>而<code>&#39;&#39; == []</code>为<code>true</code></p>
+<p>对于<code>null</code>和<code>undefined</code>，spec里面也说了</p>
+<blockquote>
+<p>The Undefined type has exactly one value, called undefined. Any variable that has not been assigned a value has the value undefined.(8.1)<br>The Null type has exactly one value, called null.(8.2)<br>If x is null and y is undefined, return true.(11.9.3)<br>If x is undefined and y is null, return true.(11.9.3)</p>
+</blockquote>
+<p>因此</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">null</span> <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token comment">// true</span>
+<span class="token keyword">undefined</span> <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token comment">// true</span>
+<span class="token keyword">null</span> <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token comment">// true</span>
+<span class="token keyword">undefined</span> <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>对于一边对象一边string或number的情况，那么对象就是转化为<code>primitive</code></p>
+<p><strong>优先</strong>使用的是<code>Symbol.toPrimitive</code>。没有的话，就还是<code>toString()</code>和<code>valueOf()</code>,hint为<code>string</code>就是优先<code>toString()</code>再<code>valueOf()</code>，hint为其他就是反之。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token punctuation">[</span>Symbol<span class="token punctuation">.</span>toPrimitive<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token parameter">hint</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>hint <span class="token operator">===</span> <span class="token string">"default"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// default, number or string</span>
+            <span class="token keyword">return</span> <span class="token string">"114514"</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj <span class="token operator">==</span> <span class="token number">114514</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="gt-lt-gt-lt"><a href="#gt-lt-gt-lt" class="headerlink" title="&gt; &lt; &gt;= &lt;="></a>&gt; &lt; &gt;= &lt;=</h2><p>那<code>&lt;</code>和<code>&gt;</code>和<code>&gt;=</code>和<code>&lt;=</code>呢？其比较的原理跟<code>==</code>的一样(没有<code>&lt;==</code>这种东西)，所以<code>==</code>的规则还是要懂的</p>
+<p>还要注意字符串的比较，是一个一个字符的进行比较(像Java里头String的<code>compareTo()</code></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token string">"10"</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token string">"9"</span><span class="token punctuation">;</span>
+
+x <span class="token operator">&lt;</span> y <span class="token comment">// false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="-1"><a href="#-1" class="headerlink" title="==="></a>===</h2><p><code>===</code>是比较严格的比较。<strong>先</strong>比较类型，类型相同，再比较值。</p>
+<p>但也不是真正的strict equal comparison</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">NaN</span> <span class="token operator">===</span> <span class="token number">NaN</span> <span class="token comment">// false</span>
+<span class="token number">0</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">0</span> <span class="token comment">// true</span>
+<span class="token operator">+</span><span class="token number">0</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">0</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Object-is"><a href="#Object-is" class="headerlink" title="Object.is"></a>Object.is</h2><p>刚刚<code>===</code>出现的这些个问题都可以用<code>Object.is()</code>来解决，所以<code>Object.is()</code>就是<code>====</code>了（手滑</p>
+<p>一个polyfill如下（摘自MDN）</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Object<span class="token punctuation">.</span>is<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>Object<span class="token punctuation">,</span> <span class="token string">"is"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+    <span class="token function-variable function">value</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span> y</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// SameValue algorithm</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">===</span> y<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// return true if x and y are not 0, OR</span>
+        <span class="token comment">// if x and y are both 0 of the same sign.</span>
+        <span class="token comment">// This checks for cases 1 and 2 above.</span>
+        <span class="token keyword">return</span> x <span class="token operator">!==</span> <span class="token number">0</span> <span class="token operator">||</span> <span class="token number">1</span> <span class="token operator">/</span> x <span class="token operator">===</span> <span class="token number">1</span> <span class="token operator">/</span> y<span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// return true if both x AND y evaluate to NaN.</span>
+        <span class="token comment">// The only possibility for a variable to not be strictly equal to itself</span>
+        <span class="token comment">// is when that variable evaluates to NaN (example: Number.NaN, 0/0, NaN).</span>
+        <span class="token comment">// This checks for case 3.</span>
+        <span class="token keyword">return</span> x <span class="token operator">!==</span> x <span class="token operator">&amp;&amp;</span> y <span class="token operator">!==</span> y<span class="token punctuation">;</span>
+      <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>知道了一些规矩，感觉也不像之前那么玄学了</p>
+<p>虽然被说是糟粕，但是比较大于小于的时候必须要用啊…</p>
+<p>所以，玄学来源于未知（强行解释）</p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+  </entry>
+  <entry>
     <title>JavaScript之What is this</title>
     <url>//contents/f7dd0265df9c/</url>
     <content><![CDATA[<p>(浅解释,不深入)想必写js的，都会碰到关于this的问题吧？</p>
@@ -1751,160 +2099,6 @@ console<span class="token punctuation">.</span><span class="token function">log<
       </categories>
   </entry>
   <entry>
-    <title>JavaScript之值的比较</title>
-    <url>//contents/d2b42a9c0258/</url>
-    <content><![CDATA[<p>inspired by 海绵宝宝meme（</p>
-<span id="more"></span>
-
-<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>如图所示（其实是因为不熟悉，导致平时用起来有点抗拒</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210424234347.png" alt="MEME"></p>
-<p>好啦，meme归meme，那么JS这令人诟病的值比较究竟是怎么样的呢？</p>
-<h2 id="Type-of-value"><a href="#Type-of-value" class="headerlink" title="Type of value"></a>Type of value</h2><p>在JS里头，value有两种：primitive和object</p>
-<p>primitive分别是 <code>string</code>, <code>number</code>, <code>bigint</code>, <code>boolean</code>, <code>undefined</code>, <code>symbol</code>, <code>null</code></p>
-<p>其特点就是immutable，即它们的值不能被更改。不像数组，对象，函数那样，可以把自身的property给更改。如果一个被赋值了primitive的变量的value被更改，那就是这个变量被赋了个新值。</p>
-<p>至于object类型，Objects are held by reference。这跟Java是差不多的。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token punctuation">&#123;</span> x<span class="token operator">:</span> <span class="token number">114514</span> <span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> b <span class="token operator">=</span> a<span class="token punctuation">;</span> <span class="token comment">// copy the reference and assign to b</span>
-b<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">1919810</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 1919810</span>
-
-<span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> d <span class="token operator">=</span> c<span class="token punctuation">;</span> <span class="token comment">// assigning a new primitive, but not copying the reference</span>
-d <span class="token operator">=</span> <span class="token number">1919810</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 114514</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><code>undefined</code>指的是一个变量的值为空（没有赋值），这跟<code>null</code>不一样</p>
-<p><code>Symbol</code>是一个有特殊用途的primitive，平时表现为一个隐藏的值。通常作为一个对象的特殊key。</p>
-<p><code>function</code>和<code>array</code>是特殊的Object类型</p>
-<p><code>typeof</code>这里也有一点坑，理论上primitive就显示对应的类型，但是<code>null</code>却不是如此</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">typeof</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">// "function"</span>
-<span class="token keyword">typeof</span> <span class="token punctuation">[</span><span class="token number">1919</span><span class="token punctuation">,</span> <span class="token number">810</span><span class="token punctuation">]</span> <span class="token comment">// "object" but not "array"</span>
-<span class="token keyword">typeof</span> <span class="token keyword">null</span> <span class="token comment">// "object" but not "null"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="Falsy-values"><a href="#Falsy-values" class="headerlink" title="Falsy values"></a>Falsy values</h2><p>这里插入falsy value，为后面比较做铺垫</p>
-<p>下面这些值都是false</p>
-<ul>
-<li><code>false</code></li>
-<li><code>null</code></li>
-<li><code>undefined</code></li>
-<li><code>NaN</code></li>
-<li><code>0</code> (zero)</li>
-<li><code>-0</code> (Number negative zero)</li>
-<li><code>0n</code> (BigInt zero)</li>
-<li>empty string (“” or ‘’ or ``)</li>
-</ul>
-<h2 id="Operator-amp-amp"><a href="#Operator-amp-amp" class="headerlink" title="Operator || &amp;&amp;"></a>Operator || &amp;&amp;</h2><p>与此同时，顺便插入跟其他常见语言行为有点不同的<code>&amp;&amp;</code>和<code>||</code>运算符运算规则</p>
-<table>
-<thead>
-<tr>
-<th>meaning</th>
-<th>statement</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Logic OR</td>
-<td>If expr1 can be converted to true, returns expr1; else, returns expr2.</td>
-</tr>
-<tr>
-<td>Logic AND</td>
-<td>If expr1 can be converted to true, returns expr2; else, returns expr1.</td>
-</tr>
-</tbody></table>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token keyword">undefined</span> <span class="token operator">||</span> <span class="token number">114514</span><span class="token punctuation">;</span> <span class="token comment">// a = 114514</span>
-<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token keyword">undefined</span> <span class="token operator">&amp;&amp;</span> <span class="token number">1919810</span><span class="token punctuation">;</span> <span class="token comment">// b = undefined</span>
-<span class="token keyword">let</span> c <span class="token operator">=</span> <span class="token string">"you"</span> <span class="token operator">||</span> <span class="token string">"me"</span><span class="token punctuation">;</span> <span class="token comment">// c = you</span>
-<span class="token keyword">let</span> d <span class="token operator">=</span> <span class="token string">"you"</span> <span class="token operator">&amp;&amp;</span> <span class="token string">"me"</span><span class="token punctuation">;</span> <span class="token comment">// d = me</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>根据<strong>短路运算</strong>的规则来理解就行了，比如Logic OR，第一个true就扔回第一个，否则就会比较第二个，因此第一个false就会扔回第二个。Logic AND也是如此</p>
-<p>并且因为js用来判断false和true的是用falsy value和truthy value，所以使用if语句的时候，要注意哪些东西在js里头是falsy的。</p>
-<h2 id=""><a href="#" class="headerlink" title="=="></a>==</h2><p><code>==</code>与<code>===</code>这两个在同类型比较的时候，行为是<strong>一样</strong>的。</p>
-<p>但是在两个待比较的值的类型不同的时候，就会产生差别，<code>==</code>会把类型做转换后再进行比较值（强制比较，即Coercive equality）。（注意：这区别于value的单独出现，比如<code>[]</code>是truthy value，但是在做<code>==</code>比较的时候就会强制转换类型）</p>
-<p>且优先做<strong>primitive numeric comparison</strong>，即</p>
-<ol>
-<li>把<code>object</code>(如果不是<code>primitive</code>)类型的值转到<code>primitive</code>(使用<code>valueOf()</code>或者<code>toString()</code>)</li>
-<li>再转为<code>number</code>(如果此时的<code>primitive</code>还不是数字)进行比较</li>
-</ol>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">114514</span> <span class="token operator">==</span> <span class="token string">"114514"</span> <span class="token comment">// true, (string -> number)</span>
-<span class="token number">0</span> <span class="token operator">==</span> <span class="token boolean">true</span> <span class="token comment">// false (boolean -> number)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>对于数组的话，用<code>==</code>作比较的时候，会发生类型转换，使用了<code>toString()</code>或<code>valueOf()</code></p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ""</span>
-<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">""</span> <span class="token comment">// true</span>
-<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"0"</span> <span class="token comment">// true</span>
-<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token comment">// true</span>
-<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token boolean">false</span> <span class="token comment">// true</span>
-
-<span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// "114514"</span>
-<span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"114514"</span> <span class="token comment">// true</span>
-<span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">114514</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>所以海绵宝宝meme里头的<code>&quot;0&quot; == 0</code>, <code>0 == []</code>都是<code>true</code>。<code>[].toString()</code>得到<code>&quot;&quot;</code>，所以<code>&quot;0&quot; == []</code>是<code>false</code>而<code>&#39;&#39; == []</code>为<code>true</code></p>
-<p>对于<code>null</code>和<code>undefined</code>，spec里面也说了</p>
-<blockquote>
-<p>The Undefined type has exactly one value, called undefined. Any variable that has not been assigned a value has the value undefined.(8.1)<br>The Null type has exactly one value, called null.(8.2)<br>If x is null and y is undefined, return true.(11.9.3)<br>If x is undefined and y is null, return true.(11.9.3)</p>
-</blockquote>
-<p>因此</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">null</span> <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token comment">// true</span>
-<span class="token keyword">undefined</span> <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token comment">// true</span>
-<span class="token keyword">null</span> <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token comment">// true</span>
-<span class="token keyword">undefined</span> <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>对于一边对象一边string或number的情况，那么对象就是转化为<code>primitive</code></p>
-<p><strong>优先</strong>使用的是<code>Symbol.toPrimitive</code>。没有的话，就还是<code>toString()</code>和<code>valueOf()</code>,hint为<code>string</code>就是优先<code>toString()</code>再<code>valueOf()</code>，hint为其他就是反之。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-    <span class="token punctuation">[</span>Symbol<span class="token punctuation">.</span>toPrimitive<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token parameter">hint</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>hint <span class="token operator">===</span> <span class="token string">"default"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// default, number or string</span>
-            <span class="token keyword">return</span> <span class="token string">"114514"</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>obj <span class="token operator">==</span> <span class="token number">114514</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="gt-lt-gt-lt"><a href="#gt-lt-gt-lt" class="headerlink" title="&gt; &lt; &gt;= &lt;="></a>&gt; &lt; &gt;= &lt;=</h2><p>那<code>&lt;</code>和<code>&gt;</code>和<code>&gt;=</code>和<code>&lt;=</code>呢？其比较的原理跟<code>==</code>的一样(没有<code>&lt;==</code>这种东西)，所以<code>==</code>的规则还是要懂的</p>
-<p>还要注意字符串的比较，是一个一个字符的进行比较(像Java里头String的<code>compareTo()</code></p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> x <span class="token operator">=</span> <span class="token string">"10"</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> y <span class="token operator">=</span> <span class="token string">"9"</span><span class="token punctuation">;</span>
-
-x <span class="token operator">&lt;</span> y <span class="token comment">// false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="-1"><a href="#-1" class="headerlink" title="==="></a>===</h2><p><code>===</code>是比较严格的比较。<strong>先</strong>比较类型，类型相同，再比较值。</p>
-<p>但也不是真正的strict equal comparison</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">NaN</span> <span class="token operator">===</span> <span class="token number">NaN</span> <span class="token comment">// false</span>
-<span class="token number">0</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">0</span> <span class="token comment">// true</span>
-<span class="token operator">+</span><span class="token number">0</span> <span class="token operator">===</span> <span class="token operator">-</span><span class="token number">0</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="Object-is"><a href="#Object-is" class="headerlink" title="Object.is"></a>Object.is</h2><p>刚刚<code>===</code>出现的这些个问题都可以用<code>Object.is()</code>来解决，所以<code>Object.is()</code>就是<code>====</code>了（手滑</p>
-<p>一个polyfill如下（摘自MDN）</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>Object<span class="token punctuation">.</span>is<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  Object<span class="token punctuation">.</span><span class="token function">defineProperty</span><span class="token punctuation">(</span>Object<span class="token punctuation">,</span> <span class="token string">"is"</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
-    <span class="token function-variable function">value</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">x<span class="token punctuation">,</span> y</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-      <span class="token comment">// SameValue algorithm</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">===</span> y<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// return true if x and y are not 0, OR</span>
-        <span class="token comment">// if x and y are both 0 of the same sign.</span>
-        <span class="token comment">// This checks for cases 1 and 2 above.</span>
-        <span class="token keyword">return</span> x <span class="token operator">!==</span> <span class="token number">0</span> <span class="token operator">||</span> <span class="token number">1</span> <span class="token operator">/</span> x <span class="token operator">===</span> <span class="token number">1</span> <span class="token operator">/</span> y<span class="token punctuation">;</span>
-      <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// return true if both x AND y evaluate to NaN.</span>
-        <span class="token comment">// The only possibility for a variable to not be strictly equal to itself</span>
-        <span class="token comment">// is when that variable evaluates to NaN (example: Number.NaN, 0/0, NaN).</span>
-        <span class="token comment">// This checks for case 3.</span>
-        <span class="token keyword">return</span> x <span class="token operator">!==</span> x <span class="token operator">&amp;&amp;</span> y <span class="token operator">!==</span> y<span class="token punctuation">;</span>
-      <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>知道了一些规矩，感觉也不像之前那么玄学了</p>
-<p>虽然被说是糟粕，但是比较大于小于的时候必须要用啊…</p>
-<p>所以，玄学来源于未知（强行解释）</p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-  </entry>
-  <entry>
     <title>C语言之数组与指针</title>
     <url>//contents/d34f10f99adc/</url>
     <content><![CDATA[<p>发觉指针和数组的关系不浅</p>
@@ -1973,11 +2167,11 @@ p <span class="token operator">+=</span> <span class="token number">4</span><spa
 <p>首先，先给自己的脑子灌输一点知识：如果没有了解过内存的话，我们可以大概的形成一下印象。（大佬请跳过）</p>
 <p>内存呢，我喜欢把它形象化成一张密密麻麻的表格，它很长很长，但是宽度只有8个格子（1字节 = 8位），并且每一行都有一个专门的标号，就是内存的地址啦（字节编址）</p>
 <p>如图所示</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143617.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205143617.png"></p>
 <p>数据进入内存的话，就会占据内存的一部分，比如我们熟知，在32位下，<code>int</code>型占用4个字节，<code>double</code>型占用8个字节，比如我们有一个值为1的int变量，它会在内存中占据着4个字节</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143537.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205143537.png"></p>
 <p>数组是在内存上连续分布一块的数据结构。如果有一个长度为3的int数组<code>arr[3] = &#123;7, 4, 5&#125;</code>，那么它在内存里的占用是连续的，三个int类型长度的地址，还有一个数组名的变量，相当于一个常量指针（不可更改地址）</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205143733.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205143733.png"></p>
 <p>我们可以使用<code>arr[0] arr[1] arr[2]</code>来进行对应元素的访问。与此同时，使用一个指针<code>int *p = arr</code>来实现上述的访问</p>
 <pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 <span class="token keyword">int</span> <span class="token operator">*</span>p <span class="token operator">=</span> arr<span class="token punctuation">;</span> <span class="token comment">// *p = 7</span>
@@ -1985,7 +2179,7 @@ p<span class="token operator">++</span><span class="token punctuation">;</span> 
 p<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// *p = 5</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>由上可见，指针p进行了两次自增，每一次自增，都会对p存放的地址+4，去到下一个元素的起始地址。因此，对p解引用就会出现不同的结果，分别对应<code>arr[0] arr[1] arr[2]</code></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205144359.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205144359.png"></p>
 <p>那么有，</p>
 <p><code>arr[0]</code>就是直接对arr的起始地址进行解引用，结果就是<code>7</code></p>
 <p><code>arr[1]</code>就是对arr进行+1，对指针<code>arr + 1</code>进行解引用，结果就是<code>4</code></p>
@@ -2014,7 +2208,7 @@ p2<span class="token operator">++</span><span class="token punctuation">;</span>
 
 <p>可以看出，两者输出结果不一样，其中p1读出来的是<code>a[0][1]  = 5</code>，而p2读出来的是<code>a[1][1] = 9</code></p>
 <p>为什么呢？仔细思考一下的话，其实也不难理解</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205145556.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205145556.png"></p>
 <h2 id="注意操作的对象"><a href="#注意操作的对象" class="headerlink" title="注意操作的对象"></a>注意操作的对象</h2><p>我到底，操作着哪个对象啊……</p>
 <p>我作为一个初学者，平时也会被各种多重 asterisk(*) 搞晕，不过静下心来，发现还是要抓住这些</p>
 <ol>
@@ -2057,90 +2251,9 @@ p2<span class="token operator">++</span><span class="token punctuation">;</span>
 <p>对于上文那个<code>array[3][4]</code>数组，语句<code>(*(p2+1)+1)</code>做了些啥呢？p2是<code>int[4]</code>类型的指针，对<code>(p2+1)</code>就是p2右移动1个<code>int[4]</code>的长度，就是<code>array[1][0]</code>的起始地址，对该地址解引用后，获得了这个二维数组中的第二个<code>int[4]</code>类型的一维数组，即<code>array[1]</code>，是一个<code>int</code>类型的指针，之后加1就是右移动1个<code>int</code>长度了，因此最后解引用后就是9</p>
 <p>并且写到这里我发现，<code>array[1][1] </code>，因为<code>[]</code>的结合性是左结合，即是<code>(array[1])[1]</code>，其实不就是相当于<code>*(*(p2+1)+1)</code>吗？？？(难道数组的下标相当于给指针进行解引用)</p>
 <p>大概是下图这样的</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201205153231.png"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201205153231.png"></p>
 <p>于是输出了<code>9</code>;</p>
 <h2 id="后面"><a href="#后面" class="headerlink" title="后面"></a>后面</h2><p>还需要补一下，还有字符数组与字符串</p>
-]]></content>
-      <categories>
-        <category>笔记</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>记一次JSON入门</title>
-    <url>//contents/681cfff66470/</url>
-    <content><![CDATA[<p>咋感觉最近学的小东西越来越多了…</p>
-<span id="more"></span>
-
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>其实JSON这个东西我也不是第一次听到了，只不过之前看json文件看得云里雾里，但因为不是要自己上手使用<del>（之前的想法是读json只需知道它大概说了啥就行）</del>所以一直没去了解，一直拖延到现在，才打算学习一下json。</p>
-<h2 id="这是啥啊"><a href="#这是啥啊" class="headerlink" title="这是啥啊"></a>这是啥啊</h2><p>俗话说：“知己知彼，百战百胜。”所以我特地去找了找其介绍</p>
-<blockquote>
-<p><strong>JSON</strong>(JavaScript Object Notation) 是一种轻量级的数据交换格式。 易于人阅读和编写。同时也易于机器解析和生成。 它基于<a href="http://www.crockford.com/javascript">JavaScript Programming Language</a>, <a href="http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf">Standard ECMA-262 3rd Edition - December 1999</a>的一个子集。 JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C, C++, C#, Java, JavaScript, Perl, Python等）。 这些特性使JSON成为理想的数据交换语言。</p>
-</blockquote>
-<p>现在我对json的认识是：</p>
-<ol>
-<li>是一种用于数据交换的文本格式</li>
-<li>使用了C-liked的风格</li>
-</ol>
-<p>那么相对于之前一股脑乱读json，停下脚步，静下心来思考，也许json并不是很难呢？</p>
-<p>事实证明，思维的懒惰才是最为可怕的，花了一小段时间来阅读了一下<a href="https://www.json.org/json-en.html">JSON官网</a>的介绍，发现json这东西，真的不是很难</p>
-<p><strong>由于目前咱有一点程序语言的知识储备</strong>，所以这里只记录一些我自己需要记录的东西。</p>
-<h2 id="两大结构"><a href="#两大结构" class="headerlink" title="两大结构"></a>两大结构</h2><p>如同HTML有属性和元素，JSON也有两大结构</p>
-<blockquote>
-<p>JSON is built on two structures:</p>
-<ul>
-<li>A collection of name/value pairs. In various languages, this is realized as an <em>object</em>, record, struct, dictionary, hash table, keyed list, or associative array.</li>
-<li>An ordered list of values. In most languages, this is realized as an <em>array</em>, vector, list, or sequence.</li>
-</ul>
-</blockquote>
-<p>它们分别是</p>
-<ol>
-<li>名称/值 pair 的集合</li>
-<li>值的有序列表（这个跟数组array很像的）</li>
-</ol>
-<h2 id="一些形式"><a href="#一些形式" class="headerlink" title="一些形式"></a>一些形式</h2><h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>对象呢，就是一堆无序的名称/值的集合，以<code>&#123;</code>开始并以<code>&#125;</code>结束，里面的每个pair都是以<code>name: value</code>这样的格式表示的，然后每个pair<strong>之间</strong>都要用逗号<code>,</code>来<strong>分隔开</strong><del>（之前一直以为是每次换行都要加个逗号</del></p>
-<p>我觉得官网上面的这个图画的挺厉害的，就收下来了</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193252.png" alt="Object 选自json官网"></p>
-<h3 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h3><p>数组嘛，见得太多了，就不多说了，跟<code>[ele1, ele2 ... eleN]</code>这东西长得是差不多的，只不过其中的元素就是名次/值pair</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201127193253.png" alt="Array 选自json官网"></p>
-<h3 id="Value"><a href="#Value" class="headerlink" title="Value"></a>Value</h3><p>为什么我要把见得太多了的value给记录下呢？因为之前我是不知道json的值可以是object或者array的，所以也要用小本本记下来。</p>
-<blockquote>
-<p>A <em>value</em> can be a <em>string</em> in double quotes, or a <em>number</em>, or <code>true</code> or <code>false</code> or <code>null</code>, or an <strong>object</strong>  or an <strong>array</strong>. These structures can be nested.</p>
-</blockquote>
-<h2 id="阅读实例"><a href="#阅读实例" class="headerlink" title="阅读实例"></a>阅读实例</h2><p>json就顺手在刚刚查询的空教室记录里面抽取了一段，如下</p>
-<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
-  <span class="token property">"currentPage"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
-  <span class="token property">"currentResult"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-  <span class="token property">"entityOrField"</span><span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
-  <span class="token property">"items"</span><span class="token operator">:</span><span class="token punctuation">[</span>
-     <span class="token punctuation">&#123;</span>
-        <span class="token property">"cd_id"</span><span class="token operator">:</span><span class="token string">"1011230"</span><span class="token punctuation">,</span>
-        <span class="token property">"cdbh"</span><span class="token operator">:</span><span class="token string">"1011230"</span><span class="token punctuation">,</span>
-        <span class="token property">"cdjylx"</span><span class="token operator">:</span><span class="token string">"教学类,活动类"</span><span class="token punctuation">,</span>
-        <span class="token property">"cdmc"</span><span class="token operator">:</span><span class="token string">"文新123#"</span><span class="token punctuation">,</span>
-        <span class="token property">"dateDigit"</span><span class="token operator">:</span><span class="token string">"2020年11月27日"</span><span class="token punctuation">,</span>
-        <span class="token property">"dateDigitSeparator"</span><span class="token operator">:</span><span class="token string">"2020-11-27"</span><span class="token punctuation">,</span>
-        <span class="token property">"month"</span><span class="token operator">:</span><span class="token string">"11"</span><span class="token punctuation">,</span>
-        <span class="token property">"queryModel"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
-           <span class="token property">"currentPage"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
-           <span class="token property">"currentResult"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"entityOrField"</span><span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
-           <span class="token property">"limit"</span><span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span>
-           <span class="token property">"offset"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"pageNo"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"pageSize"</span><span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span>
-           <span class="token property">"showCount"</span><span class="token operator">:</span><span class="token number">10</span><span class="token punctuation">,</span>
-           <span class="token property">"sorts"</span><span class="token operator">:</span><span class="token punctuation">[</span>
-              
-           <span class="token punctuation">]</span><span class="token punctuation">,</span>
-           <span class="token property">"totalCount"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"totalPage"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
-           <span class="token property">"totalResult"</span><span class="token operator">:</span><span class="token number">0</span>
-        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-        <span class="token property">"rangeable"</span><span class="token operator">:</span><span class="token boolean">true</span>
-     <span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>结合上面的知识储备，就能看懂这段json想表示啥了<del>，但为什么部分混入了拼音首字母缩写啊我擦</del></p>
 ]]></content>
       <categories>
         <category>笔记</category>
@@ -2700,6 +2813,446 @@ test<span class="token punctuation">.</span>with <span class="token punctuation"
       </categories>
   </entry>
   <entry>
+    <title>记一次JSON入门</title>
+    <url>//contents/681cfff66470/</url>
+    <content><![CDATA[<p>咋感觉最近学的小东西越来越多了…</p>
+<span id="more"></span>
+
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>其实JSON这个东西我也不是第一次听到了，只不过之前看json文件看得云里雾里，但因为不是要自己上手使用<del>（之前的想法是读json只需知道它大概说了啥就行）</del>所以一直没去了解，一直拖延到现在，才打算学习一下json。</p>
+<h2 id="这是啥啊"><a href="#这是啥啊" class="headerlink" title="这是啥啊"></a>这是啥啊</h2><p>俗话说：“知己知彼，百战百胜。”所以我特地去找了找其介绍</p>
+<blockquote>
+<p><strong>JSON</strong>(JavaScript Object Notation) 是一种轻量级的数据交换格式。 易于人阅读和编写。同时也易于机器解析和生成。 它基于<a href="http://www.crockford.com/javascript">JavaScript Programming Language</a>, <a href="http://www.ecma-international.org/publications/files/ecma-st/ECMA-262.pdf">Standard ECMA-262 3rd Edition - December 1999</a>的一个子集。 JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C, C++, C#, Java, JavaScript, Perl, Python等）。 这些特性使JSON成为理想的数据交换语言。</p>
+</blockquote>
+<p>现在我对json的认识是：</p>
+<ol>
+<li>是一种用于数据交换的文本格式</li>
+<li>使用了C-liked的风格</li>
+</ol>
+<p>那么相对于之前一股脑乱读json，停下脚步，静下心来思考，也许json并不是很难呢？</p>
+<p>事实证明，思维的懒惰才是最为可怕的，花了一小段时间来阅读了一下<a href="https://www.json.org/json-en.html">JSON官网</a>的介绍，发现json这东西，真的不是很难</p>
+<p><strong>由于目前咱有一点程序语言的知识储备</strong>，所以这里只记录一些我自己需要记录的东西。</p>
+<h2 id="两大结构"><a href="#两大结构" class="headerlink" title="两大结构"></a>两大结构</h2><p>如同HTML有属性和元素，JSON也有两大结构</p>
+<blockquote>
+<p>JSON is built on two structures:</p>
+<ul>
+<li>A collection of name/value pairs. In various languages, this is realized as an <em>object</em>, record, struct, dictionary, hash table, keyed list, or associative array.</li>
+<li>An ordered list of values. In most languages, this is realized as an <em>array</em>, vector, list, or sequence.</li>
+</ul>
+</blockquote>
+<p>它们分别是</p>
+<ol>
+<li>名称/值 pair 的集合</li>
+<li>值的有序列表（这个跟数组array很像的）</li>
+</ol>
+<h2 id="一些形式"><a href="#一些形式" class="headerlink" title="一些形式"></a>一些形式</h2><h3 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h3><p>对象呢，就是一堆无序的名称/值的集合，以<code>&#123;</code>开始并以<code>&#125;</code>结束，里面的每个pair都是以<code>name: value</code>这样的格式表示的，然后每个pair<strong>之间</strong>都要用逗号<code>,</code>来<strong>分隔开</strong><del>（之前一直以为是每次换行都要加个逗号</del></p>
+<p>我觉得官网上面的这个图画的挺厉害的，就收下来了</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201127193252.png" alt="Object 选自json官网"></p>
+<h3 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h3><p>数组嘛，见得太多了，就不多说了，跟<code>[ele1, ele2 ... eleN]</code>这东西长得是差不多的，只不过其中的元素就是名次/值pair</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201127193253.png" alt="Array 选自json官网"></p>
+<h3 id="Value"><a href="#Value" class="headerlink" title="Value"></a>Value</h3><p>为什么我要把见得太多了的value给记录下呢？因为之前我是不知道json的值可以是object或者array的，所以也要用小本本记下来。</p>
+<blockquote>
+<p>A <em>value</em> can be a <em>string</em> in double quotes, or a <em>number</em>, or <code>true</code> or <code>false</code> or <code>null</code>, or an <strong>object</strong>  or an <strong>array</strong>. These structures can be nested.</p>
+</blockquote>
+<h2 id="阅读实例"><a href="#阅读实例" class="headerlink" title="阅读实例"></a>阅读实例</h2><p>json就顺手在刚刚查询的空教室记录里面抽取了一段，如下</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"currentPage"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">"currentResult"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">"entityOrField"</span><span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
+  <span class="token property">"items"</span><span class="token operator">:</span><span class="token punctuation">[</span>
+     <span class="token punctuation">&#123;</span>
+        <span class="token property">"cd_id"</span><span class="token operator">:</span><span class="token string">"1011230"</span><span class="token punctuation">,</span>
+        <span class="token property">"cdbh"</span><span class="token operator">:</span><span class="token string">"1011230"</span><span class="token punctuation">,</span>
+        <span class="token property">"cdjylx"</span><span class="token operator">:</span><span class="token string">"教学类,活动类"</span><span class="token punctuation">,</span>
+        <span class="token property">"cdmc"</span><span class="token operator">:</span><span class="token string">"文新123#"</span><span class="token punctuation">,</span>
+        <span class="token property">"dateDigit"</span><span class="token operator">:</span><span class="token string">"2020年11月27日"</span><span class="token punctuation">,</span>
+        <span class="token property">"dateDigitSeparator"</span><span class="token operator">:</span><span class="token string">"2020-11-27"</span><span class="token punctuation">,</span>
+        <span class="token property">"month"</span><span class="token operator">:</span><span class="token string">"11"</span><span class="token punctuation">,</span>
+        <span class="token property">"queryModel"</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+           <span class="token property">"currentPage"</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+           <span class="token property">"currentResult"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"entityOrField"</span><span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span>
+           <span class="token property">"limit"</span><span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span>
+           <span class="token property">"offset"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"pageNo"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"pageSize"</span><span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span>
+           <span class="token property">"showCount"</span><span class="token operator">:</span><span class="token number">10</span><span class="token punctuation">,</span>
+           <span class="token property">"sorts"</span><span class="token operator">:</span><span class="token punctuation">[</span>
+              
+           <span class="token punctuation">]</span><span class="token punctuation">,</span>
+           <span class="token property">"totalCount"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"totalPage"</span><span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span>
+           <span class="token property">"totalResult"</span><span class="token operator">:</span><span class="token number">0</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+        <span class="token property">"rangeable"</span><span class="token operator">:</span><span class="token boolean">true</span>
+     <span class="token punctuation">&#125;</span><span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>结合上面的知识储备，就能看懂这段json想表示啥了<del>，但为什么部分混入了拼音首字母缩写啊我擦</del></p>
+]]></content>
+      <categories>
+        <category>笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>搭建个人博客</title>
+    <url>//contents/43abca4995a8/</url>
+    <content><![CDATA[<p>国庆回家了，先随便水一篇文章 <del>才放4天假差评</del></p>
+<p>那么，如何搭建一个属于自己的静态博客？</p>
+<span id="more"></span>
+
+<p><strong>时效性：</strong>本文在2020/12/12时，经舍友测试可用</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这个世界上有许多东西，如果我们不去刻意记录，它们也许会永远消失于自己脑海，消失于他人视野中，消失于这个世上</p>
+<p>拥有一个自己的博客，可用于随手记下自己的成长历程中的点滴与思考</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>一个自己的GitHub账户</li>
+<li>相关本地环境</li>
+<li>SSH密钥</li>
+<li>阅读相关文档的<strong>耐心</strong></li>
+</ol>
+<h2 id="选择博客框架"><a href="#选择博客框架" class="headerlink" title="选择博客框架"></a>选择博客框架</h2><p>能搭建起博客的有很多，比如</p>
+<ul>
+<li>WordPress (适合新手，不过有点臃肿，毕竟是动态博客)</li>
+<li>django (一个python-based的框架)</li>
+<li>hexo (轻量的静态博客，也是我选用的)</li>
+<li>github page一把梭 (简单粗暴适合新手<del>可以直接把github当editor</del>)</li>
+<li>Jhipster (<del>能玩得起来的人都tql</del>)</li>
+</ul>
+<p>最后我选择了hexo作为我的博客框架，基于以下一些个人的思考</p>
+<ol>
+<li>博客是否足够轻?</li>
+<li>文章文件是否<strong>易于备份</strong>(重要，毕竟文章才是自己输出的心血)</li>
+<li>支不支持Markdown</li>
+<li>是否可拓展且有比较多的插件</li>
+<li>是否可以一键部署至云端</li>
+</ol>
+<h2 id="本地环境"><a href="#本地环境" class="headerlink" title="本地环境"></a>本地环境</h2><p>github账户应该是人均一个了吧，这里不再说github账户注册相关的了</p>
+<p>在本地环境下，安装如下软件</p>
+<ol>
+<li><a href="https://git-scm.com/">Git</a></li>
+<li><a href="https://nodejs.org/en/">node.js</a></li>
+</ol>
+<p>Git用于后续的博客部署和版本控制，而hexo是powered by nodejs的</p>
+<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><p>作为用户，我们啥也不知道啊，但开发者已经把他想说的都写出来了，所以<strong>阅读文档</strong>是个好方法</p>
+<p><a href="https://hexo.io/docs/">Hexo Deocumentation</a></p>
+<p>里面写了requirement和hexo installation方法</p>
+<p><strong>耐心</strong>阅读与寻找，便能找到如下内容</p>
+<pre><code>Install Hexo
+Once all the requirements are installed, you can install Hexo with npm:
+
+$ npm install -g hexo-cli</code></pre>
+<p>读出来，就是在命令行输入</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>便能安装hexo</p>
+<p>hexo-cli安装了，所以该如何setup呢？</p>
+<p>无需多虑，开发者写了相应的文档<a href="https://hexo.io/docs/setup">hexo setup</a></p>
+<p>开局就写到</p>
+<pre><code>Once Hexo is installed, run the following commands to initialize Hexo in the target &lt;folder&gt;.
+
+$ hexo init &lt;folder&gt;
+$ cd &lt;folder&gt;
+$ npm install</code></pre>
+<p>也就是说，在目标文件夹下依次输入上面三个commands就行了</p>
+<p>初始化之后的目录结构，一些对于config文件的说明，文档里已经讲得清清楚楚了，跟着它一起配置即可</p>
+<p>关于命令行操作，<a href="https://hexo.io/docs/commands">文档</a>里面也写的很清楚了</p>
+<p>我一般也就新建新文章，本地测试，上传到github，所以大部分时候会用到如下几个</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">hexo new <span class="token punctuation">[</span>layout<span class="token punctuation">]</span> <span class="token operator">&lt;</span>title<span class="token operator">></span>
+hexo generate
+hexo publish
+hexo clean
+hexo server
+hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="撰写你的第一篇文章"><a href="#撰写你的第一篇文章" class="headerlink" title="撰写你的第一篇文章"></a>撰写你的第一篇文章</h2><p>在hexo目录下输入 <code>hexo new my-first-content</code></p>
+<p>接着，该文章的文件就会生成于子目录 <code>source/_post</code> 下</p>
+<p>该文件是 <strong>Markdown</strong> 格式，最好用支持md的editor打开（<del>vscode + markdownlint 天下第一</del></p>
+<p>typora 对于 Markdown 的支持也是很好的（<del>不过vscode能做的事为什么还要用其他编辑器啊</del></p>
+<p>此处附上 Markdown syntax 相关的网页: <a href="https://www.markdownguide.org/basic-syntax/">Markdown Guide</a></p>
+<h2 id="配置SSH密钥"><a href="#配置SSH密钥" class="headerlink" title="配置SSH密钥"></a>配置SSH密钥</h2><p>这里使用SSH密钥来进行本地与github之间的通讯</p>
+<p>官方文档如下</p>
+<p><a href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh">connecting to github with ssh Github Docs</a></p>
+<p>经阅读上方的文档可以得知</p>
+<p>先生成SSH key，下列command生成了公/私对<br><code>$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code></p>
+<p>再将其public key复制进剪贴板<br><code>$ clip &lt; ~/.ssh/id_rsa.pub</code></p>
+<p>之后到<a href="https://github.com/settings/keys">https://github.com/settings/keys</a>里，点击New SSH key，然后把它粘贴到文本框里</p>
+<p>接下来就是测试连接</p>
+<p>在命令行下输入 <code>ssh -T git@github.com</code> 以测试SSH是否配置好</p>
+<p>预期结果应如下</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> C:\Users\situ> ssh <span class="token operator">-</span>T git@github<span class="token punctuation">.</span>com
+Hi situ2001<span class="token operator">!</span> You've successfully authenticated<span class="token punctuation">,</span> but GitHub does not provide shell access<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>此时，到github的connection已经没有问题</p>
+<h2 id="关于部署"><a href="#关于部署" class="headerlink" title="关于部署"></a>关于部署</h2><p>本地写好了，当然是要部署，而部署之前，得要有地方给你放。</p>
+<p>首先先在github上建立一个这样的仓库</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201003114117.png"></p>
+<p>repo的name是 yourusername.github.io ，并且这个repo要是Public的，填完之后点击 Create Repository 按钮就行了</p>
+<p>至于为什么要这样做，细看官方讲解: <a href="https://pages.github.com/">Github Pages</a></p>
+<p>新建出来的repo，github pages默认是启用着的（<del>也关不了</del></p>
+<p>再调一下 repo 里面的 setting ，进入 setting 之后一直往下跑就看到了</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201003151605.png"></p>
+<p>主要是设置一下 source folder 和 branch 之类的，可以直接加一个HTTPS，也支持自定义域名</p>
+<p>至于hexo这边如何配置呢</p>
+<p>先执行如下命令，为什么，因为文档有的说啊：<a href="https://hexo.io/docs/github-pages#One-command-deployment">Github Pages | Hexo</a><br><code>$ npm install hexo-deployer-git --save</code></p>
+<p>再去到hexo文件夹下，找到 <code>_config.yml</code> 文件</p>
+<p>添加如下几行</p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">deploy:
+  type: &#39;git&#39;
+  repo: https:&#x2F;&#x2F;github.com&#x2F;yourusername&#x2F;yourusername.github.io
+  #branch: master
+  branch: main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>2020-11-01更新: GitHub repo的default branch name变成main而不是master了, 因此上方做了一些修改</p>
+</blockquote>
+<p>输入 command <code>hexo deploy</code> 等待一段时间之后，若无错误提示，便是部署成功</p>
+<h2 id="访问博客"><a href="#访问博客" class="headerlink" title="访问博客"></a>访问博客</h2><p>在部署之前可以输入command <code>hexo server</code> 进行本地访问</p>
+<p>若已经部署到github上了，直接在浏览器输入 <code>username.github.io</code> 就行</p>
+<p>如果没有问题，你的博客页面将会被加载</p>
+<p><strong>注</strong>: 绝大部分地区可能无法打开<code>*.github.io</code>，建议修改DNS为 <code>223.5.5.5</code>，能解决大部分问题，如果有域名和CDN的，推荐CNAME解析再套上CDN</p>
+<p>update: CNAME文件会在deploy之后被覆盖，翻了一下，发现<code>hexo deploy</code>用的是 <code>git push --force</code> ，因此远程仓库的内容会被现有的本地仓库覆盖掉，解决方法是在source目录下直接新建一个CNAME文件，这样在生成的时候就会出现在public目录里</p>
+<p>如下图所示</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201003174322.png"></p>
+<h2 id="图床配置-Optional"><a href="#图床配置-Optional" class="headerlink" title="图床配置 (Optional)"></a>图床配置 (Optional)</h2><p>Git 这种东西，不是拿来给我们存放二进制文件（如图片）的</p>
+<p>俗话说得好， <del>Git存换删图一时爽，.git folder火葬场</del></p>
+<p>而图片在Markdown中，可以以URL形式附上，所以只要有链接，就能出图了</p>
+<p>经过一把Google之后，我认为有两种不错的方法来进行图片的</p>
+<h3 id="公共图床"><a href="#公共图床" class="headerlink" title="公共图床"></a>公共图床</h3><p>使用公共图床，可以直接0开支（免费图床的话），但有利也有弊，图床毕竟只是别人的一项服务，图片放在别人那里，万一用着的这家公共图床凉了呢？能换，但是文章中URL修改的工程量可不小呢，如果没有备份的好习惯，你的图片都还在本地吗？</p>
+<p>列一些用的比较多的图床</p>
+<ol>
+<li><a href="https://imgur.com/">imgur</a> (国外知名图床，国内访问不友好)</li>
+<li><a href="https://imgchr.com/">imgchr</a> (<del>跟1域名高度重合，一看就知道解决了什么问题</del>)</li>
+</ol>
+<h3 id="私人图床"><a href="#私人图床" class="headerlink" title="私人图床"></a>私人图床</h3><p>私人图床可以考虑使用对象存储，如七牛、腾讯、阿里的对象存储<br>对于一般的个人博客，用对象存储，金钱开支一般都会很小（存储便宜，流量价格适中但是几乎不怎么跑流量）</p>
+<h3 id="图片管理神器-PicGo"><a href="#图片管理神器-PicGo" class="headerlink" title="图片管理神器 PicGo"></a>图片管理神器 PicGo</h3><p>地址：<a href="https://github.com/Molunerfinn/PicGo">PicGo</a><br>这是github上的大佬开发的一个用于管理自己存放于图床的图片的工具</p>
+<p>下载下来并根据里面的Wiki一步一步来就行了</p>
+<p>上传图片之后，按照md的syntax <code>![text](URL)</code> 插入到文章即可</p>
+<p>不详细说怎么操作了，毕竟人家已经有文档了，我在这里说，无非就是照搬文档，甚至还可能加上自己的主观认知，从而导致方法步骤等被个人地二次加工。</p>
+<p>所以<br><strong>不会读文档的人可不是一个新时代青年哦</strong></p>
+<p><del>为了叫你们去读文档而不花费大量篇幅写作，我可真是好人呢</del></p>
+<h2 id="安装主题-Optional"><a href="#安装主题-Optional" class="headerlink" title="安装主题 (Optional)"></a>安装主题 (Optional)</h2><p>可以安装其他主题以美化自己的博客<br>我用的是Next主题：<a href="https://github.com/next-theme/hexo-theme-next">https://github.com/next-theme/hexo-theme-next</a></p>
+<p>安装很简单，直接在hexo目录下输入下面command即可<br><code>$ npm install hexo-theme-next</code></p>
+<p>之后再在 <code>_config.yml</code> 下将theme改成<br><code>theme: next</code></p>
+<p>剩下的设置都在官方文档了，自己去看吧: <a href="https://theme-next.js.org/docs/">https://theme-next.js.org/docs/</a></p>
+<p><del>我还在用着默认设置</del></p>
+<h2 id="备份博客-Optional"><a href="#备份博客-Optional" class="headerlink" title="备份博客 (Optional)"></a>备份博客 (Optional)</h2><p>虽然博客的源文件是在本地的，但是在本地也有风险啊，（猜测）并且有时候为了去其他电脑码文，你用了U盘拷过去，一次两次还好，多次之后你将会分不清那边是最新的源文件了<del>（论版本控制的重要性）</del></p>
+<h3 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h3><p>所以我们可以在github新开一个private repo(没想到已经放开使用了)</p>
+<p><strong>首次</strong>先<code>git clone</code>下来，把源文件扔进去，一波 <code>git add .</code> 一波 <code>git commit</code> 最后 <code>git push</code> 送他上路<br><strong>以后</strong>再其他设备上，只需要 <code>git clone</code> <code>git add</code> <code>git commit</code> 和 <code>git push / git pull</code> 就行了（常用的几个）</p>
+<p>Alternative: 也可以在github pages的repo下，把deployment的branch设置为master之外的（如gh-pages），然后直接push到master分支即可，不过.deploy_git文件夹没拉下来的话，可能会出事，下面有提到。</p>
+<h3 id="把-gitignore文件设置好"><a href="#把-gitignore文件设置好" class="headerlink" title="把.gitignore文件设置好"></a>把.gitignore文件设置好</h3><p><strong>一定要有</strong>.gitignore文件<br>一定要<strong>有.gitignore文件</strong><br><strong>一定要有.gitignore文件</strong></p>
+<p>如果你想git clone下来一堆或者push一堆node_moudle，请忽略此步</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201003182803.png"></p>
+<p>该文件的作用如文件名本身，可以忽略上传的文件/文件夹</p>
+<p>对于hexo源文件，我一般选择忽略如下，剩下的便是文章和config文件</p>
+<pre class="line-numbers language-none"><code class="language-none">.DS_Store
+Thumbs.db
+db.json
+*.log
+node_modules&#x2F;
+public&#x2F;
+.deploy*&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>2020-11-21更新：<strong>不过</strong>在更换本地环境之后，.deploy*/是保存有静态页面仓库的.git文件夹的，并且hexo-deployer-git的<a href="https://github.com/hexojs/hexo-deployer-git#how-it-works">README</a>如是说</p>
+<blockquote>
+<p>hexo-deployer-git works by generating the site in .deploy_git and force pushing to the repo(es) in config. If .deploy_git does not exist, a repo will initialized (git init). Otherwise the curent repo (with its commit history) will be used.</p>
+</blockquote>
+<p>由于是force push，也就是说没有这个文件夹时候，重新生成的新的，会把你原有的仓库直接覆盖掉（也就是说commit啥的全没了）<br>所以在换环境的时候，记得clone一下，即是把你的username.github.io这个repo clone下来并重命名为.deploy_git，如下</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone <span class="token operator">&lt;</span>gh-pages repo<span class="token operator">></span> .deploy_git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>到这里，现在你<del>应该</del>有一个属于自己的个人博客了</p>
+<p>听说在线聊天，异性”哦”你的时候，回个”嗯”是一个很好的选择（跑</p>
+<p>那么</p>
+<p>嗯</p>
+<p>Enjoy writing</p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>git快速上手</title>
+    <url>//contents/bd5b790794cf/</url>
+    <content><![CDATA[<p>我想这篇文章应该可以让你快速上手git和github吧？</p>
+<span id="more"></span>
+
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>什么时候会用到git呢？就我而言，我目前有两处地方有用到git</p>
+<ol>
+<li>跟踪管理自己代码的时候</li>
+<li>与其他人合作为同一个项目做贡献的时候</li>
+<li>对其他开源项目做贡献<del>（太菜了没做过）</del></li>
+</ol>
+<p>我认为快速入门git的好方法是了解基础步骤后直接开始操作<del>，于是就有了这篇文章</del></p>
+<p>这篇文章的许多内容都是自己试过的，希望下面的内容能给新手们带来一点帮助，如有错误，请指出。</p>
+<h2 id="上手之前"><a href="#上手之前" class="headerlink" title="上手之前"></a>上手之前</h2><h3 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h3><p>首先准备好所需的工具：<strong>git</strong>和<strong>github账号一个</strong>（当然其他代码托管平台也是可以的），若没有的话，git在这里<a href="https://git-scm.com/">下载</a>，github账号的在<a href="https://github.com/">这里注册</a></p>
+<p>然后，在命令行中做好配置文件相应的设置<br><code>git config --global user.name &quot;your-name&quot;</code><br><code>git config --global user.email &quot;your-email&quot;</code></p>
+<p>再者就是本地与github之间通讯要用到的ssh密钥。之前应该写过，我直接拷贝过来吧。</p>
+<h3 id="配置密钥"><a href="#配置密钥" class="headerlink" title="配置密钥"></a>配置密钥</h3><p>先生成SSH key，下列command生成了公/私对<br><code>$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code></p>
+<p>再将其public key复制进剪贴板<br><code>$ clip &lt; ~/.ssh/id_rsa.pub</code></p>
+<p>之后到<a href="https://github.com/settings/keys">https://github.com/settings/keys</a>里，点击New SSH key，然后把它粘贴到文本框里</p>
+<p>接下来就是测试连接</p>
+<p>在命令行下输入 <code>ssh -T git@github.com</code> 以测试SSH是否配置好</p>
+<p>预期结果应如下</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> C:\Users\situ> ssh <span class="token operator">-</span>T git@github<span class="token punctuation">.</span>com
+Hi situ2001<span class="token operator">!</span> You've successfully authenticated<span class="token punctuation">,</span> but GitHub does not provide shell access<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>此时，密钥配置完成。</p>
+<p>然后下面是操作的过程，虽然不知道发生了什么，但是先照着做就是了。</p>
+<h2 id="跟踪自己的代码"><a href="#跟踪自己的代码" class="headerlink" title="跟踪自己的代码"></a>跟踪自己的代码</h2><p>这块内容大致分为两步</p>
+<ol>
+<li>新建一个仓库</li>
+<li>往仓库提交你的代码</li>
+</ol>
+<h3 id="新建一个仓库"><a href="#新建一个仓库" class="headerlink" title="新建一个仓库"></a>新建一个仓库</h3><p>这个新建一次就行了。这个新建一次就行了。这个新建一次就行了。</p>
+<p>仓库分为本地的仓库（即本机）和远程仓库（在这里指github的仓库）</p>
+<p>建立本地仓库的话，就是在你代码的目录下，输入下面的命令</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>成功初始化后的输出可能如下</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">Initialized empty Git repository <span class="token keyword">in</span> C:/Users/situ/github/git_test/.git/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>接着去github新建对应的仓库，在github首页的右上角就能看到新建仓库的图标了，跟着指引一步一步做下去就行了</p>
+<p>至此，仓库的新建工作完成了</p>
+<h3 id="往仓库提交你的代码"><a href="#往仓库提交你的代码" class="headerlink" title="往仓库提交你的代码"></a>往仓库提交你的代码</h3><p>接着就是进行状态的检查，这个命令<strong>很有用</strong>，它可以告诉你现在仓库的状态是什么样子的</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>输出可能如下</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>git_test<span class="token operator">></span>git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  <span class="token punctuation">(</span>use <span class="token string">"git add &lt;file>..."</span> to include <span class="token keyword">in</span> what will be committed<span class="token punctuation">)</span>
+        <span class="token number">1</span>.txt
+        Main.java
+
+nothing added to commit but untracked files present <span class="token punctuation">(</span>use <span class="token string">"git add"</span> to track<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>接着，把untracked的文件加入git中</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这个命令表示把所有更改过的或者未追踪的文件加入跟踪</p>
+<p>接着就是记录自己此时仓库的情况，使用如下命令</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> commit -m <span class="token string">"my first commit"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>输出结果如下</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token punctuation">[</span>master <span class="token punctuation">(</span>root-commit<span class="token punctuation">)</span> cc978b4<span class="token punctuation">]</span> my first commit
+ <span class="token number">2</span> files changed, <span class="token number">15</span> insertions<span class="token punctuation">(</span>+<span class="token punctuation">)</span>
+ create mode <span class="token number">100644</span> <span class="token number">1</span>.txt
+ create mode <span class="token number">100644</span> Main.java<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>再用<code>git status</code>看看</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">On branch master
+nothing to commit, working tree clean<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>说明，此时仓库已经记录下你现在的工作了。</p>
+<p>接着我们使用命令<code>git remote</code>进行远端仓库的添加(如下仅为实例，具体情况具体分析)</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> remote <span class="token function">add</span> origin https://github.com/situ2001/git_test.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>最后，我们使用<code>git push</code>命令，把此时本地的master分支推到远端仓库上的master分支</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>出现像下面这样的，是成功了</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>git_test<span class="token operator">></span>git push -u origin master
+Enumerating objects: <span class="token number">4</span>, done.
+Counting objects: <span class="token number">100</span>% <span class="token punctuation">(</span><span class="token number">4</span>/4<span class="token punctuation">)</span>, done.
+Delta compression using up to <span class="token number">16</span> threads
+Compressing objects: <span class="token number">100</span>% <span class="token punctuation">(</span><span class="token number">3</span>/3<span class="token punctuation">)</span>, done.
+Writing objects: <span class="token number">100</span>% <span class="token punctuation">(</span><span class="token number">4</span>/4<span class="token punctuation">)</span>, <span class="token number">406</span> bytes <span class="token operator">|</span> <span class="token number">406.00</span> KiB/s, done.
+Total <span class="token number">4</span> <span class="token punctuation">(</span>delta <span class="token number">0</span><span class="token punctuation">)</span>, reused <span class="token number">0</span> <span class="token punctuation">(</span>delta <span class="token number">0</span><span class="token punctuation">)</span>, pack-reused <span class="token number">0</span>
+To https://github.com/situ2001/git_test.git
+ * <span class="token punctuation">[</span>new branch<span class="token punctuation">]</span>      master -<span class="token operator">></span> master
+Branch <span class="token string">'master'</span> <span class="token builtin class-name">set</span> up to track remote branch <span class="token string">'master'</span> from <span class="token string">'origin'</span><span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>接着，你在github的repo上面就能见到这次的commit了。</p>
+<p>那么<strong>在其他地方</strong>操作，怎么把仓库拉下来啊。很EZ，用<code>git clone</code>命令就行了，如下</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone <span class="token punctuation">[</span>repo-url<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>还有不要忘了在其他地方做了更改，回到自己的环境下，要进行一下<code>git pull</code>同步一下远端仓库的内容哦</p>
+<h2 id="与他人进行合作"><a href="#与他人进行合作" class="headerlink" title="与他人进行合作"></a>与他人进行合作</h2><p>有时候我们会与他人合作，共同contribute同一个repo，因此，一些git分支与合并的操作还是要懂得一点的</p>
+<p>我目前了解到的合作还是<strong>比较肤浅</strong>，自己了解过的只有两种</p>
+<ol>
+<li>受他人邀请后，直接获得对仓库进行更改的权限</li>
+<li>fork一份他人的repo，对其修改后，在github上发起PR（Pull Request）</li>
+</ol>
+<h3 id="直接修改所有者的repo"><a href="#直接修改所有者的repo" class="headerlink" title="直接修改所有者的repo"></a>直接修改所有者的repo</h3><p>这两种原理是差不多的，我挑较为用过次数比2多的1来说吧(事实上这<strong>有点头铁</strong>，推荐用2)</p>
+<p>如果repo的所有者对你发出了collaborate的邀请，接受了，你对应用户的邮箱就能直接在这个repo下进行更改了</p>
+<p>此时先使用命令<code>git clone</code>把对应的仓库clone下来</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone <span class="token punctuation">[</span>repo-url<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>由于是多人合作，就要避免一些更改的冲突，此处比较保险的方法是利用git的分支操作，大概操作如下：</p>
+<ol>
+<li>创建分支并切换到对应的分支</li>
+<li>进行相对应的更改并做好commit</li>
+<li>在主分支下进行整合工作</li>
+<li>将当前的分支push到远端分支</li>
+</ol>
+<p><strong>开始操作</strong><del>（由于最近在肝某deadline，所以一些输出就不搞了，理论上这流程下来是没有问题的）</del></p>
+<p>首先，创建一个分支并切换到对应分支</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout -b <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>下面这两行与上面的是等效的</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> branch <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
+<span class="token function">git</span> checkout <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>接着，开始你的工作，进行相对应的更改并做好相对应的commit，还是像上面一样</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+<span class="token function">git</span> commit -m <span class="token string">"some changes"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>再接着，把做好的修改，确定无误后，使用<code>git merge</code>指令将该分支合并到主分支上……等等，此时我们冷静一下，我在进行多人合作诶，思考下：万一人家在我合并之前已经进行了一次合并或者是主分支出现了一些更新的commit呢？</p>
+<p>所以，我们在合并之前最好是使用<code>git pull</code>命令，同步一下最新的远端仓库，所以要执行的操作如下，先同步后合并</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout master
+<span class="token function">git</span> pull
+<span class="token function">git</span> merge <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>git会进行自动处理，除非是git无法处理的冲突才需要人为干涉（这里暂不多说）</p>
+<p>接下来就是，把当前本地的分支推到远端了，依旧是<code>git push</code></p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>要是想要把新分支也同步上去，如下</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
+<span class="token function">git</span> push -u origin <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h3 id="使用Pull-Request"><a href="#使用Pull-Request" class="headerlink" title="使用Pull Request"></a>使用Pull Request</h3><p>如果是用PR的方法的话，应该会安全一点（云玩家又来了</p>
+<p>我认为先是fork一份到自己的号里，然后前面1 2步骤与上面一样，而3 4 5分别是</p>
+<ol start="3">
+<li>将主分支的最新更改整合到你的分支里</li>
+<li>push你的分支到远端</li>
+<li>在你的repo下根据提示进行PR</li>
+</ol>
+<p>自第三步有点差别，考虑到是合作，他人有可能进行了一定的修改，先<code>git pull</code></p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout master
+<span class="token function">git</span> pull
+<span class="token function">git</span> checkout <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
+<span class="token function">git</span> merge master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>再合并，不过此次是把master合并到你的分支里</p>
+<p>第四步就是将你的分支推到远端啦</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> push -u origin <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>第五步就是打开你的github对应的repo，它会自动提示你进行PR操作的</p>
+<p>甚至还能做下事后清理工作，可以把本地和远程对应的分支所删除(当然远程分支也可以在github的对应的repo下进行删除分支的操作)</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> branch -d <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
+<span class="token function">git</span> push -d origin <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="还有更多"><a href="#还有更多" class="headerlink" title="还有更多"></a>还有更多</h2><p>我只是简单地写了两种常见的git使用场景的普遍情况，这俩操作可以应付得来大部分场景了</p>
+<p>不过就这么点，还远远不够，再安利些东西吧，git指令想了解原理和更多操作，可以参考下面这个，初学的时候受益甚多（不过内容还是比较多的，初次上手可以像我这篇文章一样直接开个仓库进行操作</p>
+<p><a href="https://www.atlassian.com/git/tutorials">Git Tutorials and Training | Atlassian Git Tutorial</a></p>
+<p><strong>强烈建议</strong>了解一下里面画的图片，配合图片来解释git的一些行为，会比空洞的文字好很多的</p>
+<p>刚刚全都是在命令行下处理的，如果需要一个相关的GUI工具，可以尝试下面的</p>
+<ul>
+<li><p><a href="https://www.sourcetreeapp.com/">Sourcetree</a></p>
+</li>
+<li><p>vscode</p>
+</li>
+</ul>
+<p>还有一个方法，学习这东西，可以到github上面浏览一下出名的repo的一些东西，比如说，它们的commit commet的写法风格是怎么样的，它们的分支是怎么样的……</p>
+<p>以上就是我这菜狗能提供的东西了，如有错误，还请指出<del>（菜是原罪）</del></p>
+]]></content>
+      <categories>
+        <category>教程</category>
+      </categories>
+  </entry>
+  <entry>
     <title>笔记-入门前端三件套</title>
     <url>//contents/7bce767300fa/</url>
     <content><![CDATA[<p>Web安全方向试探路</p>
@@ -2964,16 +3517,16 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>页面长这个样子，如图所示。</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195627.png" alt="原始页面"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195627.png" alt="原始页面"></p>
 <p>然后我们给son2加上这么一段css</p>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
 <span class="token property">left</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
 <span class="token property">top</span><span class="token punctuation">:</span> 120px<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195646.png" alt="此时的参照物为body"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195646.png" alt="此时的参照物为body"></p>
 <p>如图所示，son3直接顶上来了，son2仿佛就像是“跳”出了文档本身一样，并且以页面（此时没有其他的father设置了non-static的position）左上角，相对左边向右偏移了40px，相对上面向下偏移了120px</p>
 <p>如果我们把<code>position</code>改为<code>relative</code>，那么便会出现下图的情况</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195703.png" alt="此时的参照物为原来的自己"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195703.png" alt="此时的参照物为原来的自己"></p>
 <p>可以看出，son2在文档原本的位置依旧存在，只不过son2以原位置，右偏移了40px且向下偏移了120px</p>
 <p>然而，上面这些是根据像素点（pixel缩写为px）来偏移的，既然是相对的位置表示，用百分比又会如何呢？</p>
 <p>这就涉及到参照物的情况了，我<strong>目前</strong>碰到有这些</p>
@@ -2990,374 +3543,107 @@ myString1 <span class="token operator">+</span> <span class="token string">", "<
 <span class="token property">top</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>就会出现下图的这种情况</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195749.png" alt="此时的参照物为grandpa"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195749.png" alt="此时的参照物为grandpa"></p>
 <p>此时百分比是<strong>占得father的宽度和高度</strong></p>
 <p>但是我们把son2改成<code>position: relative</code>的话，发现son2只向右移动了一个father宽度的像素而没有额外的下移</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195812.png" alt="此时的参照物为原来的自己"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195812.png" alt="此时的参照物为原来的自己"></p>
 <p>思考了一下，既然这个属性百分比是继承父类的属性，那father肯定没有加height，一查，果然如此，给father加个<code>height: 335px</code>之后，果然好了。</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201128195817.png" alt="此时的参照物为原来的自己"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201128195817.png" alt="此时的参照物为原来的自己"></p>
 ]]></content>
       <categories>
         <category>笔记</category>
       </categories>
   </entry>
   <entry>
-    <title>搭建个人博客</title>
-    <url>//contents/43abca4995a8/</url>
-    <content><![CDATA[<p>国庆回家了，先随便水一篇文章 <del>才放4天假差评</del></p>
-<p>那么，如何搭建一个属于自己的静态博客？</p>
+    <title>庚子年 十月</title>
+    <url>//contents/life/2020-10/</url>
+    <content><![CDATA[<p>那就开始记录生活吧！</p>
 <span id="more"></span>
 
-<p><strong>时效性：</strong>本文在2020/12/12时，经舍友测试可用</p>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这个世界上有许多东西，如果我们不去刻意记录，它们也许会永远消失于自己脑海，消失于他人视野中，消失于这个世上</p>
-<p>拥有一个自己的博客，可用于随手记下自己的成长历程中的点滴与思考</p>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
-<li>一个自己的GitHub账户</li>
-<li>相关本地环境</li>
-<li>SSH密钥</li>
-<li>阅读相关文档的<strong>耐心</strong></li>
-</ol>
-<h2 id="选择博客框架"><a href="#选择博客框架" class="headerlink" title="选择博客框架"></a>选择博客框架</h2><p>能搭建起博客的有很多，比如</p>
-<ul>
-<li>WordPress (适合新手，不过有点臃肿，毕竟是动态博客)</li>
-<li>django (一个python-based的框架)</li>
-<li>hexo (轻量的静态博客，也是我选用的)</li>
-<li>github page一把梭 (简单粗暴适合新手<del>可以直接把github当editor</del>)</li>
-<li>Jhipster (<del>能玩得起来的人都tql</del>)</li>
-</ul>
-<p>最后我选择了hexo作为我的博客框架，基于以下一些个人的思考</p>
-<ol>
-<li>博客是否足够轻?</li>
-<li>文章文件是否<strong>易于备份</strong>(重要，毕竟文章才是自己输出的心血)</li>
-<li>支不支持Markdown</li>
-<li>是否可拓展且有比较多的插件</li>
-<li>是否可以一键部署至云端</li>
-</ol>
-<h2 id="本地环境"><a href="#本地环境" class="headerlink" title="本地环境"></a>本地环境</h2><p>github账户应该是人均一个了吧，这里不再说github账户注册相关的了</p>
-<p>在本地环境下，安装如下软件</p>
-<ol>
-<li><a href="https://git-scm.com/">Git</a></li>
-<li><a href="https://nodejs.org/en/">node.js</a></li>
-</ol>
-<p>Git用于后续的博客部署和版本控制，而hexo是powered by nodejs的</p>
-<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><p>作为用户，我们啥也不知道啊，但开发者已经把他想说的都写出来了，所以<strong>阅读文档</strong>是个好方法</p>
-<p><a href="https://hexo.io/docs/">Hexo Deocumentation</a></p>
-<p>里面写了requirement和hexo installation方法</p>
-<p><strong>耐心</strong>阅读与寻找，便能找到如下内容</p>
-<pre><code>Install Hexo
-Once all the requirements are installed, you can install Hexo with npm:
-
-$ npm install -g hexo-cli</code></pre>
-<p>读出来，就是在命令行输入</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">npm</span> <span class="token function">install</span> -g hexo-cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>便能安装hexo</p>
-<p>hexo-cli安装了，所以该如何setup呢？</p>
-<p>无需多虑，开发者写了相应的文档<a href="https://hexo.io/docs/setup">hexo setup</a></p>
-<p>开局就写到</p>
-<pre><code>Once Hexo is installed, run the following commands to initialize Hexo in the target &lt;folder&gt;.
-
-$ hexo init &lt;folder&gt;
-$ cd &lt;folder&gt;
-$ npm install</code></pre>
-<p>也就是说，在目标文件夹下依次输入上面三个commands就行了</p>
-<p>初始化之后的目录结构，一些对于config文件的说明，文档里已经讲得清清楚楚了，跟着它一起配置即可</p>
-<p>关于命令行操作，<a href="https://hexo.io/docs/commands">文档</a>里面也写的很清楚了</p>
-<p>我一般也就新建新文章，本地测试，上传到github，所以大部分时候会用到如下几个</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">hexo new <span class="token punctuation">[</span>layout<span class="token punctuation">]</span> <span class="token operator">&lt;</span>title<span class="token operator">></span>
-hexo generate
-hexo publish
-hexo clean
-hexo server
-hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="撰写你的第一篇文章"><a href="#撰写你的第一篇文章" class="headerlink" title="撰写你的第一篇文章"></a>撰写你的第一篇文章</h2><p>在hexo目录下输入 <code>hexo new my-first-content</code></p>
-<p>接着，该文章的文件就会生成于子目录 <code>source/_post</code> 下</p>
-<p>该文件是 <strong>Markdown</strong> 格式，最好用支持md的editor打开（<del>vscode + markdownlint 天下第一</del></p>
-<p>typora 对于 Markdown 的支持也是很好的（<del>不过vscode能做的事为什么还要用其他编辑器啊</del></p>
-<p>此处附上 Markdown syntax 相关的网页: <a href="https://www.markdownguide.org/basic-syntax/">Markdown Guide</a></p>
-<h2 id="配置SSH密钥"><a href="#配置SSH密钥" class="headerlink" title="配置SSH密钥"></a>配置SSH密钥</h2><p>这里使用SSH密钥来进行本地与github之间的通讯</p>
-<p>官方文档如下</p>
-<p><a href="https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/connecting-to-github-with-ssh">connecting to github with ssh Github Docs</a></p>
-<p>经阅读上方的文档可以得知</p>
-<p>先生成SSH key，下列command生成了公/私对<br><code>$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code></p>
-<p>再将其public key复制进剪贴板<br><code>$ clip &lt; ~/.ssh/id_rsa.pub</code></p>
-<p>之后到<a href="https://github.com/settings/keys">https://github.com/settings/keys</a>里，点击New SSH key，然后把它粘贴到文本框里</p>
-<p>接下来就是测试连接</p>
-<p>在命令行下输入 <code>ssh -T git@github.com</code> 以测试SSH是否配置好</p>
-<p>预期结果应如下</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> C:\Users\situ> ssh <span class="token operator">-</span>T git@github<span class="token punctuation">.</span>com
-Hi situ2001<span class="token operator">!</span> You've successfully authenticated<span class="token punctuation">,</span> but GitHub does not provide shell access<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>此时，到github的connection已经没有问题</p>
-<h2 id="关于部署"><a href="#关于部署" class="headerlink" title="关于部署"></a>关于部署</h2><p>本地写好了，当然是要部署，而部署之前，得要有地方给你放。</p>
-<p>首先先在github上建立一个这样的仓库</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003114117.png"></p>
-<p>repo的name是 yourusername.github.io ，并且这个repo要是Public的，填完之后点击 Create Repository 按钮就行了</p>
-<p>至于为什么要这样做，细看官方讲解: <a href="https://pages.github.com/">Github Pages</a></p>
-<p>新建出来的repo，github pages默认是启用着的（<del>也关不了</del></p>
-<p>再调一下 repo 里面的 setting ，进入 setting 之后一直往下跑就看到了</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003151605.png"></p>
-<p>主要是设置一下 source folder 和 branch 之类的，可以直接加一个HTTPS，也支持自定义域名</p>
-<p>至于hexo这边如何配置呢</p>
-<p>先执行如下命令，为什么，因为文档有的说啊：<a href="https://hexo.io/docs/github-pages#One-command-deployment">Github Pages | Hexo</a><br><code>$ npm install hexo-deployer-git --save</code></p>
-<p>再去到hexo文件夹下，找到 <code>_config.yml</code> 文件</p>
-<p>添加如下几行</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">deploy:
-  type: &#39;git&#39;
-  repo: https:&#x2F;&#x2F;github.com&#x2F;yourusername&#x2F;yourusername.github.io
-  #branch: master
-  branch: main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<h2 id="第四十三周-当今与将来-何去又何从"><a href="#第四十三周-当今与将来-何去又何从" class="headerlink" title="第四十三周 | 当今与将来 何去又何从"></a>第四十三周 | 当今与将来 何去又何从</h2><h3 id="我的高考-高考于我"><a href="#我的高考-高考于我" class="headerlink" title="我的高考 高考于我"></a>我的高考 高考于我</h3><p>我这个人啊，重要关头总是会翻车，比较刺激的一次是2018年12月代表高中学校去佛山参加创客比赛，比赛参展的前一晚就因为调试过度导致一块继电器驱动板坏掉5V供能部分，并且出发前也没有带一块备用驱动板，那个慌张程度啊，我以为这就凉凉了，还好点了份宵夜吃完后镇定下来(?)，用我并不扎实的电路知识魔改了一通，将5V部分引向USB电源但是让GND仍接到于Arduino的电路部分上以保持正常的端口通讯，成功的挺过了一个早中下午的展览。最后成功混了个奖</p>
+<p>哦不这应该叫做翻车后翻回来（至今还是一中创客社的翻车传说</p>
+<p>而高考就没那么客气了，我一直以为应试教育，理解清楚概念然后看一下真题就够了（注意：这里指的是只看少做），最后因为缺乏足够的训练，在考试场上，所有坏习惯同时爆发了出来，平时的粗枝大叶的坏习惯还是这鸟样丝毫没变，选择题纠结的情况第一次爆了出来，简单的没做对，难的也不会做，结果就等于翻车（简的来说就是我菜）</p>
+<p>最后成就了高中尖子班唯一一个高考语文没过百的人（笑） <del>（回校探访语文老师的时候她还跟我们说这次高考我们班语文很好，没有人低过百分的</del></p>
+<p>考试过后爸妈在载我回家的途中和我去西餐店吃了一餐，在吃饭途中，我看了一下广工的计算机类分数，上一年是560多分，凭着我精准估分的技能估了一下，感觉应该能上到这个分数，但又为了防止孤注一掷，我看了看隔壁的广大，533分左右，心想这个应该可以做个掉分的缓冲学校（缘分在此开始</p>
+<p>出成绩那一天听到了那高了快30分的优投线心里各种害怕，等成绩出来，看到成绩，猜测得一模一样，然后看了看排名…<del>不愧是你高30分分数线的2020广东高考</del></p>
+<p>然后其他学校都没有去考虑了，名次也不是不能冲211，但是地理位置在新疆，这个名次特意出省也是没啥好处，省内再看东莞理工，稳入最好的专业软件工程，但是既没有211名号也没有广州那作为省中心的地理位置，综合起来思考了一下，这个名次还是稳定均衡比较好<br>而广州大学，在广州（地理位置），在飞速发展（这几年），名次也能选大部分专业（可选专业），这仨因素加起来<del>我全都要</del>，我这个垃圾名次，可谓是超值</p>
+<p>然后填志愿的第一天，我搜集了近五年广大的录取名次来自行胡乱分析了一下，策略是滑到网络工程的位置然后被录取<del>（真是缘分啊）</del>然后大一上下转软件工程</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/Screenshot%202020-10-24%20205416.png"></p>
+<p>在第二天到来前，A志愿填了广州大学，然后后面全空（后来我妈叫我补上了，<del>我补了个五邑大学</del></p>
+<p>最后如愿以偿<del>凭着院里最低分</del>进入了广大的计算机学院<del>（完 全 一 致</del></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/Screenshot%202020-10-24%20220809.png"></p>
+<p><del>咱高中电脑老师得知我被录取后，还不忘在我朋友圈下评论道：这位小兄弟在关键时候翻车，然后最后时刻又神奇翻回来的传说一直在延续</del></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/WeChat%20Image_20201024220659.jpg"></p>
+<p><del>万 恶 之 源</del></p>
+<h3 id="迷茫迷茫-慌慌忙忙"><a href="#迷茫迷茫-慌慌忙忙" class="headerlink" title="迷茫迷茫 慌慌忙忙"></a>迷茫迷茫 慌慌忙忙</h3><p>进入之后的一个多月都没啥忧虑的，开心生活着，直到职业规划课老师叫我们做生涯规划报告的那一刻，我才开始担心起来自己的将来，听别人说大厂非985 211不招，而又听说双非打ACM才是高就业的唯一最优解，自己又对算法类比赛不感冒（个人更喜欢工程类的），感到了焦虑。</p>
+<p>但是呢。万事无绝对啊，换个角度来看，虽然双非ACM在就业上是个加分项，但是我不是很喜欢做自己不喜欢做的东西<del>（高考语数生拉胯警告）</del>，所以还是做一条正正常常、普普通通的，做着自己喜爱的事情<del>的咸鱼吧</del></p>
+<p><del>INFP之直觉猜测：特别是在这双非学校里，除了真心热爱，大多数人可能是因为除了这比赛之外，不知要做点其他啥的才去参加的？？</del></p>
+<p>这样不仅能够做自己喜欢的事情，还能学到不少东西，而真的想要就业，<strong>条条大路通罗马</strong>，人生路这么多，又不是只能死磕一条</p>
+<p>所以，不准备参加ACM且打听过百度过相当一部分大厂不卡92简历的咸鱼，经历了好几天的迷茫（从周三网络实验课老师宣传ACM招新那一天起吧），周六下午在图书馆咖啡厅蹭个座位，思考人生，做好了大体规划，想通了一些道理，继续过上了正常生活 <del>并赶完了生涯规划作业的deadline</del></p>
+<h3 id="未知征程-踽踽独行"><a href="#未知征程-踽踽独行" class="headerlink" title="未知征程 踽踽独行"></a>未知征程 踽踽独行</h3><p>在广大生活学习的这一个月来呢，感受不浅。其实广大呢，也没有别人所说的广州娱乐大学那么不堪，<del>点名批评商中周末搞活动，宿舍都能能听到，图书馆倒是好好的，设计合理，表扬（逃</del></p>
+<p>他让我学会了一些啥？简单来说就是信息获取与筛选有用信息的能力</p>
+<p>怎么说呢，你已经是个大学生了，想成为什么，只有自己才知道，你想娱乐，你就会是娱乐的一份子，你想学习，你也就会变成学习大潮的一份子，就是这样，大学极度多元化，大学提供给了你一个多彩的舞台，你是哪里的演员，只有自己才知道</p>
+<p>听说，大学里面上课，没人想要坐前排，但我迟了一点到教室，前排便已座无虚席<br>听说，大学里面每个人都很喜欢打游戏，但我也看到了宿舍自习室和图书馆里面奋斗的青年们<br>听说，大学上完课，没人会会在课余时间学习了，但为什么我能看到座无虚席的自习室和图书馆，有时甚至还要寻找空教室<br>听说，大学里的课都很水，那为什么我能遇到十分负责的高数老师呢</p>
+<p>听说，这些东西都是从学长学姐那里听来的，那么，你为什么不亲眼一见而要当个<strong>听风就是雨的云玩家</strong>呢？？</p>
+<p>诚然，任何事物都不是十全十美的，在这所大学，水课老师的确有<del>（线代）</del>，黑幕的确有，无所事事的人也有，而优点与奋斗者也不少，但为什么网上和流传着的都是不好的一方面呢？</p>
+<p>其实我认为，人们去判断一个事物的好坏，总喜欢揪着坏的一方面去做文章并将其放大，并且互联网上也比较倾向于炒作负面信息，只要有点缺点，互联网能将其成倍成倍地放大，以引起人们的注意，事实上许多人没有亲身经历过，但也跟着一起说起来了，人是社群动物，喜欢跟风，这不是很合理的行为吗？</p>
+<p>所以，作为一个合格的青年，我们不能听风就是雨，要有一定的自我判断能力和自我保护能力，要明知是非，不然你的思维和行为一下子就别人控制了（</p>
+<p>前面路漫漫，水之深浅尚未知，当今从何来，今后又去哪，我们难以肯定，但唯一不变的是要好好处理接收的信息，得出一个较为正确的结论，自信踏出那带有自我思考的步伐</p>
+<p>写给今后再次看到这篇文章的你和我</p>
+<p>共勉</p>
+<p>2020/10/24<br>程序员节快乐</p>
+<h2 id="第四十四周-是真的累"><a href="#第四十四周-是真的累" class="headerlink" title="第四十四周 | 是真的累"></a>第四十四周 | 是真的累</h2><h3 id="以炎热开始的一周"><a href="#以炎热开始的一周" class="headerlink" title="以炎热开始的一周"></a>以炎热开始的一周</h3><p>经历了上星期了寒冷干燥，我以为广东离入秋已经不远了</p>
+<p>然而离新的一周越近，气温却越来越高，小米温湿度计分小时地记录下了这一过程</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201102183352.jpg" alt="节 节 攀 升"></p>
+<p>还是第一次以肉眼可见的速度看到室内温度在入夜的时间内越长越高<br><del>再一次入秋失败，不愧是你广东</del></p>
+<p><strong>节 能 环 保</strong> 的宿舍中央空调却早已因为均温不足响应<del><strong>节能号召</strong></del>而关闭了，学校方面也是耗了一两天才响应民意(?)而把空调供冷重新打开</p>
+<p>而这无空调的两天呢。自然是翻来覆去睡不着的啦，我想睡得着的人才是真正淡定的人吧<del>心静自然凉</del>，从而导致程序设计实验课都逻辑混乱，高数课变得像天书一样，就像写周记前两小时我写的屑代码一样</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201102183417.jpg" alt="什么叫做睡眠不足.jpg"></p>
+<p>其实吧，睡眠不足真的可以极度影响工作和学习的，对于我来说，影响是头脑不清晰，注意力低下和更为明显的耐心不足</p>
 <blockquote>
-<p>2020-11-01更新: GitHub repo的default branch name变成main而不是master了, 因此上方做了一些修改</p>
+<p><del>2020-11-01更新: 周四下了一场雨降温了一下，学校又把空调给关了，现在依旧是炎热得睡不着的晚上</del></p>
 </blockquote>
-<p>输入 command <code>hexo deploy</code> 等待一段时间之后，若无错误提示，便是部署成功</p>
-<h2 id="访问博客"><a href="#访问博客" class="headerlink" title="访问博客"></a>访问博客</h2><p>在部署之前可以输入command <code>hexo server</code> 进行本地访问</p>
-<p>若已经部署到github上了，直接在浏览器输入 <code>username.github.io</code> 就行</p>
-<p>如果没有问题，你的博客页面将会被加载</p>
-<p><strong>注</strong>: 绝大部分地区可能无法打开<code>*.github.io</code>，建议修改DNS为 <code>223.5.5.5</code>，能解决大部分问题，如果有域名和CDN的，推荐CNAME解析再套上CDN</p>
-<p>update: CNAME文件会在deploy之后被覆盖，翻了一下，发现<code>hexo deploy</code>用的是 <code>git push --force</code> ，因此远程仓库的内容会被现有的本地仓库覆盖掉，解决方法是在source目录下直接新建一个CNAME文件，这样在生成的时候就会出现在public目录里</p>
-<p>如下图所示</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003174322.png"></p>
-<h2 id="图床配置-Optional"><a href="#图床配置-Optional" class="headerlink" title="图床配置 (Optional)"></a>图床配置 (Optional)</h2><p>Git 这种东西，不是拿来给我们存放二进制文件（如图片）的</p>
-<p>俗话说得好， <del>Git存换删图一时爽，.git folder火葬场</del></p>
-<p>而图片在Markdown中，可以以URL形式附上，所以只要有链接，就能出图了</p>
-<p>经过一把Google之后，我认为有两种不错的方法来进行图片的</p>
-<h3 id="公共图床"><a href="#公共图床" class="headerlink" title="公共图床"></a>公共图床</h3><p>使用公共图床，可以直接0开支（免费图床的话），但有利也有弊，图床毕竟只是别人的一项服务，图片放在别人那里，万一用着的这家公共图床凉了呢？能换，但是文章中URL修改的工程量可不小呢，如果没有备份的好习惯，你的图片都还在本地吗？</p>
-<p>列一些用的比较多的图床</p>
-<ol>
-<li><a href="https://imgur.com/">imgur</a> (国外知名图床，国内访问不友好)</li>
-<li><a href="https://imgchr.com/">imgchr</a> (<del>跟1域名高度重合，一看就知道解决了什么问题</del>)</li>
-</ol>
-<h3 id="私人图床"><a href="#私人图床" class="headerlink" title="私人图床"></a>私人图床</h3><p>私人图床可以考虑使用对象存储，如七牛、腾讯、阿里的对象存储<br>对于一般的个人博客，用对象存储，金钱开支一般都会很小（存储便宜，流量价格适中但是几乎不怎么跑流量）</p>
-<h3 id="图片管理神器-PicGo"><a href="#图片管理神器-PicGo" class="headerlink" title="图片管理神器 PicGo"></a>图片管理神器 PicGo</h3><p>地址：<a href="https://github.com/Molunerfinn/PicGo">PicGo</a><br>这是github上的大佬开发的一个用于管理自己存放于图床的图片的工具</p>
-<p>下载下来并根据里面的Wiki一步一步来就行了</p>
-<p>上传图片之后，按照md的syntax <code>![text](URL)</code> 插入到文章即可</p>
-<p>不详细说怎么操作了，毕竟人家已经有文档了，我在这里说，无非就是照搬文档，甚至还可能加上自己的主观认知，从而导致方法步骤等被个人地二次加工。</p>
-<p>所以<br><strong>不会读文档的人可不是一个新时代青年哦</strong></p>
-<p><del>为了叫你们去读文档而不花费大量篇幅写作，我可真是好人呢</del></p>
-<h2 id="安装主题-Optional"><a href="#安装主题-Optional" class="headerlink" title="安装主题 (Optional)"></a>安装主题 (Optional)</h2><p>可以安装其他主题以美化自己的博客<br>我用的是Next主题：<a href="https://github.com/next-theme/hexo-theme-next">https://github.com/next-theme/hexo-theme-next</a></p>
-<p>安装很简单，直接在hexo目录下输入下面command即可<br><code>$ npm install hexo-theme-next</code></p>
-<p>之后再在 <code>_config.yml</code> 下将theme改成<br><code>theme: next</code></p>
-<p>剩下的设置都在官方文档了，自己去看吧: <a href="https://theme-next.js.org/docs/">https://theme-next.js.org/docs/</a></p>
-<p><del>我还在用着默认设置</del></p>
-<h2 id="备份博客-Optional"><a href="#备份博客-Optional" class="headerlink" title="备份博客 (Optional)"></a>备份博客 (Optional)</h2><p>虽然博客的源文件是在本地的，但是在本地也有风险啊，（猜测）并且有时候为了去其他电脑码文，你用了U盘拷过去，一次两次还好，多次之后你将会分不清那边是最新的源文件了<del>（论版本控制的重要性）</del></p>
-<h3 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h3><p>所以我们可以在github新开一个private repo(没想到已经放开使用了)</p>
-<p><strong>首次</strong>先<code>git clone</code>下来，把源文件扔进去，一波 <code>git add .</code> 一波 <code>git commit</code> 最后 <code>git push</code> 送他上路<br><strong>以后</strong>再其他设备上，只需要 <code>git clone</code> <code>git add</code> <code>git commit</code> 和 <code>git push / git pull</code> 就行了（常用的几个）</p>
-<p>Alternative: 也可以在github pages的repo下，把deployment的branch设置为master之外的（如gh-pages），然后直接push到master分支即可，不过.deploy_git文件夹没拉下来的话，可能会出事，下面有提到。</p>
-<h3 id="把-gitignore文件设置好"><a href="#把-gitignore文件设置好" class="headerlink" title="把.gitignore文件设置好"></a>把.gitignore文件设置好</h3><p><strong>一定要有</strong>.gitignore文件<br>一定要<strong>有.gitignore文件</strong><br><strong>一定要有.gitignore文件</strong></p>
-<p>如果你想git clone下来一堆或者push一堆node_moudle，请忽略此步</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201003182803.png"></p>
-<p>该文件的作用如文件名本身，可以忽略上传的文件/文件夹</p>
-<p>对于hexo源文件，我一般选择忽略如下，剩下的便是文章和config文件</p>
-<pre class="line-numbers language-none"><code class="language-none">.DS_Store
-Thumbs.db
-db.json
-*.log
-node_modules&#x2F;
-public&#x2F;
-.deploy*&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>2020-11-21更新：<strong>不过</strong>在更换本地环境之后，.deploy*/是保存有静态页面仓库的.git文件夹的，并且hexo-deployer-git的<a href="https://github.com/hexojs/hexo-deployer-git#how-it-works">README</a>如是说</p>
+<p><del><strong>均温不足断空调 口中直呼热热热</strong></del></p>
+<p>所以在这学校里面住宿，最好要买一部便携的风扇，大的小的都行，只需对着容易发热的部位吹就行了，虽然睡眠质量是不怎么好夜里经常因为风扇倒了而被热醒<del>但至少是能睡</del></p>
+<p>而睡眠不佳是当代大学生的重大健康问题诶，因此建议有志向的高中学子们还是要努力学习做好备考，从而考得更好 <del>去到有独立空调的学校</del></p>
+<h3 id="杂言杂语专门放置"><a href="#杂言杂语专门放置" class="headerlink" title="杂言杂语专门放置"></a>杂言杂语专门放置</h3><p><del>累，懒得整理</del></p>
+<p>2020-10-31晚 和高中同学出去广州塔附近搭了陆上列车，一路搭到万胜围，然后转4号线回学校了，个人感觉拿来当珠江沿线观光车挺不错的，白天一定很清楚</p>
+<p>2020-10-30晚 购入《爱上火车LR》，说实话这游戏挺不错的，剧情行，作画也行，续作的容量翻了一倍，达到了史无前例(?)的10GB多，推荐</p>
+<p>2020-10-28晚 与曾经高中一些合作过的要好的朋友聊过天，深知不论本专科，现在能来到你身边的，几乎都是与你差不多的人，我想这就是一面镜子的作用了，你甚至可以从大学的同学看到另一个你，学习生活上，习惯上，还是一些行为上，都有自己的身影</p>
+<p>2020-10-27晚 因为缺乏对原版书上的生词的有效管理，决定花点钱买下手机版的欧路词典Pro用来做生词本和电子辞典</p>
+<p>2020-10-26晚 太热了于是买了一本书(?)，书名叫做《软技能：代码之外的生存指南（异步图书）》，看看这神书能给我带来啥</p>
+<p>2020-10-28下午 <del>依旧是线代老师的PPT showtime</del> 课堂上，从行列式到矩阵运算，现在到了线性方程组，个个人依旧一脸懵逼，而在下面摸鱼自学(?)的我，从线性方程组到矩阵运算，准备到行列式 <del>恰恰相反</del></p>
+<h3 id="用进废退四字真理"><a href="#用进废退四字真理" class="headerlink" title="用进废退四字真理"></a>用进废退四字真理</h3><p>科学家拉马克提出用进废退的理论，而我作为一个凡人，真正感受到了用进废退</p>
+<p>最近用英语的地方经常是读文档，写代码，因此极其重要的发音的那部分被我置之不理了<br>而英语很多单词的拼写记忆，大多是建立在发音的情况下，这样一来，我好久不发音，忘记了许多单词的发音，自然而然也忘记了它们的读音<br>所以要使用某种奇奇怪怪的操作进行发音练习了，目前是开始使用电子辞典听取发声，熟悉后进行拼写，除了一些比较特殊的单词，几乎都能用它的发音来拼个大概</p>
+<p>然后寒假回去把Bilibili<del>大学</del>上面的转自油管的<a href="https://www.bilibili.com/video/BV1n54y1B7bE">发音教程</a>学掉（咕进计划了</p>
+<h3 id="什么叫驱动型学习"><a href="#什么叫驱动型学习" class="headerlink" title="什么叫驱动型学习"></a>什么叫驱动型学习</h3><p>为什么要学习一样新东西，大多数情况下是因为有些事情需要用到它们吧，而最近在毫无HTML+CSS知识储备的情况下接手了导生师兄的一点网页设计任务<br>最后用了三小时左右从零基础开始，做了一个还算过得去的页面</p>
+<p>那么，我是怎么样快速入门的呢？教训告诉我，不能打无准备之仗，做事情要有目的而不能老是靠着感觉</p>
+<p>所以，我便写下来了目标</p>
 <blockquote>
-<p>hexo-deployer-git works by generating the site in .deploy_git and force pushing to the repo(es) in config. If .deploy_git does not exist, a repo will initialized (git init). Otherwise the curent repo (with its commit history) will be used.</p>
+<p>目标：做一个网页页面</p>
 </blockquote>
-<p>由于是force push，也就是说没有这个文件夹时候，重新生成的新的，会把你原有的仓库直接覆盖掉（也就是说commit啥的全没了）<br>所以在换环境的时候，记得clone一下，即是把你的username.github.io这个repo clone下来并重命名为.deploy_git，如下</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone <span class="token operator">&lt;</span>gh-pages repo<span class="token operator">></span> .deploy_git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>到这里，现在你<del>应该</del>有一个属于自己的个人博客了</p>
-<p>听说在线聊天，异性”哦”你的时候，回个”嗯”是一个很好的选择（跑</p>
-<p>那么</p>
-<p>嗯</p>
-<p>Enjoy writing</p>
+<p>之后借助强大的互联网和搜索引擎进行大范围的搜索进行信息的了解和归纳，目标变得如下</p>
+<blockquote>
+<p>目标：用bootstrap快速做一个页面<br>前提：有一定的HTML与CSS的知识<br>学习：HTML和CSS基础从W3School里面进行学习 bootstrap主要是看文档<br>学会了会怎么样：拥有HTML知识并拥有写基本网页的能力，能做一个简单的页面</p>
+</blockquote>
+<p>于是下面要经过快速的HTML的基础学习，之后再拿着这些知识储备来进行对bootstrap文档的粗略查看<br><del>懂了，bootstrap的使用本质不就是改class attribute(?)</del></p>
+<p>便速速做好了网页的基础结构，然后还学到了HTML的一些基本知识，在日常F12中更加得心应手了</p>
+<h3 id="钉子户对手机感想"><a href="#钉子户对手机感想" class="headerlink" title="钉子户对手机感想"></a>钉子户对手机感想</h3><p>这周Redmi竟然出了一个像极了的米6的手机K30S Ultra，作为一个常年钉子户，必须得去看一下<br>于是星期五上完导论课便离开大学城<del>学园孤岛</del>前往小米之家了</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201102183444.jpg" alt="外观"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201102183430.jpg" alt="参数和屏幕"></p>
+<p>结果去到那里一摸，强大的性能和高素质屏幕，再加上MIUI的加持，真香</p>
+<p>但是除了这些呢，剩下的是啥？扫码摄像头？屏幕封装不佳导致的下边阴影？还是高达210+克的质量？<br>虽然Redmi在两千多元的价格上，达到了极好的LCD屏和顶级的性能，但是一分钱一分货是永恒不变的真理，综合体验上来说，只有速度和屏幕这一块还算过得去了，其他的特性虽然也有，但只能算是能用了</p>
+<p>这么多人说安卓机子不是非常好用，或许他们并没有用过顶级旗舰的机子如Samsung S系列等的吧</p>
+<p>不过由于每个消费者都有自己的不同选择，所以手机还是高中低价位都有的，买什么手机，必须得综合自己的实际情况，再做选择</p>
+<p>我的选择是：<del>管它啥新机 我用小米6</del></p>
+<p>然后就是<del>单身狗</del>必胜客工作餐就和让人恐惧的3号线 <del>晚安打工人</del></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201102183457.jpg" alt="打工人 人上人"></p>
+<h3 id="以疲惫结束的一周"><a href="#以疲惫结束的一周" class="headerlink" title="以疲惫结束的一周"></a>以疲惫结束的一周</h3><p>害，这变化无常的天气和万恶的中央空调把人搞得好累好累，都不想好好干活了 <del>所以这周周记比较乱</del></p>
+<p>这周大概是娱乐摸鱼占一大半吧 工作只有在还算精神的情况下才开展</p>
+<p>就这样吧，希望天气能冷下来，给人一个精致的睡眠</p>
 ]]></content>
       <categories>
-        <category>教程</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>git快速上手</title>
-    <url>//contents/bd5b790794cf/</url>
-    <content><![CDATA[<p>我想这篇文章应该可以让你快速上手git和github吧？</p>
-<span id="more"></span>
-
-<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>什么时候会用到git呢？就我而言，我目前有两处地方有用到git</p>
-<ol>
-<li>跟踪管理自己代码的时候</li>
-<li>与其他人合作为同一个项目做贡献的时候</li>
-<li>对其他开源项目做贡献<del>（太菜了没做过）</del></li>
-</ol>
-<p>我认为快速入门git的好方法是了解基础步骤后直接开始操作<del>，于是就有了这篇文章</del></p>
-<p>这篇文章的许多内容都是自己试过的，希望下面的内容能给新手们带来一点帮助，如有错误，请指出。</p>
-<h2 id="上手之前"><a href="#上手之前" class="headerlink" title="上手之前"></a>上手之前</h2><h3 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h3><p>首先准备好所需的工具：<strong>git</strong>和<strong>github账号一个</strong>（当然其他代码托管平台也是可以的），若没有的话，git在这里<a href="https://git-scm.com/">下载</a>，github账号的在<a href="https://github.com/">这里注册</a></p>
-<p>然后，在命令行中做好配置文件相应的设置<br><code>git config --global user.name &quot;your-name&quot;</code><br><code>git config --global user.email &quot;your-email&quot;</code></p>
-<p>再者就是本地与github之间通讯要用到的ssh密钥。之前应该写过，我直接拷贝过来吧。</p>
-<h3 id="配置密钥"><a href="#配置密钥" class="headerlink" title="配置密钥"></a>配置密钥</h3><p>先生成SSH key，下列command生成了公/私对<br><code>$ ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code></p>
-<p>再将其public key复制进剪贴板<br><code>$ clip &lt; ~/.ssh/id_rsa.pub</code></p>
-<p>之后到<a href="https://github.com/settings/keys">https://github.com/settings/keys</a>里，点击New SSH key，然后把它粘贴到文本框里</p>
-<p>接下来就是测试连接</p>
-<p>在命令行下输入 <code>ssh -T git@github.com</code> 以测试SSH是否配置好</p>
-<p>预期结果应如下</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">PS</span> C:\Users\situ> ssh <span class="token operator">-</span>T git@github<span class="token punctuation">.</span>com
-Hi situ2001<span class="token operator">!</span> You've successfully authenticated<span class="token punctuation">,</span> but GitHub does not provide shell access<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>此时，密钥配置完成。</p>
-<p>然后下面是操作的过程，虽然不知道发生了什么，但是先照着做就是了。</p>
-<h2 id="跟踪自己的代码"><a href="#跟踪自己的代码" class="headerlink" title="跟踪自己的代码"></a>跟踪自己的代码</h2><p>这块内容大致分为两步</p>
-<ol>
-<li>新建一个仓库</li>
-<li>往仓库提交你的代码</li>
-</ol>
-<h3 id="新建一个仓库"><a href="#新建一个仓库" class="headerlink" title="新建一个仓库"></a>新建一个仓库</h3><p>这个新建一次就行了。这个新建一次就行了。这个新建一次就行了。</p>
-<p>仓库分为本地的仓库（即本机）和远程仓库（在这里指github的仓库）</p>
-<p>建立本地仓库的话，就是在你代码的目录下，输入下面的命令</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> init<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>成功初始化后的输出可能如下</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">Initialized empty Git repository <span class="token keyword">in</span> C:/Users/situ/github/git_test/.git/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>接着去github新建对应的仓库，在github首页的右上角就能看到新建仓库的图标了，跟着指引一步一步做下去就行了</p>
-<p>至此，仓库的新建工作完成了</p>
-<h3 id="往仓库提交你的代码"><a href="#往仓库提交你的代码" class="headerlink" title="往仓库提交你的代码"></a>往仓库提交你的代码</h3><p>接着就是进行状态的检查，这个命令<strong>很有用</strong>，它可以告诉你现在仓库的状态是什么样子的</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>输出可能如下</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>git_test<span class="token operator">></span>git status
-On branch master
-
-No commits yet
-
-Untracked files:
-  <span class="token punctuation">(</span>use <span class="token string">"git add &lt;file>..."</span> to include <span class="token keyword">in</span> what will be committed<span class="token punctuation">)</span>
-        <span class="token number">1</span>.txt
-        Main.java
-
-nothing added to commit but untracked files present <span class="token punctuation">(</span>use <span class="token string">"git add"</span> to track<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>接着，把untracked的文件加入git中</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>这个命令表示把所有更改过的或者未追踪的文件加入跟踪</p>
-<p>接着就是记录自己此时仓库的情况，使用如下命令</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> commit -m <span class="token string">"my first commit"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>输出结果如下</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token punctuation">[</span>master <span class="token punctuation">(</span>root-commit<span class="token punctuation">)</span> cc978b4<span class="token punctuation">]</span> my first commit
- <span class="token number">2</span> files changed, <span class="token number">15</span> insertions<span class="token punctuation">(</span>+<span class="token punctuation">)</span>
- create mode <span class="token number">100644</span> <span class="token number">1</span>.txt
- create mode <span class="token number">100644</span> Main.java<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>再用<code>git status</code>看看</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">On branch master
-nothing to commit, working tree clean<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>说明，此时仓库已经记录下你现在的工作了。</p>
-<p>接着我们使用命令<code>git remote</code>进行远端仓库的添加(如下仅为实例，具体情况具体分析)</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> remote <span class="token function">add</span> origin https://github.com/situ2001/git_test.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>最后，我们使用<code>git push</code>命令，把此时本地的master分支推到远端仓库上的master分支</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>出现像下面这样的，是成功了</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>situ<span class="token punctuation">\</span>github<span class="token punctuation">\</span>git_test<span class="token operator">></span>git push -u origin master
-Enumerating objects: <span class="token number">4</span>, done.
-Counting objects: <span class="token number">100</span>% <span class="token punctuation">(</span><span class="token number">4</span>/4<span class="token punctuation">)</span>, done.
-Delta compression using up to <span class="token number">16</span> threads
-Compressing objects: <span class="token number">100</span>% <span class="token punctuation">(</span><span class="token number">3</span>/3<span class="token punctuation">)</span>, done.
-Writing objects: <span class="token number">100</span>% <span class="token punctuation">(</span><span class="token number">4</span>/4<span class="token punctuation">)</span>, <span class="token number">406</span> bytes <span class="token operator">|</span> <span class="token number">406.00</span> KiB/s, done.
-Total <span class="token number">4</span> <span class="token punctuation">(</span>delta <span class="token number">0</span><span class="token punctuation">)</span>, reused <span class="token number">0</span> <span class="token punctuation">(</span>delta <span class="token number">0</span><span class="token punctuation">)</span>, pack-reused <span class="token number">0</span>
-To https://github.com/situ2001/git_test.git
- * <span class="token punctuation">[</span>new branch<span class="token punctuation">]</span>      master -<span class="token operator">></span> master
-Branch <span class="token string">'master'</span> <span class="token builtin class-name">set</span> up to track remote branch <span class="token string">'master'</span> from <span class="token string">'origin'</span><span class="token builtin class-name">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>接着，你在github的repo上面就能见到这次的commit了。</p>
-<p>那么<strong>在其他地方</strong>操作，怎么把仓库拉下来啊。很EZ，用<code>git clone</code>命令就行了，如下</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone <span class="token punctuation">[</span>repo-url<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>还有不要忘了在其他地方做了更改，回到自己的环境下，要进行一下<code>git pull</code>同步一下远端仓库的内容哦</p>
-<h2 id="与他人进行合作"><a href="#与他人进行合作" class="headerlink" title="与他人进行合作"></a>与他人进行合作</h2><p>有时候我们会与他人合作，共同contribute同一个repo，因此，一些git分支与合并的操作还是要懂得一点的</p>
-<p>我目前了解到的合作还是<strong>比较肤浅</strong>，自己了解过的只有两种</p>
-<ol>
-<li>受他人邀请后，直接获得对仓库进行更改的权限</li>
-<li>fork一份他人的repo，对其修改后，在github上发起PR（Pull Request）</li>
-</ol>
-<h3 id="直接修改所有者的repo"><a href="#直接修改所有者的repo" class="headerlink" title="直接修改所有者的repo"></a>直接修改所有者的repo</h3><p>这两种原理是差不多的，我挑较为用过次数比2多的1来说吧(事实上这<strong>有点头铁</strong>，推荐用2)</p>
-<p>如果repo的所有者对你发出了collaborate的邀请，接受了，你对应用户的邮箱就能直接在这个repo下进行更改了</p>
-<p>此时先使用命令<code>git clone</code>把对应的仓库clone下来</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> clone <span class="token punctuation">[</span>repo-url<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>由于是多人合作，就要避免一些更改的冲突，此处比较保险的方法是利用git的分支操作，大概操作如下：</p>
-<ol>
-<li>创建分支并切换到对应的分支</li>
-<li>进行相对应的更改并做好commit</li>
-<li>在主分支下进行整合工作</li>
-<li>将当前的分支push到远端分支</li>
-</ol>
-<p><strong>开始操作</strong><del>（由于最近在肝某deadline，所以一些输出就不搞了，理论上这流程下来是没有问题的）</del></p>
-<p>首先，创建一个分支并切换到对应分支</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout -b <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>下面这两行与上面的是等效的</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> branch <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
-<span class="token function">git</span> checkout <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>接着，开始你的工作，进行相对应的更改并做好相对应的commit，还是像上面一样</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
-<span class="token function">git</span> commit -m <span class="token string">"some changes"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>再接着，把做好的修改，确定无误后，使用<code>git merge</code>指令将该分支合并到主分支上……等等，此时我们冷静一下，我在进行多人合作诶，思考下：万一人家在我合并之前已经进行了一次合并或者是主分支出现了一些更新的commit呢？</p>
-<p>所以，我们在合并之前最好是使用<code>git pull</code>命令，同步一下最新的远端仓库，所以要执行的操作如下，先同步后合并</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout master
-<span class="token function">git</span> pull
-<span class="token function">git</span> merge <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>git会进行自动处理，除非是git无法处理的冲突才需要人为干涉（这里暂不多说）</p>
-<p>接下来就是，把当前本地的分支推到远端了，依旧是<code>git push</code></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>要是想要把新分支也同步上去，如下</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
-<span class="token function">git</span> push -u origin <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h3 id="使用Pull-Request"><a href="#使用Pull-Request" class="headerlink" title="使用Pull Request"></a>使用Pull Request</h3><p>如果是用PR的方法的话，应该会安全一点（云玩家又来了</p>
-<p>我认为先是fork一份到自己的号里，然后前面1 2步骤与上面一样，而3 4 5分别是</p>
-<ol start="3">
-<li>将主分支的最新更改整合到你的分支里</li>
-<li>push你的分支到远端</li>
-<li>在你的repo下根据提示进行PR</li>
-</ol>
-<p>自第三步有点差别，考虑到是合作，他人有可能进行了一定的修改，先<code>git pull</code></p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> checkout master
-<span class="token function">git</span> pull
-<span class="token function">git</span> checkout <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
-<span class="token function">git</span> merge master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>再合并，不过此次是把master合并到你的分支里</p>
-<p>第四步就是将你的分支推到远端啦</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> push -u origin <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>第五步就是打开你的github对应的repo，它会自动提示你进行PR操作的</p>
-<p>甚至还能做下事后清理工作，可以把本地和远程对应的分支所删除(当然远程分支也可以在github的对应的repo下进行删除分支的操作)</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">git</span> branch -d <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span>
-<span class="token function">git</span> push -d origin <span class="token punctuation">[</span>branch-name<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h2 id="还有更多"><a href="#还有更多" class="headerlink" title="还有更多"></a>还有更多</h2><p>我只是简单地写了两种常见的git使用场景的普遍情况，这俩操作可以应付得来大部分场景了</p>
-<p>不过就这么点，还远远不够，再安利些东西吧，git指令想了解原理和更多操作，可以参考下面这个，初学的时候受益甚多（不过内容还是比较多的，初次上手可以像我这篇文章一样直接开个仓库进行操作</p>
-<p><a href="https://www.atlassian.com/git/tutorials">Git Tutorials and Training | Atlassian Git Tutorial</a></p>
-<p><strong>强烈建议</strong>了解一下里面画的图片，配合图片来解释git的一些行为，会比空洞的文字好很多的</p>
-<p>刚刚全都是在命令行下处理的，如果需要一个相关的GUI工具，可以尝试下面的</p>
-<ul>
-<li><p><a href="https://www.sourcetreeapp.com/">Sourcetree</a></p>
-</li>
-<li><p>vscode</p>
-</li>
-</ul>
-<p>还有一个方法，学习这东西，可以到github上面浏览一下出名的repo的一些东西，比如说，它们的commit commet的写法风格是怎么样的，它们的分支是怎么样的……</p>
-<p>以上就是我这菜狗能提供的东西了，如有错误，还请指出<del>（菜是原罪）</del></p>
-]]></content>
-      <categories>
-        <category>教程</category>
+        <category>生活</category>
       </categories>
   </entry>
   <entry>
@@ -3406,7 +3692,7 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 <li>用新买的SHP9500听了许多动漫与游戏的OST，不愧是纯音乐神器</li>
 </ul>
 <h3 id="适度剁手不会错"><a href="#适度剁手不会错" class="headerlink" title="适度剁手不会错"></a>适度剁手不会错</h3><p>适逢双十一，在周二当天剁手了两部好物（自认为的）：飞利浦SHP9500和thinkplus 65W适配器</p>
-<img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108184005.jpg" alt="合影留念" style="zoom:20%;" />
+<img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201108184005.jpg" alt="合影留念" style="zoom:20%;" />
 
 <p>前者在宿舍固定场所听歌是真的香，佩戴极其舒适，并且也很透气，虽然是开放式耳机，但是我的座位在角落，不开大声听，舍友就<del>几乎</del>听不到了</p>
 <p>后者的体积很小，跟我钉子户的充电头几乎一样的体积，支持MAX 65W的输出，虽然没用用上最新的GaN，但是体积却出乎意料的小（点名批评一些用了GaN却没有小体积的适配器），用于携带出外给笔记本电池续命或者进行高性能作业</p>
@@ -3421,11 +3707,11 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 </li>
 </ul>
 <p>下面放点照片吧(抱歉MI6的祖传绿)</p>
-<img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108184054.jpg" alt="高素质屏幕" style="zoom:20%;" />
+<img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201108184054.jpg" alt="高素质屏幕" style="zoom:20%;" />
 
-<img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108184142.jpeg" alt="性能对比" style="zoom:20%;" />
+<img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201108184142.jpeg" alt="性能对比" style="zoom:20%;" />
 
-<img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201108184115.jpeg" alt="肥宅快乐观影时刻" style="zoom:20%;" />
+<img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201108184115.jpeg" alt="肥宅快乐观影时刻" style="zoom:20%;" />
 
 <h3 id="睡醒遇到新生赛"><a href="#睡醒遇到新生赛" class="headerlink" title="睡醒遇到新生赛"></a>睡醒遇到新生赛</h3><p>周六睡到下午三点半醒来就遇到CTF新生赛，随便水了下，还行，详情请点击<a href="/contents/0d721ec073c6/">这里</a></p>
 <h2 id="庚子四六与四七"><a href="#庚子四六与四七" class="headerlink" title="庚子四六与四七"></a>庚子四六与四七</h2><blockquote class="blockquote-center">资源不是你想有，想有就能有<br>实际是要冲才会有</blockquote>
@@ -3434,13 +3720,13 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 <p>正是因为最近有点忙，所以这篇文章是在学校合并组建20周年晚会上写的，先是祝学校20岁生日快乐<del>，其次祝贺一下自己，摸鱼技能提升了。</del></p>
 <p>这两周发生的事情，比较重要的俩活动，让我眼界开阔了不少。<del>奇怪的活动和讲座增加了</del></p>
 <h3 id="Google-Devfest"><a href="#Google-Devfest" class="headerlink" title="Google Devfest"></a>Google Devfest</h3><p>其一就是去参加了2020年的Google Devfest嘉年华活动。活动在天河科技成果转化基地1L举行。这次盛会，有挺多大佬上台做presentation，他们提到了许多我没有听过或者用过的前沿技术—比如用于单片机的机器学习TinyML，做UI的flutter和dart，听大佬介绍了一下Linux foundation和open source，让我感受到开源并不是在用爱发电，而是实实在在地为世界做贡献</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201122224106.jpg"></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201122224110.jpg"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201122224106.jpg"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201122224110.jpg"></p>
 <p>图片在这个链接里面：<a href="https://gallery.vphotos.cn/vphotosgallery/index.html?vphotowechatid=0B42B6CCC348209AA075861E73D5CACF#/gallerypc">点击进入</a></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201122224158.jpg"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201122224158.jpg"></p>
 <p>图有点多，就放张有华点的图吧</p>
 <p>当然啦，还有真香的Google周边，有人手一份的，也有限量的，要去活动集市打卡签到齐了才会有，可惜去晚了。当然晚了也有晚了的好处，拿到了最后的一件限量衣服（可惜是M码，只能当纪念品了</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201122224051.jpg"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201122224051.jpg"></p>
 <p>然后还参加了最后一天的活动tensorflow day，也是有一点收获的，比如里面提到了这么一句话</p>
 <blockquote>
 <p> AI is the new electronic.</p>
@@ -3448,11 +3734,11 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 <p>讲座的大佬也问了一个令人扎心的问题：“在座的会用office的朋友和同学们，请举手”</p>
 <p>全场没有人不举手，他再借此提及了AI，他说，在未来，AI将会变成这样人人皆知，人人也都会用。这似乎已经是趋势了。</p>
 <p>现在虽然有各种任务和事情，还没有入门tf，但是我认为这个工具，在以后还是要学习学习的</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201122224036.jpg"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201122224036.jpg"></p>
 <p>然后tindy2013想来看看这Devfest，就前来广州玩耍，于是便带他出去玩耍了两天，吃了好多垃圾食品</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201122224019.jpg"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201122224019.jpg"></p>
 <p>到了我心目中的未来的单身狗房间，就是tindy2013住的旅馆房间<del>简直是单身狗未来的好房间</del></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201122223955.jpg"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201122223955.jpg"></p>
 <p>但是这快乐的几天，换来的却是近一周的疲惫不堪。所以旅游，不过是<strong>用疲惫换见识</strong>罢了(暴论)</p>
 <h3 id="方班预备班招新"><a href="#方班预备班招新" class="headerlink" title="方班预备班招新"></a>方班预备班招新</h3><p>然后就是学校的方班预备班的招新，其实方法很EZ，只需要在日常无课的星期二下午，两点钟到达现场开始答题就行了，不得不说里面有点题目是有点难度的，不过主要是看你个人介绍里面的内容。下午我在昏昏沉沉地写，<del>会写的好像没写全，不会的，好像也没写。。。</del>不过最后也还是混进去了。</p>
 <p>嘛，其实在这个阶段，找一些自己可能感兴趣的方向微微探索一下，也不免是个好选择。（况且这里面的内容对于开发和计算机基础知识的学习，也有一定的帮助，要用魔法打败魔法。</p>
@@ -3487,7 +3773,7 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 <p>尽量早点睡，并在自己醒来最佳的时刻起床</p>
 </blockquote>
 <p>我一下就找到了最佳起床时间，那就是早课7点半的起床，头一两天有那么一点难受，到后面就好起来了，并且可以减掉回宿舍睡觉的时间和路程。结合一下GZHU那短的可怕的12:00-13:50午饭午休时间<del>，这张图真的是应景。</del></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201129135035.jpg"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20201129135035.jpg"></p>
 <p>除了能节省时间，还有几个好处：</p>
 <ol>
 <li>下午过了极度疲惫期，就会恢复精神坚持下去</li>
@@ -3532,98 +3818,6 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 <blockquote>
 <p>“我们继续念PPT吧”</p>
 </blockquote>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>庚子年 十月</title>
-    <url>//contents/life/2020-10/</url>
-    <content><![CDATA[<p>那就开始记录生活吧！</p>
-<span id="more"></span>
-
-<h2 id="第四十三周-当今与将来-何去又何从"><a href="#第四十三周-当今与将来-何去又何从" class="headerlink" title="第四十三周 | 当今与将来 何去又何从"></a>第四十三周 | 当今与将来 何去又何从</h2><h3 id="我的高考-高考于我"><a href="#我的高考-高考于我" class="headerlink" title="我的高考 高考于我"></a>我的高考 高考于我</h3><p>我这个人啊，重要关头总是会翻车，比较刺激的一次是2018年12月代表高中学校去佛山参加创客比赛，比赛参展的前一晚就因为调试过度导致一块继电器驱动板坏掉5V供能部分，并且出发前也没有带一块备用驱动板，那个慌张程度啊，我以为这就凉凉了，还好点了份宵夜吃完后镇定下来(?)，用我并不扎实的电路知识魔改了一通，将5V部分引向USB电源但是让GND仍接到于Arduino的电路部分上以保持正常的端口通讯，成功的挺过了一个早中下午的展览。最后成功混了个奖</p>
-<p>哦不这应该叫做翻车后翻回来（至今还是一中创客社的翻车传说</p>
-<p>而高考就没那么客气了，我一直以为应试教育，理解清楚概念然后看一下真题就够了（注意：这里指的是只看少做），最后因为缺乏足够的训练，在考试场上，所有坏习惯同时爆发了出来，平时的粗枝大叶的坏习惯还是这鸟样丝毫没变，选择题纠结的情况第一次爆了出来，简单的没做对，难的也不会做，结果就等于翻车（简的来说就是我菜）</p>
-<p>最后成就了高中尖子班唯一一个高考语文没过百的人（笑） <del>（回校探访语文老师的时候她还跟我们说这次高考我们班语文很好，没有人低过百分的</del></p>
-<p>考试过后爸妈在载我回家的途中和我去西餐店吃了一餐，在吃饭途中，我看了一下广工的计算机类分数，上一年是560多分，凭着我精准估分的技能估了一下，感觉应该能上到这个分数，但又为了防止孤注一掷，我看了看隔壁的广大，533分左右，心想这个应该可以做个掉分的缓冲学校（缘分在此开始</p>
-<p>出成绩那一天听到了那高了快30分的优投线心里各种害怕，等成绩出来，看到成绩，猜测得一模一样，然后看了看排名…<del>不愧是你高30分分数线的2020广东高考</del></p>
-<p>然后其他学校都没有去考虑了，名次也不是不能冲211，但是地理位置在新疆，这个名次特意出省也是没啥好处，省内再看东莞理工，稳入最好的专业软件工程，但是既没有211名号也没有广州那作为省中心的地理位置，综合起来思考了一下，这个名次还是稳定均衡比较好<br>而广州大学，在广州（地理位置），在飞速发展（这几年），名次也能选大部分专业（可选专业），这仨因素加起来<del>我全都要</del>，我这个垃圾名次，可谓是超值</p>
-<p>然后填志愿的第一天，我搜集了近五年广大的录取名次来自行胡乱分析了一下，策略是滑到网络工程的位置然后被录取<del>（真是缘分啊）</del>然后大一上下转软件工程</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/Screenshot%202020-10-24%20205416.png"></p>
-<p>在第二天到来前，A志愿填了广州大学，然后后面全空（后来我妈叫我补上了，<del>我补了个五邑大学</del></p>
-<p>最后如愿以偿<del>凭着院里最低分</del>进入了广大的计算机学院<del>（完 全 一 致</del></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/Screenshot%202020-10-24%20220809.png"></p>
-<p><del>咱高中电脑老师得知我被录取后，还不忘在我朋友圈下评论道：这位小兄弟在关键时候翻车，然后最后时刻又神奇翻回来的传说一直在延续</del></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/WeChat%20Image_20201024220659.jpg"></p>
-<p><del>万 恶 之 源</del></p>
-<h3 id="迷茫迷茫-慌慌忙忙"><a href="#迷茫迷茫-慌慌忙忙" class="headerlink" title="迷茫迷茫 慌慌忙忙"></a>迷茫迷茫 慌慌忙忙</h3><p>进入之后的一个多月都没啥忧虑的，开心生活着，直到职业规划课老师叫我们做生涯规划报告的那一刻，我才开始担心起来自己的将来，听别人说大厂非985 211不招，而又听说双非打ACM才是高就业的唯一最优解，自己又对算法类比赛不感冒（个人更喜欢工程类的），感到了焦虑。</p>
-<p>但是呢。万事无绝对啊，换个角度来看，虽然双非ACM在就业上是个加分项，但是我不是很喜欢做自己不喜欢做的东西<del>（高考语数生拉胯警告）</del>，所以还是做一条正正常常、普普通通的，做着自己喜爱的事情<del>的咸鱼吧</del></p>
-<p><del>INFP之直觉猜测：特别是在这双非学校里，除了真心热爱，大多数人可能是因为除了这比赛之外，不知要做点其他啥的才去参加的？？</del></p>
-<p>这样不仅能够做自己喜欢的事情，还能学到不少东西，而真的想要就业，<strong>条条大路通罗马</strong>，人生路这么多，又不是只能死磕一条</p>
-<p>所以，不准备参加ACM且打听过百度过相当一部分大厂不卡92简历的咸鱼，经历了好几天的迷茫（从周三网络实验课老师宣传ACM招新那一天起吧），周六下午在图书馆咖啡厅蹭个座位，思考人生，做好了大体规划，想通了一些道理，继续过上了正常生活 <del>并赶完了生涯规划作业的deadline</del></p>
-<h3 id="未知征程-踽踽独行"><a href="#未知征程-踽踽独行" class="headerlink" title="未知征程 踽踽独行"></a>未知征程 踽踽独行</h3><p>在广大生活学习的这一个月来呢，感受不浅。其实广大呢，也没有别人所说的广州娱乐大学那么不堪，<del>点名批评商中周末搞活动，宿舍都能能听到，图书馆倒是好好的，设计合理，表扬（逃</del></p>
-<p>他让我学会了一些啥？简单来说就是信息获取与筛选有用信息的能力</p>
-<p>怎么说呢，你已经是个大学生了，想成为什么，只有自己才知道，你想娱乐，你就会是娱乐的一份子，你想学习，你也就会变成学习大潮的一份子，就是这样，大学极度多元化，大学提供给了你一个多彩的舞台，你是哪里的演员，只有自己才知道</p>
-<p>听说，大学里面上课，没人想要坐前排，但我迟了一点到教室，前排便已座无虚席<br>听说，大学里面每个人都很喜欢打游戏，但我也看到了宿舍自习室和图书馆里面奋斗的青年们<br>听说，大学上完课，没人会会在课余时间学习了，但为什么我能看到座无虚席的自习室和图书馆，有时甚至还要寻找空教室<br>听说，大学里的课都很水，那为什么我能遇到十分负责的高数老师呢</p>
-<p>听说，这些东西都是从学长学姐那里听来的，那么，你为什么不亲眼一见而要当个<strong>听风就是雨的云玩家</strong>呢？？</p>
-<p>诚然，任何事物都不是十全十美的，在这所大学，水课老师的确有<del>（线代）</del>，黑幕的确有，无所事事的人也有，而优点与奋斗者也不少，但为什么网上和流传着的都是不好的一方面呢？</p>
-<p>其实我认为，人们去判断一个事物的好坏，总喜欢揪着坏的一方面去做文章并将其放大，并且互联网上也比较倾向于炒作负面信息，只要有点缺点，互联网能将其成倍成倍地放大，以引起人们的注意，事实上许多人没有亲身经历过，但也跟着一起说起来了，人是社群动物，喜欢跟风，这不是很合理的行为吗？</p>
-<p>所以，作为一个合格的青年，我们不能听风就是雨，要有一定的自我判断能力和自我保护能力，要明知是非，不然你的思维和行为一下子就别人控制了（</p>
-<p>前面路漫漫，水之深浅尚未知，当今从何来，今后又去哪，我们难以肯定，但唯一不变的是要好好处理接收的信息，得出一个较为正确的结论，自信踏出那带有自我思考的步伐</p>
-<p>写给今后再次看到这篇文章的你和我</p>
-<p>共勉</p>
-<p>2020/10/24<br>程序员节快乐</p>
-<h2 id="第四十四周-是真的累"><a href="#第四十四周-是真的累" class="headerlink" title="第四十四周 | 是真的累"></a>第四十四周 | 是真的累</h2><h3 id="以炎热开始的一周"><a href="#以炎热开始的一周" class="headerlink" title="以炎热开始的一周"></a>以炎热开始的一周</h3><p>经历了上星期了寒冷干燥，我以为广东离入秋已经不远了</p>
-<p>然而离新的一周越近，气温却越来越高，小米温湿度计分小时地记录下了这一过程</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201102183352.jpg" alt="节 节 攀 升"></p>
-<p>还是第一次以肉眼可见的速度看到室内温度在入夜的时间内越长越高<br><del>再一次入秋失败，不愧是你广东</del></p>
-<p><strong>节 能 环 保</strong> 的宿舍中央空调却早已因为均温不足响应<del><strong>节能号召</strong></del>而关闭了，学校方面也是耗了一两天才响应民意(?)而把空调供冷重新打开</p>
-<p>而这无空调的两天呢。自然是翻来覆去睡不着的啦，我想睡得着的人才是真正淡定的人吧<del>心静自然凉</del>，从而导致程序设计实验课都逻辑混乱，高数课变得像天书一样，就像写周记前两小时我写的屑代码一样</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201102183417.jpg" alt="什么叫做睡眠不足.jpg"></p>
-<p>其实吧，睡眠不足真的可以极度影响工作和学习的，对于我来说，影响是头脑不清晰，注意力低下和更为明显的耐心不足</p>
-<blockquote>
-<p><del>2020-11-01更新: 周四下了一场雨降温了一下，学校又把空调给关了，现在依旧是炎热得睡不着的晚上</del></p>
-</blockquote>
-<p><del><strong>均温不足断空调 口中直呼热热热</strong></del></p>
-<p>所以在这学校里面住宿，最好要买一部便携的风扇，大的小的都行，只需对着容易发热的部位吹就行了，虽然睡眠质量是不怎么好夜里经常因为风扇倒了而被热醒<del>但至少是能睡</del></p>
-<p>而睡眠不佳是当代大学生的重大健康问题诶，因此建议有志向的高中学子们还是要努力学习做好备考，从而考得更好 <del>去到有独立空调的学校</del></p>
-<h3 id="杂言杂语专门放置"><a href="#杂言杂语专门放置" class="headerlink" title="杂言杂语专门放置"></a>杂言杂语专门放置</h3><p><del>累，懒得整理</del></p>
-<p>2020-10-31晚 和高中同学出去广州塔附近搭了陆上列车，一路搭到万胜围，然后转4号线回学校了，个人感觉拿来当珠江沿线观光车挺不错的，白天一定很清楚</p>
-<p>2020-10-30晚 购入《爱上火车LR》，说实话这游戏挺不错的，剧情行，作画也行，续作的容量翻了一倍，达到了史无前例(?)的10GB多，推荐</p>
-<p>2020-10-28晚 与曾经高中一些合作过的要好的朋友聊过天，深知不论本专科，现在能来到你身边的，几乎都是与你差不多的人，我想这就是一面镜子的作用了，你甚至可以从大学的同学看到另一个你，学习生活上，习惯上，还是一些行为上，都有自己的身影</p>
-<p>2020-10-27晚 因为缺乏对原版书上的生词的有效管理，决定花点钱买下手机版的欧路词典Pro用来做生词本和电子辞典</p>
-<p>2020-10-26晚 太热了于是买了一本书(?)，书名叫做《软技能：代码之外的生存指南（异步图书）》，看看这神书能给我带来啥</p>
-<p>2020-10-28下午 <del>依旧是线代老师的PPT showtime</del> 课堂上，从行列式到矩阵运算，现在到了线性方程组，个个人依旧一脸懵逼，而在下面摸鱼自学(?)的我，从线性方程组到矩阵运算，准备到行列式 <del>恰恰相反</del></p>
-<h3 id="用进废退四字真理"><a href="#用进废退四字真理" class="headerlink" title="用进废退四字真理"></a>用进废退四字真理</h3><p>科学家拉马克提出用进废退的理论，而我作为一个凡人，真正感受到了用进废退</p>
-<p>最近用英语的地方经常是读文档，写代码，因此极其重要的发音的那部分被我置之不理了<br>而英语很多单词的拼写记忆，大多是建立在发音的情况下，这样一来，我好久不发音，忘记了许多单词的发音，自然而然也忘记了它们的读音<br>所以要使用某种奇奇怪怪的操作进行发音练习了，目前是开始使用电子辞典听取发声，熟悉后进行拼写，除了一些比较特殊的单词，几乎都能用它的发音来拼个大概</p>
-<p>然后寒假回去把Bilibili<del>大学</del>上面的转自油管的<a href="https://www.bilibili.com/video/BV1n54y1B7bE">发音教程</a>学掉（咕进计划了</p>
-<h3 id="什么叫驱动型学习"><a href="#什么叫驱动型学习" class="headerlink" title="什么叫驱动型学习"></a>什么叫驱动型学习</h3><p>为什么要学习一样新东西，大多数情况下是因为有些事情需要用到它们吧，而最近在毫无HTML+CSS知识储备的情况下接手了导生师兄的一点网页设计任务<br>最后用了三小时左右从零基础开始，做了一个还算过得去的页面</p>
-<p>那么，我是怎么样快速入门的呢？教训告诉我，不能打无准备之仗，做事情要有目的而不能老是靠着感觉</p>
-<p>所以，我便写下来了目标</p>
-<blockquote>
-<p>目标：做一个网页页面</p>
-</blockquote>
-<p>之后借助强大的互联网和搜索引擎进行大范围的搜索进行信息的了解和归纳，目标变得如下</p>
-<blockquote>
-<p>目标：用bootstrap快速做一个页面<br>前提：有一定的HTML与CSS的知识<br>学习：HTML和CSS基础从W3School里面进行学习 bootstrap主要是看文档<br>学会了会怎么样：拥有HTML知识并拥有写基本网页的能力，能做一个简单的页面</p>
-</blockquote>
-<p>于是下面要经过快速的HTML的基础学习，之后再拿着这些知识储备来进行对bootstrap文档的粗略查看<br><del>懂了，bootstrap的使用本质不就是改class attribute(?)</del></p>
-<p>便速速做好了网页的基础结构，然后还学到了HTML的一些基本知识，在日常F12中更加得心应手了</p>
-<h3 id="钉子户对手机感想"><a href="#钉子户对手机感想" class="headerlink" title="钉子户对手机感想"></a>钉子户对手机感想</h3><p>这周Redmi竟然出了一个像极了的米6的手机K30S Ultra，作为一个常年钉子户，必须得去看一下<br>于是星期五上完导论课便离开大学城<del>学园孤岛</del>前往小米之家了</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201102183444.jpg" alt="外观"></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201102183430.jpg" alt="参数和屏幕"></p>
-<p>结果去到那里一摸，强大的性能和高素质屏幕，再加上MIUI的加持，真香</p>
-<p>但是除了这些呢，剩下的是啥？扫码摄像头？屏幕封装不佳导致的下边阴影？还是高达210+克的质量？<br>虽然Redmi在两千多元的价格上，达到了极好的LCD屏和顶级的性能，但是一分钱一分货是永恒不变的真理，综合体验上来说，只有速度和屏幕这一块还算过得去了，其他的特性虽然也有，但只能算是能用了</p>
-<p>这么多人说安卓机子不是非常好用，或许他们并没有用过顶级旗舰的机子如Samsung S系列等的吧</p>
-<p>不过由于每个消费者都有自己的不同选择，所以手机还是高中低价位都有的，买什么手机，必须得综合自己的实际情况，再做选择</p>
-<p>我的选择是：<del>管它啥新机 我用小米6</del></p>
-<p>然后就是<del>单身狗</del>必胜客工作餐就和让人恐惧的3号线 <del>晚安打工人</del></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20201102183457.jpg" alt="打工人 人上人"></p>
-<h3 id="以疲惫结束的一周"><a href="#以疲惫结束的一周" class="headerlink" title="以疲惫结束的一周"></a>以疲惫结束的一周</h3><p>害，这变化无常的天气和万恶的中央空调把人搞得好累好累，都不想好好干活了 <del>所以这周周记比较乱</del></p>
-<p>这周大概是娱乐摸鱼占一大半吧 工作只有在还算精神的情况下才开展</p>
-<p>就这样吧，希望天气能冷下来，给人一个精致的睡眠</p>
 ]]></content>
       <categories>
         <category>生活</category>
@@ -3720,30 +3914,6 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
       </categories>
   </entry>
   <entry>
-    <title>辛丑年 一月</title>
-    <url>//contents/life/2021-01/</url>
-    <content><![CDATA[<p>时间过得可真快，一下子就又过去了一个月。这个月都做了些什么呢？我回想了一下<del>（拿起了日记本）</del></p>
-<span id="more"></span>
-
-<p>先是发烧与考试撞车了，现在发个烧都要被隔离了，所以我完美地缓考了英语和数学…还好后来考的专业概论和C++都还行，拿了个4.0。</p>
-<p>接着就是学校的第一次冬季军训，虽然有点寒冷和干燥，甚至有一天下冻雨过于寒冷导致了停训。并且广州在我军训的头几天，宣布继2016后，广州再次入冬成功……这酸爽可想而知。军训的时候也没什么事情可以做的，毕竟一天到晚就是训练，晚上回去洗澡休息一下就到点睡觉了。不过我还是看了一下Python，并做了一些小工具来玩耍。虽然不怎么样，但是是在军训里嘛，满足了。</p>
-<p>军训期间，报名了学院的小程序的活，军训之后要留校7天做点discussion。</p>
-<p>军训结束后，个个都收拾行李回家，周围就只有我一个人留在宿舍了。既然没什么事情可以做，那我就快速学了下JavaSE的多线程和Collection，然后了解了一下Springboot。最后第一天开始的时候，直接雷击——图书馆已经把这个project外包给另外一公司做了，还是在两个月前。草，真是大乌龙了。得知这个消息的时候，我们所有人都突然僵住了，不过可以早点回家了，我又开心了（？）。不过有一说一，少人的学校，真的很像一个欧洲大花园，安静又舒适。</p>
-<p>这次事情，让我懂的了。</p>
-<blockquote class="blockquote-center">需求是学习的驱动力</blockquote>
-
-<p>然后一月剩下的几天就是在家里度过了，四个月没回家了，还是有一丝怀念之感的。不过既然都放假了，当然是在家休息几天。</p>
-<p>在家看到有hgame，就去佛系打了下，这佛系打题的过程，我用Python写脚本的能力又提升了。然后是学院的创新班招新，抱着大一可以试错的态度，报了个名去试了试。不知道结果怎么样，至少是去报名了。</p>
-<p>然后一月就这样完了。</p>
-<hr>
-<p>附个湿度</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330234203.jpg" alt="湿度"></p>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-  </entry>
-  <entry>
     <title>辛丑年 二月</title>
     <url>//contents/life/2021-02/</url>
     <content><![CDATA[<p>时光飞逝，又一个月过去了。但是不管怎么说，人都是会有成长的吧，没错()，这个月做了一些不值得的东西，也做了一些值得的。</p>
@@ -3764,8 +3934,40 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 <p>开发 + 动画 + 休息，是个不错的二月。</p>
 <hr>
 <p>附个湿度</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330234114.jpg" alt="湿度"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330234114.jpg" alt="湿度"></p>
 ]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>辛丑年 一月</title>
+    <url>//contents/life/2021-01/</url>
+    <content><![CDATA[<p>时间过得可真快，一下子就又过去了一个月。这个月都做了些什么呢？我回想了一下<del>（拿起了日记本）</del></p>
+<span id="more"></span>
+
+<p>先是发烧与考试撞车了，现在发个烧都要被隔离了，所以我完美地缓考了英语和数学…还好后来考的专业概论和C++都还行，拿了个4.0。</p>
+<p>接着就是学校的第一次冬季军训，虽然有点寒冷和干燥，甚至有一天下冻雨过于寒冷导致了停训。并且广州在我军训的头几天，宣布继2016后，广州再次入冬成功……这酸爽可想而知。军训的时候也没什么事情可以做的，毕竟一天到晚就是训练，晚上回去洗澡休息一下就到点睡觉了。不过我还是看了一下Python，并做了一些小工具来玩耍。虽然不怎么样，但是是在军训里嘛，满足了。</p>
+<p>军训期间，报名了学院的小程序的活，军训之后要留校7天做点discussion。</p>
+<p>军训结束后，个个都收拾行李回家，周围就只有我一个人留在宿舍了。既然没什么事情可以做，那我就快速学了下JavaSE的多线程和Collection，然后了解了一下Springboot。最后第一天开始的时候，直接雷击——图书馆已经把这个project外包给另外一公司做了，还是在两个月前。草，真是大乌龙了。得知这个消息的时候，我们所有人都突然僵住了，不过可以早点回家了，我又开心了（？）。不过有一说一，少人的学校，真的很像一个欧洲大花园，安静又舒适。</p>
+<p>这次事情，让我懂的了。</p>
+<blockquote class="blockquote-center">需求是学习的驱动力</blockquote>
+
+<p>然后一月剩下的几天就是在家里度过了，四个月没回家了，还是有一丝怀念之感的。不过既然都放假了，当然是在家休息几天。</p>
+<p>在家看到有hgame，就去佛系打了下，这佛系打题的过程，我用Python写脚本的能力又提升了。然后是学院的创新班招新，抱着大一可以试错的态度，报了个名去试了试。不知道结果怎么样，至少是去报名了。</p>
+<p>然后一月就这样完了。</p>
+<hr>
+<p>附个湿度</p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330234203.jpg" alt="湿度"></p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>辛丑年 四月</title>
+    <url>//contents/life/2021-04/</url>
+    <content><![CDATA[]]></content>
       <categories>
         <category>生活</category>
       </categories>
@@ -3785,27 +3987,27 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 <p>真正可以放松一下的日子，也就是只剩星期天了。</p>
 <hr>
 <p>首先，第一个周日并没有好好地睡tm的一早上觉，而是跟着同学。从大学城北出发，沿着4-&gt;21-&gt;14地铁去gzhu的黄埔校区。有一说一，21号线的快车很厉害，只停一些站，运行时速有100多公里。大概二十分钟左右就跑了一半的站。</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330221508.jpg" alt="快车"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330221508.jpg" alt="快车"></p>
 <p>第一次见到了地上跑的地铁</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330221448.jpg" alt="地上跑的地铁"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330221448.jpg" alt="地上跑的地铁"></p>
 <p>搭了不是很久的地铁（跟去天河城的耗时差不多），就到达旺村站了</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330221415.jpg" alt="地铁站外"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330221415.jpg" alt="地铁站外"></p>
 <p>去到了广州大学的另一个校区–黄埔研究院。去到这里之后我才知道什么是三十几个e的经费…</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330221242.jpg" alt="主楼"></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330221300.jpg" alt="一楼大厅"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330221242.jpg" alt="主楼"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330221300.jpg" alt="一楼大厅"></p>
 <p>楼里有人工智能与区块链研究院，当然也还有网络空间安全研究院。<del>说实话，好像一个酒店</del></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330221320.jpg" alt="办公区"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330221320.jpg" alt="办公区"></p>
 <p>隔壁就是西电的研究院</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330221105.jpg" alt="西电研究院"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330221105.jpg" alt="西电研究院"></p>
 <p>有一说一，还真是阴差阳错啊，高考考差了。与梦想中的两电一邮差得太远太远了。但是却在广大里面，见到了北邮前校长，还见到了研究院附近的西电研究院。</p>
 <p>有一说一，真是妙啊。</p>
 <p>还有一件事，就是黄埔研究院附近的鹅校长餐厅，饭菜味道超级赞，下次还想吃！</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330221208.jpg" alt="鹅校长"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330221208.jpg" alt="鹅校长"></p>
 <p>与此同时，创新班的周六满课小课堂也开始了</p>
 <p>我想回高三休息…</p>
 <hr>
 <p>然后，三月的第二周，就开始入驻实验室了。在这个人头涌动的大学城校区，竟然还能拥有属于自己个人的一个实验室座位，真的是太爽了啊。</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330221025.jpg" alt="实验室座位"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330221025.jpg" alt="实验室座位"></p>
 <p>还有一个显示器，不错（</p>
 <p>其实是因为要做东西，才会被分配到一个实验室座位吧。确实，就如上图，到目前为止，我都是抽空就会去读读论文，说实话不难。读英语原著图书已经一个学期多了（暑假开始阅读的），除了词汇量还有一点问题之外，长难句已经不是问题了。没想到英语能力的提高，竟然是在高考之后…</p>
 <p>顺便完成了人生的第一次论文阅读报告。当然啦，水平太菜了，得努力一下啊。</p>
@@ -3818,23 +4020,23 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 <hr>
 <p>与此同一周的周日，早上做了第二次的报告，这次我直接全英了，虽然还是有点肤浅，但至少比上一次要好。</p>
 <p>接着就是出岛去太古汇的顺电摸机机了。摸了好一会的s21，感觉这就是我心目中的小屏机了（虽然后壳塑料。</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330221044.jpg" alt="单 手 握 持"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330221044.jpg" alt="单 手 握 持"></p>
 <p>放点与MI6的对比图</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330220950.jpg" alt="正面"></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330220933.jpg" alt="背面"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330220950.jpg" alt="正面"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330220933.jpg" alt="背面"></p>
 <p>又看到了ThinkPad的X1系列，这次摸了nano和fold，真是太震撼了。一个是900g的极致轻薄本，另一个是可折叠的笔记本。</p>
 <p>nano要是出的早我就买了，只可惜没出那么早。。。9999拥有极致轻薄本，十一代i5，16GB+512GB内存和SSD倒是正常操作。不过，竟然还有2k的16:10的低功耗屏，<del>x1c都没有的</del>，真的是太强了。</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330220833.jpg" alt="X1 nano"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330220833.jpg" alt="X1 nano"></p>
 <p>fold就是很令人震撼了，折叠型的笔记本，没想到联想做出来了。只不过除此之外…就是低功耗(?)的14mm 5核心处理器，4小核+1大核的设计…还有23999的天价（价格不是缺点）</p>
 <p>嘛，不过这产品的目的是秀肌肉。<del>性能可以搁一边的</del></p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330220813.jpg" alt="X1 fold"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330220813.jpg" alt="X1 fold"></p>
 <p>后来的时候还搭了B25公交车，直达广大宿舍区，不错，耗时也才45分钟左右。只要不塞车，是比从大学城南北额外骑自行车3公里回来要香的。也第一次见到了大城市里头的快速公交站，要走地下通道才能去到的。</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330220720.jpg" alt="公交站台"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330220720.jpg" alt="公交站台"></p>
 <hr>
 <p>接着来到了让人感到无语的第四周。这一周我见识到了学校的神操作…</p>
 <p>为了所谓的安全，花了<strong>四百多万</strong>买了围栏。。。把学校生活区围了起来，封了人行道，所有人都要走天桥上课。。。</p>
 <p>然后加上空调迟迟不开</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210330220848.jpg" alt="大一新生报道 不知这是什么 求解答"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210330220848.jpg" alt="大一新生报道 不知这是什么 求解答"></p>
 <p>结果引爆了，众怒。微博热搜都上了，最后空调倒是开了（</p>
 <p>（封路图就不上了，懂得都懂）</p>
 <p>封路还不知道最终的情况，在写这篇文章的当天，广东电视台都派人来了，不过没有校卡进去。。。最后报道采访的人还是本校新闻专业的本校学生。。。并且来的时候保安还来分流了，文科楼还提前下课了，还选择下午不上课的周二来采访。真有你的啊。。。</p>
@@ -3845,7 +4047,7 @@ Branch <span class="token string">'master'</span> <span class="token builtin cla
 <p>希望四月会是个好月份。</p>
 <hr>
 <p>附个湿度</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210331235204.jpg" alt="湿度"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210331235204.jpg" alt="湿度"></p>
 ]]></content>
       <categories>
         <category>生活</category>
@@ -3944,7 +4146,7 @@ NumberExpression, Observable, Property&lt;Number&gt;, ReadOnlyProperty&lt;Number
 public abstract class ReadOnlyDoubleProperty extends DoubleExpression implements ReadOnlyProperty&lt;Number&gt;
 public class ReadOnlyDoubleWrapper extends SimpleDoubleProperty<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210113131956.png" alt="ReadOnlyDoubleWrapper"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210113131956.png" alt="ReadOnlyDoubleWrapper"></p>
 <p>由上可见，<code>ReadOnlyDoubleProperty</code>是一个抽象类，而<code>ReadOnlyDoubleWrapper</code>是一个concrete的实实在在的类。通过下面的分析可以查出，一个<code>ReadOnlyDoubleWrapper</code>是如何被construct的。</p>
 <p>我们首先在<code>ReadOnlyDoubleWrapper</code>的constructor里头发现了<code>with-arg</code>的<code>super()</code>，也就是说它显示地invoke了父类的constructor。父类里的constructor也是如此的操作，直到来到了类<code>DoublePropertyBase</code>才停了下来。</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//class ReadOnlyDoubleWrapper</span>
@@ -4004,7 +4206,7 @@ javafx.beans.property.ReadOnlyDoubleWrapper.ReadOnlyPropertyImpl
 All Implemented Interfaces:
 NumberExpression, Observable, ReadOnlyProperty&lt;Number&gt;, ObservableDoubleValue, ObservableNumberValue, ObservableValue&lt;Number&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210113132012.png" alt="ReadOnlyPropertyImpl"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210113132012.png" alt="ReadOnlyPropertyImpl"></p>
 <p>啊，因为在Stage里头的width需要更改，所以要是个可读可写的property。但可以用一个内部私有类，把一个property肛成一个read-only property。并根据dynamic binding将<code>ObservableDoubleValue</code>和<code>ReadOnlyProperty</code>里头的方法给实现掉（原先是在类<code>DoublePropertyBase</code>和<code>SimpleDoubleProperty</code>里头实现的）。实在是妙！</p>
 <p>并且查阅文档可以发现内部私有类<code>ReadOnlyPropertyImpl</code>与Listener有关的方法，全部在<code>ReadOnlyDoublePropertyBase</code>类里头。</p>
 <p>所以我们要看<code>addListener</code>的实现，就要去<code>DoublePropertyBase</code>这个类里头看了。如下所示</p>
@@ -4202,7 +4404,7 @@ NumberExpression, Observable, ReadOnlyProperty&lt;Number&gt;, ObservableDoubleVa
 <span class="token class-name">ExpressionHelper</span><span class="token punctuation">.</span><span class="token function">fireValueChangedEvent</span><span class="token punctuation">(</span>helper<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//breakpoint here</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>从Frame来看，我的思路被验证了，是正确的</p>
-<p><img data-src="https://img-situ.oss-cn-shenzhen.aliyuncs.com/20210113132029.jpg" alt="Debug"></p>
+<p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/20210113132029.jpg" alt="Debug"></p>
 <h2 id="亲手试错"><a href="#亲手试错" class="headerlink" title="亲手试错"></a>亲手试错</h2><p>竟然不明不白地就这样分析了一通InvalidationListener的实现，对Observer Pattern也有了更进一步的了解。于是垃圾地模拟了一下好像现实的场景：有一个商店里面有商品要抢购，而顾客们迫切地想知道商品的补货信息。但是，你是一个Customer，而不一定是一个Subscriber。</p>
 <p>思路就是，实现一个Subscription接口，然后由Customer实现，最后Store里头存储着subscribers，并会提醒subscriber们关于价格和库存的更新。</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">test</span><span class="token punctuation">;</span>
