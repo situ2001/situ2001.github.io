@@ -26,7 +26,7 @@
   </script>
 <meta name="description" content="萌新接触排序算法(实现语言为JS)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="常见排序算法的实现">
+<meta property="og:title" content="常见的排序算法">
 <meta property="og:url" content="https://blog.situ2001.com/contents/9c4c35cd7c7d/index.html">
 <meta property="og:site_name" content="Situ Note">
 <meta property="og:description" content="萌新接触排序算法(实现语言为JS)">
@@ -56,7 +56,7 @@
     lang   : 'zh-CN'
   };
 </script>
-<title>常见排序算法的实现 | Situ Note</title>
+<title>常见的排序算法 | Situ Note</title>
   
 
 
@@ -275,7 +275,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          常见排序算法的实现
+          常见的排序算法
         </h1>
 
         <div class="post-meta-container">
@@ -306,14 +306,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>5k</span>
+      <span>4.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>6 分钟</span>
+      <span>12 分钟</span>
     </span>
 </div>
 
@@ -328,7 +328,7 @@
 <span id="more"></span>
 
 <p>写在前面: 下面的排序都对整形类型的数组进行排序，并且为升序(ascending)排序</p>
-<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>先确定一个位置上的数，接着处理后续位置的元素。即n个元素的数组中，比较第1个元素与后面n-1个元素，找出最大或最小值，排到第1个元素位置上，然后屏蔽第1个元素，从第2个元素起，继续与其后面n-2个元素进行比较，把此时最大或最小值排到第2个元素上…后续以此类推。</p>
+<h2 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h2><p>先确定一个位置上的数，接着处理后续位置的元素。即在n个元素的数组中，找出n个元素的最大值或最小是，排到第1个元素位置上，然后屏蔽第1个元素，从第2个元素起，找出剩下n-1个元素的最大值，排在第2个元素的位置上面…以此类推</p>
 <p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/sorting/Selection-Sort.gif" alt="选择排序"></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">selectionSort</span><span class="token punctuation">(</span><span class="token parameter">nums</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -350,7 +350,7 @@
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>数组分为了排序好了的部分和未排序的部分，从未排序部分中取出头一个元素，逐一与排序好了的部分的元素进行比较以插入该部分。</p>
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><p>数组分为了排序好了的部分(前)和未排序的部分(后)，从未排序部分中取出一个元素，逐一与排序好了的部分的元素进行比较，以插入该部分中去。</p>
 <p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/sorting/Insertion-Sort.gif" alt="插入排序"></p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">insertionSort</span><span class="token punctuation">(</span><span class="token parameter">nums</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -395,7 +395,7 @@
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>这个排序涉及到分治(Divide-and-Conquer即分而治之)的方法。将数组进行split之后进行排序，之后将排序的结果一个一个地merge起来</p>
+<h2 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h2><p>这个排序涉及到分治(Divide-and-Conquer即分而治之)的方法。将数组进行分割然后进行排序，之后将排序的结果一个一个地合并起来</p>
 <p><img data-src="https://cdn.jsdelivr.net/gh/situ2001/assets/img/sorting/Merge-Sort.png" alt="归并排序"></p>
 <p>代码实现如下，使用递归，将数组分开与合并</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">mergeSort</span><span class="token punctuation">(</span><span class="token parameter">nums</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -446,7 +446,7 @@
 function quickSort(list) &#123;
     if (list.length > 1) &#123;
         select a pivot;
-        partition the list into list1 and list2 such that
+        partition the list into list1 and list2 that satisfy
             <span class="token list punctuation">1.</span> all elements in list1 are &lt;= pivot;
             <span class="token list punctuation">2.</span> all elements in list2 are > pivot;
         quickSort(list1);
@@ -585,7 +585,7 @@ rightChildIndex <span class="token operator">=</span> <span class="token number"
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://blog.situ2001.com/contents/9c4c35cd7c7d/" title="常见排序算法的实现">https://blog.situ2001.com/contents/9c4c35cd7c7d/</a>
+      <a href="https://blog.situ2001.com/contents/9c4c35cd7c7d/" title="常见的排序算法">https://blog.situ2001.com/contents/9c4c35cd7c7d/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-ND</a> 许可协议。转载请注明出处！
@@ -663,7 +663,7 @@ rightChildIndex <span class="token operator">=</span> <span class="token number"
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:35</span>
+    <span title="站点阅读时长">5:11</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
