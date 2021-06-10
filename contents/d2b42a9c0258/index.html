@@ -151,7 +151,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type-of-value"><span class="nav-number">2.</span> <span class="nav-text">Type of value</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Falsy-values"><span class="nav-number">3.</span> <span class="nav-text">Falsy values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operator-amp-amp"><span class="nav-number">4.</span> <span class="nav-text">Operator || &amp;&amp;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gt-lt-gt-lt"><span class="nav-number">6.</span> <span class="nav-text">&gt; &lt; &gt;&#x3D; &lt;&#x3D;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">7.</span> <span class="nav-text">&#x3D;&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-is"><span class="nav-number">8.</span> <span class="nav-text">Object.is</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">9.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%B7%E5%9B%A0"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type-of-value"><span class="nav-number">2.</span> <span class="nav-text">Type of value</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Falsy-values"><span class="nav-number">3.</span> <span class="nav-text">Falsy values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operator-amp-amp"><span class="nav-number">4.</span> <span class="nav-text">Operator || &amp;&amp;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">&#x3D;&#x3D;</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E6%80%BB%E7%BB%93"><span class="nav-number">5.1.</span> <span class="nav-text">小总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gt-lt-gt-lt"><span class="nav-number">6.</span> <span class="nav-text">&gt; &lt; &gt;&#x3D; &lt;&#x3D;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">7.</span> <span class="nav-text">&#x3D;&#x3D;&#x3D;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Object-is"><span class="nav-number">8.</span> <span class="nav-text">Object.is</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">9.</span> <span class="nav-text">最后</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -260,14 +260,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.7k</span>
+      <span>3.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>7 分钟</span>
+      <span>8 分钟</span>
     </span>
 </div>
 
@@ -374,7 +374,14 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token keyword">null</span> <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token comment">// true</span>
 <span class="token keyword">undefined</span> <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token comment">// true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>对于一边对象一边string或number的情况，那么对象就是转化为<code>primitive</code></p>
+<p>并且<code>null</code> <code>undefined</code>在与其他值进行比较的时候，都不能进行强制类型转化</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token number">5</span> <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token comment">// false</span>
+<span class="token number">14</span> <span class="token operator">==</span> <span class="token keyword">undefined</span> <span class="token comment">// false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>特殊的<code>NaN</code>则是：<strong>只要</strong>有一边的操作数为NaN那么进行恒等于比较就会是false，不等于的比较则是true</p>
+<h3 id="小总结"><a href="#小总结" class="headerlink" title="小总结"></a>小总结</h3><p>如果两边都是primitive，那么优先强制转化为number比较</p>
+<p>如果两边都是对象的引用，则看这两个引用是不是指向同一个对象</p>
+<p>而对于一边是对象而另一边是string或number的情况，那么对象就是转化为<code>primitive</code></p>
 <p><strong>优先</strong>使用的是<code>Symbol.toPrimitive</code>。没有的话，就还是<code>toString()</code>和<code>valueOf()</code>,hint为<code>string</code>就是优先<code>toString()</code>再<code>valueOf()</code>，hint为其他就是反之。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
     <span class="token punctuation">[</span>Symbol<span class="token punctuation">.</span>toPrimitive<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token parameter">hint</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -500,7 +507,7 @@ x <span class="token operator">&lt;</span> y <span class="token comment">// fals
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:30</span>
+    <span title="站点阅读时长">4:31</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
