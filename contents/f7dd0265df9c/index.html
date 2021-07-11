@@ -20,16 +20,16 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.6.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="(浅解释,不深入)想必写js的，都会碰到关于this的问题吧？">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"blog.situ2001.com","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"width":240},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="想必JSer们都碰到过关于this的问题吧？ 更新于高数大物考前一天">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript之What is this">
 <meta property="og:url" content="https://blog.situ2001.com/contents/f7dd0265df9c/index.html">
 <meta property="og:site_name" content="Situ Note">
-<meta property="og:description" content="(浅解释,不深入)想必写js的，都会碰到关于this的问题吧？">
+<meta property="og:description" content="想必JSer们都碰到过关于this的问题吧？ 更新于高数大物考前一天">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-04-12T13:30:00.000Z">
-<meta property="article:modified_time" content="2021-04-12T13:30:00.000Z">
+<meta property="article:published_time" content="2021-07-11T03:30:00.000Z">
+<meta property="article:modified_time" content="2021-07-11T03:30:00.000Z">
 <meta property="article:author" content="situ2001">
 <meta name="twitter:card" content="summary">
 
@@ -186,6 +186,7 @@
 
           </div>
         </div>
+      </div>
     </div>
   </aside>
   <div class="sidebar-dimmer"></div>
@@ -239,7 +240,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-04-12 21:30:00" itemprop="dateCreated datePublished" datetime="2021-04-12T21:30:00+08:00">2021-04-12</time>
+      <time title="创建时间：2021-07-11 11:30:00" itemprop="dateCreated datePublished" datetime="2021-07-11T11:30:00+08:00">2021-07-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -259,14 +260,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.3k</span>
+      <span>3.8k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>7 分钟</span>
+      <span>8 分钟</span>
     </span>
 </div>
 
@@ -277,31 +278,43 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>(浅解释,不深入)想必写js的，都会碰到关于this的问题吧？</p>
+        <p>想必JSer们都碰到过关于this的问题吧？</p>
+<p><del>更新于高数大物考前一天</del></p>
 <span id="more"></span>
 
 <h2 id="this"><a href="#this" class="headerlink" title="this"></a>this</h2><blockquote>
 <p>A property of an execution context (global, function or eval) that, in non–strict mode, is always a reference to an object and in strict mode can be any value.</p>
 </blockquote>
 <p>即是此时执行上下文(Execution context)的一个property，在严格模式下，可以是任何值，非严格模式下，它的值总是特定一个object</p>
-<h2 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h2><p>在js里头，一般来说，函数调用方式有下面几种，前两个很常见，最后一个是<code>Function.prototype.call</code></p>
+<h2 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h2><p>在js里头，一般来说，函数调用方式有下面几种，前两个很常见，分别为函数调用和方法调用。而最后一个是用<code>Function.prototype.call</code>调用</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">func</span><span class="token punctuation">(</span><span class="token number">114514</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 obj<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token number">114514</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">func</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p>其中对于第三种的这个method，syntax如下</p>
+<p>其中对于第三种的这个方法，其syntax如下</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">func</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token punctuation">[</span>thisArg<span class="token punctuation">[</span><span class="token punctuation">,</span> arg1<span class="token punctuation">,</span> arg2<span class="token punctuation">,</span> <span class="token operator">...</span>argN<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>thisArg在第一个位置，其实对于函数里头的this，MDN里头这样说</p>
+<p>thisArg在第一个位置，其实对于函数里头的this，MDN如是说</p>
 <blockquote>
 <p>In most cases, the value of this is determined by how a function is called (runtime binding). It can’t be set by assignment during execution, and it may be different each time the function is called.</p>
 </blockquote>
-<p>也就是说我们可以把<code>this</code>当成：某时某刻，这个函数是<strong>由谁</strong>调用执行的。this其实是当前执行该context的对象。在<code>call()</code>方法里头，函数里的<code>thisArg</code>就会是指定为传进去的<code>this</code>。</p>
-<p>在nodejs下，上面的两种调用方式转化为<code>call()</code>。就会是如下代码所示（在浏览器里的话，第一个函数调用：非strict mode下就会是<code>window</code>，而strict mode下就是<code>undefined</code>）</p>
+<p>也就是说我们可以把<code>this</code>当成：某时某刻，这个函数是<strong>由谁</strong>调用执行的。this其实是当前执行该函数的对象。在<code>call()</code>方法里头，函数里的<code>thisArg</code>就会是指定为传进去的<code>this</code>。</p>
+<p>在nodejs的环境下，上面的两种调用方式</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">func</span><span class="token punctuation">(</span><span class="token number">114514</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+obj<span class="token punctuation">.</span><span class="token function">func</span><span class="token punctuation">(</span><span class="token number">114514</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>转化为<code>call()</code>，就会是如下代码所示</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">func</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">undefined</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token function">func</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>上面说完了，那，this真的就是一个对象吗？我们可以打印出来看看</p>
+<blockquote>
+<p>注: 而在浏览器里的话，第一个函数调用：非strict mode下就会是<code>window</code>，而strict mode下就是<code>undefined</code></p>
+</blockquote>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// non-strict mode</span>
+<span class="token function">func</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>window<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">func</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>上面说完了，那么，<code>this</code>真的就是一个对象吗？我们可以打印出来看看</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
     s<span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
     i<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
@@ -316,14 +329,23 @@ obj<span class="token punctuation">.</span><span class="token function">func</sp
 <span class="token function">func</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &#123; s: 2, i: 0, t: 0, u: 1 &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>感觉说了一点啰嗦的东西…</p>
-<p>大白话时间（不够水平）：在js里头，函数是一等公民，函数就是一个值，可以赋给其他变量。但函数声明的位置（箭头函数除外），对于里面的<code>this</code>的值，不是最重要的。最重要的是：这个函数是谁调用的(或被绑定)。</p>
-<p>于是乎，如果碰到有this的情况，我们可以做一点啰嗦的转化。</p>
+<p>大白话时间（水平不足）：在js里头，函数是一等公民，函数就是一个值，可以赋给其他变量。</p>
+<p>但一个函数在哪里声明定义（箭头函数除外），不是最重要的。</p>
+<p>对于函数里头<code>this</code>的值，最重要的是：这个函数是谁调用的(或被绑定)。</p>
+<p>于是乎，如果碰到有this的情况，我们可以做一点稍微啰嗦的转化。</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// foo is an object</span>
 foo<span class="token punctuation">.</span><span class="token function">bar</span><span class="token punctuation">(</span><span class="token number">114514</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// is equivalent to</span>
 foo<span class="token punctuation">.</span><span class="token function">bar</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>foo<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">114514</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>非常容易看到，此时的函数<code>bar</code>里面的<code>this</code>，就是<code>foo</code>。那么此时把里头的<code>this</code>都看成这个<code>bar</code>对象，不就EZ很多了吗？</p>
+<hr>
+<p>总结时间（三个月后…）</p>
+<blockquote>
+<p>普通函数如<code>func()</code>调用可以看作是<code>func.call(window, [...args])</code>或者<code>func.call(undefined, [...args])</code></p>
+<p>对象方法如<code>obj.func()</code>调用可以看做是<code>func.call(obj, [...args])</code></p>
+<p>指定函数的<code>this</code>可以使用<code>Function.prototype.call</code></p>
+</blockquote>
 <h2 id="this绑定"><a href="#this绑定" class="headerlink" title="this绑定"></a>this绑定</h2><p>其实还有<code>Function.prototype.bind</code>这个方法，它是用于绑定<code>this</code>的，返回的是一个<strong>绑定了</strong><code>this</code>的函数。注意，这个函数的第一个参数也是<code>thisArg</code>。</p>
 <p>比如说</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
@@ -344,7 +366,11 @@ foo<span class="token punctuation">.</span><span class="token function">bar</spa
 
 foo<span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// [ 's', 'i', 't', 'u' ]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>箭头函数没有属于自己的<code>this</code>，在箭头函数里头的<code>this</code>，都是从外面capture进来(就是你定义这个箭头函数的地方)的，可以理解为静态的<code>this</code>。比如</p>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>由于箭头函数没有属于自己的<code>this</code></p>
+<p>那么在箭头函数里头为什么可以有<code>this</code>呢？？</p>
+<p>原因是，这个<code>this</code>，是循着作用域链，从外部的作用域里capture进来(就是你定义这个箭头函数的地方)的，</p>
+<p>可以理解为静态不变的<code>this</code>，在编译的时候已经被确定下来了（词法作用域）。</p>
+<p>比如</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> <span class="token function-variable function">test</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">114514</span><span class="token punctuation">;</span>
 
@@ -428,7 +454,7 @@ Foo foo <span class="token operator">=</span> <span class="token keyword">new</s
 <span class="token comment">// Then print its properties</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>foo<span class="token punctuation">.</span>x<span class="token punctuation">,</span> foo<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 114 514</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>那为什么，在调用<code>new Foo()</code>之后，可以得到一个有<code>x</code>和<code>y</code>这两个properties的对象？</p>
+<p>那为什么，在调用<code>new Foo()</code>之后，可以得到一个对象，且其带有<code>x</code>和<code>y</code>这两个property？</p>
 <p>其实，在了解了<code>this</code>之后，我们可以这样看待<code>new</code>运算符，其实new运算符是分了几步的，很简陋的一个实现如下</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> bar <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token class-name">Foo</span><span class="token punctuation">.</span>prototype<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// bar = &#123;&#125;</span>
 <span class="token function">foo</span><span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>bar<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// bar = &#123; x: 114, y: 514 &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -439,7 +465,14 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token keyword">this</span><span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">514</span><span class="token punctuation">;</span> <span class="token comment">// is bar.y = 514</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>此时的property就自然而然被加上咯。</p>
-<h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>令人头晕的<code>this</code>，好像也就这样了？其实我觉得理解到实质，就稳很多了。</p>
+<hr>
+<p>一句话总结</p>
+<blockquote>
+<p>JS里头的对象的创建大致流程了解了，后面的ES6 <code>class</code>这些语法糖就没有什么问题了，因为class本质上还是基于这一套基于原型的OO</p>
+</blockquote>
+<p><del>其实实际代码，用ES6 class就行了</del></p>
+<h2 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h2><p>令人头晕的<code>this</code>，好像也就这样了（感觉要比C晕针症状严重）？</p>
+<p>其实我觉得理解到一些实质，就稳很多了。</p>
 
     </div>
 
@@ -470,14 +503,11 @@ console<span class="token punctuation">.</span><span class="token function">log<
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/contents/d5c78114ba70/" rel="prev" title="JavaScript之作用域与变量提升">
-                  <i class="fa fa-chevron-left"></i> JavaScript之作用域与变量提升
+                <a href="/contents/4eba787ff8b0/" rel="prev" title="JavaScript之symbol">
+                  <i class="fa fa-chevron-left"></i> JavaScript之symbol
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/contents/d2b42a9c0258/" rel="next" title="JavaScript之值的比较">
-                  JavaScript之值的比较 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -516,7 +546,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">4:38</span>
+    <span title="站点阅读时长">4:39</span>
   </span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
